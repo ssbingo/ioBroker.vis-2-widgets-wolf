@@ -20,6 +20,17 @@ export function toNumber(value: unknown): number | null {
 }
 
 /**
+ * Dezimaltrennzeichen einer Sprachregion, z. B. "," für de-DE und "." für en.
+ *
+ * @param locale Sprachregion
+ * @returns das Trennzeichen
+ */
+export function decimalSeparator(locale = 'de-DE'): string {
+    const part = new Intl.NumberFormat(locale).formatToParts(1.5).find(p => p.type === 'decimal');
+    return part?.value ?? ',';
+}
+
+/**
  * Zahl formatieren. Nicht numerische Werte werden als "--" dargestellt.
  *
  * @param value Wert aus dem Objekt
