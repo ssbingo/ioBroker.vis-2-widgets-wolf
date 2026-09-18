@@ -55,5 +55,9 @@
     "return_temp": "Retour",
     "phase_0": "Veille",
     "phase_1": "Chauffage",
-    "phase_2": "Eau chaude"
+    "phase_2": "Eau chaude",
+    "theme": "Jeu de couleurs",
+    "theme_auto": "Automatique (comme VIS-2)",
+    "theme_light": "Clair",
+    "theme_dark": "Sombre"
 }

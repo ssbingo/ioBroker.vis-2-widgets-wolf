@@ -55,5 +55,9 @@
     "return_temp": "Powrót",
     "phase_0": "Czuwanie",
     "phase_1": "Ogrzewanie",
-    "phase_2": "Ciepła woda"
+    "phase_2": "Ciepła woda",
+    "theme": "Schemat kolorów",
+    "theme_auto": "Automatycznie (jak VIS-2)",
+    "theme_light": "Jasny",
+    "theme_dark": "Ciemny"
 }

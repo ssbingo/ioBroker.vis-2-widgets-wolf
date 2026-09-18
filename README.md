@@ -33,7 +33,7 @@ names or structure.
 | Trends | Charts from history, SQL or InfluxDB | planned |
 | Messages | Fault indicator and recent messages | planned |
 
-All widgets follow the light or dark theme of VIS-2.
+Each widget can be set to light or dark, or follow the VIS-2 theme automatically (default).
 
 ### Requirements
 
@@ -73,6 +73,7 @@ provide.
 ### **WORK IN PROGRESS**
 * (ssbingo) Initial version: widget set built with React 19 and TypeScript, first version of the gas meter widget
 * (ssbingo) Gas meter: all seven counter styles (A, B, C, E, F, G, H) and a status LED for consumption
+* (ssbingo) Color scheme per widget: automatic (like VIS-2), light or dark
 * (ssbingo) Boiler status: operating phase (texts from the widget, the object's states or built-in defaults), modulation and water pressure gauges with warning zones, operating hours, burner starts, flow and return temperature
 
 ## License

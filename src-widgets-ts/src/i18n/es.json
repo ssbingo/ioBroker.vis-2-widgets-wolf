@@ -55,5 +55,9 @@
     "return_temp": "Retorno",
     "phase_0": "En espera",
     "phase_1": "Calefacción",
-    "phase_2": "Agua caliente"
+    "phase_2": "Agua caliente",
+    "theme": "Esquema de colores",
+    "theme_auto": "Automático (como VIS-2)",
+    "theme_light": "Claro",
+    "theme_dark": "Oscuro"
 }

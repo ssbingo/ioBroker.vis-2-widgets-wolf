@@ -55,5 +55,9 @@
     "return_temp": "Retour",
     "phase_0": "Stand-by",
     "phase_1": "Verwarmen",
-    "phase_2": "Warm water"
+    "phase_2": "Warm water",
+    "theme": "Kleurenschema",
+    "theme_auto": "Automatisch (zoals VIS-2)",
+    "theme_light": "Licht",
+    "theme_dark": "Donker"
 }

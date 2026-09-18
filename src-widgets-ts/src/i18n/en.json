@@ -55,5 +55,9 @@
     "return_temp": "Return",
     "phase_0": "Standby",
     "phase_1": "Heating",
-    "phase_2": "Hot water"
+    "phase_2": "Hot water",
+    "theme": "Color scheme",
+    "theme_auto": "Automatic (like VIS-2)",
+    "theme_light": "Light",
+    "theme_dark": "Dark"
 }
