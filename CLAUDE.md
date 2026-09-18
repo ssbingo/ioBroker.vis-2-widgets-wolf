@@ -86,6 +86,16 @@ Englisch, die übrigen unter `doc/<sprache>/` in der jeweiligen Sprache.
 - Schreiben mit `ack: false`, Anzeige folgt erst nach `ack: true`
 - Entprellung vor dem Schreiben, Vorgabe 800 ms
 - Zustand „wird übernommen" sichtbar machen, Zeitüberschreitung nach 10 s melden
+- Immer über `WolfWidgetBase` schreiben (`numberControl`, `selectControl`, `switchControl`),
+  nie direkt `context.setValue` — sonst fehlt die Nachverfolgung
+- Das Warten endet nur mit `ack: true` **und** dem geschriebenen Wert. Nach einer
+  Zeitüberschreitung den zuletzt bestätigten Wert zeigen: ioBroker hält den unbestätigten Befehl
+  als Objektwert
+- Schaltwerte im Typ des Objekts schreiben (`switchValue`: Zahl-Objekt 0/1, sonst true/false)
+- Bedien-Kacheln scrollen statt abzuschneiden (`overflow-y: auto`); die Vorgabehöhe schließt die
+  Leiste „Übernehmen" ein
+- Heizkurve: Wolf veröffentlicht keine Formel — das Modell in `lib/heatCurve.ts` ist eine
+  Näherung und bleibt im Widget als solche gekennzeichnet
 
 ## Vor jedem Commit
 

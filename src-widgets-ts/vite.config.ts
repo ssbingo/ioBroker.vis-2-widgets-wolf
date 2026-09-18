@@ -20,6 +20,7 @@ const config: UserConfig = {
                 './WolfBoiler': './src/widgets/WolfBoiler',
                 './WolfCircuit': './src/widgets/WolfCircuit',
                 './WolfDhw': './src/widgets/WolfDhw',
+                './WolfHeatCurve': './src/widgets/WolfHeatCurve',
                 './translations': './src/translations',
             },
             remotes: {},

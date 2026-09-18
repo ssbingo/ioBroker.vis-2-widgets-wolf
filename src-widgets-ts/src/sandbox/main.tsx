@@ -19,6 +19,7 @@ import de from '../i18n/de.json';
 
 import SimCircuit from './SimCircuit';
 import SimDhw from './SimDhw';
+import SimHeatCurve from './SimHeatCurve';
 
 import './sandbox.css';
 
@@ -101,6 +102,25 @@ const DHWS = [
     { subtitle: 'wie ISM7: ohne Zirkulation und Sofortladung', temp: 47, extras: false },
     { subtitle: 'Quelle bestätigt nicht (Wartezeit 4 s)', temp: 44, extras: true, noAck: true, timeoutMs: 4000 },
     { subtitle: 'Bestätigungsmodus', temp: 50, extras: true, confirm: true },
+];
+
+/** Heizkurve: wie wolf-smartset, Steilheit/Niveau schreibbar mit Krümmung, Quelle schweigt */
+const CURVES = [
+    { subtitle: 'wie wolf-smartset: Steilheit nur lesend', writableSlope: false, controller: true, exponent: 1 },
+    {
+        subtitle: 'Steilheit und Niveau schreibbar, n = 1,15, Punkt berechnet',
+        writableSlope: true,
+        controller: false,
+        exponent: 1.15,
+    },
+    {
+        subtitle: 'Quelle bestätigt nicht (Wartezeit 4 s)',
+        writableSlope: false,
+        controller: true,
+        exponent: 1,
+        noAck: true,
+        timeoutMs: 4000,
+    },
 ];
 
 const TARIFF = { brennwert: 11.482, zustandszahl: 0.9612, arbeitspreis: 0.1092, grundpreis: 14.9 };
@@ -315,6 +335,22 @@ function Sandbox(): React.JSX.Element {
                             themeType={themeType}
                             running={running}
                             {...d}
+                        />
+                    </div>
+                ))}
+            </div>
+
+            <h2 className="sb-h">Heizkurve — WolfHeatCurve</h2>
+            <div className="sb-grid">
+                {CURVES.map(c => (
+                    <div
+                        key={c.subtitle}
+                        className="sb-cell sb-cell-curve"
+                    >
+                        <SimHeatCurve
+                            themeType={themeType}
+                            running={running}
+                            {...c}
                         />
                     </div>
                 ))}

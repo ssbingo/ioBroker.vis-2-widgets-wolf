@@ -14,6 +14,6 @@ export default [
         },
     },
     {
-        ignores: ['build/', 'node_modules/', '.__mf__temp/', 'legacy/', 'vite.config.*', 'vite.sandbox.config.*'],
+        ignores: ['build/', 'node_modules/', '.__mf__temp/', 'vite.config.*', 'vite.sandbox.config.*'],
     },
 ];
