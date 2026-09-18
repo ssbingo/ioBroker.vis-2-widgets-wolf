@@ -17,6 +17,7 @@ const config: UserConfig = {
             filename: 'customWidgets.js',
             exposes: {
                 './WolfGasMeter': './src/widgets/WolfGasMeter',
+                './WolfBoiler': './src/widgets/WolfBoiler',
                 './translations': './src/translations',
             },
             remotes: {},

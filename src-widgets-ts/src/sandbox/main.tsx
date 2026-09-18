@@ -10,6 +10,7 @@
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
+import BoilerView from '../components/BoilerView';
 import Counter, { COUNTER_VARIANTS, toVariant } from '../components/Counter';
 import GasMeterView from '../components/GasMeterView';
 import { monthlyCost } from '../lib/gas';
@@ -32,6 +33,23 @@ const START: Meter[] = [
     { title: 'Wohnung Obergeschoss', subtitle: 'mbus.0.2', reading: 7314.096, flow: 0.92, today: 2.14, month: 51.7 },
 ];
 
+interface Boiler {
+    phase: number;
+    modulation: number;
+    pressure: number;
+    hours: number;
+    starts: number;
+    flowTemp: number;
+    returnTemp: number;
+}
+
+/** Zwei Kessel: einer im Normalbetrieb, einer mit zu niedrigem Druck (Warnzone sichtbar) */
+const BOILERS: Boiler[] = [
+    { phase: 1, modulation: 42, pressure: 1.6, hours: 14268, starts: 96314, flowTemp: 54.8, returnTemp: 41.3 },
+    { phase: 0, modulation: 0, pressure: 1.05, hours: 8113, starts: 40211, flowTemp: 31.2, returnTemp: 29.8 },
+];
+const PHASES = [de.phase_0, de.phase_1, de.phase_2];
+
 const TARIFF = { brennwert: 11.482, zustandszahl: 0.9612, arbeitspreis: 0.1092, grundpreis: 14.9 };
 const TICK_MS = 2000;
 const PARAMS = new URLSearchParams(window.location.search);
@@ -51,12 +69,36 @@ function step(m: Meter): Meter {
     return { ...m, flow, reading: m.reading + inc, today: m.today + inc, month: m.month + inc };
 }
 
+/**
+ * Ein Simulationsschritt für den Kessel: Phase wechselt gelegentlich, Werte folgen der Phase.
+ *
+ * @param b Kesselzustand vor dem Schritt
+ * @returns Kesselzustand nach dem Schritt
+ */
+function stepBoiler(b: Boiler): Boiler {
+    const phase = Math.random() < 0.15 ? Math.floor(Math.random() * 3) : b.phase;
+    const burning = phase > 0;
+    const modulation = burning ? Math.max(15, Math.min(100, b.modulation + (Math.random() - 0.4) * 20)) : 0;
+    const flowTemp = burning ? Math.min(72, b.flowTemp + 0.5) : Math.max(28, b.flowTemp - 0.35);
+    return {
+        ...b,
+        phase,
+        modulation,
+        pressure: Math.max(0.8, Math.min(2.8, b.pressure + (Math.random() - 0.5) * 0.08)),
+        hours: b.hours + (burning ? 1 : 0),
+        starts: b.starts + (burning && b.phase === 0 ? 1 : 0),
+        flowTemp,
+        returnTemp: flowTemp - 9 - Math.random() * 2,
+    };
+}
+
 /** Sandbox-Seite mit Umschaltern für Theme, Zählwerk-Variante und Simulation */
 function Sandbox(): React.JSX.Element {
     const [dark, setDark] = useState(() => PARAMS.get('theme') === 'dark');
     const [variant, setVariant] = useState(() => toVariant(PARAMS.get('variant') || 'A'));
     const [running, setRunning] = useState(true);
     const [meters, setMeters] = useState(START);
+    const [boilers, setBoilers] = useState(BOILERS);
     const themeType = dark ? 'dark' : 'light';
 
     useEffect(() => {
@@ -71,7 +113,10 @@ function Sandbox(): React.JSX.Element {
         if (!running) {
             return undefined;
         }
-        const timer = setInterval(() => setMeters(ms => ms.map(step)), TICK_MS);
+        const timer = setInterval(() => {
+            setMeters(ms => ms.map(step));
+            setBoilers(bs => bs.map(stepBoiler));
+        }, TICK_MS);
         return () => clearInterval(timer);
     }, [running]);
 
@@ -145,6 +190,40 @@ function Sandbox(): React.JSX.Element {
                                 costMonth: de.cost_month,
                                 consumption: de.consumption,
                                 noConsumption: de.no_consumption,
+                            }}
+                        />
+                    </div>
+                ))}
+            </div>
+
+            <h2 className="sb-h">Kesselstatus — WolfBoiler</h2>
+            <div className="sb-grid">
+                {boilers.map((b, i) => (
+                    <div
+                        key={i}
+                        className="sb-cell sb-cell-boiler"
+                    >
+                        <BoilerView
+                            themeType={themeType}
+                            title={de.boiler}
+                            subtitle={i === 0 ? 'CGB-2 / Betriebsdaten' : 'Druck unter Warnschwelle'}
+                            phase={PHASES[b.phase]}
+                            modulation={b.modulation}
+                            pressure={b.pressure}
+                            pressureMin={1.2}
+                            pressureMax={2.5}
+                            pressureScale={3}
+                            hours={b.hours}
+                            starts={b.starts}
+                            flowTemp={b.flowTemp}
+                            returnTemp={b.returnTemp}
+                            labels={{
+                                modulation: de.modulation,
+                                pressure: de.pressure,
+                                hours: de.hours,
+                                starts: de.starts,
+                                flowTemp: de.flow_temp,
+                                returnTemp: de.return_temp,
                             }}
                         />
                     </div>

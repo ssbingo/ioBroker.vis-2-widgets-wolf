@@ -6,7 +6,7 @@ ausführbarer Teil des Adapters: Er wird weder gebaut noch gelintet noch veröff
 
 | Datei | Inhalt | Portiert nach |
 |---|---|---|
-| `vis-2-widgets-wolf.js` | Bausteine (LED, Zählwerk A–H, Zeigerwerk, Sieben-Segment, Bogen, Schreiblogik) und das Gaszähler-Widget | `src/components/`, `src/lib/`, `src/widgets/` — Meilensteine M1 bis M3 |
+| `vis-2-widgets-wolf.js` | Bausteine und das Gaszähler-Widget | **portiert (M1):** LED, Zählwerk A–H, Zeigerwerk, Sieben-Segment, Bogenanzeige, Gaszähler, Kesselstatus — **offen (M2):** Schreiblogik `setVal`/`debounce` |
 | `sandbox-index.html`, `vis-stub.js` | frühere Sandbox mit Nachbildung von `vis` | ersetzt durch die Vite-Sandbox (`npm start`) |
 
 Das CSS liegt bereits portiert unter `src/styles/wolf.css`.

@@ -55,15 +55,17 @@ export default class WolfGasMeter extends (window.visRxWidget as typeof VisRxWid
             visSetColor: '#c2561f',
             visName: 'WolfGasMeter',
             visWidgetLabel: 'gasmeter',
+            // Jede Gruppe hat Felder mit Vorgabe (notfalls ''), sonst legt VIS-2 sie beim Platzieren
+            // eines neuen Widgets abgewählt an und die Felder bleiben verborgen.
             visAttrs: [
                 {
                     name: 'common',
                     label: 'group_objects',
                     fields: [
-                        { name: 'oid_zaehlerstand', type: 'id', label: 'oid_zaehlerstand' },
-                        { name: 'oid_durchfluss', type: 'id', label: 'oid_durchfluss' },
-                        { name: 'oid_heute', type: 'id', label: 'oid_heute' },
-                        { name: 'oid_monat', type: 'id', label: 'oid_monat' },
+                        { name: 'oid_zaehlerstand', type: 'id', label: 'oid_zaehlerstand', default: '' },
+                        { name: 'oid_durchfluss', type: 'id', label: 'oid_durchfluss', default: '' },
+                        { name: 'oid_heute', type: 'id', label: 'oid_heute', default: '' },
+                        { name: 'oid_monat', type: 'id', label: 'oid_monat', default: '' },
                     ],
                 },
                 {
@@ -109,8 +111,8 @@ export default class WolfGasMeter extends (window.visRxWidget as typeof VisRxWid
                     name: 'display',
                     label: 'group_display',
                     fields: [
-                        { name: 'title', type: 'text', label: 'title' },
-                        { name: 'subtitle', type: 'text', label: 'subtitle' },
+                        { name: 'title', type: 'text', label: 'title', default: '' },
+                        { name: 'subtitle', type: 'text', label: 'subtitle', default: '' },
                     ],
                 },
             ],

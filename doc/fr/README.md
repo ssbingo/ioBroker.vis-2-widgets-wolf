@@ -8,7 +8,7 @@ Widgets VIS-2 qui affichent et permettent de piloter une installation de chauffa
 
 Le jeu de widgets ne lit aucune donnée directement depuis le chauffage. Chaque valeur est liée individuellement à un objet ioBroker existant — par exemple issu de l'adaptateur `wolf-smartset`, de l'adaptateur `wolf` (ISM8i), de Modbus ou de vos propres scripts.
 
-> **État :** développement précoce. Seul le widget compteur de gaz est disponible pour l'instant.
+> **État :** développement précoce. Le compteur de gaz et l'état de la chaudière sont disponibles pour l'instant.
 
 ### Prérequis
 

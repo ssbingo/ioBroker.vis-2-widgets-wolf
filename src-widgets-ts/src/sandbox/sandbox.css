@@ -89,3 +89,7 @@ body.sb-dark {
     gap: 12px;
     align-items: flex-start;
 }
+/* Kessel-Kachel in ihrer Vorgabegröße */
+.sb-cell-boiler {
+    height: 390px;
+}

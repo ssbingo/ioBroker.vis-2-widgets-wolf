@@ -541,6 +541,58 @@
     margin-left: 2px;
 }
 
+.wolf-gauge .wolf-arc-v {
+    transition: stroke-dasharray 0.6s ease;
+}
+
+/* ---------------------------------------------------------------- Kessel */
+
+.wolf-phase-row {
+    margin-bottom: 14px;
+}
+
+.wolf-phase {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--wolf-accent-soft);
+    color: var(--wolf-accent);
+    border-radius: 99px;
+    padding: 5px 12px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.wolf-gauges {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.wolf-kv {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 14px;
+    padding-top: 13px;
+    border-top: 1px solid var(--wolf-line);
+}
+
+.wolf-kv .wolf-v {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+.wolf-kv .wolf-v small {
+    color: var(--wolf-muted);
+    font-weight: 500;
+    font-size: 12px;
+    margin-left: 2px;
+}
+
 /* ------------------------------------------------------- Bedienelemente */
 
 .wolf-seg {
@@ -850,7 +902,8 @@
     }
 
     .wolf-cnt-b .wolf-strip,
-    .wolf-bar span {
+    .wolf-bar span,
+    .wolf-gauge .wolf-arc-v {
         transition: none;
     }
 }
