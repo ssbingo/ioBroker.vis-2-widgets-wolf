@@ -15,6 +15,7 @@
 /* ------------------------------------------------------------------ Tokens */
 
 .wolf-w {
+    color-scheme: light; /* native Bildlaufleisten und Regler passend zum Farbschema */
     --wolf-surface: #ffffff;
     --wolf-surface-2: #f2f5f8;
     --wolf-surface-3: #e7ecf1;
@@ -46,6 +47,7 @@
 
 @media (prefers-color-scheme: dark) {
     .wolf-w:not([data-wolf-theme="light"]) {
+        color-scheme: dark;
         --wolf-surface: #141d26;
         --wolf-surface-2: #1a242f;
         --wolf-surface-3: #202c38;
@@ -71,6 +73,7 @@
 }
 
 .wolf-w[data-wolf-theme="dark"] {
+    color-scheme: dark;
     --wolf-surface: #141d26;
     --wolf-surface-2: #1a242f;
     --wolf-surface-3: #202c38;
@@ -897,13 +900,15 @@
 
 @media (prefers-reduced-motion: reduce) {
     .wolf-led.wolf-on,
-    .wolf-flow {
+    .wolf-flow,
+    .wolf-tank-charging .wolf-tank-fill {
         animation: none;
     }
 
     .wolf-cnt-b .wolf-strip,
     .wolf-bar span,
-    .wolf-gauge .wolf-arc-v {
+    .wolf-gauge .wolf-arc-v,
+    .wolf-tank-fill {
         transition: none;
     }
 }
@@ -1006,8 +1011,26 @@
 }
 
 /* Bedien-Kacheln: lieber scrollen als ein Bedienelement abschneiden */
-.wolf-w.wolf-circuit {
+.wolf-w.wolf-circuit,
+.wolf-w.wolf-dhw {
     overflow-y: auto;
+}
+
+.wolf-switch-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+}
+
+.wolf-press {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.wolf-press .wolf-status {
+    align-self: flex-end;
 }
 
 .wolf-confirm {
@@ -1035,4 +1058,79 @@
 .wolf-secondary:focus-visible {
     outline: 2px solid var(--wolf-accent);
     outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------ Warmwasser */
+
+.wolf-tank-row {
+    display: flex;
+    gap: 16px;
+    align-items: stretch;
+}
+
+.wolf-tank {
+    width: 86px;
+    flex: none;
+    align-self: center;
+}
+
+.wolf-tank svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.wolf-tank-val {
+    font-family: var(--wolf-font-num);
+    font-weight: 700;
+    font-size: 17px;
+    fill: var(--wolf-warm);
+}
+
+.wolf-tank-fill {
+    transition:
+        y 0.6s ease,
+        height 0.6s ease;
+}
+
+/* Ladung läuft: Füllung atmet leicht */
+.wolf-tank-charging .wolf-tank-fill {
+    animation: wolf-tank-charge 2.4s ease-in-out infinite;
+}
+
+@keyframes wolf-tank-charge {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.65;
+    }
+}
+
+.wolf-dhw-side {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.wolf-dhw-side .wolf-kv {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+}
+
+.wolf-dhw-side .wolf-ctl .wolf-stepper {
+    margin: 2px 0 0;
+}
+
+.wolf-dhw-charging.wolf-on {
+    color: var(--wolf-warm);
+}
+
+.wolf-dhw-program {
+    margin-top: 16px;
 }

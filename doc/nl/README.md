@@ -8,7 +8,7 @@ VIS-2-widgets die een [WOLF](https://www.wolf.eu/)-verwarmingsinstallatie in ioB
 
 De widgetset leest zelf geen gegevens uit de verwarming. Elke waarde wordt afzonderlijk gekoppeld aan een bestaand ioBroker-object — bijvoorbeeld van de adapter `wolf-smartset`, de adapter `wolf` (ISM8i), Modbus of eigen scripts.
 
-> **Status:** vroege ontwikkeling. Voorlopig zijn de gasmeter, de ketelstatus en het verwarmingscircuit beschikbaar.
+> **Status:** vroege ontwikkeling. Voorlopig zijn de gasmeter, de ketelstatus, het verwarmingscircuit en warm water beschikbaar.
 
 ### Vereisten
 

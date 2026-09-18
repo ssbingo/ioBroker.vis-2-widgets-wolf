@@ -19,6 +19,7 @@ const config: UserConfig = {
                 './WolfGasMeter': './src/widgets/WolfGasMeter',
                 './WolfBoiler': './src/widgets/WolfBoiler',
                 './WolfCircuit': './src/widgets/WolfCircuit',
+                './WolfDhw': './src/widgets/WolfDhw',
                 './translations': './src/translations',
             },
             remotes: {},

@@ -6,7 +6,7 @@ ausführbarer Teil des Adapters: Er wird weder gebaut noch gelintet noch veröff
 
 | Datei | Inhalt | Portiert nach |
 |---|---|---|
-| `vis-2-widgets-wolf.js` | Bausteine und das Gaszähler-Widget | **portiert (M1):** LED, Zählwerk A–H, Zeigerwerk, Sieben-Segment, Bogenanzeige, Gaszähler, Kesselstatus — **portiert (M2):** Schreiblogik `setVal`/`debounce` → `src/lib/writeTracker.ts`, Stepper, Segmentschalter, Heizkreis — **offen (M2):** Warmwasser, Heizkurve |
+| `vis-2-widgets-wolf.js` | Bausteine und das Gaszähler-Widget | **portiert (M1):** LED, Zählwerk A–H, Zeigerwerk, Sieben-Segment, Bogenanzeige, Gaszähler, Kesselstatus — **portiert (M2):** Schreiblogik `setVal`/`debounce` → `src/lib/writeTracker.ts`, Stepper, Segmentschalter, Schalter, Knopf, Heizkreis, Warmwasser — **offen (M2):** Heizkurve |
 | `sandbox-index.html`, `vis-stub.js` | frühere Sandbox mit Nachbildung von `vis` | ersetzt durch die Vite-Sandbox (`npm start`) |
 
 Das CSS liegt bereits portiert unter `src/styles/wolf.css`.
@@ -19,7 +19,8 @@ Das CSS liegt bereits portiert unter `src/styles/wolf.css`.
 - **Gleitkommafehler im Zählwerk:** `splitDigits` zeigt `18427,482` als `18427,481`
   (auch Variante H). In `src/lib/digits.ts` bereits behoben.
 - **Optimistischer Schalter:** Der Zirkulationsschalter der alten Sandbox schaltet sofort um
-  statt erst nach `ack: true`.
+  statt erst nach `ack: true`. Behoben: Der gewünschte Zustand steht gedämpft mit „wird
+  übernommen" da, nach der Wartezeit ohne Bestätigung wieder der bestätigte.
 - **Heizkurve:** Die Formel im Entwurf (`20 + Niveau + Steilheit · (20 − Ta) · 1,15`) ist
   geschätzt; `curve_formula: wolf` braucht eine Quelle.
 

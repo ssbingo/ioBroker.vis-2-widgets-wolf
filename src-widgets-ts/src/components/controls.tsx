@@ -30,6 +30,16 @@ export interface NumberControl {
     onChange: (value: number) => void;
 }
 
+/** Schalter oder Knopf (Zirkulation, Sofortladung) */
+export interface SwitchControl {
+    /** angezeigter Zustand; null ohne Wert */
+    value: boolean | null;
+    /** Zustand */
+    status: ControlStatus;
+    /** umschalten */
+    onToggle: (on: boolean) => void;
+}
+
 /** Übersetzte Zustandstexte */
 export interface StatusTexts {
     /** Wert unterwegs, Bestätigung ausstehend */
@@ -52,20 +62,46 @@ export interface StatusTexts {
  * @returns die Zeile
  */
 export function ControlLabel(props: { label: string; status: ControlStatus; texts: StatusTexts }): React.JSX.Element {
-    const { status } = props;
     return (
         <div className="wolf-ctl-label">
             <span className="wolf-label">{props.label}</span>
-            {status === 'idle' ? null : (
-                <span
-                    className={`wolf-status wolf-status-${status}`}
-                    role={status === 'timeout' ? 'alert' : undefined}
-                >
-                    {props.texts[status]}
-                </span>
-            )}
+            <StatusNote
+                status={props.status}
+                texts={props.texts}
+            />
         </div>
     );
+}
+
+/**
+ * Zustandshinweis eines Bedienelements; im Ruhezustand nichts.
+ *
+ * @param props Zustand und Texte
+ * @param props.status Zustand des Datenpunkts
+ * @param props.texts übersetzte Zustandstexte
+ * @returns der Hinweis oder null
+ */
+export function StatusNote(props: { status: ControlStatus; texts: StatusTexts }): React.JSX.Element | null {
+    const { status } = props;
+    if (status === 'idle') {
+        return null;
+    }
+    return (
+        <span
+            className={`wolf-status wolf-status-${status}`}
+            role={status === 'timeout' ? 'alert' : undefined}
+        >
+            {props.texts[status]}
+        </span>
+    );
+}
+
+/**
+ * @param status Zustand
+ * @returns true, solange der Wert unterwegs oder vorgemerkt ist
+ */
+export function isPending(status: ControlStatus): boolean {
+    return status === 'pending' || status === 'staged';
 }
 
 /** Eigenschaften des Segmentschalters */
@@ -202,32 +238,71 @@ export function Stepper(props: StepperProps): React.JSX.Element {
 }
 
 /**
- * Ein/Aus-Schalter, z. B. Zirkulation.
+ * Ein/Aus-Schalter, z. B. Zirkulation. Schaltet erst um, wenn die Quelle bestätigt —
+ * bis dahin steht der gewünschte Zustand gedämpft da.
  *
- * @param props Beschriftung, Zustand und Rückruf
+ * @param props Beschriftung, Schalter und Zustandstexte
  * @param props.label Beschriftung
- * @param props.on eingeschaltet
- * @param props.disabled Objekt nicht schreibbar
- * @param props.pending Wert unterwegs
- * @param props.onToggle umgeschaltet
+ * @param props.control Zustand und Rückruf
+ * @param props.texts übersetzte Zustandstexte
  * @returns der Schalter
  */
-export function Toggle(props: {
-    label: string;
-    on: boolean;
-    disabled: boolean;
-    pending: boolean;
-    onToggle: (on: boolean) => void;
-}): React.JSX.Element {
+export function Toggle(props: { label: string; control: SwitchControl; texts: StatusTexts }): React.JSX.Element {
+    const { control } = props;
+    const on = control.value === true;
     return (
-        <div className={props.pending ? 'wolf-switch wolf-pending' : 'wolf-switch'}>
-            <span>{props.label}</span>
+        <div className="wolf-switch">
+            <span className="wolf-switch-text">
+                <span>{props.label}</span>
+                <StatusNote
+                    status={control.status}
+                    texts={props.texts}
+                />
+            </span>
             <button
                 type="button"
                 aria-label={props.label}
-                aria-pressed={props.on}
-                disabled={props.disabled}
-                onClick={() => props.onToggle(!props.on)}
+                aria-pressed={on}
+                className={isPending(control.status) ? 'wolf-pending' : undefined}
+                disabled={control.status === 'locked'}
+                onClick={() => control.onToggle(!on)}
+            />
+        </div>
+    );
+}
+
+/**
+ * Knopf mit zwei Zuständen, z. B. „Sofortladung starten" / „Sofortladung läuft".
+ *
+ * @param props Beschriftungen, Schalter und Zustandstexte
+ * @param props.label Beschriftung im Ruhezustand
+ * @param props.activeLabel Beschriftung, solange der Zustand ein ist
+ * @param props.control Zustand und Rückruf
+ * @param props.texts übersetzte Zustandstexte
+ * @returns der Knopf
+ */
+export function PressButton(props: {
+    label: string;
+    activeLabel: string;
+    control: SwitchControl;
+    texts: StatusTexts;
+}): React.JSX.Element {
+    const { control } = props;
+    const on = control.value === true;
+    return (
+        <div className="wolf-press">
+            <button
+                type="button"
+                className={isPending(control.status) ? 'wolf-primary wolf-pending' : 'wolf-primary'}
+                aria-pressed={on}
+                disabled={control.status === 'locked'}
+                onClick={() => control.onToggle(!on)}
+            >
+                {on ? props.activeLabel : props.label}
+            </button>
+            <StatusNote
+                status={control.status}
+                texts={props.texts}
             />
         </div>
     );

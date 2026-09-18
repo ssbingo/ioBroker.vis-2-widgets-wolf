@@ -1,9 +1,9 @@
 import type { RxWidgetInfo, VisRxWidgetProps, VisRxWidgetState } from '@iobroker/types-vis-2';
 import type VisRxWidget from '@iobroker/types-vis-2/visRxWidget';
 
-import type { NumberControl, SelectControl, StatusTexts } from '../components/controls';
+import type { NumberControl, SelectControl, StatusTexts, SwitchControl } from '../components/controls';
 import { toBoolean, toNumber } from '../lib/fmt';
-import { toObjectMeta, type NumberRange, type ObjectMeta, type SelectOption } from '../lib/objectMeta';
+import { switchValue, toObjectMeta, type NumberRange, type ObjectMeta, type SelectOption } from '../lib/objectMeta';
 import { resolveTheme, type ThemeType } from '../lib/theme';
 import { sameValue, WriteTracker, type WriteStatus, type WriteValue } from '../lib/writeTracker';
 import { injectStyles } from '../styles/injectStyles';
@@ -292,6 +292,23 @@ export default abstract class WolfWidgetBase<
                 const n = Number(value);
                 this.writeValue(oid, value.trim() !== '' && Number.isFinite(n) ? n : value, true);
             },
+        };
+    }
+
+    /**
+     * Schalter für einen Datenpunkt — schreibt sofort, im Typ des Objekts (0/1 oder true/false).
+     *
+     * @param oid Objekt-ID; leer blendet das Element aus
+     * @returns Bedienelement oder null
+     */
+    protected switchControl(oid: string | undefined): SwitchControl | null {
+        if (!oid) {
+            return null;
+        }
+        return {
+            value: toBoolean(this.shownValue(oid)),
+            status: this.writeStatus(oid),
+            onToggle: on => this.writeValue(oid, switchValue(this.meta(oid), on), true),
         };
     }
 

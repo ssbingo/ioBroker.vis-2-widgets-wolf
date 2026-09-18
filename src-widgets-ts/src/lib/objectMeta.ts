@@ -1,5 +1,6 @@
 import { toNumber } from './fmt';
 import { parseValueMap, statesToValueMap, type ValueMap } from './valueMap';
+import type { WriteValue } from './writeTracker';
 
 /** Was ein Widget über ein Objekt wissen muss, um es anzuzeigen und zu bedienen */
 export interface ObjectMeta {
@@ -13,6 +14,8 @@ export interface ObjectMeta {
     step?: number;
     /** Klartexte aus common.states, ohne wiederholte Zahlenpräfixe */
     states: ValueMap;
+    /** common.type, z. B. number oder boolean */
+    type?: string;
 }
 
 /** Auswahlmöglichkeit für Segmentschalter */
@@ -47,7 +50,23 @@ export function toObjectMeta(obj: { common?: unknown } | null | undefined): Obje
         max: toNumber(common.max) ?? undefined,
         step: toNumber(common.step) ?? undefined,
         states: statesToValueMap(common.states),
+        type: typeof common.type === 'string' ? common.type : undefined,
     };
+}
+
+/**
+ * Schaltwert im Typ des Objekts: Zahl-Objekte (z. B. wolf-smartset „0 Aus / 1 Ein") bekommen 0/1,
+ * alle anderen true/false.
+ *
+ * @param meta Metadaten des Objekts
+ * @param on gewünschter Zustand
+ * @returns zu schreibender Wert
+ */
+export function switchValue(meta: ObjectMeta | undefined, on: boolean): WriteValue {
+    if (meta?.type === 'number') {
+        return on ? 1 : 0;
+    }
+    return on;
 }
 
 /**
