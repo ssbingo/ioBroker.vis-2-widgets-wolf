@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { mapValue, parseValueMap, statesToValueMap } from './valueMap';
+import { mapValue, parseValueMap, statesToValueMap, stripKeyPrefix } from './valueMap';
 
 describe('parseValueMap', () => {
     it('liest die Zuordnung aus dem Widget-Attribut', () => {
@@ -59,5 +59,27 @@ describe('mapValue', () => {
     it('zeigt "--" ohne Wert', () => {
         expect(mapValue(null, own)).toBe('--');
         expect(mapValue('', own)).toBe('--');
+    });
+});
+
+describe('stripKeyPrefix', () => {
+    it('entfernt die wiederholte Zahl, wie sie wolf-smartset liefert', () => {
+        expect(stripKeyPrefix('0', '0 - Standby')).toBe('Standby');
+        expect(stripKeyPrefix('3', '3 - Wärmeanforderung (Heizbetrieb)')).toBe('Wärmeanforderung (Heizbetrieb)');
+        expect(stripKeyPrefix('10', '10 - HG Status 10')).toBe('HG Status 10');
+        expect(stripKeyPrefix('5', '5: Frostschutz')).toBe('Frostschutz');
+    });
+
+    it('lässt Texte ohne passendes Präfix unverändert', () => {
+        expect(stripKeyPrefix('1', '10 - HG Status 10')).toBe('10 - HG Status 10');
+        expect(stripKeyPrefix('0', '1')).toBe('1');
+        expect(stripKeyPrefix('9', '9')).toBe('9');
+        expect(stripKeyPrefix('2', '2-Wege-Ventil')).toBe('2-Wege-Ventil');
+        expect(stripKeyPrefix('3', '3.5 bar')).toBe('3.5 bar');
+    });
+
+    it('wirkt beim Übernehmen von common.states', () => {
+        expect(statesToValueMap({ 0: '0 - Standby', 3: '3 - Taktsperre' })).toEqual({ 0: 'Standby', 3: 'Taktsperre' });
+        expect(statesToValueMap('0:0 - Aus;1:1 - Ein')).toEqual({ 0: 'Aus', 1: 'Ein' });
     });
 });

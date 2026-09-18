@@ -59,5 +59,8 @@
     "theme": "Color scheme",
     "theme_auto": "Automatic (like VIS-2)",
     "theme_light": "Light",
-    "theme_dark": "Dark"
+    "theme_dark": "Dark",
+    "oid_brenner": "Burner status (flame)",
+    "burner_on": "Burner on",
+    "burner_off": "Burner off"
 }

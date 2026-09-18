@@ -34,6 +34,9 @@ const START: Meter[] = [
 ];
 
 interface Boiler {
+    subtitle: string;
+    /** Bögen zeigen — ISM7 über wolf-smartset liefert weder Modulation noch Druck */
+    gauges: boolean;
     phase: number;
     modulation: number;
     pressure: number;
@@ -43,10 +46,41 @@ interface Boiler {
     returnTemp: number;
 }
 
-/** Zwei Kessel: einer im Normalbetrieb, einer mit zu niedrigem Druck (Warnzone sichtbar) */
+/** Drei Kessel: Normalbetrieb, Druck zu niedrig (Warnzone sichtbar), und wie ISM7 ohne Modulation/Druck */
 const BOILERS: Boiler[] = [
-    { phase: 1, modulation: 42, pressure: 1.6, hours: 14268, starts: 96314, flowTemp: 54.8, returnTemp: 41.3 },
-    { phase: 0, modulation: 0, pressure: 1.05, hours: 8113, starts: 40211, flowTemp: 31.2, returnTemp: 29.8 },
+    {
+        subtitle: 'CGB-2 / Betriebsdaten',
+        gauges: true,
+        phase: 1,
+        modulation: 42,
+        pressure: 1.6,
+        hours: 14268,
+        starts: 96314,
+        flowTemp: 54.8,
+        returnTemp: 41.3,
+    },
+    {
+        subtitle: 'Druck unter Warnschwelle',
+        gauges: true,
+        phase: 0,
+        modulation: 0,
+        pressure: 1.05,
+        hours: 8113,
+        starts: 40211,
+        flowTemp: 31.2,
+        returnTemp: 29.8,
+    },
+    {
+        subtitle: 'wie ISM7: ohne Modulation und Druck',
+        gauges: false,
+        phase: 0,
+        modulation: 0,
+        pressure: 0,
+        hours: 25419,
+        starts: 194198,
+        flowTemp: 26,
+        returnTemp: 26,
+    },
 ];
 const PHASES = [de.phase_0, de.phase_1, de.phase_2];
 
@@ -206,8 +240,11 @@ function Sandbox(): React.JSX.Element {
                         <BoilerView
                             themeType={themeType}
                             title={de.boiler}
-                            subtitle={i === 0 ? 'CGB-2 / Betriebsdaten' : 'Druck unter Warnschwelle'}
+                            subtitle={b.subtitle}
                             phase={PHASES[b.phase]}
+                            burner={b.phase > 0}
+                            showModulation={b.gauges}
+                            showPressure={b.gauges}
                             modulation={b.modulation}
                             pressure={b.pressure}
                             pressureMin={1.2}
@@ -224,6 +261,8 @@ function Sandbox(): React.JSX.Element {
                                 starts: de.starts,
                                 flowTemp: de.flow_temp,
                                 returnTemp: de.return_temp,
+                                burnerOn: de.burner_on,
+                                burnerOff: de.burner_off,
                             }}
                         />
                     </div>

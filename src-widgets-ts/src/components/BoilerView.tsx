@@ -2,6 +2,7 @@ import React from 'react';
 
 import { fmt } from '../lib/fmt';
 import Gauge from './Gauge';
+import Led from './Led';
 
 /** Anzeigewerte und Beschriftungen des Kesselstatus */
 export interface BoilerViewProps {
@@ -13,6 +14,12 @@ export interface BoilerViewProps {
     subtitle?: string;
     /** Betriebsphase im Klartext */
     phase: string;
+    /** Brenner an/aus; null blendet die LED aus (kein Datenpunkt verknüpft) */
+    burner: boolean | null;
+    /** Modulationsbogen zeigen — nur wenn ein Datenpunkt verknüpft ist */
+    showModulation: boolean;
+    /** Druckbogen zeigen — nur wenn ein Datenpunkt verknüpft ist */
+    showPressure: boolean;
     /** Modulationsgrad in % */
     modulation: number | null;
     /** Wasserdruck in bar */
@@ -39,6 +46,8 @@ export interface BoilerViewProps {
         starts: string;
         flowTemp: string;
         returnTemp: string;
+        burnerOn: string;
+        burnerOff: string;
     };
     /** Sprachregion für die Zahlformatierung */
     locale?: string;
@@ -57,8 +66,10 @@ export function pressureOk(pressure: number | null, min: number, max: number): b
 }
 
 /**
- * Kesselstatus — Darstellung ohne Zugriff auf ioBroker: Betriebsphase, Modulation,
- * Wasserdruck mit Warnzonen, Betriebsstunden, Brennerstarts, Vor- und Rücklauf.
+ * Kesselstatus — Darstellung ohne Zugriff auf ioBroker: Betriebsphase, Brenner-LED,
+ * Modulation, Wasserdruck mit Warnzonen, Betriebsstunden, Brennerstarts, Vor- und Rücklauf.
+ * LED und Bögen erscheinen nur, wenn ein Datenpunkt verknüpft ist — nicht jede Anlage
+ * liefert Modulation oder Druck (z. B. wolf-smartset mit ISM7).
  *
  * @param props Anzeigewerte und Beschriftungen
  * @returns die Kachel
@@ -84,33 +95,46 @@ export default function BoilerView(props: BoilerViewProps): React.JSX.Element {
                     <h3>{props.title}</h3>
                     {props.subtitle ? <div className="wolf-hint">{props.subtitle}</div> : null}
                 </div>
+                {props.burner === null ? null : (
+                    <Led
+                        on={props.burner}
+                        labelOn={labels.burnerOn}
+                        labelOff={labels.burnerOff}
+                    />
+                )}
             </div>
 
             <div className="wolf-phase-row">
                 <span className="wolf-phase">{props.phase}</span>
             </div>
 
-            <div className="wolf-gauges">
-                <Gauge
-                    value={props.modulation}
-                    min={0}
-                    max={100}
-                    color="var(--wolf-accent)"
-                    text={fmt(props.modulation, 0, undefined, locale)}
-                    unit="%"
-                    label={labels.modulation}
-                />
-                <Gauge
-                    value={props.pressure}
-                    min={0}
-                    max={props.pressureScale}
-                    color={ok ? 'var(--wolf-ok)' : 'var(--wolf-alert)'}
-                    bands={bands}
-                    text={fmt(props.pressure, 1, undefined, locale)}
-                    unit="bar"
-                    label={labels.pressure}
-                />
-            </div>
+            {props.showModulation || props.showPressure ? (
+                <div className="wolf-gauges">
+                    {props.showModulation ? (
+                        <Gauge
+                            value={props.modulation}
+                            min={0}
+                            max={100}
+                            color="var(--wolf-accent)"
+                            text={fmt(props.modulation, 0, undefined, locale)}
+                            unit="%"
+                            label={labels.modulation}
+                        />
+                    ) : null}
+                    {props.showPressure ? (
+                        <Gauge
+                            value={props.pressure}
+                            min={0}
+                            max={props.pressureScale}
+                            color={ok ? 'var(--wolf-ok)' : 'var(--wolf-alert)'}
+                            bands={bands}
+                            text={fmt(props.pressure, 1, undefined, locale)}
+                            unit="bar"
+                            label={labels.pressure}
+                        />
+                    ) : null}
+                </div>
+            ) : null}
 
             <div className="wolf-kv">
                 <div>

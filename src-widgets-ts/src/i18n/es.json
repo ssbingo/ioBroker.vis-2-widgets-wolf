@@ -59,5 +59,8 @@
     "theme": "Esquema de colores",
     "theme_auto": "Automático (como VIS-2)",
     "theme_light": "Claro",
-    "theme_dark": "Oscuro"
+    "theme_dark": "Oscuro",
+    "oid_brenner": "Estado del quemador (llama)",
+    "burner_on": "Quemador encendido",
+    "burner_off": "Quemador apagado"
 }

@@ -59,5 +59,8 @@
     "theme": "Farbschema",
     "theme_auto": "Automatisch (wie VIS-2)",
     "theme_light": "Hell",
-    "theme_dark": "Dunkel"
+    "theme_dark": "Dunkel",
+    "oid_brenner": "Brennerstatus (Flamme)",
+    "burner_on": "Brenner läuft",
+    "burner_off": "Brenner aus"
 }

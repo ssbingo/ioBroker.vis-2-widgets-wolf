@@ -59,5 +59,8 @@
     "theme": "Kleurenschema",
     "theme_auto": "Automatisch (zoals VIS-2)",
     "theme_light": "Licht",
-    "theme_dark": "Donker"
+    "theme_dark": "Donker",
+    "oid_brenner": "Branderstatus (vlam)",
+    "burner_on": "Brander aan",
+    "burner_off": "Brander uit"
 }

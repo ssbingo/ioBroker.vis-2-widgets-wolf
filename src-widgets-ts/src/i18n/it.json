@@ -59,5 +59,8 @@
     "theme": "Schema colori",
     "theme_auto": "Automatico (come VIS-2)",
     "theme_light": "Chiaro",
-    "theme_dark": "Scuro"
+    "theme_dark": "Scuro",
+    "oid_brenner": "Stato bruciatore (fiamma)",
+    "burner_on": "Bruciatore acceso",
+    "burner_off": "Bruciatore spento"
 }

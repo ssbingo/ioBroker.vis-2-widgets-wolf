@@ -74,6 +74,7 @@ provide.
 * (ssbingo) Initial version: widget set built with React 19 and TypeScript, first version of the gas meter widget
 * (ssbingo) Gas meter: all seven counter styles (A, B, C, E, F, G, H) and a status LED for consumption
 * (ssbingo) Color scheme per widget: automatic (like VIS-2), light or dark
+* (ssbingo) Boiler status: burner LED, gauges only when a data point is linked, state texts without a repeated number prefix (as delivered by wolf-smartset)
 * (ssbingo) Boiler status: operating phase (texts from the widget, the object's states or built-in defaults), modulation and water pressure gauges with warning zones, operating hours, burner starts, flow and return temperature
 
 ## License

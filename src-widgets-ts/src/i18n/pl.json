@@ -59,5 +59,8 @@
     "theme": "Schemat kolorów",
     "theme_auto": "Automatycznie (jak VIS-2)",
     "theme_light": "Jasny",
-    "theme_dark": "Ciemny"
+    "theme_dark": "Ciemny",
+    "oid_brenner": "Stan palnika (płomień)",
+    "burner_on": "Palnik pracuje",
+    "burner_off": "Palnik wyłączony"
 }

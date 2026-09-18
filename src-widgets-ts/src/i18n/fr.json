@@ -59,5 +59,8 @@
     "theme": "Jeu de couleurs",
     "theme_auto": "Automatique (comme VIS-2)",
     "theme_light": "Clair",
-    "theme_dark": "Sombre"
+    "theme_dark": "Sombre",
+    "oid_brenner": "État du brûleur (flamme)",
+    "burner_on": "Brûleur en marche",
+    "burner_off": "Brûleur arrêté"
 }

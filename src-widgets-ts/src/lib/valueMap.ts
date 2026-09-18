@@ -25,6 +25,23 @@ export function parseValueMap(text: string | undefined | null): ValueMap {
 }
 
 /**
+ * Entfernt eine vorangestellte Wiederholung des Schlüssels, wie sie manche Adapter liefern:
+ * "3 - Wärmeanforderung (Heizbetrieb)" → "Wärmeanforderung (Heizbetrieb)".
+ * Nur wenn das Präfix genau dem Schlüssel entspricht, auf das Trennzeichen ein Leerzeichen folgt
+ * und danach noch Text steht.
+ *
+ * @param key Rohwert als Zeichenkette
+ * @param text Klartext
+ * @returns Klartext ohne redundantes Präfix
+ */
+export function stripKeyPrefix(key: string, text: string): string {
+    const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    // Trennzeichen mit folgendem Leerzeichen: "0 - Standby", "5: Frostschutz" — nicht "2-Wege-Ventil"
+    const stripped = text.replace(new RegExp(`^${escaped}\\s*[-–:.]\\s+`), '');
+    return stripped && stripped !== text ? stripped : text;
+}
+
+/**
  * Übernimmt common.states eines ioBroker-Objekts als Zuordnung.
  * Unterstützt die Objektform { "0": "Aus" } und die veraltete Textform "0:Aus;1:Ein".
  *
@@ -33,13 +50,17 @@ export function parseValueMap(text: string | undefined | null): ValueMap {
  */
 export function statesToValueMap(states: unknown): ValueMap {
     if (typeof states === 'string') {
-        return parseValueMap(states.replace(/:/g, '='));
+        const map = parseValueMap(states.replace(/:/g, '='));
+        for (const key of Object.keys(map)) {
+            map[key] = stripKeyPrefix(key, map[key]);
+        }
+        return map;
     }
     if (states && typeof states === 'object' && !Array.isArray(states)) {
         const map: ValueMap = {};
         for (const [key, value] of Object.entries(states as Record<string, unknown>)) {
             if (typeof value === 'string' || typeof value === 'number') {
-                map[key] = String(value);
+                map[key] = stripKeyPrefix(key, String(value));
             }
         }
         return map;
