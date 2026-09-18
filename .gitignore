@@ -1,0 +1,24 @@
+# Abhängigkeiten und Build-Zwischenstände
+node_modules/
+src-widgets-ts/node_modules/
+src-widgets-ts/package-lock.json
+src-widgets-ts/build/
+src-widgets-ts/.__mf__temp/
+src-widgets-ts/.mf/
+
+# ioBroker dev-server
+.dev-server/
+www/
+
+# npm-Pakete
+iobroker.*.tgz
+
+# Planungsunterlagen — bewusst nicht im (später öffentlichen) Repository
+Projektplan_*.md
+Projektplan_*.pdf
+
+# Sonstiges
+*.log
+.DS_Store
+Thumbs.db
+.commitinfo

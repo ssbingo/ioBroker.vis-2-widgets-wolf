@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wolf Heizung Leitstand</title>
+<style>:root{padding:0}body{margin:0}</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@500;600&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+:root{
+  --bg:#E9EDF1; --surface:#FFFFFF; --surface-2:#F2F5F8; --surface-3:#E7ECF1;
+  --ink:#101821; --ink-2:#3C4A57; --muted:#697887;
+  --line:#D5DDE4; --line-strong:#BFCAD4;
+  --accent:#C2561F; --accent-soft:rgba(194,86,31,.12);
+  --warm:#D2551F; --warm-2:#EE8B4E;
+  --cool:#2F7BB5; --cool-2:#6FAFD8;
+  --ok:#17936A; --ok-glow:rgba(30,200,140,.55);
+  --warn:#B77A0B; --warn-soft:rgba(183,122,11,.14);
+  --alert:#D6382F; --alert-glow:rgba(255,80,60,.6); --alert-soft:rgba(214,56,47,.12);
+  --shadow:0 1px 2px rgba(16,24,33,.06), 0 8px 24px -12px rgba(16,24,33,.28);
+  --bezel-a:#C9D1D8; --bezel-b:#8D99A5;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --bg:#0B1117; --surface:#141D26; --surface-2:#1A242F; --surface-3:#202C38;
+  --ink:#E7EDF3; --ink-2:#BCC8D4; --muted:#8494A3;
+  --line:#233140; --line-strong:#32424F;
+  --accent:#EE8B4E; --accent-soft:rgba(238,139,78,.14);
+  --warm:#F08A45; --warm-2:#FFB37A;
+  --cool:#4FA3DE; --cool-2:#8CC6EC;
+  --ok:#2ED39A; --ok-glow:rgba(46,211,154,.55);
+  --warn:#E5A93A; --warn-soft:rgba(229,169,58,.16);
+  --alert:#FF5F52; --alert-glow:rgba(255,95,82,.6); --alert-soft:rgba(255,95,82,.14);
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 32px -16px rgba(0,0,0,.8);
+  --bezel-a:#3A4855; --bezel-b:#141C24;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0B1117; --surface:#141D26; --surface-2:#1A242F; --surface-3:#202C38;
+  --ink:#E7EDF3; --ink-2:#BCC8D4; --muted:#8494A3;
+  --line:#233140; --line-strong:#32424F;
+  --accent:#EE8B4E; --accent-soft:rgba(238,139,78,.14);
+  --warm:#F08A45; --warm-2:#FFB37A;
+  --cool:#4FA3DE; --cool-2:#8CC6EC;
+  --ok:#2ED39A; --ok-glow:rgba(46,211,154,.55);
+  --warn:#E5A93A; --warn-soft:rgba(229,169,58,.16);
+  --alert:#FF5F52; --alert-glow:rgba(255,95,82,.6); --alert-soft:rgba(255,95,82,.14);
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 32px -16px rgba(0,0,0,.8);
+  --bezel-a:#3A4855; --bezel-b:#141C24;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Archivo","Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px;padding-block:28px 56px}
+.label{font-family:"Barlow Semi Condensed",sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.09em;font-size:12px;color:var(--muted)}
+.num{font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+
+.top{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between;margin-bottom:22px}
+h1{font-size:clamp(26px,4vw,36px);font-weight:700;letter-spacing:-.02em;margin:0;text-wrap:balance}
+.sub{color:var(--muted);margin:4px 0 0;font-size:14px;max-width:64ch}
+.btn{font:inherit;font-size:13px;font-weight:500;background:var(--surface);color:var(--ink-2);border:1px solid var(--line);border-radius:8px;padding:7px 12px;cursor:pointer;transition:border-color .15s,color .15s}
+.btn:hover{border-color:var(--line-strong);color:var(--ink)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap}
+
+.board{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.w{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:18px}
+.w > h2{margin:0 0 2px;font-size:16px;font-weight:600;letter-spacing:-.01em}
+.w-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
+.w-head .hint{font-size:12px;color:var(--muted);margin-top:2px}
+.c12{grid-column:span 12}
+.c8{grid-column:span 8}
+.c6{grid-column:span 6}
+.c4{grid-column:span 4}
+.c3{grid-column:span 3}
+@media (max-width:980px){ .c8,.c6,.c4,.c3{grid-column:span 12} }
+
+/* LED */
+.led-box{display:flex;align-items:center;gap:9px;flex:none}
+.bezel{width:32px;height:32px;border-radius:50%;background:linear-gradient(145deg,var(--bezel-a),var(--bezel-b));padding:5px;
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.45), inset 0 -1px 2px rgba(0,0,0,.35), 0 1px 2px rgba(0,0,0,.25)}
+.led{position:relative;width:22px;height:22px;border-radius:50%;
+  background:radial-gradient(circle at 34% 26%, var(--hi) 0%, var(--mid) 42%, var(--lo) 100%);
+  box-shadow:inset 0 0 6px 1px rgba(0,0,0,.45), inset 0 -3px 5px rgba(0,0,0,.35), 0 0 8px 1px var(--glow), 0 0 20px 5px var(--glow2)}
+.led::before{content:"";position:absolute;left:4px;right:5px;top:3px;height:36%;border-radius:50% 50% 42% 42% / 62% 62% 38% 38%;
+  background:linear-gradient(to bottom,rgba(255,255,255,.92),rgba(255,255,255,.08))}
+.led.off{--hi:#9BFFD6;--mid:#1FBE88;--lo:#0A5C41;--glow:var(--ok-glow);--glow2:rgba(30,200,140,.28)}
+.led.on{--hi:#FFC9C2;--mid:#F0463A;--lo:#7A140D;--glow:var(--alert-glow);--glow2:rgba(255,80,60,.3);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.22)}}
+@media (prefers-reduced-motion:reduce){.led.on{animation:none}}
+.led-txt{font-family:"Barlow Semi Condensed",sans-serif;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.08em;line-height:1.2}
+.led-txt.on{color:var(--alert)} .led-txt.off{color:var(--ok)}
+
+/* Schema */
+.schema{width:100%;height:auto;display:block}
+.pipe{fill:none;stroke-linecap:round}
+.pipe-bg{stroke:var(--line);stroke-width:11}
+.flow{stroke-width:5;stroke-dasharray:9 13;animation:flow 1.1s linear infinite}
+.flow.cool{animation-direction:reverse}
+.flow.idle{animation-play-state:paused;opacity:.35}
+@keyframes flow{to{stroke-dashoffset:-22}}
+@media (prefers-reduced-motion:reduce){.flow{animation:none}}
+.node{fill:var(--surface-2);stroke:var(--line-strong);stroke-width:1.5}
+.slab{font-family:"Barlow Semi Condensed",sans-serif;font-weight:600;font-size:11px;fill:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.sval{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:15px;fill:var(--ink)}
+.sval.warm{fill:var(--warm)} .sval.cool{fill:var(--cool)}
+.schema-legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.lg{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--muted)}
+.lg i{width:16px;height:4px;border-radius:2px;display:block}
+
+/* Segment-Control */
+.seg{display:flex;gap:3px;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:3px;flex-wrap:wrap}
+.seg button{flex:1 1 auto;min-width:64px;font:inherit;font-size:13px;font-weight:500;color:var(--muted);background:transparent;border:0;border-radius:7px;padding:7px 8px;cursor:pointer;transition:background .15s,color .15s}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12);font-weight:600}
+.seg button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+
+/* Stepper */
+.stepper{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:16px 0 10px}
+.step-btn{width:42px;height:42px;flex:none;border-radius:11px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);font-size:22px;line-height:1;cursor:pointer;font-family:inherit}
+.step-btn:hover{border-color:var(--line-strong)}
+.step-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.big{font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1;text-align:center;flex:1}
+.big span{font-size:18px;font-weight:500;color:var(--muted);margin-left:2px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.kv{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px;padding-top:13px;border-top:1px solid var(--line)}
+.kv .v{font-size:15px;font-weight:600;margin-top:2px}
+.kv .v small{color:var(--muted);font-weight:500;font-size:12px;margin-left:2px}
+
+/* Kurve */
+.curve{display:block;width:100%;height:120px;margin-top:8px}
+
+/* Tank */
+.tank-row{display:flex;gap:18px;align-items:stretch}
+.tank{width:86px;flex:none}
+.wwctl{flex:1;display:flex;flex-direction:column;gap:10px;justify-content:center}
+.switch{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:9px 12px}
+.switch button{width:46px;height:26px;flex:none;border-radius:99px;border:1px solid var(--line-strong);background:var(--surface-3);position:relative;cursor:pointer;transition:background .18s,border-color .18s}
+.switch button::after{content:"";position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:var(--surface);box-shadow:0 1px 2px rgba(0,0,0,.35);transition:transform .18s}
+.switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent)}
+.switch button[aria-pressed="true"]::after{transform:translateX(20px)}
+.switch button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.primary{font:inherit;font-size:14px;font-weight:600;background:var(--accent);color:#fff;border:0;border-radius:10px;padding:11px 14px;cursor:pointer}
+.primary[aria-pressed="true"]{background:var(--warm-2);color:#231208}
+.primary:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+/* Kessel */
+.gauges{display:flex;gap:14px;align-items:center;justify-content:space-around;flex-wrap:wrap}
+.gauge{text-align:center;width:120px}
+.gauge svg{display:block;width:100%;height:78px}
+.gauge .gv{font-size:19px;font-weight:600;margin-top:-6px}
+.gauge .gv small{font-size:12px;color:var(--muted);font-weight:500;margin-left:2px}
+.phase{display:inline-flex;align-items:center;gap:7px;background:var(--accent-soft);color:var(--accent);border-radius:99px;padding:5px 12px;font-size:13px;font-weight:600}
+
+/* Chart */
+.chart-scroll{overflow-x:auto}
+.chart{display:block;width:100%;min-width:560px;height:250px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px}
+
+/* Störungen */
+.msgs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.msgs li{display:flex;gap:11px;align-items:flex-start;padding:10px 2px;border-bottom:1px solid var(--line)}
+.msgs li:last-child{border-bottom:0}
+.dot{width:9px;height:9px;border-radius:50%;margin-top:6px;flex:none}
+.dot.err{background:var(--alert);box-shadow:0 0 6px var(--alert-glow)}
+.dot.warn{background:var(--warn)}
+.dot.info{background:var(--cool)}
+.msgs .t{font-size:14px;font-weight:500}
+.msgs .m{font-size:12px;color:var(--muted);font-family:"JetBrains Mono",monospace}
+
+/* Gaszähler kompakt */
+.gas{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.rollers{display:flex;gap:2px;padding:6px;background:#0F1113;border-radius:6px;box-shadow:inset 0 2px 5px rgba(0,0,0,.8);flex:none}
+.roll{width:22px;height:34px;border-radius:3px;display:grid;place-items:center;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:19px;color:#fff;
+  background:linear-gradient(to bottom,#4A4E53 0%,#1C1F22 22%,#101214 50%,#1C1F22 78%,#4A4E53 100%)}
+.roll.dec{background:linear-gradient(to bottom,#E06A63 0%,#B01F1A 22%,#8E120E 50%,#B01F1A 78%,#E06A63 100%)}
+
+.note{margin-top:26px;color:var(--muted);font-size:13px;line-height:1.6;max-width:76ch}
+.note strong{color:var(--ink-2);font-weight:600}
+</style>
+
+<div class="wrap">
+  <div class="top">
+    <div>
+      <h1>Wolf Heizung Leitstand</h1>
+      <p class="sub">Entwurf der Widgets für <span class="num">ioBroker.vis-2-widgets-wolf</span> — Anlagenschema, Heizkreis-Bedienung, Warmwasser, Kesselstatus, Verläufe und Störungen. Alle Werte sind Demodaten, die Bedienelemente reagieren.</p>
+    </div>
+    <div class="toolbar">
+      <button class="btn" id="themeBtn" type="button">Dunkel / Hell</button>
+      <button class="btn" id="burnBtn" type="button">Brenner an/aus</button>
+    </div>
+  </div>
+
+  <div class="board">
+
+    <!-- Anlagenschema -->
+    <section class="w c8">
+      <div class="w-head">
+        <div><h2>Anlagenschema</h2><div class="hint">CGB-2 · Warmwasserspeicher · zwei Heizkreise</div></div>
+        <div class="led-box"><div class="bezel"><div class="led off" id="ledBurner"></div></div>
+          <div><div class="label" style="margin-bottom:1px">Brenner</div><div class="led-txt off" id="ledBurnerTxt">Aus</div></div></div>
+      </div>
+      <svg class="schema" viewBox="0 0 880 330" role="img" aria-label="Hydraulisches Anlagenschema">
+        <!-- Rohre Hintergrund -->
+        <path class="pipe pipe-bg" d="M180 150 H452"/>
+        <path class="pipe pipe-bg" d="M180 250 H452"/>
+        <path class="pipe pipe-bg" d="M468 165 H505 V100 H575"/>
+        <path class="pipe pipe-bg" d="M468 200 H530 V210 H575"/>
+        <path class="pipe pipe-bg" d="M468 235 H552 V282 H575"/>
+        <!-- Fluss -->
+        <path class="pipe flow" id="fVL" stroke="var(--warm)" d="M180 150 H452"/>
+        <path class="pipe flow cool" id="fRL" stroke="var(--cool)" d="M180 250 H452"/>
+        <path class="pipe flow" id="fWW" stroke="var(--warm)" d="M468 165 H505 V100 H575"/>
+        <path class="pipe flow" id="fHK1" stroke="var(--warm-2)" d="M468 200 H530 V210 H575"/>
+        <path class="pipe flow" id="fHK2" stroke="var(--cool-2)" d="M468 235 H552 V282 H575"/>
+
+        <!-- Kessel -->
+        <rect class="node" x="30" y="110" width="150" height="180" rx="12"/>
+        <text class="slab" x="46" y="134">Brennwertgerät</text>
+        <text class="sval" x="46" y="158" id="tKessel">54,8 °C</text>
+        <g id="flame" transform="translate(105,232)">
+          <path d="M0 -42 C 16 -24 24 -12 24 2 C 24 18 12 30 0 30 C -12 30 -24 18 -24 2 C -24 -12 -16 -24 0 -42 Z" fill="var(--warm)" opacity=".28"/>
+          <path d="M0 -26 C 9 -14 14 -6 14 3 C 14 13 7 20 0 20 C -7 20 -14 13 -14 3 C -14 -6 -9 -14 0 -26 Z" fill="var(--warm-2)"/>
+          <path d="M0 -12 C 5 -6 7 -2 7 3 C 7 9 4 13 0 13 C -4 13 -7 9 -7 3 C -7 -2 -5 -6 0 -12 Z" fill="#FFE1A8"/>
+        </g>
+        <text class="slab" x="46" y="278" id="tMod">Modulation 0 %</text>
+
+        <!-- Verteiler -->
+        <rect x="452" y="140" width="16" height="110" rx="6" fill="var(--line-strong)"/>
+        <text class="slab" x="460" y="132" text-anchor="middle">Verteiler</text>
+
+        <!-- Speicher -->
+        <rect class="node" x="575" y="45" width="96" height="120" rx="14"/>
+        <clipPath id="tankClip"><rect x="577" y="47" width="92" height="116" rx="13"/></clipPath>
+        <rect id="tankFill" x="577" y="90" width="92" height="73" clip-path="url(#tankClip)" fill="var(--warm)" opacity=".24"/>
+        <text class="slab" x="623" y="70" text-anchor="middle">Warmwasser</text>
+        <text class="sval warm" x="623" y="120" text-anchor="middle" id="tWW">52,4 °C</text>
+
+        <!-- Heizkreis 1 -->
+        <rect class="node" x="575" y="180" width="130" height="60" rx="10"/>
+        <g stroke="var(--line-strong)" stroke-width="2">
+          <line x1="592" y1="192" x2="592" y2="228"/><line x1="604" y1="192" x2="604" y2="228"/>
+          <line x1="616" y1="192" x2="616" y2="228"/>
+        </g>
+        <text class="slab" x="634" y="204">Heizkreis 1</text>
+        <text class="sval warm" x="634" y="226" id="tHK1">42,1 °C</text>
+
+        <!-- Heizkreis 2 -->
+        <rect class="node" x="575" y="252" width="130" height="60" rx="10"/>
+        <g stroke="var(--line-strong)" stroke-width="2">
+          <line x1="592" y1="264" x2="592" y2="300"/><line x1="604" y1="264" x2="604" y2="300"/>
+          <line x1="616" y1="264" x2="616" y2="300"/>
+        </g>
+        <text class="slab" x="634" y="276">Heizkreis 2</text>
+        <text class="sval cool" x="634" y="298" id="tHK2">24,0 °C</text>
+
+        <!-- Außen -->
+        <rect class="node" x="740" y="110" width="110" height="80" rx="10"/>
+        <text class="slab" x="795" y="136" text-anchor="middle">Außen</text>
+        <text class="sval cool" x="795" y="166" text-anchor="middle" id="tAussen">6,2 °C</text>
+      </svg>
+      <div class="schema-legend">
+        <span class="lg"><i style="background:var(--warm)"></i>Vorlauf</span>
+        <span class="lg"><i style="background:var(--cool)"></i>Rücklauf</span>
+        <span class="lg"><i style="background:var(--warm-2)"></i>Heizkreis aktiv</span>
+        <span class="lg"><i style="background:var(--cool-2)"></i>Heizkreis aus</span>
+      </div>
+    </section>
+
+    <!-- Kesselstatus -->
+    <section class="w c4">
+      <div class="w-head"><div><h2>Kesselstatus</h2><div class="hint">CGB-2 / Betriebsdaten</div></div></div>
+      <div style="margin-bottom:14px"><span class="phase" id="phase">Standby</span></div>
+      <div class="gauges">
+        <div class="gauge">
+          <svg viewBox="0 0 120 78" aria-hidden="true">
+            <path d="M14 68 A46 46 0 0 1 106 68" fill="none" stroke="var(--line)" stroke-width="10" stroke-linecap="round"/>
+            <path id="arcMod" d="M14 68 A46 46 0 0 1 106 68" fill="none" stroke="var(--accent)" stroke-width="10" stroke-linecap="round"/>
+          </svg>
+          <div class="gv num" id="gMod">0<small>%</small></div>
+          <div class="label">Modulation</div>
+        </div>
+        <div class="gauge">
+          <svg viewBox="0 0 120 78" aria-hidden="true">
+            <path d="M14 68 A46 46 0 0 1 106 68" fill="none" stroke="var(--line)" stroke-width="10" stroke-linecap="round"/>
+            <path d="M14 68 A46 46 0 0 1 48 26" fill="none" stroke="var(--alert-soft)" stroke-width="10"/>
+            <path id="arcPress" d="M14 68 A46 46 0 0 1 106 68" fill="none" stroke="var(--ok)" stroke-width="10" stroke-linecap="round"/>
+          </svg>
+          <div class="gv num" id="gPress">1,6<small>bar</small></div>
+          <div class="label">Wasserdruck</div>
+        </div>
+      </div>
+      <div class="kv">
+        <div><div class="label">Betriebsstunden</div><div class="v num" id="kHours">14 268<small>h</small></div></div>
+        <div><div class="label">Brennerstarts</div><div class="v num" id="kStarts">96 314</div></div>
+        <div><div class="label">Vorlauf Ist</div><div class="v num" id="kVL">54,8<small>°C</small></div></div>
+        <div><div class="label">Rücklauf</div><div class="v num" id="kRL">41,3<small>°C</small></div></div>
+      </div>
+    </section>
+
+    <!-- Heizkreis-Bedienung -->
+    <section class="w c4">
+      <div class="w-head"><div><h2>Heizkreis 1</h2><div class="hint">Wohnräume · schreibende Bedienung</div></div></div>
+      <div class="label" style="margin-bottom:7px">Betriebsart</div>
+      <div class="seg" id="segMode">
+        <button type="button" aria-pressed="true">Automatik</button>
+        <button type="button" aria-pressed="false">Heizen</button>
+        <button type="button" aria-pressed="false">Sparen</button>
+        <button type="button" aria-pressed="false">Standby</button>
+      </div>
+      <div class="label" style="margin-top:18px">Raumsolltemperatur</div>
+      <div class="stepper">
+        <button class="step-btn" type="button" id="tDown" aria-label="Solltemperatur senken">−</button>
+        <div class="big num"><span id="setTemp">21,5</span><span>°C</span></div>
+        <button class="step-btn" type="button" id="tUp" aria-label="Solltemperatur erhöhen">+</button>
+      </div>
+      <input type="range" id="tRange" min="15" max="26" step="0.5" value="21.5" aria-label="Raumsolltemperatur">
+      <div class="kv">
+        <div><div class="label">Raum Ist</div><div class="v num" id="roomIs">21,1<small>°C</small></div></div>
+        <div><div class="label">Vorlauf Soll</div><div class="v num" id="hkSoll">43,0<small>°C</small></div></div>
+      </div>
+    </section>
+
+    <!-- Heizkurve -->
+    <section class="w c4">
+      <div class="w-head"><div><h2>Heizkurve</h2><div class="hint">Steilheit und Niveau</div></div></div>
+      <svg class="curve" id="curve" viewBox="0 0 340 120" role="img" aria-label="Heizkurve"></svg>
+      <div class="label" style="margin-top:12px">Steilheit <span class="num" id="slopeV">1,20</span></div>
+      <input type="range" id="slope" min="0.4" max="2.4" step="0.05" value="1.2" aria-label="Steilheit">
+      <div class="label" style="margin-top:10px">Niveau <span class="num" id="levelV">+2 K</span></div>
+      <input type="range" id="level" min="-8" max="8" step="1" value="2" aria-label="Niveau">
+    </section>
+
+    <!-- Warmwasser -->
+    <section class="w c4">
+      <div class="w-head"><div><h2>Warmwasser</h2><div class="hint">Speicher 160 l</div></div></div>
+      <div class="tank-row">
+        <svg class="tank" viewBox="0 0 86 190" role="img" aria-label="Speichertemperatur">
+          <rect x="8" y="8" width="70" height="174" rx="20" fill="var(--surface-2)" stroke="var(--line-strong)" stroke-width="1.5"/>
+          <clipPath id="wwClip"><rect x="9.5" y="9.5" width="67" height="171" rx="19"/></clipPath>
+          <rect id="wwFill" x="9.5" y="60" width="67" height="121" clip-path="url(#wwClip)" fill="url(#wwGrad)"/>
+          <defs><linearGradient id="wwGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="var(--warm)" stop-opacity=".55"/>
+            <stop offset="100%" stop-color="var(--cool)" stop-opacity=".30"/></linearGradient></defs>
+          <line id="wwTarget" x1="4" y1="52" x2="82" y2="52" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5 4"/>
+          <text x="43" y="112" text-anchor="middle" class="sval warm" id="wwVal" style="font-size:17px">52,4°</text>
+        </svg>
+        <div class="wwctl">
+          <div class="switch"><span>Zirkulation</span><button type="button" id="circ" aria-pressed="false" aria-label="Zirkulation"></button></div>
+          <button class="primary" type="button" id="boost" aria-pressed="false">Sofortladung starten</button>
+          <div class="kv" style="margin:0;padding:0;border:0">
+            <div><div class="label">Soll</div><div class="v num">55,0<small>°C</small></div></div>
+            <div><div class="label">Ladung</div><div class="v" id="wwState">inaktiv</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Verläufe -->
+    <section class="w c8">
+      <div class="w-head"><div><h2>Verläufe, 24 Stunden</h2><div class="hint">Quelle: history / SQL / InfluxDB</div></div></div>
+      <div class="chart-scroll"><svg class="chart" id="chart" viewBox="0 0 880 250" role="img" aria-label="Temperaturverläufe der letzten 24 Stunden"></svg></div>
+      <div class="legend">
+        <span class="lg"><i style="background:var(--warm)"></i>Vorlauf</span>
+        <span class="lg"><i style="background:var(--cool)"></i>Rücklauf</span>
+        <span class="lg"><i style="background:var(--ok)"></i>Außentemperatur</span>
+        <span class="lg"><i style="background:var(--accent-soft)"></i>Modulation</span>
+      </div>
+    </section>
+
+    <!-- Störungen -->
+    <section class="w c4">
+      <div class="w-head">
+        <div><h2>Meldungen</h2><div class="hint">Sammelstörung und Historie</div></div>
+        <div class="led-box"><div class="bezel"><div class="led off" id="ledFault"></div></div></div>
+      </div>
+      <ul class="msgs">
+        <li><span class="dot warn"></span><div><div class="t">Wasserdruck unter 1,2 bar</div><div class="m">17.09.2026 · 06:14 · quittiert</div></div></li>
+        <li><span class="dot info"></span><div><div class="t">Wartung fällig in 34 Tagen</div><div class="m">12.09.2026 · 00:00</div></div></li>
+        <li><span class="dot err"></span><div><div class="t">Störabschaltung 41 — Flammenabriss</div><div class="m">28.08.2026 · 19:47 · entstört</div></div></li>
+        <li><span class="dot info"></span><div><div class="t">Sommerbetrieb beendet</div><div class="m">24.08.2026 · 03:00</div></div></li>
+      </ul>
+    </section>
+
+    <!-- Gaszähler -->
+    <section class="w c12">
+      <div class="w-head"><div><h2>Gaszähler</h2><div class="hint">Zählwerk-Variante A · Rollenzählwerk</div></div></div>
+      <div class="gas">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="rollers" id="rollers"></div>
+          <span class="label">m³</span>
+        </div>
+        <div><div class="label">Momentandurchfluss</div><div class="big num" style="text-align:left;font-size:30px"><span id="gFlow">0,00</span><span> m³/h</span></div></div>
+        <div><div class="label">Heute</div><div class="big num" style="text-align:left;font-size:30px"><span id="gToday">4,82</span><span> m³</span></div></div>
+        <div><div class="label">Kosten Monat</div><div class="big num" style="text-align:left;font-size:30px"><span id="gCost">117,46</span><span> €</span></div></div>
+        <div class="led-box"><div class="bezel"><div class="led off" id="ledGas"></div></div>
+          <div><div class="label" style="margin-bottom:1px">Verbrauch</div><div class="led-txt off" id="ledGasTxt">Kein Verbrauch</div></div></div>
+      </div>
+    </section>
+
+  </div>
+
+  <p class="note"><strong>Aufteilung in Widgets:</strong> Jede Kachel ist eine eigene Widget-Klasse und frei platzierbar — Anlagenschema, Kesselstatus, Heizkreis-Bedienung, Heizkurve, Warmwasser, Verläufe, Meldungen und Gaszähler. Die Bindung der Objekte erfolgt je Wert einzeln, damit der Adapter unabhängig von der Quelle bleibt: <span class="num">wolf-smartset</span>, <span class="num">wolf</span> über ISM8i oder eigene Modbus-/Skript-Datenpunkte. Anzahl der Heizkreise und sichtbare Anlagenteile werden pro Instanz konfiguriert.</p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  function f(v,d){ return v.toFixed(d).replace(".",","); }
+
+  var st = {
+    burner:false, mod:0, kessel:38.4, rl:32.1, aussen:6.2,
+    ww:52.4, wwTarget:55, boost:false, circ:false,
+    hk1:42.1, hk2:24.0, room:21.1, setTemp:21.5,
+    slope:1.2, level:2,
+    press:1.6, hours:14268, starts:96314,
+    gas:18427.482, gasFlow:0, gasToday:4.82, gasMonth:96.4
+  };
+
+  /* ---------- Heizkurve ---------- */
+  function drawCurve(){
+    var svg=document.getElementById("curve");
+    var W=340,H=120,L=34,R=8,T=10,B=24, iw=W-L-R, ih=H-T-B;
+    var aMin=-16,aMax=20, vMin=20,vMax=75;
+    function X(a){ return L + (aMax-a)/(aMax-aMin)*iw; }
+    function Y(v){ return T + ih - (v-vMin)/(vMax-vMin)*ih; }
+    var s="";
+    [30,50,70].forEach(function(v){
+      s+='<line x1="'+L+'" y1="'+Y(v).toFixed(1)+'" x2="'+(W-R)+'" y2="'+Y(v).toFixed(1)+'" stroke="var(--line)" stroke-width="1"/>';
+      s+='<text x="'+(L-6)+'" y="'+(Y(v)+4).toFixed(1)+'" text-anchor="end" font-size="10" fill="var(--muted)" font-family="JetBrains Mono, monospace">'+v+'</text>';
+    });
+    [15,0,-15].forEach(function(a){
+      s+='<text x="'+X(a).toFixed(1)+'" y="'+(H-6)+'" text-anchor="middle" font-size="10" fill="var(--muted)" font-family="JetBrains Mono, monospace">'+a+'°</text>';
+    });
+    var p="";
+    for(var a=aMax;a>=aMin;a-=1){
+      var v = 20 + st.level + st.slope*Math.max(0,(20-a))*1.15;
+      v = Math.max(vMin,Math.min(vMax,v));
+      p += (p?" L":"M")+X(a).toFixed(1)+" "+Y(v).toFixed(1);
+    }
+    s+='<path d="'+p+'" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linejoin="round"/>';
+    var cv = Math.max(vMin,Math.min(vMax, 20 + st.level + st.slope*Math.max(0,(20-st.aussen))*1.15));
+    s+='<circle cx="'+X(st.aussen).toFixed(1)+'" cy="'+Y(cv).toFixed(1)+'" r="4.5" fill="var(--accent)" stroke="var(--surface)" stroke-width="2"/>';
+    s+='<text x="'+(X(st.aussen)+8).toFixed(1)+'" y="'+(Y(cv)-7).toFixed(1)+'" font-size="11" font-weight="700" fill="var(--ink)" font-family="JetBrains Mono, monospace">'+f(cv,0)+'°C</text>';
+    svg.innerHTML=s;
+    st.hk1soll = cv;
+  }
+
+  /* ---------- Verläufe ---------- */
+  var hist = [];
+  (function(){
+    for(var i=0;i<96;i++){
+      var h=(i/4);
+      var out = 6 + 5*Math.sin((h-4)/24*2*Math.PI);
+      var on = (h>5&&h<9)||(h>15&&h<22);
+      var vl = on ? 46+6*Math.sin(i/3) : 30+3*Math.sin(i/5);
+      hist.push({ h:h, out:out, vl:vl, rl:vl-9-2*Math.sin(i/4), mod: on ? 45+25*Math.sin(i/2.4) : 0 });
+    }
+  })();
+  function drawChart(){
+    var svg=document.getElementById("chart");
+    var W=880,H=250,L=44,R=14,T=14,B=30, iw=W-L-R, ih=H-T-B;
+    var vMin=-5,vMax=65;
+    function X(i){ return L + i/(hist.length-1)*iw; }
+    function Y(v){ return T + ih - (v-vMin)/(vMax-vMin)*ih; }
+    var s="";
+    [0,15,30,45,60].forEach(function(v){
+      s+='<line x1="'+L+'" y1="'+Y(v).toFixed(1)+'" x2="'+(W-R)+'" y2="'+Y(v).toFixed(1)+'" stroke="var(--line)" stroke-width="1"/>';
+      s+='<text x="'+(L-8)+'" y="'+(Y(v)+4).toFixed(1)+'" text-anchor="end" font-size="11" fill="var(--muted)" font-family="JetBrains Mono, monospace">'+v+'</text>';
+    });
+    for(var t=0;t<=24;t+=4){
+      var xi = (t/24)*(hist.length-1);
+      s+='<text x="'+X(xi).toFixed(1)+'" y="'+(H-9)+'" text-anchor="middle" font-size="11" fill="var(--muted)" font-family="Archivo, sans-serif">'+(t<10?"0"+t:t)+':00</text>';
+    }
+    var ma="";
+    for(var i=0;i<hist.length;i++){
+      var y = T+ih - (hist[i].mod/100)*ih*0.42;
+      ma += (i?" L":"M")+X(i).toFixed(1)+" "+y.toFixed(1);
+    }
+    ma += " L"+X(hist.length-1).toFixed(1)+" "+(T+ih)+" L"+L+" "+(T+ih)+" Z";
+    s+='<path d="'+ma+'" fill="var(--accent-soft)" stroke="none"/>';
+    [["vl","var(--warm)"],["rl","var(--cool)"],["out","var(--ok)"]].forEach(function(k){
+      var p="";
+      for(var j=0;j<hist.length;j++) p += (j?" L":"M")+X(j).toFixed(1)+" "+Y(hist[j][k[0]]).toFixed(1);
+      s+='<path d="'+p+'" fill="none" stroke="'+k[1]+'" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>';
+    });
+    svg.innerHTML=s;
+  }
+
+  /* ---------- Bogen-Anzeigen ---------- */
+  var ARC_LEN = 0;
+  function setArc(id, frac){
+    var el=document.getElementById(id);
+    if(!ARC_LEN) ARC_LEN = el.getTotalLength();
+    var L = el.getTotalLength();
+    el.style.strokeDasharray = L;
+    el.style.strokeDashoffset = L*(1-Math.max(0,Math.min(1,frac)));
+  }
+
+  /* ---------- Rollenzählwerk ---------- */
+  function rollers(v){
+    var w=String(Math.floor(v)).padStart(5,"0").slice(-5);
+    var d=String(Math.floor((v-Math.floor(v))*1000)).padStart(3,"0");
+    var h="";
+    for(var i=0;i<5;i++) h+='<span class="roll">'+w[i]+'</span>';
+    for(var j=0;j<3;j++) h+='<span class="roll dec">'+d[j]+'</span>';
+    document.getElementById("rollers").innerHTML=h;
+  }
+
+  /* ---------- Rendern ---------- */
+  function led(id,txtId,on,onWord,offWord){
+    var e=document.getElementById(id); e.className="led "+(on?"on":"off");
+    if(txtId){ var t=document.getElementById(txtId); t.className="led-txt "+(on?"on":"off"); t.textContent=on?onWord:offWord; }
+  }
+  function render(){
+    document.getElementById("tKessel").textContent=f(st.kessel,1)+" °C";
+    document.getElementById("tWW").textContent=f(st.ww,1)+" °C";
+    document.getElementById("tHK1").textContent=f(st.hk1,1)+" °C";
+    document.getElementById("tHK2").textContent=f(st.hk2,1)+" °C";
+    document.getElementById("tAussen").textContent=f(st.aussen,1)+" °C";
+    document.getElementById("tMod").textContent="Modulation "+Math.round(st.mod)+" %";
+
+    document.getElementById("flame").style.opacity = st.burner ? (0.45+st.mod/180) : 0.12;
+    ["fVL","fRL","fWW"].forEach(function(id){
+      document.getElementById(id).classList.toggle("idle", !st.burner);
+    });
+    document.getElementById("fHK1").classList.toggle("idle", st.hk1<30);
+    document.getElementById("fHK2").classList.toggle("idle", true);
+
+    var top = 45 + (1-(st.ww-30)/40)*70;
+    document.getElementById("tankFill").setAttribute("y", Math.max(46,Math.min(160,top)).toFixed(1));
+    document.getElementById("tankFill").setAttribute("height", (165-Math.max(46,Math.min(160,top))).toFixed(1));
+
+    led("ledBurner","ledBurnerTxt",st.burner,"Brenner läuft","Aus");
+    led("ledFault",null,false);
+    led("ledGas","ledGasTxt",st.gasFlow>0.02,"Verbrauch","Kein Verbrauch");
+
+    document.getElementById("phase").textContent = st.burner ? (st.boost?"Warmwasserladung":"Heizbetrieb") : "Standby";
+    setArc("arcMod", st.mod/100);
+    setArc("arcPress", (st.press-0)/3);
+    document.getElementById("gMod").innerHTML=Math.round(st.mod)+'<small>%</small>';
+    document.getElementById("gPress").innerHTML=f(st.press,1)+'<small>bar</small>';
+    document.getElementById("kHours").innerHTML=st.hours.toLocaleString("de-DE")+'<small>h</small>';
+    document.getElementById("kStarts").textContent=st.starts.toLocaleString("de-DE");
+    document.getElementById("kVL").innerHTML=f(st.kessel,1)+'<small>°C</small>';
+    document.getElementById("kRL").innerHTML=f(st.rl,1)+'<small>°C</small>';
+
+    document.getElementById("roomIs").innerHTML=f(st.room,1)+'<small>°C</small>';
+    document.getElementById("hkSoll").innerHTML=f(st.hk1soll||43,1)+'<small>°C</small>';
+
+    var wwTop = 12 + (1-(st.ww-30)/40)*130;
+    document.getElementById("wwFill").setAttribute("y", Math.max(12,Math.min(170,wwTop)).toFixed(1));
+    document.getElementById("wwFill").setAttribute("height", (180-Math.max(12,Math.min(170,wwTop))).toFixed(1));
+    document.getElementById("wwVal").textContent=f(st.ww,1)+"°";
+    document.getElementById("wwState").textContent = st.boost ? "aktiv" : "inaktiv";
+
+    rollers(st.gas);
+    document.getElementById("gFlow").textContent=f(st.gasFlow,2);
+    document.getElementById("gToday").textContent=f(st.gasToday,2);
+    document.getElementById("gCost").textContent=f(st.gasMonth*11.482*0.9612*0.1092+14.9,2);
+  }
+
+  /* ---------- Bedienung ---------- */
+  var seg=document.getElementById("segMode");
+  seg.addEventListener("click",function(e){
+    if(e.target.tagName!=="BUTTON") return;
+    Array.prototype.forEach.call(seg.children,function(b){ b.setAttribute("aria-pressed", b===e.target ? "true":"false"); });
+  });
+  function setTemp(v){
+    st.setTemp=Math.max(15,Math.min(26,v));
+    document.getElementById("setTemp").textContent=f(st.setTemp,1);
+    document.getElementById("tRange").value=st.setTemp;
+  }
+  document.getElementById("tUp").addEventListener("click",function(){ setTemp(st.setTemp+0.5); });
+  document.getElementById("tDown").addEventListener("click",function(){ setTemp(st.setTemp-0.5); });
+  document.getElementById("tRange").addEventListener("input",function(){ setTemp(parseFloat(this.value)); });
+  document.getElementById("slope").addEventListener("input",function(){
+    st.slope=parseFloat(this.value);
+    document.getElementById("slopeV").textContent=f(st.slope,2);
+    drawCurve(); render();
+  });
+  document.getElementById("level").addEventListener("input",function(){
+    st.level=parseInt(this.value,10);
+    document.getElementById("levelV").textContent=(st.level>0?"+":"")+st.level+" K";
+    drawCurve(); render();
+  });
+  document.getElementById("circ").addEventListener("click",function(){
+    st.circ=!st.circ; this.setAttribute("aria-pressed",st.circ?"true":"false");
+  });
+  document.getElementById("boost").addEventListener("click",function(){
+    st.boost=!st.boost; this.setAttribute("aria-pressed",st.boost?"true":"false");
+    this.textContent = st.boost ? "Sofortladung läuft" : "Sofortladung starten";
+    if(st.boost) st.burner=true;
+    render();
+  });
+  document.getElementById("burnBtn").addEventListener("click",function(){
+    st.burner=!st.burner; render();
+  });
+  document.getElementById("themeBtn").addEventListener("click",function(){
+    var r=document.documentElement;
+    var dark=r.getAttribute("data-theme")==="dark" || (!r.getAttribute("data-theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    r.setAttribute("data-theme", dark?"light":"dark");
+    drawCurve(); drawChart(); render();
+  });
+
+  /* ---------- Simulation ---------- */
+  setInterval(function(){
+    if(st.burner){
+      st.mod = Math.max(18, Math.min(100, st.mod + (Math.random()-0.45)*9 || 42));
+      st.kessel = Math.min(72, st.kessel + 0.5);
+      st.gasFlow = 0.9 + st.mod/100*1.6;
+    } else {
+      st.mod = Math.max(0, st.mod - 14);
+      st.kessel = Math.max(28, st.kessel - 0.35);
+      st.gasFlow = 0;
+    }
+    st.rl = st.kessel - 9 - Math.random()*2;
+    st.hk1 = Math.max(22, Math.min(st.kessel, (st.hk1soll||43) - 1 + Math.random()));
+    st.ww = st.boost ? Math.min(58, st.ww+0.6) : Math.max(41, st.ww-0.08);
+    if(st.boost && st.ww>=57.5){ st.boost=false;
+      var b=document.getElementById("boost"); b.setAttribute("aria-pressed","false"); b.textContent="Sofortladung starten"; }
+    st.room = 20.6 + Math.random()*0.8;
+    var inc = st.gasFlow/3600*2;
+    st.gas += inc; st.gasToday += inc; st.gasMonth += inc;
+    if(Math.random()<0.04) st.burner=!st.burner;
+    render();
+  }, 2000);
+
+  setTemp(21.5);
+  drawCurve(); drawChart(); render();
+})();
+</script>
+
+</body>
+</html>

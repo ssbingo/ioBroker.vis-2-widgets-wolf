@@ -1,0 +1,814 @@
+/*
+ * ioBroker.vis-2-widgets-wolf — Design-Grundlage
+ *
+ * Alle Selektoren sind mit .wolf-w bzw. .wolf- praefixiert, damit nichts in die
+ * uebrige VIS-2-Oberflaeche ausblutet. Farben kommen ausschliesslich aus den
+ * Tokens unten. Ausnahme sind physisch nachgebildete Anzeigen (Rollenzaehlwerk,
+ * LED, VFD) — die sehen im Hellen wie im Dunklen gleich aus, weil sie reale
+ * Bauteile darstellen.
+ *
+ * Theme: das Attribut data-wolf-theme wird von vis-2-widgets-wolf.js am
+ * Widget-Container gesetzt (light | dark), abgeleitet aus dem VIS-2-Theme.
+ * Ohne Attribut greift prefers-color-scheme als Rueckfallebene.
+ */
+
+/* ------------------------------------------------------------------ Tokens */
+
+.wolf-w {
+    --wolf-surface: #ffffff;
+    --wolf-surface-2: #f2f5f8;
+    --wolf-surface-3: #e7ecf1;
+    --wolf-ink: #101821;
+    --wolf-ink-2: #3c4a57;
+    --wolf-muted: #697887;
+    --wolf-line: #d5dde4;
+    --wolf-line-strong: #bfcad4;
+    --wolf-accent: #c2561f;
+    --wolf-accent-soft: rgba(194, 86, 31, 0.12);
+    --wolf-warm: #d2551f;
+    --wolf-warm-2: #ee8b4e;
+    --wolf-cool: #2f7bb5;
+    --wolf-cool-2: #6fafd8;
+    --wolf-ok: #17936a;
+    --wolf-ok-glow: rgba(30, 200, 140, 0.55);
+    --wolf-warn: #b77a0b;
+    --wolf-warn-soft: rgba(183, 122, 11, 0.14);
+    --wolf-alert: #d6382f;
+    --wolf-alert-glow: rgba(255, 80, 60, 0.6);
+    --wolf-alert-soft: rgba(214, 56, 47, 0.12);
+    --wolf-bezel-a: #c9d1d8;
+    --wolf-bezel-b: #8d99a5;
+    --wolf-radius: 14px;
+    --wolf-font: "Archivo", "Segoe UI", system-ui, sans-serif;
+    --wolf-font-label: "Barlow Semi Condensed", "Archivo", sans-serif;
+    --wolf-font-num: "JetBrains Mono", ui-monospace, "DejaVu Sans Mono", monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+    .wolf-w:not([data-wolf-theme="light"]) {
+        --wolf-surface: #141d26;
+        --wolf-surface-2: #1a242f;
+        --wolf-surface-3: #202c38;
+        --wolf-ink: #e7edf3;
+        --wolf-ink-2: #bcc8d4;
+        --wolf-muted: #8494a3;
+        --wolf-line: #233140;
+        --wolf-line-strong: #32424f;
+        --wolf-accent: #ee8b4e;
+        --wolf-accent-soft: rgba(238, 139, 78, 0.14);
+        --wolf-warm: #f08a45;
+        --wolf-warm-2: #ffb37a;
+        --wolf-cool: #4fa3de;
+        --wolf-cool-2: #8cc6ec;
+        --wolf-ok: #2ed39a;
+        --wolf-warn: #e5a93a;
+        --wolf-warn-soft: rgba(229, 169, 58, 0.16);
+        --wolf-alert: #ff5f52;
+        --wolf-alert-soft: rgba(255, 95, 82, 0.14);
+        --wolf-bezel-a: #3a4855;
+        --wolf-bezel-b: #141c24;
+    }
+}
+
+.wolf-w[data-wolf-theme="dark"] {
+    --wolf-surface: #141d26;
+    --wolf-surface-2: #1a242f;
+    --wolf-surface-3: #202c38;
+    --wolf-ink: #e7edf3;
+    --wolf-ink-2: #bcc8d4;
+    --wolf-muted: #8494a3;
+    --wolf-line: #233140;
+    --wolf-line-strong: #32424f;
+    --wolf-accent: #ee8b4e;
+    --wolf-accent-soft: rgba(238, 139, 78, 0.14);
+    --wolf-warm: #f08a45;
+    --wolf-warm-2: #ffb37a;
+    --wolf-cool: #4fa3de;
+    --wolf-cool-2: #8cc6ec;
+    --wolf-ok: #2ed39a;
+    --wolf-warn: #e5a93a;
+    --wolf-warn-soft: rgba(229, 169, 58, 0.16);
+    --wolf-alert: #ff5f52;
+    --wolf-alert-soft: rgba(255, 95, 82, 0.14);
+    --wolf-bezel-a: #3a4855;
+    --wolf-bezel-b: #141c24;
+}
+
+/* ------------------------------------------------------------- Grundgeruest */
+
+.wolf-w {
+    box-sizing: border-box;
+    font-family: var(--wolf-font);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--wolf-ink);
+    background: var(--wolf-surface);
+    border: 1px solid var(--wolf-line);
+    border-radius: var(--wolf-radius);
+    padding: 18px;
+    height: 100%;
+    overflow: hidden;
+}
+
+.wolf-w *,
+.wolf-w *::before,
+.wolf-w *::after {
+    box-sizing: border-box;
+}
+
+.wolf-label {
+    font-family: var(--wolf-font-label);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    font-size: 12px;
+    color: var(--wolf-muted);
+}
+
+.wolf-num {
+    font-family: var(--wolf-font-num);
+    font-variant-numeric: tabular-nums;
+}
+
+.wolf-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.wolf-head h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.wolf-head .wolf-hint {
+    font-size: 12px;
+    color: var(--wolf-muted);
+    margin-top: 2px;
+}
+
+.wolf-foot {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    border-top: 1px solid var(--wolf-line);
+    padding-top: 13px;
+    margin-top: 14px;
+}
+
+.wolf-foot .wolf-v {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+.wolf-foot .wolf-v small {
+    font-size: 12px;
+    color: var(--wolf-muted);
+    font-weight: 500;
+    margin-left: 2px;
+}
+
+/* Wert wurde geschrieben, Quelle hat noch nicht mit ack:true bestaetigt */
+.wolf-pending {
+    opacity: 0.55;
+    font-style: italic;
+}
+
+/* ------------------------------------------------------------------ LED */
+
+.wolf-led-box {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    flex: none;
+}
+
+.wolf-bezel {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    padding: 5px;
+    background: linear-gradient(145deg, var(--wolf-bezel-a), var(--wolf-bezel-b));
+    box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.45),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.35),
+        0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.wolf-led {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 34% 26%, var(--hi) 0%, var(--mid) 42%, var(--lo) 100%);
+    box-shadow:
+        inset 0 0 6px 1px rgba(0, 0, 0, 0.45),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.35),
+        0 0 8px 1px var(--glow),
+        0 0 20px 5px var(--glow2);
+}
+
+.wolf-led::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    right: 5px;
+    top: 3px;
+    height: 36%;
+    border-radius: 50% 50% 42% 42% / 62% 62% 38% 38%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.08));
+}
+
+.wolf-led.wolf-off {
+    --hi: #9bffd6;
+    --mid: #1fbe88;
+    --lo: #0a5c41;
+    --glow: var(--wolf-ok-glow);
+    --glow2: rgba(30, 200, 140, 0.28);
+}
+
+.wolf-led.wolf-on {
+    --hi: #ffc9c2;
+    --mid: #f0463a;
+    --lo: #7a140d;
+    --glow: var(--wolf-alert-glow);
+    --glow2: rgba(255, 80, 60, 0.3);
+    animation: wolf-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes wolf-pulse {
+    0%,
+    100% {
+        filter: brightness(1);
+    }
+    50% {
+        filter: brightness(1.22);
+    }
+}
+
+.wolf-led-txt {
+    font-family: var(--wolf-font-label);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+}
+
+.wolf-led-txt.wolf-on {
+    color: var(--wolf-alert);
+}
+
+.wolf-led-txt.wolf-off {
+    color: var(--wolf-ok);
+}
+
+/* ------------------------------------------------- Zaehlwerk, Variante A */
+
+.wolf-cnt-a {
+    display: flex;
+    gap: 2px;
+    padding: 6px;
+    background: #0f1113;
+    border-radius: 6px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.8);
+    flex: none;
+}
+
+.wolf-cnt-a span {
+    width: 23px;
+    height: 36px;
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    font-family: var(--wolf-font-num);
+    font-weight: 700;
+    font-size: 20px;
+    color: #fff;
+    background: linear-gradient(to bottom, #4a4e53 0%, #1c1f22 22%, #101214 50%, #1c1f22 78%, #4a4e53 100%);
+}
+
+.wolf-cnt-a span.wolf-dec {
+    background: linear-gradient(to bottom, #e06a63 0%, #b01f1a 22%, #8e120e 50%, #b01f1a 78%, #e06a63 100%);
+}
+
+/* ------------------------------------------- Zaehlwerk, Variante B animiert */
+
+.wolf-cnt-b {
+    display: flex;
+    gap: 2px;
+    padding: 6px;
+    background: #101214;
+    border-radius: 6px;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.85);
+    flex: none;
+}
+
+.wolf-cnt-b .wolf-col {
+    position: relative;
+    width: 24px;
+    height: 38px;
+    overflow: hidden;
+    border-radius: 3px;
+    background: linear-gradient(to bottom, #55595e, #1a1d20 26%, #0d0f11 50%, #1a1d20 74%, #55595e);
+}
+
+.wolf-cnt-b .wolf-col.wolf-dec {
+    background: linear-gradient(to bottom, #e2736b, #a81d18 26%, #830f0c 50%, #a81d18 74%, #e2736b);
+}
+
+.wolf-cnt-b .wolf-col::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.55),
+        rgba(255, 255, 255, 0.08) 45%,
+        rgba(255, 255, 255, 0.02) 55%,
+        rgba(0, 0, 0, 0.55)
+    );
+}
+
+.wolf-cnt-b .wolf-strip {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.55s cubic-bezier(0.3, 0.9, 0.3, 1);
+}
+
+.wolf-cnt-b .wolf-strip span {
+    height: 38px;
+    display: grid;
+    place-items: center;
+    font-family: var(--wolf-font-num);
+    font-weight: 700;
+    font-size: 19px;
+    color: #fff;
+}
+
+/* ------------------------------------------ Zaehlwerk, Variante C Plakette */
+
+.wolf-cnt-c {
+    flex: none;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: linear-gradient(150deg, #f3f1eb, #cfccc3 55%, #e6e3db);
+    border: 1px solid #b7b3a8;
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.8) inset,
+        0 6px 14px -8px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.wolf-cnt-c .wolf-win {
+    display: flex;
+    gap: 3px;
+    padding: 5px 6px;
+    border-radius: 4px;
+    background: #edebe4;
+    box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.35),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.wolf-cnt-c .wolf-win span {
+    width: 21px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    font-family: var(--wolf-font-num);
+    font-weight: 700;
+    font-size: 19px;
+    color: #23262a;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.wolf-cnt-c .wolf-win span:last-child {
+    border-right: none;
+}
+
+.wolf-cnt-c .wolf-win span.wolf-dec {
+    color: #8e120e;
+}
+
+/* ----------------------------------------------- Zaehlwerk, Variante E VFD */
+
+.wolf-cnt-e {
+    flex: none;
+    padding: 12px 14px;
+    border-radius: 6px;
+    background: radial-gradient(120% 140% at 50% 0%, #1b2028, #07090c);
+    border: 1px solid #2b323b;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+/* --------------------------------------- Zaehlwerk, Variante F typografisch */
+
+.wolf-cnt-f {
+    flex: none;
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+    font-family: var(--wolf-font-num);
+    font-variant-numeric: tabular-nums;
+}
+
+.wolf-cnt-f .wolf-int {
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--wolf-ink);
+}
+
+.wolf-cnt-f .wolf-sep {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--wolf-muted);
+}
+
+.wolf-cnt-f .wolf-frac {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--wolf-accent);
+}
+
+/* ---------------------------------------- Zaehlwerk, Variante G Kacheln */
+
+.wolf-cnt-g {
+    display: flex;
+    gap: 4px;
+    flex: none;
+}
+
+.wolf-cnt-g span {
+    width: 28px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 6px;
+    background: var(--wolf-surface);
+    border: 1px solid var(--wolf-line);
+    font-family: var(--wolf-font-num);
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--wolf-ink);
+}
+
+.wolf-cnt-g span.wolf-dec {
+    background: var(--wolf-accent-soft);
+    border-color: transparent;
+    color: var(--wolf-accent);
+}
+
+/* ------------------------------- Zaehlwerk, Variante H Walzen + Zeigerwerk */
+
+.wolf-cnt-h {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: none;
+}
+
+.wolf-cnt-h .wolf-dials {
+    display: flex;
+    gap: 6px;
+}
+
+/* -------------------------------------------------------- Bogenanzeige */
+
+.wolf-gauge {
+    text-align: center;
+    width: 120px;
+}
+
+.wolf-gauge svg {
+    display: block;
+    width: 100%;
+    height: 78px;
+}
+
+.wolf-gauge .wolf-gv {
+    font-size: 19px;
+    font-weight: 600;
+    margin-top: -6px;
+    font-family: var(--wolf-font-num);
+    font-variant-numeric: tabular-nums;
+}
+
+.wolf-gauge .wolf-gv small {
+    font-size: 12px;
+    color: var(--wolf-muted);
+    font-weight: 500;
+    margin-left: 2px;
+}
+
+/* ------------------------------------------------------- Bedienelemente */
+
+.wolf-seg {
+    display: flex;
+    gap: 3px;
+    background: var(--wolf-surface-2);
+    border: 1px solid var(--wolf-line);
+    border-radius: 10px;
+    padding: 3px;
+    flex-wrap: wrap;
+}
+
+.wolf-seg button {
+    flex: 1 1 auto;
+    min-width: 64px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--wolf-muted);
+    background: transparent;
+    border: 0;
+    border-radius: 7px;
+    padding: 7px 8px;
+    cursor: pointer;
+    transition:
+        background 0.15s,
+        color 0.15s;
+}
+
+.wolf-seg button[aria-pressed="true"] {
+    background: var(--wolf-surface);
+    color: var(--wolf-ink);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+    font-weight: 600;
+}
+
+.wolf-seg button:focus-visible {
+    outline: 2px solid var(--wolf-accent);
+    outline-offset: 1px;
+}
+
+.wolf-stepper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 16px 0 10px;
+}
+
+.wolf-step-btn {
+    width: 42px;
+    height: 42px;
+    flex: none;
+    border-radius: 11px;
+    border: 1px solid var(--wolf-line);
+    background: var(--wolf-surface-2);
+    color: var(--wolf-ink);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.wolf-step-btn:hover {
+    border-color: var(--wolf-line-strong);
+}
+
+.wolf-step-btn:focus-visible {
+    outline: 2px solid var(--wolf-accent);
+    outline-offset: 2px;
+}
+
+.wolf-big {
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    text-align: center;
+    flex: 1;
+    font-family: var(--wolf-font-num);
+    font-variant-numeric: tabular-nums;
+}
+
+.wolf-big small {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--wolf-muted);
+    margin-left: 2px;
+    font-family: var(--wolf-font);
+}
+
+.wolf-switch {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: var(--wolf-surface-2);
+    border: 1px solid var(--wolf-line);
+    border-radius: 10px;
+    padding: 9px 12px;
+}
+
+.wolf-switch button {
+    width: 46px;
+    height: 26px;
+    flex: none;
+    border-radius: 99px;
+    border: 1px solid var(--wolf-line-strong);
+    background: var(--wolf-surface-3);
+    position: relative;
+    cursor: pointer;
+    transition:
+        background 0.18s,
+        border-color 0.18s;
+}
+
+.wolf-switch button::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--wolf-surface);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+    transition: transform 0.18s;
+}
+
+.wolf-switch button[aria-pressed="true"] {
+    background: var(--wolf-accent);
+    border-color: var(--wolf-accent);
+}
+
+.wolf-switch button[aria-pressed="true"]::after {
+    transform: translateX(20px);
+}
+
+.wolf-switch button:focus-visible {
+    outline: 2px solid var(--wolf-accent);
+    outline-offset: 2px;
+}
+
+.wolf-primary {
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    background: var(--wolf-accent);
+    color: #fff;
+    border: 0;
+    border-radius: 10px;
+    padding: 11px 14px;
+    cursor: pointer;
+}
+
+.wolf-primary[aria-pressed="true"] {
+    background: var(--wolf-warm-2);
+    color: #231208;
+}
+
+.wolf-primary:focus-visible {
+    outline: 2px solid var(--wolf-ink);
+    outline-offset: 2px;
+}
+
+.wolf-bar {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--wolf-surface-2);
+    border: 1px solid var(--wolf-line);
+    overflow: hidden;
+    margin-top: 9px;
+}
+
+.wolf-bar span {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, var(--wolf-accent), var(--wolf-alert));
+    transition: width 0.6s ease;
+}
+
+/* ------------------------------------------------------------ Schema */
+
+.wolf-pipe {
+    fill: none;
+    stroke-linecap: round;
+}
+
+.wolf-pipe-bg {
+    stroke: var(--wolf-line);
+    stroke-width: 11;
+}
+
+.wolf-flow {
+    stroke-width: 5;
+    stroke-dasharray: 9 13;
+    animation: wolf-flow 1.1s linear infinite;
+}
+
+.wolf-flow.wolf-rev {
+    animation-direction: reverse;
+}
+
+.wolf-flow.wolf-idle {
+    animation-play-state: paused;
+    opacity: 0.35;
+}
+
+@keyframes wolf-flow {
+    to {
+        stroke-dashoffset: -22;
+    }
+}
+
+.wolf-node {
+    fill: var(--wolf-surface-2);
+    stroke: var(--wolf-line-strong);
+    stroke-width: 1.5;
+}
+
+.wolf-slab {
+    font-family: var(--wolf-font-label);
+    font-weight: 600;
+    font-size: 11px;
+    fill: var(--wolf-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.wolf-sval {
+    font-family: var(--wolf-font-num);
+    font-weight: 700;
+    font-size: 15px;
+    fill: var(--wolf-ink);
+}
+
+.wolf-sval.wolf-warm {
+    fill: var(--wolf-warm);
+}
+
+.wolf-sval.wolf-cool {
+    fill: var(--wolf-cool);
+}
+
+/* ----------------------------------------------------------- Meldungen */
+
+.wolf-msgs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.wolf-msgs li {
+    display: flex;
+    gap: 11px;
+    align-items: flex-start;
+    padding: 10px 2px;
+    border-bottom: 1px solid var(--wolf-line);
+}
+
+.wolf-msgs li:last-child {
+    border-bottom: 0;
+}
+
+.wolf-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    margin-top: 6px;
+    flex: none;
+}
+
+.wolf-dot.wolf-err {
+    background: var(--wolf-alert);
+    box-shadow: 0 0 6px var(--wolf-alert-glow);
+}
+
+.wolf-dot.wolf-warn {
+    background: var(--wolf-warn);
+}
+
+.wolf-dot.wolf-info {
+    background: var(--wolf-cool);
+}
+
+/* ------------------------------------------------------- Barrierefreiheit */
+
+@media (prefers-reduced-motion: reduce) {
+    .wolf-led.wolf-on,
+    .wolf-flow {
+        animation: none;
+    }
+
+    .wolf-cnt-b .wolf-strip,
+    .wolf-bar span {
+        transition: none;
+    }
+}

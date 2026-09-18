@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gaszähler Leitstand</title>
+<style>:root{padding:0}body{margin:0}</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@500;600&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+:root{
+  --bg:#E9EDF1;
+  --surface:#FFFFFF;
+  --surface-2:#F2F5F8;
+  --ink:#101821;
+  --ink-2:#3C4A57;
+  --muted:#697887;
+  --line:#D5DDE4;
+  --line-strong:#BFCAD4;
+  --accent:#C2561F;
+  --accent-soft:rgba(194,86,31,.12);
+  --ok:#17936A;
+  --ok-glow:rgba(30,200,140,.55);
+  --alert:#D6382F;
+  --alert-glow:rgba(255,80,60,.6);
+  --shadow:0 1px 2px rgba(16,24,33,.06), 0 8px 24px -12px rgba(16,24,33,.28);
+  --bezel-a:#C9D1D8;
+  --bezel-b:#8D99A5;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B1117;
+    --surface:#141D26;
+    --surface-2:#1A242F;
+    --ink:#E7EDF3;
+    --ink-2:#BCC8D4;
+    --muted:#8494A3;
+    --line:#233140;
+    --line-strong:#32424F;
+    --accent:#EE8B4E;
+    --accent-soft:rgba(238,139,78,.14);
+    --ok:#2ED39A;
+    --ok-glow:rgba(46,211,154,.55);
+    --alert:#FF5F52;
+    --alert-glow:rgba(255,95,82,.6);
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 32px -16px rgba(0,0,0,.8);
+    --bezel-a:#3A4855;
+    --bezel-b:#141C24;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B1117;
+  --surface:#141D26;
+  --surface-2:#1A242F;
+  --ink:#E7EDF3;
+  --ink-2:#BCC8D4;
+  --muted:#8494A3;
+  --line:#233140;
+  --line-strong:#32424F;
+  --accent:#EE8B4E;
+  --accent-soft:rgba(238,139,78,.14);
+  --ok:#2ED39A;
+  --ok-glow:rgba(46,211,154,.55);
+  --alert:#FF5F52;
+  --alert-glow:rgba(255,95,82,.6);
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 32px -16px rgba(0,0,0,.8);
+  --bezel-a:#3A4855;
+  --bezel-b:#141C24;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Archivo","Segoe UI",system-ui,sans-serif;
+  font-size:15px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 56px}
+
+.label{
+  font-family:"Barlow Semi Condensed","Archivo",sans-serif;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.09em;
+  font-size:12px;
+  color:var(--muted);
+}
+.num{font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+
+/* ---------- Kopf ---------- */
+.top{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between;margin-bottom:22px}
+h1{font-size:clamp(26px,4vw,36px);font-weight:700;letter-spacing:-.02em;margin:0;text-wrap:balance}
+.sub{color:var(--muted);margin:4px 0 0;font-size:14px;max-width:56ch}
+.toolbar{display:flex;gap:8px;align-items:center}
+.btn{
+  font:inherit;font-size:13px;font-weight:500;
+  background:var(--surface);color:var(--ink-2);
+  border:1px solid var(--line);border-radius:8px;
+  padding:7px 12px;cursor:pointer;transition:border-color .15s,color .15s,background .15s;
+}
+.btn:hover{border-color:var(--line-strong);color:var(--ink)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- Summenleiste ---------- */
+.summary{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;
+  margin-bottom:26px;
+}
+.summary > div{background:var(--surface);padding:14px 16px}
+.summary .v{font-size:24px;font-weight:600;letter-spacing:-.01em;margin-top:3px}
+.summary .v small{font-size:13px;font-weight:500;color:var(--muted);margin-left:3px;font-family:"Archivo",sans-serif}
+
+/* ---------- Kachelraster ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:18px}
+
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:18px 18px 16px;
+  box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:16px;
+  text-align:left;font:inherit;color:inherit;
+  cursor:pointer;
+  transition:border-color .18s, transform .18s;
+}
+.card:hover{border-color:var(--line-strong)}
+.card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.card[aria-pressed="true"]{border-color:var(--accent);box-shadow:var(--shadow),0 0 0 1px var(--accent)}
+
+.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.card-head h2{margin:0;font-size:17px;font-weight:600;letter-spacing:-.01em}
+.oid{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted);margin-top:3px;word-break:break-all}
+
+/* ---------- LED ---------- */
+.led-box{display:flex;flex-direction:column;align-items:center;gap:6px;flex:none;width:76px}
+.bezel{
+  width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(145deg,var(--bezel-a),var(--bezel-b));
+  padding:5px;
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.45), inset 0 -1px 2px rgba(0,0,0,.35), 0 1px 2px rgba(0,0,0,.25);
+}
+.led{
+  position:relative;width:24px;height:24px;border-radius:50%;
+  background:radial-gradient(circle at 34% 26%, var(--hi) 0%, var(--mid) 42%, var(--lo) 100%);
+  box-shadow:
+    inset 0 0 6px 1px rgba(0,0,0,.45),
+    inset 0 -3px 5px rgba(0,0,0,.35),
+    0 0 8px 1px var(--glow),
+    0 0 20px 5px var(--glow2);
+}
+.led::before{
+  content:"";position:absolute;left:4px;right:5px;top:3px;height:36%;
+  border-radius:50% 50% 42% 42% / 62% 62% 38% 38%;
+  background:linear-gradient(to bottom,rgba(255,255,255,.92),rgba(255,255,255,.08));
+}
+.led::after{
+  content:"";position:absolute;left:22%;right:22%;bottom:3px;height:20%;
+  border-radius:50%;
+  background:radial-gradient(ellipse at center,var(--hi),transparent 70%);
+  opacity:.7;
+}
+.led.off{--hi:#9BFFD6;--mid:#1FBE88;--lo:#0A5C41;--glow:var(--ok-glow);--glow2:rgba(30,200,140,.28)}
+.led.on{--hi:#FFC9C2;--mid:#F0463A;--lo:#7A140D;--glow:var(--alert-glow);--glow2:rgba(255,80,60,.3);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.22)}}
+@media (prefers-reduced-motion:reduce){.led.on{animation:none}}
+.led-label{font-family:"Barlow Semi Condensed",sans-serif;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.08em;text-align:center;line-height:1.15}
+.led-label.on{color:var(--alert)}
+.led-label.off{color:var(--ok)}
+
+/* ---------- Rollenzählwerk ---------- */
+.counter{display:flex;align-items:center;gap:8px}
+.rollers{display:flex;gap:2px;padding:6px;background:#0F1113;border-radius:6px;box-shadow:inset 0 2px 5px rgba(0,0,0,.8)}
+.roll{
+  width:23px;height:36px;border-radius:3px;
+  display:grid;place-items:center;
+  font-family:"JetBrains Mono",monospace;font-weight:700;font-size:20px;color:#fff;
+  background:linear-gradient(to bottom,#4A4E53 0%,#1C1F22 22%,#101214 50%,#1C1F22 78%,#4A4E53 100%);
+}
+.roll.dec{background:linear-gradient(to bottom,#E06A63 0%,#B01F1A 22%,#8E120E 50%,#B01F1A 78%,#E06A63 100%)}
+.counter .unit{font-family:"Barlow Semi Condensed",sans-serif;font-weight:600;font-size:14px;color:var(--muted)}
+
+/* ---------- Durchfluss ---------- */
+.flow-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.flow-val{font-size:32px;font-weight:600;letter-spacing:-.02em;line-height:1}
+.flow-val .u{font-size:14px;font-weight:500;color:var(--muted);margin-left:5px;font-family:"Archivo",sans-serif;letter-spacing:0}
+.bar{height:6px;border-radius:3px;background:var(--surface-2);border:1px solid var(--line);overflow:hidden;margin-top:9px}
+.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--alert));transition:width .6s ease}
+.spark{display:block;width:100%;height:56px;margin-top:10px}
+
+/* ---------- Fußzeile der Kachel ---------- */
+.foot{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;border-top:1px solid var(--line);padding-top:13px}
+.foot .v{font-size:16px;font-weight:600;margin-top:2px}
+.foot .v small{font-size:12px;color:var(--muted);font-weight:500;margin-left:2px}
+
+.simbtn{
+  align-self:flex-start;font:inherit;font-size:11px;font-weight:600;
+  font-family:"Barlow Semi Condensed",sans-serif;text-transform:uppercase;letter-spacing:.08em;
+  background:var(--accent-soft);color:var(--accent);border:1px solid transparent;
+  border-radius:99px;padding:3px 10px;cursor:pointer;
+}
+.simbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- Detailpanel ---------- */
+.detail{
+  margin-top:24px;background:var(--surface);border:1px solid var(--line);
+  border-radius:14px;box-shadow:var(--shadow);padding:20px;
+}
+.detail-head{display:flex;flex-wrap:wrap;gap:12px;align-items:baseline;justify-content:space-between;margin-bottom:6px}
+.detail-head h3{margin:0;font-size:19px;font-weight:600;letter-spacing:-.01em}
+.chart-scroll{overflow-x:auto;margin-top:14px}
+.chart{display:block;width:100%;min-width:420px;height:200px}
+.assumptions{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;
+  margin-top:18px;padding-top:16px;border-top:1px solid var(--line);
+}
+.assumptions .v{font-size:15px;font-weight:600;margin-top:2px}
+
+.note{margin-top:26px;color:var(--muted);font-size:13px;line-height:1.6;max-width:72ch}
+.note strong{color:var(--ink-2);font-weight:600}
+
+@media (max-width:640px){
+  .summary{grid-template-columns:repeat(2,1fr)}
+  .roll{width:20px;height:32px;font-size:18px}
+}
+</style>
+
+<div class="wrap">
+  <div class="top">
+    <div>
+      <h1>Gaszähler Leitstand</h1>
+      <p class="sub">Entwurf für ioBroker VIS-2 — drei Zähler mit Rollenzählwerk, Momentandurchfluss und glasiger Status-LED. Werte sind Demodaten.</p>
+    </div>
+    <div class="toolbar">
+      <button class="btn" id="themeBtn" type="button">Dunkel / Hell</button>
+      <button class="btn" id="pauseBtn" type="button">Simulation pausieren</button>
+    </div>
+  </div>
+
+  <div class="summary" id="summary">
+    <div><div class="label">Verbrauch heute</div><div class="v num" id="sToday">–</div></div>
+    <div><div class="label">Verbrauch Monat</div><div class="v num" id="sMonth">–</div></div>
+    <div><div class="label">Kosten Monat</div><div class="v num" id="sCost">–</div></div>
+    <div><div class="label">Aktive Brenner</div><div class="v num" id="sActive">–</div></div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <section class="detail">
+    <div class="detail-head">
+      <h3 id="dTitle">Tagesverbrauch</h3>
+      <span class="label" id="dSub">letzte 14 Tage</span>
+    </div>
+    <div class="chart-scroll"><svg class="chart" id="chart" viewBox="0 0 640 200" role="img" aria-label="Tagesverbrauch der letzten 14 Tage"></svg></div>
+    <div class="assumptions">
+      <div><div class="label">Brennwert</div><div class="v num">11,482 <small>kWh/m³</small></div></div>
+      <div><div class="label">Zustandszahl</div><div class="v num">0,9612</div></div>
+      <div><div class="label">Arbeitspreis</div><div class="v num">10,92 <small>ct/kWh</small></div></div>
+      <div><div class="label">Grundpreis</div><div class="v num">14,90 <small>€/Monat</small></div></div>
+    </div>
+  </section>
+
+  <p class="note"><strong>Hinweis:</strong> Jede Kachel entspricht einer Widget-Instanz. Gebunden werden je Zähler vier Objekte — Zählerstand (m³), Momentandurchfluss (m³/h), Tagesverbrauch und Monatsverbrauch; die LED schaltet über einen einstellbaren Schwellwert auf dem Durchfluss. Die Chips „an/aus“ sind reine Demo-Schalter dieser Vorschau.</p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var CALORIFIC = 11.482, ZNUMBER = 0.9612, PRICE = 0.1092, BASE = 14.90;
+
+  var meters = [
+    { name:"Haupthaus",        oid:"mbus.0.1.Gas.Volume",        reading:18427.482, base:1.35, today:4.82, month:96.4,  active:true,  spark:[], days:[] },
+    { name:"Wohnung Obergeschoss", oid:"mbus.0.2.Gas.Volume",    reading: 7314.096, base:0.92, today:2.14, month:51.7,  active:false, spark:[], days:[] },
+    { name:"Werkstatt / Anbau",  oid:"modbus.0.holdingRegisters.Gas_m3", reading: 2865.730, base:2.10, today:1.05, month:18.9, active:false, spark:[], days:[] }
+  ];
+
+  meters.forEach(function(m){
+    m.flow = m.active ? m.base : 0;
+    for(var i=0;i<60;i++) m.spark.push(Math.random()<0.45 ? m.base*(0.75+Math.random()*0.4) : 0);
+    for(var d=0;d<14;d++) m.days.push(+(m.today*(0.55+Math.random()*0.95)).toFixed(2));
+    m.days[13]=m.today;
+  });
+
+  var selected = 0, paused = false;
+  var grid = document.getElementById("grid");
+
+  function fmt(v,dec){ return v.toFixed(dec).replace(".",","); }
+
+  function rollers(reading){
+    var whole = Math.floor(reading);
+    var dec = Math.floor((reading - whole)*1000);
+    var w = String(whole).padStart(5,"0").slice(-5);
+    var d = String(dec).padStart(3,"0");
+    var html = "";
+    for(var i=0;i<w.length;i++) html += '<span class="roll">'+w[i]+'</span>';
+    for(var j=0;j<d.length;j++) html += '<span class="roll dec">'+d[j]+'</span>';
+    return html;
+  }
+
+  function sparkPath(vals,w,h){
+    var max = Math.max.apply(null, vals.concat([0.5]));
+    var step = w/(vals.length-1), line = "", area = "";
+    for(var i=0;i<vals.length;i++){
+      var x = i*step, y = h - (vals[i]/max)*(h-6) - 3;
+      line += (i?" L":"M")+x.toFixed(1)+" "+y.toFixed(1);
+    }
+    area = line + " L"+w+" "+h+" L0 "+h+" Z";
+    return { line:line, area:area, max:max };
+  }
+
+  meters.forEach(function(m,i){
+    var el = document.createElement("button");
+    el.type = "button";
+    el.className = "card";
+    el.setAttribute("aria-pressed", i===selected ? "true":"false");
+    el.innerHTML =
+      '<div class="card-head">'+
+        '<div><h2>'+m.name+'</h2><div class="oid">'+m.oid+'</div></div>'+
+        '<div class="led-box"><div class="bezel"><div class="led"></div></div>'+
+        '<div class="led-label"></div></div>'+
+      '</div>'+
+      '<div class="counter"><div class="rollers"></div><span class="unit">m³</span></div>'+
+      '<div>'+
+        '<div class="flow-row"><span class="label">Momentandurchfluss</span></div>'+
+        '<div class="flow-val num"><span class="fv">0,00</span><span class="u">m³/h</span></div>'+
+        '<div class="bar"><span></span></div>'+
+        '<svg class="spark" viewBox="0 0 280 56" preserveAspectRatio="none" aria-hidden="true">'+
+          '<defs><linearGradient id="g'+i+'" x1="0" y1="0" x2="0" y2="1">'+
+          '<stop offset="0%" stop-color="var(--accent)" stop-opacity=".30"/>'+
+          '<stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs>'+
+          '<path class="sa" fill="url(#g'+i+')" stroke="none"></path>'+
+          '<path class="sl" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linejoin="round"></path>'+
+          '<circle class="sp" r="3" fill="var(--accent)"></circle>'+
+        '</svg>'+
+      '</div>'+
+      '<div class="foot">'+
+        '<div><div class="label">Heute</div><div class="v num t">–<small>m³</small></div></div>'+
+        '<div><div class="label">Monat</div><div class="v num mo">–<small>m³</small></div></div>'+
+        '<div><div class="label">Kosten Mon.</div><div class="v num co">–<small>€</small></div></div>'+
+      '</div>'+
+      '<span class="simbtn" role="button" tabindex="0">Verbrauch an/aus</span>';
+
+    el.addEventListener("click", function(ev){
+      if(ev.target.classList.contains("simbtn")){
+        m.active = !m.active;
+        m.flow = m.active ? m.base*(0.85+Math.random()*0.3) : 0;
+        render();
+        return;
+      }
+      selected = i;
+      meters.forEach(function(_,k){ grid.children[k].setAttribute("aria-pressed", k===i?"true":"false"); });
+      drawChart();
+    });
+    el.querySelector(".simbtn").addEventListener("keydown", function(ev){
+      if(ev.key===" "||ev.key==="Enter"){ ev.preventDefault(); ev.stopPropagation();
+        m.active=!m.active; m.flow=m.active?m.base:0; render(); }
+    });
+    grid.appendChild(el);
+    m.el = el;
+  });
+
+  function render(){
+    var tToday=0,tMonth=0,act=0;
+    meters.forEach(function(m){
+      var on = m.flow > 0.02;
+      if(on) act++;
+      tToday += m.today; tMonth += m.month;
+
+      var led = m.el.querySelector(".led");
+      led.className = "led " + (on?"on":"off");
+      var lbl = m.el.querySelector(".led-label");
+      lbl.className = "led-label " + (on?"on":"off");
+      lbl.textContent = on ? "Verbrauch" : "Kein Verbrauch";
+
+      m.el.querySelector(".rollers").innerHTML = rollers(m.reading);
+      m.el.querySelector(".fv").textContent = fmt(m.flow,2);
+      m.el.querySelector(".bar span").style.width = Math.min(100, (m.flow/(m.base*1.6))*100) + "%";
+
+      var p = sparkPath(m.spark,280,56);
+      m.el.querySelector(".sl").setAttribute("d", p.line);
+      m.el.querySelector(".sa").setAttribute("d", p.area);
+      var last = m.spark[m.spark.length-1];
+      m.el.querySelector(".sp").setAttribute("cx", 280);
+      m.el.querySelector(".sp").setAttribute("cy", (56 - (last/p.max)*50 - 3).toFixed(1));
+
+      var cost = m.month*CALORIFIC*ZNUMBER*PRICE + BASE;
+      m.el.querySelector(".t").innerHTML = fmt(m.today,2)+'<small>m³</small>';
+      m.el.querySelector(".mo").innerHTML = fmt(m.month,1)+'<small>m³</small>';
+      m.el.querySelector(".co").innerHTML = fmt(cost,2)+'<small>€</small>';
+    });
+
+    var totalCost = tMonth*CALORIFIC*ZNUMBER*PRICE + BASE*meters.length;
+    document.getElementById("sToday").innerHTML = fmt(tToday,2)+' <small>m³</small>';
+    document.getElementById("sMonth").innerHTML = fmt(tMonth,1)+' <small>m³</small>';
+    document.getElementById("sCost").innerHTML  = fmt(totalCost,2)+' <small>€</small>';
+    document.getElementById("sActive").innerHTML = act+' <small>von '+meters.length+'</small>';
+  }
+
+  function drawChart(){
+    var m = meters[selected], svg = document.getElementById("chart");
+    document.getElementById("dTitle").textContent = "Tagesverbrauch — "+m.name;
+    var W=640,H=200, L=46, R=10, T=14, B=32;
+    var iw = W-L-R, ih = H-T-B;
+    var max = Math.max.apply(null,m.days)*1.15;
+    var step = iw/m.days.length;
+    var s = "";
+    for(var g=0; g<=3; g++){
+      var gv = max*g/3, y = T+ih-(gv/max)*ih;
+      s += '<line x1="'+L+'" y1="'+y.toFixed(1)+'" x2="'+(W-R)+'" y2="'+y.toFixed(1)+'" stroke="var(--line)" stroke-width="1"/>';
+      s += '<text x="'+(L-8)+'" y="'+(y+4).toFixed(1)+'" text-anchor="end" fill="var(--muted)" font-size="11" font-family="JetBrains Mono, monospace">'+fmt(gv,1)+'</text>';
+    }
+    var today = new Date();
+    for(var i=0;i<m.days.length;i++){
+      var v=m.days[i], bh=(v/max)*ih, x=L+i*step+step*0.18, bw=step*0.64;
+      var isLast = i===m.days.length-1;
+      s += '<rect x="'+x.toFixed(1)+'" y="'+(T+ih-bh).toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+Math.max(1,bh).toFixed(1)+'" rx="2" fill="'+(isLast?'var(--accent)':'var(--line-strong)')+'"/>';
+      var d = new Date(today.getTime() - (m.days.length-1-i)*86400000);
+      if(i%2===0 || isLast){
+        s += '<text x="'+(x+bw/2).toFixed(1)+'" y="'+(H-12)+'" text-anchor="middle" fill="var(--muted)" font-size="11" font-family="Archivo, sans-serif">'+d.getDate()+'.'+(d.getMonth()+1)+'.</text>';
+      }
+    }
+    s += '<text x="'+L+'" y="'+(H-12)+'" fill="none">.</text>';
+    svg.innerHTML = s;
+  }
+
+  document.getElementById("themeBtn").addEventListener("click", function(){
+    var r = document.documentElement;
+    var dark = r.getAttribute("data-theme")==="dark" ||
+      (!r.getAttribute("data-theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    r.setAttribute("data-theme", dark ? "light" : "dark");
+    drawChart();
+  });
+  document.getElementById("pauseBtn").addEventListener("click", function(){
+    paused = !paused;
+    this.textContent = paused ? "Simulation starten" : "Simulation pausieren";
+  });
+
+  setInterval(function(){
+    if(paused) return;
+    meters.forEach(function(m){
+      if(Math.random() < 0.05) { m.active = !m.active; }
+      m.flow = m.active ? Math.max(0, m.base*(0.8+Math.random()*0.35)) : 0;
+      var inc = m.flow/3600*3;
+      m.reading += inc; m.today += inc; m.month += inc;
+      m.days[13] = +m.today.toFixed(2);
+      m.spark.push(m.flow); m.spark.shift();
+    });
+    render();
+    drawChart();
+  }, 3000);
+
+  render();
+  drawChart();
+})();
+</script>
+
+</body>
+</html>

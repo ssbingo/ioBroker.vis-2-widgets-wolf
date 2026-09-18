@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zählwerk Varianten</title>
+<style>:root{padding:0}body{margin:0}</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@500;600&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+:root{
+  --bg:#E9EDF1; --surface:#FFFFFF; --surface-2:#F2F5F8;
+  --ink:#101821; --ink-2:#3C4A57; --muted:#697887;
+  --line:#D5DDE4; --line-strong:#BFCAD4;
+  --accent:#C2561F; --accent-soft:rgba(194,86,31,.12);
+  --shadow:0 1px 2px rgba(16,24,33,.06), 0 8px 24px -12px rgba(16,24,33,.28);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --bg:#0B1117; --surface:#141D26; --surface-2:#1A242F;
+  --ink:#E7EDF3; --ink-2:#BCC8D4; --muted:#8494A3;
+  --line:#233140; --line-strong:#32424F;
+  --accent:#EE8B4E; --accent-soft:rgba(238,139,78,.14);
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 32px -16px rgba(0,0,0,.8);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0B1117; --surface:#141D26; --surface-2:#1A242F;
+  --ink:#E7EDF3; --ink-2:#BCC8D4; --muted:#8494A3;
+  --line:#233140; --line-strong:#32424F;
+  --accent:#EE8B4E; --accent-soft:rgba(238,139,78,.14);
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 32px -16px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Archivo","Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 56px}
+.label{font-family:"Barlow Semi Condensed",sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.09em;font-size:12px;color:var(--muted)}
+.top{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between;margin-bottom:24px}
+h1{font-size:clamp(26px,4vw,34px);font-weight:700;letter-spacing:-.02em;margin:0;text-wrap:balance}
+.sub{color:var(--muted);margin:4px 0 0;font-size:14px;max-width:62ch}
+.btn{font:inherit;font-size:13px;font-weight:500;background:var(--surface);color:var(--ink-2);border:1px solid var(--line);border-radius:8px;padding:7px 12px;cursor:pointer}
+.btn:hover{border-color:var(--line-strong);color:var(--ink)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:18px}
+.v{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:18px;display:flex;flex-direction:column;gap:14px}
+.v header{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.v h2{margin:0;font-size:16px;font-weight:600;letter-spacing:-.01em}
+.v p{margin:3px 0 0;font-size:13px;color:var(--muted);line-height:1.45}
+.tag{font-family:"Barlow Semi Condensed",sans-serif;font-weight:600;font-size:12px;letter-spacing:.1em;color:var(--accent);background:var(--accent-soft);border-radius:99px;padding:3px 9px;flex:none}
+.stage{display:flex;align-items:center;justify-content:center;gap:10px;min-height:96px;padding:12px;border-radius:10px;background:var(--surface-2);border:1px solid var(--line);overflow-x:auto}
+.unit{font-family:"Barlow Semi Condensed",sans-serif;font-weight:600;font-size:14px;color:var(--muted);flex:none}
+
+/* A — mechanisches Rollenzählwerk */
+.rollers{display:flex;gap:2px;padding:6px;background:#0F1113;border-radius:6px;box-shadow:inset 0 2px 5px rgba(0,0,0,.8);flex:none}
+.roll{width:23px;height:36px;border-radius:3px;display:grid;place-items:center;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:20px;color:#fff;
+  background:linear-gradient(to bottom,#4A4E53 0%,#1C1F22 22%,#101214 50%,#1C1F22 78%,#4A4E53 100%)}
+.roll.dec{background:linear-gradient(to bottom,#E06A63 0%,#B01F1A 22%,#8E120E 50%,#B01F1A 78%,#E06A63 100%)}
+
+/* B — animierte Walzen */
+.drum{display:flex;gap:2px;padding:6px;background:#101214;border-radius:6px;box-shadow:inset 0 2px 6px rgba(0,0,0,.85);flex:none}
+.dcol{position:relative;width:24px;height:38px;overflow:hidden;border-radius:3px;
+  background:linear-gradient(to bottom,#55595E,#1A1D20 26%,#0D0F11 50%,#1A1D20 74%,#55595E);}
+.dcol.dec{background:linear-gradient(to bottom,#E2736B,#A81D18 26%,#830F0C 50%,#A81D18 74%,#E2736B)}
+.dcol::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(0,0,0,.55),rgba(255,255,255,.08) 45%,rgba(255,255,255,.02) 55%,rgba(0,0,0,.55))}
+.dstrip{display:flex;flex-direction:column;transition:transform .55s cubic-bezier(.3,.9,.3,1)}
+.dstrip span{height:38px;display:grid;place-items:center;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:19px;color:#fff}
+@media (prefers-reduced-motion:reduce){.dstrip{transition:none}}
+
+/* C — Zählerplakette */
+.plate{flex:none;padding:12px 14px;border-radius:8px;
+  background:linear-gradient(150deg,#F3F1EB,#CFCCC3 55%,#E6E3DB);
+  border:1px solid #B7B3A8;
+  box-shadow:0 1px 0 rgba(255,255,255,.8) inset, 0 6px 14px -8px rgba(0,0,0,.5);
+  display:flex;align-items:center;gap:10px}
+.plate .win{display:flex;gap:3px;padding:5px 6px;border-radius:4px;background:#EDEBE4;
+  box-shadow:inset 0 2px 4px rgba(0,0,0,.35), inset 0 -1px 0 rgba(255,255,255,.7)}
+.plate .win span{width:21px;height:32px;display:grid;place-items:center;
+  font-family:"JetBrains Mono",monospace;font-weight:700;font-size:19px;color:#23262A;
+  text-shadow:0 1px 0 rgba(255,255,255,.9);border-right:1px solid rgba(0,0,0,.12)}
+.plate .win span:last-child{border-right:none}
+.plate .win span.dec{color:#8E120E}
+.plate .m3{font-family:"Barlow Semi Condensed",sans-serif;font-weight:600;font-size:13px;color:#4A4640;letter-spacing:.06em}
+
+/* D — LCD */
+.lcd{flex:none;padding:10px 12px;border-radius:6px;background:#B9C6A8;
+  border:1px solid #8B9A7C;box-shadow:inset 0 2px 6px rgba(0,0,0,.28);display:flex;align-items:center;gap:8px}
+.lcd .m3{font-family:"Barlow Semi Condensed",sans-serif;font-weight:600;font-size:13px;color:#2A3324}
+
+/* E — VFD */
+.vfd{flex:none;padding:12px 14px;border-radius:6px;background:radial-gradient(120% 140% at 50% 0%,#1B2028,#07090C);
+  border:1px solid #2B323B;box-shadow:inset 0 0 20px rgba(0,0,0,.9);display:flex;align-items:center;gap:9px}
+.vfd .m3{font-family:"Barlow Semi Condensed",sans-serif;font-weight:600;font-size:13px;color:#FFA23F;text-shadow:0 0 8px rgba(255,150,40,.8)}
+
+/* F — typografisch */
+.typo{flex:none;display:flex;align-items:baseline;gap:2px;font-family:"JetBrains Mono",monospace;font-variant-numeric:tabular-nums}
+.typo .int{font-size:44px;font-weight:700;letter-spacing:-.03em;color:var(--ink)}
+.typo .sep{font-size:30px;font-weight:700;color:var(--muted)}
+.typo .frac{font-size:26px;font-weight:700;color:var(--accent)}
+.typo .u{font-family:"Barlow Semi Condensed",sans-serif;font-size:15px;font-weight:600;color:var(--muted);margin-left:6px;align-self:center}
+
+/* G — Kachelziffern */
+.tiles{display:flex;gap:4px;flex:none}
+.tiles span{width:28px;height:40px;display:grid;place-items:center;border-radius:6px;
+  background:var(--surface);border:1px solid var(--line);
+  font-family:"JetBrains Mono",monospace;font-weight:700;font-size:20px;color:var(--ink)}
+.tiles span.dec{background:var(--accent-soft);border-color:transparent;color:var(--accent)}
+
+/* H — Rollen + Zeigerwerk */
+.hybrid{display:flex;align-items:center;gap:12px;flex:none}
+.dials{display:flex;gap:6px}
+
+.note{margin-top:26px;color:var(--muted);font-size:13px;line-height:1.6;max-width:74ch}
+.note strong{color:var(--ink-2);font-weight:600}
+</style>
+
+<div class="wrap">
+  <div class="top">
+    <div>
+      <h1>Zählwerk Varianten</h1>
+      <p class="sub">Acht Darstellungen desselben Zählerstands für das VIS-2 Gaszähler-Widget. Der Wert läuft live mit, damit auch das Weiterschalten der Ziffern beurteilbar ist.</p>
+    </div>
+    <div class="toolbar">
+      <button class="btn" id="themeBtn" type="button">Dunkel / Hell</button>
+      <button class="btn" id="speedBtn" type="button">Schneller zählen</button>
+    </div>
+  </div>
+
+  <div class="grid">
+    <section class="v">
+      <header><div><h2>Rollenzählwerk, mechanisch</h2><p>Nachbildung des Balgenzähler-Zählwerks: schwarze Walzen für m³, rote für die Nachkommastellen.</p></div><span class="tag">A</span></header>
+      <div class="stage"><div class="rollers" id="vA"></div><span class="unit">m³</span></div>
+    </section>
+
+    <section class="v">
+      <header><div><h2>Walzen, animiert</h2><p>Wie A, die Ziffern rollen beim Weiterschalten weich durch — mit Zylinderverlauf und Schattenkante.</p></div><span class="tag">B</span></header>
+      <div class="stage"><div class="drum" id="vB"></div><span class="unit">m³</span></div>
+    </section>
+
+    <section class="v">
+      <header><div><h2>Zählerplakette</h2><p>Aluminiumplatte mit eingelassenem Sichtfenster und geprägten Ziffern — nah am Typenschild des Zählers.</p></div><span class="tag">C</span></header>
+      <div class="stage"><div class="plate"><div class="win" id="vC"></div><span class="m3">m³</span></div></div>
+    </section>
+
+    <section class="v">
+      <header><div><h2>LCD, 7-Segment</h2><p>Graugrünes Flüssigkristallfeld mit schwach sichtbaren Geistersegmenten, wie am elektronischen Zähler.</p></div><span class="tag">D</span></header>
+      <div class="stage"><div class="lcd"><svg id="vD" height="46" role="img" aria-label="Zählerstand"></svg><span class="m3">m³</span></div></div>
+    </section>
+
+    <section class="v">
+      <header><div><h2>Leuchtanzeige, VFD</h2><p>Dunkles Panel mit orange glühenden Segmenten. Kräftiger Auftritt, passt zu dunklen VIS-Ansichten.</p></div><span class="tag">E</span></header>
+      <div class="stage"><div class="vfd"><svg id="vE" height="46" role="img" aria-label="Zählerstand"></svg><span class="m3">m³</span></div></div>
+    </section>
+
+    <section class="v">
+      <header><div><h2>Typografisch, flach</h2><p>Kein Gehäuse: große Zahl, Nachkommastellen kleiner und in der Akzentfarbe. Übernimmt Hell/Dunkel des Themes.</p></div><span class="tag">F</span></header>
+      <div class="stage"><div class="typo" id="vF"></div></div>
+    </section>
+
+    <section class="v">
+      <header><div><h2>Kachelziffern</h2><p>Jede Ziffer in einer eigenen Kachel aus den Theme-Farben — ruhig, modern, fügt sich in übrige VIS-Widgets ein.</p></div><span class="tag">G</span></header>
+      <div class="stage"><div class="tiles" id="vG"></div><span class="unit">m³</span></div>
+    </section>
+
+    <section class="v">
+      <header><div><h2>Walzen mit Zeigerwerk</h2><p>Ganze m³ als Walzen, die Nachkommastellen als vier kleine Zeigerskalen — genau wie am Balgengaszähler.</p></div><span class="tag">H</span></header>
+      <div class="stage"><div class="hybrid"><div class="rollers" id="vH"></div><div class="dials" id="vHd"></div></div><span class="unit">m³</span></div>
+    </section>
+  </div>
+
+  <p class="note"><strong>Auswahl:</strong> Sag mir einfach den Buchstaben. Die Variante wird dann im Widget als Option hinterlegt — das Zählwerk ist ohnehin ein eigener Baustein, weitere Varianten lassen sich später ergänzen, ohne den Rest der Kachel anzufassen.</p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var value = 18427.482, step = 0.004;
+
+  /* ---------- 7-Segment als SVG ---------- */
+  var MAP = {
+    "0":"abcdef","1":"bc","2":"abged","3":"abgcd","4":"fgbc","5":"afgcd",
+    "6":"afgedc","7":"abc","8":"abcdefg","9":"abfgcd"
+  };
+  function hseg(y,x0,x1){
+    var t=3.2;
+    return [[x0+2,y],[x0+4.6,y-t],[x1-4.6,y-t],[x1-2,y],[x1-4.6,y+t],[x0+4.6,y+t]];
+  }
+  function vseg(x,y0,y1){
+    var t=3.2;
+    return [[x,y0+2],[x+t,y0+4.6],[x+t,y1-4.6],[x,y1-2],[x-t,y1-4.6],[x-t,y0+4.6]];
+  }
+  function segDigit(ch, ox, on, off){
+    var W=22,H=42, x0=3.5, x1=W-3.5, yT=4, yM=H/2, yB=H-4;
+    var segs = {
+      a:hseg(yT,x0,x1), g:hseg(yM,x0,x1), d:hseg(yB,x0,x1),
+      f:vseg(x0,yT,yM), b:vseg(x1,yT,yM),
+      e:vseg(x0,yM,yB), c:vseg(x1,yM,yB)
+    };
+    var lit = MAP[ch] || "";
+    var out = "";
+    Object.keys(segs).forEach(function(k){
+      var pts = segs[k].map(function(p){ return (p[0]+ox).toFixed(1)+","+p[1].toFixed(1); }).join(" ");
+      var isOn = lit.indexOf(k) > -1;
+      out += '<polygon points="'+pts+'" fill="'+(isOn?on:off)+'"'+(isOn&&on.indexOf("FF")>-1?' filter="url(#glow)"':'')+'/>';
+    });
+    return out;
+  }
+  function segRow(svg, digits, decFrom, on, off, decOn, glow){
+    var W=22, GAP=4, x=2, out="", width;
+    if(glow){
+      out += '<defs><filter id="glow" x="-60%" y="-60%" width="220%" height="220%">'+
+             '<feGaussianBlur stdDeviation="1.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>';
+    }
+    for(var i=0;i<digits.length;i++){
+      if(i===decFrom){
+        out += '<circle cx="'+(x+1.5)+'" cy="38" r="2" fill="'+(decOn||on)+'"/>';
+        x += 7;
+      }
+      out += segDigit(digits[i], x, i>=decFrom ? (decOn||on) : on, off);
+      x += W+GAP;
+    }
+    width = x;
+    svg.setAttribute("viewBox","0 0 "+width+" 46");
+    svg.setAttribute("width", width*(46/46));
+    svg.innerHTML = out;
+  }
+
+  /* ---------- Zeigerwerk ---------- */
+  function dial(v, label){
+    var ang = (v/10)*360 - 90;
+    var r = 17, cx=20, cy=20;
+    var ticks = "";
+    for(var i=0;i<10;i++){
+      var a=(i/10)*2*Math.PI - Math.PI/2;
+      var x1=cx+Math.cos(a)*(r-3), y1=cy+Math.sin(a)*(r-3);
+      var x2=cx+Math.cos(a)*(r-6.5), y2=cy+Math.sin(a)*(r-6.5);
+      ticks += '<line x1="'+x1.toFixed(1)+'" y1="'+y1.toFixed(1)+'" x2="'+x2.toFixed(1)+'" y2="'+y2.toFixed(1)+'" stroke="var(--muted)" stroke-width="1.2"/>';
+      var tx=cx+Math.cos(a)*(r-10.5), ty=cy+Math.sin(a)*(r-10.5)+3;
+      if(i%2===0) ticks += '<text x="'+tx.toFixed(1)+'" y="'+ty.toFixed(1)+'" font-size="6" text-anchor="middle" fill="var(--muted)" font-family="Archivo, sans-serif">'+i+'</text>';
+    }
+    var hx = cx + Math.cos(ang*Math.PI/180)*(r-7), hy = cy + Math.sin(ang*Math.PI/180)*(r-7);
+    return '<svg width="46" height="58" viewBox="0 0 40 52" role="img" aria-label="Zeiger '+label+'">'+
+      '<circle cx="20" cy="20" r="17.5" fill="var(--surface)" stroke="#B01F1A" stroke-width="1.6"/>'+
+      ticks+
+      '<line x1="20" y1="20" x2="'+hx.toFixed(1)+'" y2="'+hy.toFixed(1)+'" stroke="#B01F1A" stroke-width="1.8" stroke-linecap="round"/>'+
+      '<circle cx="20" cy="20" r="2" fill="#B01F1A"/>'+
+      '<text x="20" y="47" font-size="8" text-anchor="middle" fill="var(--muted)" font-family="Barlow Semi Condensed, sans-serif" font-weight="600">'+label+'</text>'+
+    '</svg>';
+  }
+
+  /* ---------- Aufbau ---------- */
+  var vB = document.getElementById("vB");
+  function buildDrum(){
+    var html = "";
+    for(var i=0;i<8;i++){
+      var strip = "";
+      for(var d=0;d<10;d++) strip += "<span>"+d+"</span>";
+      html += '<div class="dcol'+(i>=5?" dec":"")+'"><div class="dstrip">'+strip+'</div></div>';
+    }
+    vB.innerHTML = html;
+  }
+  buildDrum();
+
+  function digitsOf(v){
+    var whole = Math.floor(v), frac = Math.floor((v-whole)*1000);
+    return {
+      w: String(whole).padStart(5,"0").slice(-5),
+      f: String(frac).padStart(3,"0")
+    };
+  }
+
+  function render(){
+    var d = digitsOf(value), all = d.w + d.f;
+
+    /* A */
+    var a = "";
+    for(var i=0;i<5;i++) a += '<span class="roll">'+d.w[i]+'</span>';
+    for(var j=0;j<3;j++) a += '<span class="roll dec">'+d.f[j]+'</span>';
+    document.getElementById("vA").innerHTML = a;
+
+    /* B */
+    var strips = vB.querySelectorAll(".dstrip");
+    for(var k=0;k<8;k++){
+      strips[k].style.transform = "translateY(-"+(+all[k]*38)+"px)";
+    }
+
+    /* C */
+    var c = "";
+    for(var m=0;m<5;m++) c += '<span>'+d.w[m]+'</span>';
+    for(var n=0;n<3;n++) c += '<span class="dec">'+d.f[n]+'</span>';
+    document.getElementById("vC").innerHTML = c;
+
+    /* D + E */
+    segRow(document.getElementById("vD"), all, 5, "#22271F", "rgba(34,39,31,.09)", "#22271F", false);
+    segRow(document.getElementById("vE"), all, 5, "#FFA23F", "rgba(255,162,63,.10)", "#FF7A3F", true);
+
+    /* F */
+    document.getElementById("vF").innerHTML =
+      '<span class="int">'+Number(d.w).toLocaleString("de-DE")+'</span><span class="sep">,</span><span class="frac">'+d.f+'</span><span class="u">m³</span>';
+
+    /* G */
+    var g = "";
+    for(var p=0;p<5;p++) g += '<span>'+d.w[p]+'</span>';
+    for(var q=0;q<3;q++) g += '<span class="dec">'+d.f[q]+'</span>';
+    document.getElementById("vG").innerHTML = g;
+
+    /* H */
+    var h = "";
+    for(var r=0;r<5;r++) h += '<span class="roll">'+d.w[r]+'</span>';
+    document.getElementById("vH").innerHTML = h;
+    var frac4 = String(Math.floor((value-Math.floor(value))*10000)).padStart(4,"0");
+    document.getElementById("vHd").innerHTML =
+      dial(+frac4[0],"0,1") + dial(+frac4[1],"0,01") + dial(+frac4[2],"0,001") + dial(+frac4[3],"0,0001");
+  }
+
+  document.getElementById("themeBtn").addEventListener("click", function(){
+    var r = document.documentElement;
+    var dark = r.getAttribute("data-theme")==="dark" ||
+      (!r.getAttribute("data-theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    r.setAttribute("data-theme", dark ? "light" : "dark");
+  });
+  document.getElementById("speedBtn").addEventListener("click", function(){
+    step = step > 0.05 ? 0.004 : 0.12;
+    this.textContent = step > 0.05 ? "Langsamer zählen" : "Schneller zählen";
+  });
+
+  setInterval(function(){ value += step; render(); }, 900);
+  render();
+})();
+</script>
+
+</body>
+</html>
