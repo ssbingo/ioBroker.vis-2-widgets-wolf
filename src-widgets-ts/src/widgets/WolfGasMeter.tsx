@@ -7,6 +7,7 @@ import { COUNTER_VARIANTS } from '../components/Counter';
 import GasMeterView from '../components/GasMeterView';
 import { toNumber } from '../lib/fmt';
 import { DEFAULT_BRENNWERT, DEFAULT_ZUSTANDSZAHL, monthlyCost } from '../lib/gas';
+import { resolveTheme, THEME_OPTIONS } from '../lib/theme';
 import { injectStyles } from '../styles/injectStyles';
 
 interface WolfGasMeterRxData {
@@ -23,6 +24,7 @@ interface WolfGasMeterRxData {
     zustandszahl?: number | string;
     arbeitspreis?: number | string;
     grundpreis?: number | string;
+    theme?: string;
     title?: string;
     subtitle?: string;
 }
@@ -111,6 +113,13 @@ export default class WolfGasMeter extends (window.visRxWidget as typeof VisRxWid
                     name: 'display',
                     label: 'group_display',
                     fields: [
+                        {
+                            name: 'theme',
+                            type: 'select',
+                            label: 'theme',
+                            default: 'auto',
+                            options: THEME_OPTIONS.map(v => ({ value: v, label: `theme_${v}` })),
+                        },
                         { name: 'title', type: 'text', label: 'title', default: '' },
                         { name: 'subtitle', type: 'text', label: 'subtitle', default: '' },
                     ],
@@ -162,7 +171,7 @@ export default class WolfGasMeter extends (window.visRxWidget as typeof VisRxWid
 
         return (
             <GasMeterView
-                themeType={this.props.context.themeType === 'dark' ? 'dark' : 'light'}
+                themeType={resolveTheme(rx.theme, this.props.context.themeType)}
                 title={rx.title || t('gasmeter')}
                 subtitle={rx.subtitle}
                 reading={this.objectNumber(rx.oid_zaehlerstand)}

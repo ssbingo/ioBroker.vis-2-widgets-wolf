@@ -53,8 +53,11 @@ Englisch, die übrigen unter `doc/<sprache>/` in der jeweiligen Sprache.
   SVG und CSS
 - CSS in `src/styles/wolf.css`, alle Selektoren mit `.wolf-` präfixiert; Schriften lokal
   als woff2 über `src/styles/fonts.ts`
-- Farben ausschließlich über `--wolf-*`-Tokens, hell/dunkel folgt `context.themeType` von VIS-2.
-  Keine festen Farbwerte außer bei physisch nachgebildeten Anzeigen (Rollenzählwerk, LED, VFD).
+- Farben ausschließlich über `--wolf-*`-Tokens. Keine festen Farbwerte außer bei physisch
+  nachgebildeten Anzeigen (Rollenzählwerk, LED, VFD).
+- **Jedes Widget hat das Attribut `theme`** (Gruppe „Darstellung", erstes Feld): `auto` (Vorgabe,
+  folgt `context.themeType` von VIS-2), `light`, `dark` — aufgelöst über `resolveTheme()` in
+  `src/lib/theme.ts`. Das VIS-2-Theme ist das der Bedienoberfläche, nicht das der Visualisierung.
 - Zahlen in der Sprache von VIS-2 formatieren (`fmt(…, locale)` mit `getLanguage()`)
 - `widgets/` ist Build-Ausgabe — nie von Hand bearbeiten, `tasks.js` löscht den Ordner
 

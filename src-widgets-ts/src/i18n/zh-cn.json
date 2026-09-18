@@ -55,5 +55,9 @@
     "return_temp": "回水",
     "phase_0": "待机",
     "phase_1": "供暖",
-    "phase_2": "热水"
+    "phase_2": "热水",
+    "theme": "配色方案",
+    "theme_auto": "自动（跟随 VIS-2）",
+    "theme_light": "浅色",
+    "theme_dark": "深色"
 }

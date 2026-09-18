@@ -5,6 +5,7 @@ import type VisRxWidget from '@iobroker/types-vis-2/visRxWidget';
 
 import BoilerView from '../components/BoilerView';
 import { toNumber } from '../lib/fmt';
+import { resolveTheme, THEME_OPTIONS } from '../lib/theme';
 import { mapValue, parseValueMap, statesToValueMap, type ValueMap } from '../lib/valueMap';
 import { injectStyles } from '../styles/injectStyles';
 
@@ -20,6 +21,7 @@ interface WolfBoilerRxData {
     druck_min?: number | string;
     druck_max?: number | string;
     druck_skala?: number | string;
+    theme?: string;
     title?: string;
     subtitle?: string;
 }
@@ -111,6 +113,13 @@ export default class WolfBoiler extends (window.visRxWidget as typeof VisRxWidge
                     name: 'display',
                     label: 'group_display',
                     fields: [
+                        {
+                            name: 'theme',
+                            type: 'select',
+                            label: 'theme',
+                            default: 'auto',
+                            options: THEME_OPTIONS.map(v => ({ value: v, label: `theme_${v}` })),
+                        },
                         { name: 'title', type: 'text', label: 'title', default: '' },
                         { name: 'subtitle', type: 'text', label: 'subtitle', default: '' },
                     ],
@@ -202,7 +211,7 @@ export default class WolfBoiler extends (window.visRxWidget as typeof VisRxWidge
 
         return (
             <BoilerView
-                themeType={this.props.context.themeType === 'dark' ? 'dark' : 'light'}
+                themeType={resolveTheme(rx.theme, this.props.context.themeType)}
                 title={rx.title || t('boiler')}
                 subtitle={rx.subtitle}
                 phase={mapValue(
