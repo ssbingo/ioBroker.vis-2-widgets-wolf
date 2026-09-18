@@ -1012,7 +1012,8 @@
 
 /* Bedien-Kacheln: lieber scrollen als ein Bedienelement abschneiden */
 .wolf-w.wolf-circuit,
-.wolf-w.wolf-dhw {
+.wolf-w.wolf-dhw,
+.wolf-w.wolf-heatcurve {
     overflow-y: auto;
 }
 
@@ -1133,4 +1134,102 @@
 
 .wolf-dhw-program {
     margin-top: 16px;
+}
+
+/* ------------------------------------------------------------- Heizkurve */
+
+.wolf-badge {
+    font-family: var(--wolf-font-label);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--wolf-muted);
+    border: 1px solid var(--wolf-line-strong);
+    border-radius: 99px;
+    padding: 2px 8px;
+    white-space: nowrap;
+    flex: none;
+    cursor: help;
+}
+
+.wolf-curve {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.wolf-curve-grid {
+    stroke: var(--wolf-line);
+    stroke-width: 1;
+}
+
+.wolf-curve-tick {
+    font-family: var(--wolf-font-num);
+    font-size: 10px;
+    fill: var(--wolf-muted);
+}
+
+.wolf-curve-line {
+    fill: none;
+    stroke: var(--wolf-accent);
+    stroke-width: 2.4;
+    stroke-linejoin: round;
+}
+
+/* Kurve mit noch nicht bestätigtem Wert */
+.wolf-curve-line.wolf-pending {
+    stroke-dasharray: 6 4;
+}
+
+.wolf-curve-point {
+    fill: var(--wolf-accent);
+    stroke: var(--wolf-surface);
+    stroke-width: 2;
+}
+
+/* Betriebspunkt während einer Speicherladung: hohl, Warnfarbe */
+.wolf-curve-point.wolf-distorted {
+    fill: var(--wolf-surface);
+    stroke: var(--wolf-warn);
+    stroke-dasharray: 2 2;
+}
+
+.wolf-curve-point-label {
+    font-family: var(--wolf-font-num);
+    font-size: 11px;
+    font-weight: 700;
+    fill: var(--wolf-ink);
+    /* Hof in Kachelfarbe, damit die Kurve die Zahl nicht durchstreicht */
+    paint-order: stroke;
+    stroke: var(--wolf-surface);
+    stroke-width: 3px;
+    stroke-linejoin: round;
+}
+
+.wolf-curve-note {
+    font-size: 12px;
+    line-height: 1.35;
+    color: var(--wolf-muted);
+    margin-top: 4px;
+}
+
+.wolf-curve-note-warn {
+    color: var(--wolf-warn);
+    font-weight: 600;
+}
+
+.wolf-curve-controls {
+    margin-top: 14px;
+}
+
+/* nur angezeigter Einstellwert — Höhe wie ein kompakter Stepper */
+.wolf-stepper-static {
+    justify-content: flex-start;
+    min-height: 32px;
+}
+
+.wolf-stepper-static .wolf-big {
+    flex: none;
+    text-align: left;
 }

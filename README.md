@@ -18,7 +18,7 @@ individually to an existing ioBroker object — for example from the `wolf-smart
 the `wolf` adapter (ISM8i), Modbus or your own scripts. No assumptions are made about object
 names or structure.
 
-> **Status:** early development. The gas meter, boiler status, heating circuit and hot water widgets are available so far.
+> **Status:** early development. The gas meter, boiler status, heating circuit, hot water and heating curve widgets are available so far.
 
 ### Widgets
 
@@ -27,13 +27,22 @@ names or structure.
 | Gas meter | Meter reading, instantaneous flow, daily/monthly consumption, costs | first version |
 | Boiler | Operating phase, modulation, water pressure, operating hours, burner starts | first version |
 | Heating circuit | Operating mode, day and economy temperature, setpoint correction, time program (writing) | first version |
-| Heating curve | Slope and level (writing) | planned |
+| Heating curve | Approximated curve with the controller's operating point, setpoint correction (writing) | first version |
 | Hot water | Tank with set mark, set temperature, time program, optional circulation and one-time charge (writing) | first version |
 | System diagram | Hydraulic diagram with animated flow | planned |
 | Trends | Charts from history, SQL or InfluxDB | planned |
 | Messages | Fault indicator and recent messages | planned |
 
 Each widget can be set to light or dark, or follow the VIS-2 theme automatically (default).
+
+### Heating curve: an approximation
+
+Wolf does not publish the formula of its heating curve. The widget therefore draws the usual
+approximation `flow = TR + N + K + S · max(0, TR − TA)^n` (room setpoint `TR`, level `N`, setpoint
+correction `K`, slope `S`, averaged outside temperature `TA`, curvature `n`, default 1) and labels
+it as such. The operating point, on the other hand, comes from the controller itself (its flow
+setpoint), so any difference between the two is visible. With `wolf-smartset` only the setpoint
+correction is writable; the slope is shown but not changed, and there is no level.
 
 ### Requirements
 
@@ -79,6 +88,7 @@ provide.
 * (ssbingo) Heating circuit: operating mode, day and economy temperature, setpoint correction and time program; limits, step size and state texts come from the linked objects
 * (ssbingo) Writing widgets: values are written with ack=false and shown as "applying" until the source confirms them with ack=true; after 10 s without confirmation the widget reports it and shows the last confirmed value again. Optional confirm mode with Apply/Discard; read-only objects lock their controls
 * (ssbingo) Hot water: tank graphic with temperature and set mark, set temperature, time program, effective setpoint and charging state; circulation and one-time charge only when linked. Switches write 0/1 to number objects and true/false otherwise
+* (ssbingo) Heating curve: approximation (labelled as such, not a Wolf formula) with the controller's operating point; setpoint correction writable, slope and level only where the object allows writing; the operating point is marked as distorted while the tank is charging
 
 ## License
 MIT License

@@ -96,7 +96,8 @@
                     "WolfGasMeter",
                     "WolfBoiler",
                     "WolfCircuit",
-                    "WolfDhw"
+                    "WolfDhw",
+                    "WolfHeatCurve"
                 ]
             }
         }
