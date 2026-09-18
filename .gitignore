@@ -7,8 +7,8 @@
 node_modules/
 nbproject
 
-# Widget-Quellen: Abhängigkeiten und Build-Zwischenstände
-src-widgets-ts/package-lock.json
+# Widget-Quellen: Build-Zwischenstände (die Lockdatei gehört ins Repository, damit die CI
+# mit denselben Versionen baut, die lokal geprüft wurden)
 src-widgets-ts/build/
 src-widgets-ts/.__mf__temp/
 

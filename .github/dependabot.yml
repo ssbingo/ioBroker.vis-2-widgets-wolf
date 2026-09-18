@@ -17,6 +17,12 @@ updates:
       # @types/node folgt der kleinsten unterstützten Node.js-Version, nicht der neuesten
       - dependency-name: "@types/node"
         update-types: ["version-update:semver-major"]
+      # Ausnahmen laut CLAUDE.md: typescript-eslint unterstützt TypeScript 7 noch nicht,
+      # eslint-plugin-react noch nicht ESLint 10 — Majors erst nach Freigabe von Hand
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: npm
     directory: "/src-widgets-ts"
@@ -32,6 +38,10 @@ updates:
     versioning-strategy: increase
     ignore:
       - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "eslint"
         update-types: ["version-update:semver-major"]
 
   - package-ecosystem: github-actions
