@@ -64,7 +64,7 @@ body.sb-dark {
 }
 /* Zelle in Widget-Größe, wie sie VIS-2 als Rahmen vorgibt */
 .sb-cell {
-    height: 330px;
+    height: 350px;
 }
 .sb-tools label {
     font-size: 13px;

@@ -884,6 +884,17 @@
 /* ------------------------------------------------------------ Gaszaehler */
 /* Bisher als Inline-Stile im Vanilla-Code des Design-Pakets */
 
+/* Sensor nicht erreichbar, Batterie schwach, Zählerstatus — Werte können veraltet sein */
+.wolf-gas-warn {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--wolf-warn);
+    background: var(--wolf-warn-soft);
+    border-radius: 8px;
+    padding: 5px 10px;
+    margin: -4px 0 12px;
+}
+
 .wolf-gasmeter .wolf-counter-row {
     display: flex;
     align-items: center;

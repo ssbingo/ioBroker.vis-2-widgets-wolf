@@ -135,5 +135,18 @@
     "outside_avg": "Extérieur moy.",
     "curve_value": "Valeur de la courbe",
     "curve_label": "Courbe de chauffe, départ en fonction de la température extérieure",
-    "outside_avg_long": "Température extérieure moyennée"
+    "outside_avg_long": "Température extérieure moyennée",
+    "group_sensor": "État du capteur",
+    "oid_sensor_status": "État du compteur (0 = OK)",
+    "oid_unreach": "Injoignable (p. ex. UNREACH)",
+    "oid_lowbat": "Pile faible (p. ex. LOW_BAT)",
+    "group_history": "Consommation depuis l'historique",
+    "history_instance": "Instance d'historique (vide = valeur système)",
+    "offset": "Correction de l'index (m³)",
+    "offset_tooltip": "Ajoutée à la valeur de l'objet : index relevé au compteur moins la valeur affichée par l'objet",
+    "history_tooltip": "Utilisée si aucun objet n'est lié pour aujourd'hui et le mois : le widget lit l'index au début du jour et du mois dans cette instance",
+    "consumption_tooltip": "Laisser vide pour calculer la consommation depuis l'historique de l'index",
+    "warn_unreach": "Capteur injoignable",
+    "warn_lowbat": "Pile faible",
+    "warn_status": "Valeur du compteur douteuse"
 }

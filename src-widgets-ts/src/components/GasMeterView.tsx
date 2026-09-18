@@ -32,6 +32,8 @@ export interface GasMeterViewProps {
     intDigits: number;
     /** Stellen nach dem Komma im Zählwerk */
     decDigits: number;
+    /** Hinweise zum Sensor (nicht erreichbar, Batterie, Zählerstatus); leer blendet die Zeile aus */
+    warnings?: string[];
     /** übersetzte Beschriftungen */
     labels: {
         flow: string;
@@ -75,6 +77,15 @@ export default function GasMeterView(props: GasMeterViewProps): React.JSX.Elemen
                     labelOff={labels.noConsumption}
                 />
             </div>
+
+            {props.warnings?.length ? (
+                <div
+                    className="wolf-gas-warn"
+                    role="status"
+                >
+                    {props.warnings.join(' · ')}
+                </div>
+            ) : null}
 
             <div className="wolf-counter-row">
                 <Counter

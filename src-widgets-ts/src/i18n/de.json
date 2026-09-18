@@ -135,5 +135,18 @@
     "outside_avg": "Außen Ø",
     "curve_value": "Kurvenwert",
     "curve_label": "Heizkurve, Vorlauf über Außentemperatur",
-    "outside_avg_long": "Außentemperatur gemittelt"
+    "outside_avg_long": "Außentemperatur gemittelt",
+    "group_sensor": "Sensorzustand",
+    "oid_sensor_status": "Zählerstatus (0 = in Ordnung)",
+    "oid_unreach": "Nicht erreichbar (z. B. UNREACH)",
+    "oid_lowbat": "Batterie schwach (z. B. LOW_BAT)",
+    "group_history": "Verbrauch aus dem Verlauf",
+    "history_instance": "Verlaufsinstanz (leer = Systemstandard)",
+    "offset": "Korrekturwert Zählerstand (m³)",
+    "offset_tooltip": "Wird zum Objektwert addiert: am Zähler abgelesener Stand minus angezeigter Objektwert",
+    "history_tooltip": "Gilt, wenn keine Objekte für Heute und Monat verknüpft sind: Das Widget liest den Zählerstand zu Tages- und Monatsbeginn aus dieser Instanz",
+    "consumption_tooltip": "Leer lassen, um den Verbrauch aus dem Verlauf des Zählerstands zu berechnen",
+    "warn_unreach": "Sensor nicht erreichbar",
+    "warn_lowbat": "Batterie schwach",
+    "warn_status": "Zählerwert fraglich"
 }
