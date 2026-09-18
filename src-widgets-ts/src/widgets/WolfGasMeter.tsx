@@ -1,16 +1,15 @@
 import React from 'react';
 
 import type { RxRenderWidgetProps, RxWidgetInfo } from '@iobroker/types-vis-2';
-import type VisRxWidget from '@iobroker/types-vis-2/visRxWidget';
 
 import { COUNTER_VARIANTS } from '../components/Counter';
 import GasMeterView from '../components/GasMeterView';
 import { toNumber } from '../lib/fmt';
 import { DEFAULT_BRENNWERT, DEFAULT_ZUSTANDSZAHL, monthlyCost } from '../lib/gas';
-import { resolveTheme, THEME_OPTIONS } from '../lib/theme';
-import { injectStyles } from '../styles/injectStyles';
+import { THEME_OPTIONS } from '../lib/theme';
+import WolfWidgetBase, { attrNumber, type WolfBaseRxData } from './WolfWidgetBase';
 
-interface WolfGasMeterRxData {
+interface WolfGasMeterRxData extends WolfBaseRxData {
     oid_zaehlerstand?: string;
     oid_durchfluss?: string;
     oid_heute?: string;
@@ -24,30 +23,13 @@ interface WolfGasMeterRxData {
     zustandszahl?: number | string;
     arbeitspreis?: number | string;
     grundpreis?: number | string;
-    theme?: string;
-    title?: string;
-    subtitle?: string;
 }
 
 /**
- * Zahl aus einem Widget-Attribut; leere Felder liefern den Vorgabewert.
- *
- * @param value Attributwert
- * @param fallback Vorgabewert
- * @returns die Zahl
- */
-function attrNumber(value: unknown, fallback: number): number {
-    return toNumber(value) ?? fallback;
-}
-
-/**
- * Anbindung des Gaszählers an VIS-2: Attribute, Objektwerte, Theme.
+ * Anbindung des Gaszählers an VIS-2: Attribute und Objektwerte.
  * Die Darstellung liegt in components/GasMeterView und ist ohne ioBroker prüfbar (Sandbox).
  */
-export default class WolfGasMeter extends (window.visRxWidget as typeof VisRxWidget)<WolfGasMeterRxData> {
-    /** wird von VIS-2 beim Laden des Widget-Sets gesetzt */
-    static adapter: string;
-
+export default class WolfGasMeter extends WolfWidgetBase<WolfGasMeterRxData> {
     /** Beschreibung des Widgets für die VIS-2-Palette und den Attribut-Editor */
     static getWidgetInfo(): RxWidgetInfo {
         return {
@@ -130,33 +112,6 @@ export default class WolfGasMeter extends (window.visRxWidget as typeof VisRxWid
         };
     }
 
-    /** VIS-2 fragt die Widget-Beschreibung auch an der Instanz ab */
-    // eslint-disable-next-line class-methods-use-this
-    getWidgetInfo(): RxWidgetInfo {
-        return WolfGasMeter.getWidgetInfo();
-    }
-
-    /** Präfix der Übersetzungsschlüssel, passend zu translations.ts (prefix: true) */
-    static getI18nPrefix(): string {
-        return `${WolfGasMeter.adapter}_`;
-    }
-
-    /** Styles und Schriften einmal je Seite einfügen */
-    componentDidMount(): void {
-        super.componentDidMount();
-        injectStyles();
-    }
-
-    /**
-     * Aktueller Wert eines gebundenen Objekts als Zahl (VIS-2 abonniert oid_-Attribute selbst).
-     *
-     * @param oid Objekt-ID aus einem oid_-Attribut
-     * @returns der Wert oder null
-     */
-    private objectNumber(oid: string | undefined): number | null {
-        return oid ? toNumber(this.state.values[`${oid}.val`]) : null;
-    }
-
     /**
      * Darstellung mit den aktuellen Werten
      *
@@ -166,13 +121,12 @@ export default class WolfGasMeter extends (window.visRxWidget as typeof VisRxWid
     renderWidgetBody(props: RxRenderWidgetProps): React.JSX.Element {
         super.renderWidgetBody(props);
         const rx = this.state.rxData;
-        const t = (key: string): string => WolfGasMeter.t(key);
         const month = this.objectNumber(rx.oid_monat);
 
         return (
             <GasMeterView
-                themeType={resolveTheme(rx.theme, this.props.context.themeType)}
-                title={rx.title || t('gasmeter')}
+                themeType={this.themeType()}
+                title={rx.title || this.tr('gasmeter')}
                 subtitle={rx.subtitle}
                 reading={this.objectNumber(rx.oid_zaehlerstand)}
                 flow={this.objectNumber(rx.oid_durchfluss)}
@@ -190,14 +144,14 @@ export default class WolfGasMeter extends (window.visRxWidget as typeof VisRxWid
                 intDigits={attrNumber(rx.digits_int, 5)}
                 decDigits={attrNumber(rx.digits_dec, 3)}
                 labels={{
-                    flow: t('flow'),
-                    today: t('today'),
-                    month: t('month'),
-                    costMonth: t('cost_month'),
-                    consumption: t('consumption'),
-                    noConsumption: t('no_consumption'),
+                    flow: this.tr('flow'),
+                    today: this.tr('today'),
+                    month: this.tr('month'),
+                    costMonth: this.tr('cost_month'),
+                    consumption: this.tr('consumption'),
+                    noConsumption: this.tr('no_consumption'),
                 }}
-                locale={WolfGasMeter.getLanguage()}
+                locale={this.locale()}
             />
         );
     }

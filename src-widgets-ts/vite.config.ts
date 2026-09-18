@@ -18,6 +18,7 @@ const config: UserConfig = {
             exposes: {
                 './WolfGasMeter': './src/widgets/WolfGasMeter',
                 './WolfBoiler': './src/widgets/WolfBoiler',
+                './WolfCircuit': './src/widgets/WolfCircuit',
                 './translations': './src/translations',
             },
             remotes: {},

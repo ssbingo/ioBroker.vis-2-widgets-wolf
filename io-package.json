@@ -94,7 +94,8 @@
                 "bundlerType": "module",
                 "components": [
                     "WolfGasMeter",
-                    "WolfBoiler"
+                    "WolfBoiler",
+                    "WolfCircuit"
                 ]
             }
         }
