@@ -26,8 +26,8 @@ WOLF i logo WOLF są znakami towarowymi WOLF GmbH. Ten projekt nie jest powiąza
     ### **WORK IN PROGRESS**
 -->
 
-### **WORK IN PROGRESS**
-* (ssbingo) Pierwsza wersja: zestaw widżetów w React 19 i TypeScript, pierwsza wersja widżetu licznika gazu
+### 0.2.0 (2026-09-18)
+* (ssbingo) Pierwsza wersja: zestaw widżetów dla VIS-2 (React 19) z licznikiem gazu, stanem kotła, obiegiem grzewczym, ciepłą wodą i krzywą grzewczą. Widżety sterujące pokazują wartość dopiero po potwierdzeniu (ack); krzywa grzewcza jest przybliżeniem (nie formułą Wolf). Licznik gazu oblicza zużycie dzienne i miesięczne z historii.
 
 ## Licencja
 

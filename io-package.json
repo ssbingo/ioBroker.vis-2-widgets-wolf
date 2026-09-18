@@ -1,108 +1,108 @@
 {
-    "common": {
-        "name": "vis-2-widgets-wolf",
-        "version": "0.0.1",
-        "news": {
-            "0.0.1": {
-                "en": "initial release",
-                "de": "Erstveröffentlichung",
-                "ru": "Начальная версия",
-                "pt": "lançamento inicial",
-                "nl": "Eerste uitgave",
-                "fr": "Première version",
-                "it": "Versione iniziale",
-                "es": "Versión inicial",
-                "pl": "Pierwsze wydanie",
-                "uk": "Початкова версія",
-                "zh-cn": "首次出版"
-            }
-        },
-        "titleLang": {
-            "en": "Wolf Heating Widgets",
-            "de": "Wolf Heizungs-Widgets",
-            "ru": "Виджеты для отопления Wolf",
-            "pt": "Widgets para aquecimento Wolf",
-            "nl": "Wolf verwarmingswidgets",
-            "fr": "Widgets de chauffage Wolf",
-            "it": "Widget di riscaldamento Wolf",
-            "es": "Widgets de calefacción Wolf",
-            "pl": "Widżety ogrzewania Wolf",
-            "uk": "Віджети для опалення Wolf",
-            "zh-cn": "Wolf 供暖小部件"
-        },
-        "desc": {
-            "en": "VIS-2 widgets for Wolf heating systems: system diagram, boiler, heating circuits, heating curve, hot water, trends, messages and gas meter",
-            "de": "VIS-2-Widgets für Wolf-Heizungsanlagen: Anlagenschema, Kessel, Heizkreise, Heizkurve, Warmwasser, Verläufe, Meldungen und Gaszähler",
-            "ru": "Виджеты VIS-2 для систем отопления Wolf: схема установки, котёл, контуры отопления, отопительная кривая, горячая вода, графики, сообщения и газовый счётчик",
-            "pt": "Widgets VIS-2 para sistemas de aquecimento Wolf: esquema da instalação, caldeira, circuitos de aquecimento, curva de aquecimento, água quente, históricos, mensagens e contador de gás",
-            "nl": "VIS-2-widgets voor Wolf-verwarmingssystemen: installatieschema, ketel, verwarmingscircuits, stooklijn, warm water, trends, meldingen en gasmeter",
-            "fr": "Widgets VIS-2 pour les systèmes de chauffage Wolf : schéma de l'installation, chaudière, circuits de chauffage, courbe de chauffe, eau chaude, historiques, messages et compteur de gaz",
-            "it": "Widget VIS-2 per impianti di riscaldamento Wolf: schema dell'impianto, caldaia, circuiti di riscaldamento, curva climatica, acqua calda, andamenti, messaggi e contatore del gas",
-            "es": "Widgets VIS-2 para sistemas de calefacción Wolf: esquema de la instalación, caldera, circuitos de calefacción, curva de calefacción, agua caliente, históricos, mensajes y contador de gas",
-            "pl": "Widżety VIS-2 dla instalacji grzewczych Wolf: schemat instalacji, kocioł, obiegi grzewcze, krzywa grzewcza, ciepła woda, przebiegi, komunikaty i licznik gazu",
-            "uk": "Віджети VIS-2 для систем опалення Wolf: схема установки, котел, контури опалення, крива опалення, гаряча вода, графіки, повідомлення та газовий лічильник",
-            "zh-cn": "适用于 Wolf 供暖系统的 VIS-2 小部件：系统图、锅炉、供暖回路、供暖曲线、热水、趋势、消息和燃气表"
-        },
-        "authors": [
-            "ssbingo <ssbingo@online.de>"
-        ],
-        "keywords": [
-            "wolf",
-            "heating",
-            "heizung",
-            "vis-2",
-            "widgets",
-            "gas"
-        ],
-        "licenseInformation": {
-            "type": "free",
-            "license": "MIT"
-        },
-        "platform": "Javascript/Node.js",
-        "icon": "vis-2-widgets-wolf.png",
-        "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/admin/vis-2-widgets-wolf.png",
-        "readme": "https://github.com/ssbingo/ioBroker.vis-2-widgets-wolf/blob/main/README.md",
-        "loglevel": "info",
-        "tier": 3,
-        "restartAdapters": [
-            "vis-2"
-        ],
-        "onlyWWW": true,
-        "singleton": true,
-        "type": "visualization-widgets",
-        "mode": "none",
-        "adminUI": {
-            "config": "none"
-        },
-        "dependencies": [
-            {
-                "js-controller": ">=7.2.2"
-            },
-            {
-                "vis-2": ">=2.20.0"
-            }
-        ],
-        "globalDependencies": [],
-        "connectionType": "none",
-        "dataSource": "none",
-        "visWidgets": {
-            "vis2Wolf": {
-                "i18n": "component",
-                "name": "vis2Wolf",
-                "url": "vis-2-widgets-wolf/customWidgets.js",
-                "bundlerType": "module",
-                "components": [
-                    "WolfGasMeter",
-                    "WolfBoiler",
-                    "WolfCircuit",
-                    "WolfDhw",
-                    "WolfHeatCurve"
-                ]
-            }
-        }
+  "common": {
+    "name": "vis-2-widgets-wolf",
+    "version": "0.2.0",
+    "news": {
+      "0.2.0": {
+        "en": "First release: widget set for VIS-2 (React 19) with gas meter, boiler status, heating circuit, hot water and heating curve. Operating widgets show a value only after it has been confirmed (ack); the heating curve is an approximation (not a Wolf formula). The gas meter calculates daily and monthly consumption from the history.",
+        "de": "Erste Version: Widget-Set für VIS-2 (React 19) mit Gaszähler, Kesselstatus, Heizkreis, Warmwasser und Heizkurve. Bedienende Widgets zeigen einen Wert erst nach der Bestätigung (ack); die Heizkurve ist eine Näherung (keine Wolf-Formel). Der Gaszähler rechnet Tages- und Monatsverbrauch aus dem Verlauf.",
+        "ru": "Первая версия: набор виджетов для VIS-2 (React 19) — газовый счётчик, состояние котла, контур отопления, горячая вода и отопительная кривая. Управляющие виджеты показывают значение только после подтверждения (ack); отопительная кривая — приближение (не формула Wolf). Газовый счётчик вычисляет суточный и месячный расход из истории.",
+        "pt": "Primeira versão: conjunto de widgets para VIS-2 (React 19) com contador de gás, estado da caldeira, circuito de aquecimento, água quente e curva de aquecimento. Os widgets de controlo só mostram um valor após a confirmação (ack); a curva de aquecimento é uma aproximação (não é uma fórmula Wolf). O contador de gás calcula o consumo diário e mensal a partir do histórico.",
+        "nl": "Eerste versie: widgetset voor VIS-2 (React 19) met gasmeter, ketelstatus, verwarmingscircuit, warm water en stooklijn. Bedienende widgets tonen een waarde pas na bevestiging (ack); de stooklijn is een benadering (geen Wolf-formule). De gasmeter berekent dag- en maandverbruik uit de historie.",
+        "fr": "Première version : ensemble de widgets pour VIS-2 (React 19) avec compteur de gaz, état de la chaudière, circuit de chauffage, eau chaude et courbe de chauffe. Les widgets de commande n'affichent une valeur qu'après confirmation (ack) ; la courbe de chauffe est une approximation (pas une formule Wolf). Le compteur de gaz calcule la consommation journalière et mensuelle à partir de l'historique.",
+        "it": "Prima versione: set di widget per VIS-2 (React 19) con contatore del gas, stato caldaia, circuito di riscaldamento, acqua calda e curva di riscaldamento. I widget di comando mostrano un valore solo dopo la conferma (ack); la curva di riscaldamento è un'approssimazione (non una formula Wolf). Il contatore del gas calcola il consumo giornaliero e mensile dallo storico.",
+        "es": "Primera versión: conjunto de widgets para VIS-2 (React 19) con contador de gas, estado de la caldera, circuito de calefacción, agua caliente y curva de calefacción. Los widgets de control solo muestran un valor tras la confirmación (ack); la curva de calefacción es una aproximación (no es una fórmula Wolf). El contador de gas calcula el consumo diario y mensual a partir del historial.",
+        "pl": "Pierwsza wersja: zestaw widżetów dla VIS-2 (React 19) z licznikiem gazu, stanem kotła, obiegiem grzewczym, ciepłą wodą i krzywą grzewczą. Widżety sterujące pokazują wartość dopiero po potwierdzeniu (ack); krzywa grzewcza jest przybliżeniem (nie formułą Wolf). Licznik gazu oblicza zużycie dzienne i miesięczne z historii.",
+        "uk": "Перша версія: набір віджетів для VIS-2 (React 19) — газовий лічильник, стан котла, контур опалення, гаряча вода та опалювальна крива. Віджети керування показують значення лише після підтвердження (ack); опалювальна крива — наближення (не формула Wolf). Газовий лічильник обчислює добову та місячну витрату з історії.",
+        "zh-cn": "首个版本：适用于 VIS-2（React 19）的小部件集，包含燃气表、锅炉状态、供暖回路、生活热水和供暖曲线。控制类小部件仅在确认（ack）后显示数值；供暖曲线为近似值（非 Wolf 公式）。燃气表根据历史记录计算日用量和月用量。"
+      }
     },
-    "native": {},
-    "objects": [],
-    "instanceObjects": []
+    "titleLang": {
+      "en": "Wolf Heating Widgets",
+      "de": "Wolf Heizungs-Widgets",
+      "ru": "Виджеты для отопления Wolf",
+      "pt": "Widgets para aquecimento Wolf",
+      "nl": "Wolf verwarmingswidgets",
+      "fr": "Widgets de chauffage Wolf",
+      "it": "Widget di riscaldamento Wolf",
+      "es": "Widgets de calefacción Wolf",
+      "pl": "Widżety ogrzewania Wolf",
+      "uk": "Віджети для опалення Wolf",
+      "zh-cn": "Wolf 供暖小部件"
+    },
+    "desc": {
+      "en": "VIS-2 widgets for Wolf heating systems: system diagram, boiler, heating circuits, heating curve, hot water, trends, messages and gas meter",
+      "de": "VIS-2-Widgets für Wolf-Heizungsanlagen: Anlagenschema, Kessel, Heizkreise, Heizkurve, Warmwasser, Verläufe, Meldungen und Gaszähler",
+      "ru": "Виджеты VIS-2 для систем отопления Wolf: схема установки, котёл, контуры отопления, отопительная кривая, горячая вода, графики, сообщения и газовый счётчик",
+      "pt": "Widgets VIS-2 para sistemas de aquecimento Wolf: esquema da instalação, caldeira, circuitos de aquecimento, curva de aquecimento, água quente, históricos, mensagens e contador de gás",
+      "nl": "VIS-2-widgets voor Wolf-verwarmingssystemen: installatieschema, ketel, verwarmingscircuits, stooklijn, warm water, trends, meldingen en gasmeter",
+      "fr": "Widgets VIS-2 pour les systèmes de chauffage Wolf : schéma de l'installation, chaudière, circuits de chauffage, courbe de chauffe, eau chaude, historiques, messages et compteur de gaz",
+      "it": "Widget VIS-2 per impianti di riscaldamento Wolf: schema dell'impianto, caldaia, circuiti di riscaldamento, curva climatica, acqua calda, andamenti, messaggi e contatore del gas",
+      "es": "Widgets VIS-2 para sistemas de calefacción Wolf: esquema de la instalación, caldera, circuitos de calefacción, curva de calefacción, agua caliente, históricos, mensajes y contador de gas",
+      "pl": "Widżety VIS-2 dla instalacji grzewczych Wolf: schemat instalacji, kocioł, obiegi grzewcze, krzywa grzewcza, ciepła woda, przebiegi, komunikaty i licznik gazu",
+      "uk": "Віджети VIS-2 для систем опалення Wolf: схема установки, котел, контури опалення, крива опалення, гаряча вода, графіки, повідомлення та газовий лічильник",
+      "zh-cn": "适用于 Wolf 供暖系统的 VIS-2 小部件：系统图、锅炉、供暖回路、供暖曲线、热水、趋势、消息和燃气表"
+    },
+    "authors": [
+      "ssbingo <ssbingo@online.de>"
+    ],
+    "keywords": [
+      "wolf",
+      "heating",
+      "heizung",
+      "vis-2",
+      "widgets",
+      "gas"
+    ],
+    "licenseInformation": {
+      "type": "free",
+      "license": "MIT"
+    },
+    "platform": "Javascript/Node.js",
+    "icon": "vis-2-widgets-wolf.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/admin/vis-2-widgets-wolf.png",
+    "readme": "https://github.com/ssbingo/ioBroker.vis-2-widgets-wolf/blob/main/README.md",
+    "loglevel": "info",
+    "tier": 3,
+    "restartAdapters": [
+      "vis-2"
+    ],
+    "onlyWWW": true,
+    "singleton": true,
+    "type": "visualization-widgets",
+    "mode": "none",
+    "adminUI": {
+      "config": "none"
+    },
+    "dependencies": [
+      {
+        "js-controller": ">=7.2.2"
+      },
+      {
+        "vis-2": ">=2.20.0"
+      }
+    ],
+    "globalDependencies": [],
+    "connectionType": "none",
+    "dataSource": "none",
+    "visWidgets": {
+      "vis2Wolf": {
+        "i18n": "component",
+        "name": "vis2Wolf",
+        "url": "vis-2-widgets-wolf/customWidgets.js",
+        "bundlerType": "module",
+        "components": [
+          "WolfGasMeter",
+          "WolfBoiler",
+          "WolfCircuit",
+          "WolfDhw",
+          "WolfHeatCurve"
+        ]
+      }
+    }
+  },
+  "native": {},
+  "objects": [],
+  "instanceObjects": []
 }

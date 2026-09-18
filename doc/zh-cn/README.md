@@ -26,8 +26,8 @@ WOLF 及 WOLF 标志是 WOLF GmbH 的商标。本项目与 WOLF GmbH 无任何�
     ### **WORK IN PROGRESS**
 -->
 
-### **WORK IN PROGRESS**
-* (ssbingo) 首个版本：基于 React 19 和 TypeScript 的小部件集，燃气表小部件的首个版本
+### 0.2.0 (2026-09-18)
+* (ssbingo) 首个版本：适用于 VIS-2（React 19）的小部件集，包含燃气表、锅炉状态、供暖回路、生活热水和供暖曲线。控制类小部件仅在确认（ack）后显示数值；供暖曲线为近似值（非 Wolf 公式）。燃气表根据历史记录计算日用量和月用量。
 
 ## 许可证
 

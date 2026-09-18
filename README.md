@@ -86,8 +86,7 @@ provide.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 0.2.0 (2026-09-18)
 * (ssbingo) Initial version: widget set built with React 19 and TypeScript, first version of the gas meter widget
 * (ssbingo) Gas meter: all seven counter styles (A, B, C, E, F, G, H) and a status LED for consumption
 * (ssbingo) Color scheme per widget: automatic (like VIS-2), light or dark
