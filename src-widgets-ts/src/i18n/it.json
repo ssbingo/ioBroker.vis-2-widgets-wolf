@@ -135,5 +135,18 @@
     "outside_avg": "Esterno med.",
     "curve_value": "Valore curva",
     "curve_label": "Curva di riscaldamento, mandata in funzione della temperatura esterna",
-    "outside_avg_long": "Temperatura esterna media"
+    "outside_avg_long": "Temperatura esterna media",
+    "group_sensor": "Stato del sensore",
+    "oid_sensor_status": "Stato del contatore (0 = OK)",
+    "oid_unreach": "Non raggiungibile (es. UNREACH)",
+    "oid_lowbat": "Batteria scarica (es. LOW_BAT)",
+    "group_history": "Consumo dallo storico",
+    "history_instance": "Istanza storico (vuoto = predefinita di sistema)",
+    "offset": "Correzione lettura contatore (m³)",
+    "offset_tooltip": "Sommata al valore dell'oggetto: lettura sul contatore meno il valore mostrato dall'oggetto",
+    "history_tooltip": "Usata se non sono collegati oggetti per oggi e mese: il widget legge la lettura a inizio giorno e mese da questa istanza",
+    "consumption_tooltip": "Lasciare vuoto per calcolare il consumo dallo storico della lettura",
+    "warn_unreach": "Sensore non raggiungibile",
+    "warn_lowbat": "Batteria scarica",
+    "warn_status": "Valore del contatore dubbio"
 }

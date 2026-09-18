@@ -135,5 +135,18 @@
     "outside_avg": "Exterior méd.",
     "curve_value": "Valor da curva",
     "curve_label": "Curva de aquecimento, ida em função da temperatura exterior",
-    "outside_avg_long": "Temperatura exterior média"
+    "outside_avg_long": "Temperatura exterior média",
+    "group_sensor": "Estado do sensor",
+    "oid_sensor_status": "Estado do contador (0 = OK)",
+    "oid_unreach": "Inacessível (p. ex. UNREACH)",
+    "oid_lowbat": "Bateria fraca (p. ex. LOW_BAT)",
+    "group_history": "Consumo a partir do histórico",
+    "history_instance": "Instância de histórico (vazio = padrão do sistema)",
+    "offset": "Correção da leitura do contador (m³)",
+    "offset_tooltip": "Somada ao valor do objeto: leitura no contador menos o valor mostrado pelo objeto",
+    "history_tooltip": "Usada quando não há objetos para hoje e mês: o widget lê a leitura no início do dia e do mês nesta instância",
+    "consumption_tooltip": "Deixe vazio para calcular o consumo a partir do histórico da leitura",
+    "warn_unreach": "Sensor inacessível",
+    "warn_lowbat": "Bateria fraca",
+    "warn_status": "Leitura duvidosa"
 }

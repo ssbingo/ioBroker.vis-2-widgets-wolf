@@ -24,7 +24,7 @@ names or structure.
 
 | Widget | Purpose | Status |
 |---|---|---|
-| Gas meter | Meter reading, instantaneous flow, daily/monthly consumption, costs | first version |
+| Gas meter | Meter reading, instantaneous flow, daily/monthly consumption (from linked objects or the history), costs, sensor warnings | first version |
 | Boiler | Operating phase, modulation, water pressure, operating hours, burner starts | first version |
 | Heating circuit | Operating mode, day and economy temperature, setpoint correction, time program (writing) | first version |
 | Heating curve | Approximated curve with the controller's operating point, setpoint correction (writing) | first version |
@@ -34,6 +34,14 @@ names or structure.
 | Messages | Fault indicator and recent messages | planned |
 
 Each widget can be set to light or dark, or follow the VIS-2 theme automatically (default).
+
+### Gas meter: consumption from the history
+
+If no objects are linked for today's and this month's consumption, the gas meter calculates both
+from the history of the meter reading (`sql`, `history` or `influxdb`, by default the system's
+history instance): the reading now minus the reading at the start of the day or month. Sensors
+such as the HomematicIP HmIP-ESI count from their installation, not from the meter's reading —
+enter the difference as the meter reading correction.
 
 ### Heating curve: an approximation
 
@@ -89,6 +97,7 @@ provide.
 * (ssbingo) Writing widgets: values are written with ack=false and shown as "applying" until the source confirms them with ack=true; after 10 s without confirmation the widget reports it and shows the last confirmed value again. Optional confirm mode with Apply/Discard; read-only objects lock their controls
 * (ssbingo) Hot water: tank graphic with temperature and set mark, set temperature, time program, effective setpoint and charging state; circulation and one-time charge only when linked. Switches write 0/1 to number objects and true/false otherwise
 * (ssbingo) Heating curve: approximation (labelled as such, not a Wolf formula) with the controller's operating point; setpoint correction writable, slope and level only where the object allows writing; the operating point is marked as distorted while the tank is charging
+* (ssbingo) Gas meter: today's and this month's consumption from the history of the meter reading when no objects are linked; meter reading correction for sensors that count from their installation (e.g. HmIP-ESI); warnings for an unreachable sensor, low battery and a questionable counter status
 
 ## License
 MIT License

@@ -135,5 +135,18 @@
     "outside_avg": "Zewn. śr.",
     "curve_value": "Wartość krzywej",
     "curve_label": "Krzywa grzewcza, zasilanie w funkcji temperatury zewnętrznej",
-    "outside_avg_long": "Temperatura zewnętrzna uśredniona"
+    "outside_avg_long": "Temperatura zewnętrzna uśredniona",
+    "group_sensor": "Stan czujnika",
+    "oid_sensor_status": "Status licznika (0 = OK)",
+    "oid_unreach": "Nieosiągalny (np. UNREACH)",
+    "oid_lowbat": "Słaba bateria (np. LOW_BAT)",
+    "group_history": "Zużycie z historii",
+    "history_instance": "Instancja historii (puste = domyślna systemu)",
+    "offset": "Korekta stanu licznika (m³)",
+    "offset_tooltip": "Dodawana do wartości obiektu: stan odczytany z licznika minus wartość pokazywana przez obiekt",
+    "history_tooltip": "Używana, gdy nie powiązano obiektów dla dziś i miesiąca: widżet odczytuje stan licznika na początku dnia i miesiąca z tej instancji",
+    "consumption_tooltip": "Pozostaw puste, aby obliczać zużycie z historii stanu licznika",
+    "warn_unreach": "Czujnik nieosiągalny",
+    "warn_lowbat": "Słaba bateria",
+    "warn_status": "Wartość licznika wątpliwa"
 }

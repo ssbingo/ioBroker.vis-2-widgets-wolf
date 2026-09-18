@@ -26,6 +26,8 @@ import './sandbox.css';
 interface Meter {
     title: string;
     subtitle: string;
+    /** Hinweise zum Sensor, wie sie z. B. ein HmIP-ESI über UNREACH und LOW_BAT meldet */
+    warnings?: string[];
     reading: number;
     flow: number;
     today: number;
@@ -34,7 +36,15 @@ interface Meter {
 
 const START: Meter[] = [
     { title: 'Haupthaus', subtitle: 'mbus.0.1', reading: 18427.482, flow: 0, today: 4.82, month: 96.4 },
-    { title: 'Wohnung Obergeschoss', subtitle: 'mbus.0.2', reading: 7314.096, flow: 0.92, today: 2.14, month: 51.7 },
+    {
+        title: 'Wohnung Obergeschoss',
+        subtitle: 'HmIP-ESI mit Hinweisen',
+        warnings: [de.warn_unreach, de.warn_lowbat],
+        reading: 7314.096,
+        flow: 0.92,
+        today: 2.14,
+        month: 51.7,
+    },
 ];
 
 interface Boiler {
@@ -257,6 +267,7 @@ function Sandbox(): React.JSX.Element {
                             maxFlow={3}
                             intDigits={5}
                             decDigits={3}
+                            warnings={m.warnings}
                             labels={{
                                 flow: de.flow,
                                 today: de.today,

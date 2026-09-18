@@ -135,5 +135,18 @@
     "outside_avg": "室外平均",
     "curve_value": "曲线值",
     "curve_label": "供暖曲线：供水温度随室外温度变化",
-    "outside_avg_long": "室外温度平均值"
+    "outside_avg_long": "室外温度平均值",
+    "group_sensor": "传感器状态",
+    "oid_sensor_status": "计量状态 (0 = 正常)",
+    "oid_unreach": "不可达 (例如 UNREACH)",
+    "oid_lowbat": "电量低 (例如 LOW_BAT)",
+    "group_history": "根据历史记录计算用量",
+    "history_instance": "历史实例 (留空 = 系统默认)",
+    "offset": "表读数修正值 (m³)",
+    "offset_tooltip": "加到对象值上：表上读数减去对象显示的值",
+    "history_tooltip": "未关联今日和本月对象时使用：小部件从此实例读取日初和月初的表读数",
+    "consumption_tooltip": "留空则根据表读数历史计算用量",
+    "warn_unreach": "传感器不可达",
+    "warn_lowbat": "电量低",
+    "warn_status": "表读数存疑"
 }

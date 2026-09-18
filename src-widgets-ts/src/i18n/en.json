@@ -135,5 +135,18 @@
     "outside_avg": "Outside avg.",
     "curve_value": "Curve value",
     "curve_label": "Heating curve, flow over outside temperature",
-    "outside_avg_long": "Outside temperature, averaged"
+    "outside_avg_long": "Outside temperature, averaged",
+    "group_sensor": "Sensor state",
+    "oid_sensor_status": "Counter status (0 = OK)",
+    "oid_unreach": "Not reachable (e.g. UNREACH)",
+    "oid_lowbat": "Low battery (e.g. LOW_BAT)",
+    "group_history": "Consumption from history",
+    "history_instance": "History instance (empty = system default)",
+    "offset": "Meter reading correction (m³)",
+    "offset_tooltip": "Added to the object value: reading on the meter minus the value shown by the object",
+    "history_tooltip": "Used when no objects for today and month are linked: the widget reads the meter reading at the start of the day and month from this instance",
+    "consumption_tooltip": "Leave empty to calculate consumption from the history of the meter reading",
+    "warn_unreach": "Sensor not reachable",
+    "warn_lowbat": "Battery low",
+    "warn_status": "Meter value questionable"
 }

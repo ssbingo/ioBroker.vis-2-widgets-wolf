@@ -135,5 +135,18 @@
     "outside_avg": "Exterior prom.",
     "curve_value": "Valor de la curva",
     "curve_label": "Curva de calefacción, impulsión según la temperatura exterior",
-    "outside_avg_long": "Temperatura exterior promediada"
+    "outside_avg_long": "Temperatura exterior promediada",
+    "group_sensor": "Estado del sensor",
+    "oid_sensor_status": "Estado del contador (0 = correcto)",
+    "oid_unreach": "No accesible (p. ej. UNREACH)",
+    "oid_lowbat": "Batería baja (p. ej. LOW_BAT)",
+    "group_history": "Consumo desde el historial",
+    "history_instance": "Instancia de historial (vacío = predeterminada del sistema)",
+    "offset": "Corrección de la lectura del contador (m³)",
+    "offset_tooltip": "Se suma al valor del objeto: lectura en el contador menos el valor que muestra el objeto",
+    "history_tooltip": "Se usa si no hay objetos vinculados para hoy y el mes: el widget lee la lectura al inicio del día y del mes en esta instancia",
+    "consumption_tooltip": "Dejar vacío para calcular el consumo desde el historial de la lectura",
+    "warn_unreach": "Sensor no accesible",
+    "warn_lowbat": "Batería baja",
+    "warn_status": "Lectura del contador dudosa"
 }

@@ -135,5 +135,18 @@
     "outside_avg": "Buiten gem.",
     "curve_value": "Curvewaarde",
     "curve_label": "Stooklijn, aanvoer over buitentemperatuur",
-    "outside_avg_long": "Buitentemperatuur gemiddeld"
+    "outside_avg_long": "Buitentemperatuur gemiddeld",
+    "group_sensor": "Sensorstatus",
+    "oid_sensor_status": "Meterstatus (0 = in orde)",
+    "oid_unreach": "Niet bereikbaar (bijv. UNREACH)",
+    "oid_lowbat": "Batterij bijna leeg (bijv. LOW_BAT)",
+    "group_history": "Verbruik uit historie",
+    "history_instance": "Historie-instantie (leeg = systeemstandaard)",
+    "offset": "Correctie meterstand (m³)",
+    "offset_tooltip": "Wordt bij de objectwaarde opgeteld: afgelezen meterstand min de getoonde objectwaarde",
+    "history_tooltip": "Geldt als er geen objecten voor vandaag en maand gekoppeld zijn: de widget leest de meterstand aan het begin van dag en maand uit deze instantie",
+    "consumption_tooltip": "Leeg laten om het verbruik uit de historie van de meterstand te berekenen",
+    "warn_unreach": "Sensor niet bereikbaar",
+    "warn_lowbat": "Batterij bijna leeg",
+    "warn_status": "Meterwaarde twijfelachtig"
 }
