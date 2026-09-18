@@ -18,14 +18,14 @@ individually to an existing ioBroker object — for example from the `wolf-smart
 the `wolf` adapter (ISM8i), Modbus or your own scripts. No assumptions are made about object
 names or structure.
 
-> **Status:** early development. Only the gas meter widget is available so far.
+> **Status:** early development. The gas meter and boiler status widgets are available so far.
 
 ### Widgets
 
 | Widget | Purpose | Status |
 |---|---|---|
 | Gas meter | Meter reading, instantaneous flow, daily/monthly consumption, costs | first version |
-| Boiler | Operating phase, modulation, water pressure, operating hours, burner starts | planned |
+| Boiler | Operating phase, modulation, water pressure, operating hours, burner starts | first version |
 | Heating circuit | Operating mode and room set temperature (writing) | planned |
 | Heating curve | Slope and level (writing) | planned |
 | Hot water | Tank temperature, set temperature, circulation, one-time charge (writing) | planned |
@@ -73,6 +73,7 @@ provide.
 ### **WORK IN PROGRESS**
 * (ssbingo) Initial version: widget set built with React 19 and TypeScript, first version of the gas meter widget
 * (ssbingo) Gas meter: all seven counter styles (A, B, C, E, F, G, H) and a status LED for consumption
+* (ssbingo) Boiler status: operating phase (texts from the widget, the object's states or built-in defaults), modulation and water pressure gauges with warning zones, operating hours, burner starts, flow and return temperature
 
 ## License
 MIT License
