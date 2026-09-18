@@ -6,7 +6,7 @@ ausführbarer Teil des Adapters: Er wird weder gebaut noch gelintet noch veröff
 
 | Datei | Inhalt | Portiert nach |
 |---|---|---|
-| `vis-2-widgets-wolf.js` | Bausteine und das Gaszähler-Widget | **portiert (M1):** LED, Zählwerk A–H, Zeigerwerk, Sieben-Segment, Bogenanzeige, Gaszähler, Kesselstatus — **offen (M2):** Schreiblogik `setVal`/`debounce` |
+| `vis-2-widgets-wolf.js` | Bausteine und das Gaszähler-Widget | **portiert (M1):** LED, Zählwerk A–H, Zeigerwerk, Sieben-Segment, Bogenanzeige, Gaszähler, Kesselstatus — **portiert (M2):** Schreiblogik `setVal`/`debounce` → `src/lib/writeTracker.ts`, Stepper, Segmentschalter, Heizkreis — **offen (M2):** Warmwasser, Heizkurve |
 | `sandbox-index.html`, `vis-stub.js` | frühere Sandbox mit Nachbildung von `vis` | ersetzt durch die Vite-Sandbox (`npm start`) |
 
 Das CSS liegt bereits portiert unter `src/styles/wolf.css`.
@@ -15,6 +15,7 @@ Das CSS liegt bereits portiert unter `src/styles/wolf.css`.
 
 - **`ack`-Rückmeldung fehlt:** `setVal` setzt „wird übernommen", wertet aber nie `ack` aus.
   Die Markierung endet erst nach 10 s, danach steht fälschlich „Keine Bestätigung".
+  In `src/lib/writeTracker.ts` behoben: Ende erst bei `ack: true` mit dem geschriebenen Wert.
 - **Gleitkommafehler im Zählwerk:** `splitDigits` zeigt `18427,482` als `18427,481`
   (auch Variante H). In `src/lib/digits.ts` bereits behoben.
 - **Optimistischer Schalter:** Der Zirkulationsschalter der alten Sandbox schaltet sofort um

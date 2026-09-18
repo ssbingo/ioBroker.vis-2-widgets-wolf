@@ -17,6 +17,8 @@ import { monthlyCost } from '../lib/gas';
 import { injectStyles } from '../styles/injectStyles';
 import de from '../i18n/de.json';
 
+import SimCircuit from './SimCircuit';
+
 import './sandbox.css';
 
 interface Meter {
@@ -83,6 +85,14 @@ const BOILERS: Boiler[] = [
     },
 ];
 const PHASES = [de.phase_0, de.phase_1, de.phase_2];
+
+/** Heizkreis: Quelle bestätigt, Bestätigungsmodus, Quelle schweigt (kurze Wartezeit), schreibgeschützt */
+const CIRCUITS = [
+    { subtitle: 'Quelle bestätigt nach 1,5 s' },
+    { subtitle: 'Bestätigungsmodus', confirm: true },
+    { subtitle: 'Quelle bestätigt nicht (Wartezeit 4 s)', noAck: true, timeoutMs: 4000 },
+    { subtitle: 'schreibgeschützt (write: false)', locked: true },
+];
 
 const TARIFF = { brennwert: 11.482, zustandszahl: 0.9612, arbeitspreis: 0.1092, grundpreis: 14.9 };
 const TICK_MS = 2000;
@@ -160,8 +170,9 @@ function Sandbox(): React.JSX.Element {
                 <div>
                     <h1>Sandbox — vis-2-widgets-wolf</h1>
                     <p className="sb-sub">
-                        Dieselben Komponenten und dasselbe CSS wie in VIS-2, mit simulierten Werten. Bindung, Schreiben
-                        und Übersetzungen prüfst du im dev-server.
+                        Dieselben Komponenten und dasselbe CSS wie in VIS-2, mit simulierten Werten. Der Heizkreis
+                        schreibt über dieselbe Nachverfolgung wie das Widget in eine simulierte Quelle. Bindung an
+                        ioBroker und Übersetzungen prüfst du im dev-server.
                     </p>
                 </div>
                 <div className="sb-tools">
@@ -264,6 +275,21 @@ function Sandbox(): React.JSX.Element {
                                 burnerOn: de.burner_on,
                                 burnerOff: de.burner_off,
                             }}
+                        />
+                    </div>
+                ))}
+            </div>
+
+            <h2 className="sb-h">Heizkreis — WolfCircuit</h2>
+            <div className="sb-grid">
+                {CIRCUITS.map(c => (
+                    <div
+                        key={c.subtitle}
+                        className="sb-cell sb-cell-circuit"
+                    >
+                        <SimCircuit
+                            themeType={themeType}
+                            {...c}
                         />
                     </div>
                 ))}

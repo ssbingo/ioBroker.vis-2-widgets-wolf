@@ -1,15 +1,14 @@
 import React from 'react';
 
-import type { RxRenderWidgetProps, RxWidgetInfo, VisRxWidgetProps, VisRxWidgetState } from '@iobroker/types-vis-2';
-import type VisRxWidget from '@iobroker/types-vis-2/visRxWidget';
+import type { RxRenderWidgetProps, RxWidgetInfo } from '@iobroker/types-vis-2';
 
 import BoilerView from '../components/BoilerView';
-import { toBoolean, toNumber } from '../lib/fmt';
-import { resolveTheme, THEME_OPTIONS } from '../lib/theme';
-import { mapValue, parseValueMap, statesToValueMap, type ValueMap } from '../lib/valueMap';
-import { injectStyles } from '../styles/injectStyles';
+import { toBoolean } from '../lib/fmt';
+import { THEME_OPTIONS } from '../lib/theme';
+import { mapValue, parseValueMap, type ValueMap } from '../lib/valueMap';
+import WolfWidgetBase, { attrNumber, type WolfBaseRxData } from './WolfWidgetBase';
 
-interface WolfBoilerRxData {
+interface WolfBoilerRxData extends WolfBaseRxData {
     oid_phase?: string;
     oid_brenner?: string;
     oid_modulation?: string;
@@ -22,55 +21,16 @@ interface WolfBoilerRxData {
     druck_min?: number | string;
     druck_max?: number | string;
     druck_skala?: number | string;
-    theme?: string;
-    title?: string;
-    subtitle?: string;
-}
-
-interface WolfBoilerState extends VisRxWidgetState {
-    /** Klartexte aus common.states des Phasen-Objekts */
-    phaseStates: ValueMap;
-}
-
-/** Nur der Teil der Socket-Verbindung, den das Widget braucht */
-interface ObjectReader {
-    getObject(id: string): Promise<ioBroker.Object | null | undefined>;
 }
 
 /** Eingebaute Phasen, wenn weder Attribut noch Objekt Klartexte liefern */
 const DEFAULT_PHASES = [0, 1, 2];
 
 /**
- * Zahl aus einem Widget-Attribut; leere Felder liefern den Vorgabewert.
- *
- * @param value Attributwert
- * @param fallback Vorgabewert
- * @returns die Zahl
- */
-function attrNumber(value: unknown, fallback: number): number {
-    return toNumber(value) ?? fallback;
-}
-
-/**
- * Anbindung des Kesselstatus an VIS-2: Attribute, Objektwerte, Klartexte der Betriebsphase, Theme.
+ * Anbindung des Kesselstatus an VIS-2: Attribute, Objektwerte, Klartexte der Betriebsphase.
  * Die Darstellung liegt in components/BoilerView und ist ohne ioBroker prüfbar (Sandbox).
  */
-export default class WolfBoiler extends (window.visRxWidget as typeof VisRxWidget)<WolfBoilerRxData, WolfBoilerState> {
-    /** wird von VIS-2 beim Laden des Widget-Sets gesetzt */
-    static adapter: string;
-
-    private mounted = false;
-
-    /**
-     * Startzustand ohne Klartexte aus dem Objekt
-     *
-     * @param props von VIS-2 übergebene Eigenschaften
-     */
-    constructor(props: VisRxWidgetProps) {
-        super(props);
-        this.state = { ...this.state, phaseStates: {} };
-    }
-
+export default class WolfBoiler extends WolfWidgetBase<WolfBoilerRxData> {
     /** Beschreibung des Widgets für die VIS-2-Palette und den Attribut-Editor */
     static getWidgetInfo(): RxWidgetInfo {
         return {
@@ -132,70 +92,9 @@ export default class WolfBoiler extends (window.visRxWidget as typeof VisRxWidge
         };
     }
 
-    /** VIS-2 fragt die Widget-Beschreibung auch an der Instanz ab */
-    // eslint-disable-next-line class-methods-use-this
-    getWidgetInfo(): RxWidgetInfo {
-        return WolfBoiler.getWidgetInfo();
-    }
-
-    /** Präfix der Übersetzungsschlüssel, passend zu translations.ts (prefix: true) */
-    static getI18nPrefix(): string {
-        return `${WolfBoiler.adapter}_`;
-    }
-
-    /** Styles einfügen und die Klartexte der Betriebsphase laden */
-    componentDidMount(): void {
-        super.componentDidMount();
-        this.mounted = true;
-        injectStyles();
-        void this.loadPhaseStates();
-    }
-
-    /** Beim Entfernen keine späten Antworten mehr übernehmen */
-    componentWillUnmount(): void {
-        this.mounted = false;
-        super.componentWillUnmount();
-    }
-
-    /**
-     * Attribute im Editor geändert — bei neuer Phasen-ID die Klartexte neu laden.
-     *
-     * @param prevRxData Attribute vor der Änderung
-     */
-    onRxDataChanged(prevRxData: typeof this.state.rxData): void {
-        super.onRxDataChanged(prevRxData);
-        if (prevRxData.oid_phase !== this.state.rxData.oid_phase) {
-            void this.loadPhaseStates();
-        }
-    }
-
-    /** Liest common.states des Phasen-Objekts, z. B. { "0": "Standby", "1": "Heizbetrieb" } */
-    private async loadPhaseStates(): Promise<void> {
-        const oid = this.state.rxData.oid_phase;
-        let phaseStates: ValueMap = {};
-        if (oid) {
-            try {
-                const socket = this.props.context.socket as ObjectReader;
-                const obj = await socket.getObject(oid);
-                phaseStates = statesToValueMap(obj?.common?.states);
-            } catch {
-                // ohne Lesezugriff auf das Objekt bleiben Attribut und Vorgaben
-            }
-        }
-        // nur übernehmen, wenn das Widget noch steht und die ID sich nicht geändert hat
-        if (this.mounted && oid === this.state.rxData.oid_phase) {
-            this.setState({ phaseStates });
-        }
-    }
-
-    /**
-     * Aktueller Wert eines gebundenen Objekts (VIS-2 abonniert oid_-Attribute selbst).
-     *
-     * @param oid Objekt-ID aus einem oid_-Attribut
-     * @returns der Rohwert oder undefined
-     */
-    private objectValue(oid: string | undefined): unknown {
-        return oid ? this.state.values[`${oid}.val`] : undefined;
+    /** @returns Phasen-Objekt, dessen Klartexte (common.states) gebraucht werden */
+    protected metaIds(): Array<string | undefined> {
+        return [this.state.rxData.oid_phase];
     }
 
     /**
@@ -207,44 +106,42 @@ export default class WolfBoiler extends (window.visRxWidget as typeof VisRxWidge
     renderWidgetBody(props: RxRenderWidgetProps): React.JSX.Element {
         super.renderWidgetBody(props);
         const rx = this.state.rxData;
-        const t = (key: string): string => WolfBoiler.t(key);
-        const defaults: ValueMap = Object.fromEntries(DEFAULT_PHASES.map(n => [String(n), t(`phase_${n}`)]));
-        const num = (oid: string | undefined): number | null => toNumber(this.objectValue(oid));
+        const defaults: ValueMap = Object.fromEntries(DEFAULT_PHASES.map(n => [String(n), this.tr(`phase_${n}`)]));
 
         return (
             <BoilerView
-                themeType={resolveTheme(rx.theme, this.props.context.themeType)}
-                title={rx.title || t('boiler')}
+                themeType={this.themeType()}
+                title={rx.title || this.tr('boiler')}
                 subtitle={rx.subtitle}
                 phase={mapValue(
                     this.objectValue(rx.oid_phase),
                     parseValueMap(rx.phase_map),
-                    this.state.phaseStates,
+                    this.meta(rx.oid_phase)?.states ?? {},
                     defaults,
                 )}
                 burner={rx.oid_brenner ? (toBoolean(this.objectValue(rx.oid_brenner)) ?? false) : null}
                 showModulation={!!rx.oid_modulation}
                 showPressure={!!rx.oid_druck}
-                modulation={num(rx.oid_modulation)}
-                pressure={num(rx.oid_druck)}
+                modulation={this.objectNumber(rx.oid_modulation)}
+                pressure={this.objectNumber(rx.oid_druck)}
                 pressureMin={attrNumber(rx.druck_min, 1.2)}
                 pressureMax={attrNumber(rx.druck_max, 2.5)}
                 pressureScale={attrNumber(rx.druck_skala, 3)}
-                hours={num(rx.oid_betriebsstunden)}
-                starts={num(rx.oid_starts)}
-                flowTemp={num(rx.oid_vorlauf)}
-                returnTemp={num(rx.oid_ruecklauf)}
+                hours={this.objectNumber(rx.oid_betriebsstunden)}
+                starts={this.objectNumber(rx.oid_starts)}
+                flowTemp={this.objectNumber(rx.oid_vorlauf)}
+                returnTemp={this.objectNumber(rx.oid_ruecklauf)}
                 labels={{
-                    modulation: t('modulation'),
-                    pressure: t('pressure'),
-                    hours: t('hours'),
-                    starts: t('starts'),
-                    flowTemp: t('flow_temp'),
-                    returnTemp: t('return_temp'),
-                    burnerOn: t('burner_on'),
-                    burnerOff: t('burner_off'),
+                    modulation: this.tr('modulation'),
+                    pressure: this.tr('pressure'),
+                    hours: this.tr('hours'),
+                    starts: this.tr('starts'),
+                    flowTemp: this.tr('flow_temp'),
+                    returnTemp: this.tr('return_temp'),
+                    burnerOn: this.tr('burner_on'),
+                    burnerOff: this.tr('burner_off'),
                 }}
-                locale={WolfBoiler.getLanguage()}
+                locale={this.locale()}
             />
         );
     }

@@ -18,7 +18,7 @@ individually to an existing ioBroker object — for example from the `wolf-smart
 the `wolf` adapter (ISM8i), Modbus or your own scripts. No assumptions are made about object
 names or structure.
 
-> **Status:** early development. The gas meter and boiler status widgets are available so far.
+> **Status:** early development. The gas meter, boiler status and heating circuit widgets are available so far.
 
 ### Widgets
 
@@ -26,7 +26,7 @@ names or structure.
 |---|---|---|
 | Gas meter | Meter reading, instantaneous flow, daily/monthly consumption, costs | first version |
 | Boiler | Operating phase, modulation, water pressure, operating hours, burner starts | first version |
-| Heating circuit | Operating mode and room set temperature (writing) | planned |
+| Heating circuit | Operating mode, day and economy temperature, setpoint correction, time program (writing) | first version |
 | Heating curve | Slope and level (writing) | planned |
 | Hot water | Tank temperature, set temperature, circulation, one-time charge (writing) | planned |
 | System diagram | Hydraulic diagram with animated flow | planned |
@@ -76,6 +76,8 @@ provide.
 * (ssbingo) Color scheme per widget: automatic (like VIS-2), light or dark
 * (ssbingo) Boiler status: burner LED, gauges only when a data point is linked, state texts without a repeated number prefix (as delivered by wolf-smartset)
 * (ssbingo) Boiler status: operating phase (texts from the widget, the object's states or built-in defaults), modulation and water pressure gauges with warning zones, operating hours, burner starts, flow and return temperature
+* (ssbingo) Heating circuit: operating mode, day and economy temperature, setpoint correction and time program; limits, step size and state texts come from the linked objects
+* (ssbingo) Writing widgets: values are written with ack=false and shown as "applying" until the source confirms them with ack=true; after 10 s without confirmation the widget reports it and shows the last confirmed value again. Optional confirm mode with Apply/Discard; read-only objects lock their controls
 
 ## License
 MIT License
