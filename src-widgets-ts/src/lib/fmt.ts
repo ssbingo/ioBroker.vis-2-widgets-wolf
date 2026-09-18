@@ -20,6 +20,29 @@ export function toNumber(value: unknown): number | null {
 }
 
 /**
+ * Wert als Ein/Aus lesen: true, Zahlen ungleich 0 sowie "true", "1", "on", "ein".
+ * Liefert null für fehlende Werte, damit "unbekannt" von "aus" unterscheidbar bleibt.
+ *
+ * @param value Wert aus einem Objekt
+ * @returns true, false oder null
+ */
+export function toBoolean(value: unknown): boolean | null {
+    if (value === null || value === undefined || value === '') {
+        return null;
+    }
+    if (typeof value === 'boolean') {
+        return value;
+    }
+    if (typeof value === 'number') {
+        return value !== 0;
+    }
+    if (typeof value === 'string') {
+        return ['true', '1', 'on', 'ein'].includes(value.trim().toLowerCase());
+    }
+    return null;
+}
+
+/**
  * Dezimaltrennzeichen einer Sprachregion, z. B. "," für de-DE und "." für en.
  *
  * @param locale Sprachregion

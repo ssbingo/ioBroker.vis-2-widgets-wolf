@@ -4,13 +4,14 @@ import type { RxRenderWidgetProps, RxWidgetInfo, VisRxWidgetProps, VisRxWidgetSt
 import type VisRxWidget from '@iobroker/types-vis-2/visRxWidget';
 
 import BoilerView from '../components/BoilerView';
-import { toNumber } from '../lib/fmt';
+import { toBoolean, toNumber } from '../lib/fmt';
 import { resolveTheme, THEME_OPTIONS } from '../lib/theme';
 import { mapValue, parseValueMap, statesToValueMap, type ValueMap } from '../lib/valueMap';
 import { injectStyles } from '../styles/injectStyles';
 
 interface WolfBoilerRxData {
     oid_phase?: string;
+    oid_brenner?: string;
     oid_modulation?: string;
     oid_druck?: string;
     oid_betriebsstunden?: string;
@@ -87,6 +88,7 @@ export default class WolfBoiler extends (window.visRxWidget as typeof VisRxWidge
                     label: 'group_objects',
                     fields: [
                         { name: 'oid_phase', type: 'id', label: 'oid_phase', default: '' },
+                        { name: 'oid_brenner', type: 'id', label: 'oid_brenner', default: '' },
                         { name: 'oid_modulation', type: 'id', label: 'oid_modulation', default: '' },
                         { name: 'oid_druck', type: 'id', label: 'oid_druck', default: '' },
                         { name: 'oid_betriebsstunden', type: 'id', label: 'oid_betriebsstunden', default: '' },
@@ -220,6 +222,9 @@ export default class WolfBoiler extends (window.visRxWidget as typeof VisRxWidge
                     this.state.phaseStates,
                     defaults,
                 )}
+                burner={rx.oid_brenner ? (toBoolean(this.objectValue(rx.oid_brenner)) ?? false) : null}
+                showModulation={!!rx.oid_modulation}
+                showPressure={!!rx.oid_druck}
                 modulation={num(rx.oid_modulation)}
                 pressure={num(rx.oid_druck)}
                 pressureMin={attrNumber(rx.druck_min, 1.2)}
@@ -236,6 +241,8 @@ export default class WolfBoiler extends (window.visRxWidget as typeof VisRxWidge
                     starts: t('starts'),
                     flowTemp: t('flow_temp'),
                     returnTemp: t('return_temp'),
+                    burnerOn: t('burner_on'),
+                    burnerOff: t('burner_off'),
                 }}
                 locale={WolfBoiler.getLanguage()}
             />

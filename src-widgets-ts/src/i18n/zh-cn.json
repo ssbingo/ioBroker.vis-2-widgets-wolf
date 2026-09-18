@@ -59,5 +59,8 @@
     "theme": "配色方案",
     "theme_auto": "自动（跟随 VIS-2）",
     "theme_light": "浅色",
-    "theme_dark": "深色"
+    "theme_dark": "深色",
+    "oid_brenner": "燃烧器状态（火焰）",
+    "burner_on": "燃烧器运行",
+    "burner_off": "燃烧器关闭"
 }

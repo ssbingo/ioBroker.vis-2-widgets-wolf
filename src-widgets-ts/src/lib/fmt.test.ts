@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { decimalSeparator, fmt, toNumber } from './fmt';
+import { decimalSeparator, fmt, toBoolean, toNumber } from './fmt';
 
 describe('toNumber', () => {
     it('liest Zahlen und numerische Zeichenketten', () => {
@@ -40,5 +40,25 @@ describe('decimalSeparator', () => {
         expect(decimalSeparator('de-DE')).toBe(',');
         expect(decimalSeparator('en')).toBe('.');
         expect(decimalSeparator('ru')).toBe(',');
+    });
+});
+
+describe('toBoolean', () => {
+    it('erkennt Ein-Zustände', () => {
+        for (const v of [true, 1, 2, 'true', '1', 'on', 'Ein', ' EIN ']) {
+            expect(toBoolean(v)).toBe(true);
+        }
+    });
+
+    it('erkennt Aus-Zustände', () => {
+        for (const v of [false, 0, 'false', '0', 'off', 'Aus']) {
+            expect(toBoolean(v)).toBe(false);
+        }
+    });
+
+    it('liefert null ohne Wert', () => {
+        expect(toBoolean(null)).toBeNull();
+        expect(toBoolean(undefined)).toBeNull();
+        expect(toBoolean('')).toBeNull();
     });
 });
