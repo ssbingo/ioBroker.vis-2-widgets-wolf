@@ -3,6 +3,7 @@ import React from 'react';
 import type { RxRenderWidgetProps, RxWidgetInfo } from '@iobroker/types-vis-2';
 import type VisRxWidget from '@iobroker/types-vis-2/visRxWidget';
 
+import { COUNTER_VARIANTS } from '../components/Counter';
 import GasMeterView from '../components/GasMeterView';
 import { toNumber } from '../lib/fmt';
 import { DEFAULT_BRENNWERT, DEFAULT_ZUSTANDSZAHL, monthlyCost } from '../lib/gas';
@@ -25,8 +26,6 @@ interface WolfGasMeterRxData {
     title?: string;
     subtitle?: string;
 }
-
-const VARIANTS = ['A', 'B', 'C', 'E', 'F', 'G', 'H'];
 
 /**
  * Zahl aus einem Widget-Attribut; leere Felder liefern den Vorgabewert.
@@ -76,7 +75,7 @@ export default class WolfGasMeter extends (window.visRxWidget as typeof VisRxWid
                             type: 'select',
                             label: 'variant',
                             default: 'A',
-                            options: VARIANTS.map(v => ({ value: v, label: `variant_${v}` })),
+                            options: COUNTER_VARIANTS.map(v => ({ value: v, label: `variant_${v}` })),
                         },
                         { name: 'digits_int', type: 'number', label: 'digits_int', default: 5, min: 1, max: 9 },
                         { name: 'digits_dec', type: 'number', label: 'digits_dec', default: 3, min: 0, max: 4 },
@@ -174,6 +173,8 @@ export default class WolfGasMeter extends (window.visRxWidget as typeof VisRxWid
                     arbeitspreis: toNumber(rx.arbeitspreis) ?? undefined,
                     grundpreis: toNumber(rx.grundpreis) ?? undefined,
                 })}
+                variant={rx.variant || 'A'}
+                threshold={attrNumber(rx.schwelle, 0.02)}
                 maxFlow={attrNumber(rx.max_flow, 4)}
                 intDigits={attrNumber(rx.digits_int, 5)}
                 decDigits={attrNumber(rx.digits_dec, 3)}
@@ -182,6 +183,8 @@ export default class WolfGasMeter extends (window.visRxWidget as typeof VisRxWid
                     today: t('today'),
                     month: t('month'),
                     costMonth: t('cost_month'),
+                    consumption: t('consumption'),
+                    noConsumption: t('no_consumption'),
                 }}
                 locale={WolfGasMeter.getLanguage()}
             />

@@ -72,6 +72,7 @@ provide.
 
 ### **WORK IN PROGRESS**
 * (ssbingo) Initial version: widget set built with React 19 and TypeScript, first version of the gas meter widget
+* (ssbingo) Gas meter: all seven counter styles (A, B, C, E, F, G, H) and a status LED for consumption
 
 ## License
 MIT License

@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { splitDigits } from '../lib/digits';
 import { fmt } from '../lib/fmt';
+import Counter, { unitInside } from './Counter';
+import Led from './Led';
 
 /** Anzeigewerte und Beschriftungen des Gaszählers */
 export interface GasMeterViewProps {
@@ -23,6 +24,10 @@ export interface GasMeterViewProps {
     costMonth: number | null;
     /** Skalenende des Durchflussbalkens in m³/h */
     maxFlow: number;
+    /** Zählwerk-Variante A, B, C, E, F, G oder H */
+    variant: string;
+    /** Durchfluss, ab dem die LED Verbrauch anzeigt, in m³/h */
+    threshold: number;
     /** Stellen vor dem Komma im Zählwerk */
     intDigits: number;
     /** Stellen nach dem Komma im Zählwerk */
@@ -33,6 +38,8 @@ export interface GasMeterViewProps {
         today: string;
         month: string;
         costMonth: string;
+        consumption: string;
+        noConsumption: string;
     };
     /** Sprachregion für die Zahlformatierung */
     locale?: string;
@@ -41,15 +48,14 @@ export interface GasMeterViewProps {
 /**
  * Gaszähler — Darstellung ohne Zugriff auf ioBroker.
  *
- * Stand M0: Zählwerk in Variante A, Durchfluss, Tages-/Monatswerte und Kosten.
- * Die übrigen Zählwerk-Varianten und die Status-LED folgen in M1.
+ * Zählwerk in allen freigegebenen Varianten, Status-LED (Verbrauch ab Schwelle),
+ * Momentandurchfluss mit Balken, Tages- und Monatswerte, Kosten des Monats.
  *
  * @param props Anzeigewerte und Beschriftungen
  * @returns die Kachel
  */
 export default function GasMeterView(props: GasMeterViewProps): React.JSX.Element {
     const { labels, locale } = props;
-    const digits = splitDigits(props.reading, props.intDigits, props.decDigits);
     const barWidth =
         props.flow !== null && props.maxFlow > 0 ? Math.min(100, Math.max(0, (props.flow / props.maxFlow) * 100)) : 0;
 
@@ -63,27 +69,23 @@ export default function GasMeterView(props: GasMeterViewProps): React.JSX.Elemen
                     <h3>{props.title}</h3>
                     {props.subtitle ? <div className="wolf-hint">{props.subtitle}</div> : null}
                 </div>
+                <Led
+                    on={props.flow !== null && props.flow > props.threshold}
+                    labelOn={labels.consumption}
+                    labelOff={labels.noConsumption}
+                />
             </div>
 
             <div className="wolf-counter-row">
-                <div
-                    className="wolf-counter wolf-cnt-a"
-                    role="img"
-                    aria-label={fmt(props.reading, props.decDigits, 'm³', locale)}
-                >
-                    {digits.whole.split('').map((d, i) => (
-                        <span key={`w${i}`}>{d}</span>
-                    ))}
-                    {digits.dec.split('').map((d, i) => (
-                        <span
-                            key={`d${i}`}
-                            className="wolf-dec"
-                        >
-                            {d}
-                        </span>
-                    ))}
-                </div>
-                <span className="wolf-label">m³</span>
+                <Counter
+                    value={props.reading}
+                    variant={props.variant}
+                    intDigits={props.intDigits}
+                    decDigits={props.decDigits}
+                    locale={locale}
+                    unit="m³"
+                />
+                {unitInside(props.variant) ? null : <span className="wolf-label">m³</span>}
             </div>
 
             <div>

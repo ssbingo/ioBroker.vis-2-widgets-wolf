@@ -41,7 +41,7 @@ const __mfImport = (src) =>
   await __mfHostInit.__tla;
   const { initHost } = __mfHostInit;
   await initHost();
-  const __mfPendingShares = await __mfImport("./pendingShares-B3kYM7zb.js").catch(() => undefined);
+  const __mfPendingShares = await __mfImport("./pendingShares-DyChc7f8.js").catch(() => undefined);
   if (__mfPendingShares && typeof __mfPendingShares.preloadPendingShares === "function") await __mfPendingShares.preloadPendingShares();
   if (__mfModuleCache.pendingShareLoads) {
     await Promise.all(__mfModuleCache.pendingShareLoads);

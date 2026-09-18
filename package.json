@@ -50,7 +50,8 @@
     "build": "node tasks --typescript",
     "lint": "cd src-widgets-ts && eslint -c eslint.config.mjs",
     "test:package": "mocha test/package --exit",
-    "test": "npm run test:package",
+    "test:unit": "npm --prefix src-widgets-ts test",
+    "test": "npm run test:package && npm run test:unit",
     "dev-server": "dev-server",
     "translate": "translate-adapter",
     "release": "release-script"

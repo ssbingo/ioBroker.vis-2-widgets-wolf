@@ -4,10 +4,13 @@
  * Rendert dieselben Komponenten, dasselbe CSS und dieselben Schriften wie VIS-2, nur mit
  * simulierten Werten. Die Anbindung (src/widgets/) wird hier bewusst nicht geladen — sie
  * braucht window.visRxWidget von VIS-2 und wird im dev-server geprüft.
+ *
+ * URL-Parameter für Screenshots: ?theme=dark, ?variant=E
  */
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
+import Counter, { COUNTER_VARIANTS, toVariant } from '../components/Counter';
 import GasMeterView from '../components/GasMeterView';
 import { monthlyCost } from '../lib/gas';
 import { injectStyles } from '../styles/injectStyles';
@@ -31,6 +34,7 @@ const START: Meter[] = [
 
 const TARIFF = { brennwert: 11.482, zustandszahl: 0.9612, arbeitspreis: 0.1092, grundpreis: 14.9 };
 const TICK_MS = 2000;
+const PARAMS = new URLSearchParams(window.location.search);
 
 /**
  * Ein Simulationsschritt: Durchfluss gelegentlich an/aus, Zählerstände laufen mit.
@@ -47,12 +51,13 @@ function step(m: Meter): Meter {
     return { ...m, flow, reading: m.reading + inc, today: m.today + inc, month: m.month + inc };
 }
 
-/** Sandbox-Seite mit Umschaltern für Theme und Simulation */
+/** Sandbox-Seite mit Umschaltern für Theme, Zählwerk-Variante und Simulation */
 function Sandbox(): React.JSX.Element {
-    // ?theme=dark startet dunkel — praktisch für Screenshots
-    const [dark, setDark] = useState(() => new URLSearchParams(window.location.search).get('theme') === 'dark');
+    const [dark, setDark] = useState(() => PARAMS.get('theme') === 'dark');
+    const [variant, setVariant] = useState(() => toVariant(PARAMS.get('variant') || 'A'));
     const [running, setRunning] = useState(true);
     const [meters, setMeters] = useState(START);
+    const themeType = dark ? 'dark' : 'light';
 
     useEffect(() => {
         injectStyles();
@@ -87,6 +92,22 @@ function Sandbox(): React.JSX.Element {
                     >
                         {dark ? 'Hell' : 'Dunkel'}
                     </button>
+                    <label>
+                        Zählwerk{' '}
+                        <select
+                            value={variant}
+                            onChange={e => setVariant(toVariant(e.target.value))}
+                        >
+                            {COUNTER_VARIANTS.map(v => (
+                                <option
+                                    key={v}
+                                    value={v}
+                                >
+                                    {de[`variant_${v}`]}
+                                </option>
+                            ))}
+                        </select>
+                    </label>
                     <button
                         type="button"
                         onClick={() => setRunning(r => !r)}
@@ -104,7 +125,7 @@ function Sandbox(): React.JSX.Element {
                         className="sb-cell"
                     >
                         <GasMeterView
-                            themeType={dark ? 'dark' : 'light'}
+                            themeType={themeType}
                             title={m.title}
                             subtitle={m.subtitle}
                             reading={m.reading}
@@ -112,10 +133,39 @@ function Sandbox(): React.JSX.Element {
                             today={m.today}
                             month={m.month}
                             costMonth={monthlyCost(m.month, TARIFF)}
+                            variant={variant}
+                            threshold={0.02}
                             maxFlow={3}
                             intDigits={5}
                             decDigits={3}
-                            labels={{ flow: de.flow, today: de.today, month: de.month, costMonth: de.cost_month }}
+                            labels={{
+                                flow: de.flow,
+                                today: de.today,
+                                month: de.month,
+                                costMonth: de.cost_month,
+                                consumption: de.consumption,
+                                noConsumption: de.no_consumption,
+                            }}
+                        />
+                    </div>
+                ))}
+            </div>
+
+            <h2 className="sb-h">Zählwerk — alle freigegebenen Varianten</h2>
+            <div className="sb-grid">
+                {COUNTER_VARIANTS.map(v => (
+                    <div
+                        key={v}
+                        className="sb-gallery wolf-w"
+                        data-wolf-theme={themeType}
+                    >
+                        <div className="wolf-label">{de[`variant_${v}`]}</div>
+                        <Counter
+                            value={meters[0].reading}
+                            variant={v}
+                            intDigits={5}
+                            decDigits={3}
+                            unit="m³"
                         />
                     </div>
                 ))}

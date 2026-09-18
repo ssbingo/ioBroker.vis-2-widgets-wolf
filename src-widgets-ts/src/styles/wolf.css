@@ -7,8 +7,8 @@
  * LED, VFD) — die sehen im Hellen wie im Dunklen gleich aus, weil sie reale
  * Bauteile darstellen.
  *
- * Theme: das Attribut data-wolf-theme wird von vis-2-widgets-wolf.js am
- * Widget-Container gesetzt (light | dark), abgeleitet aus dem VIS-2-Theme.
+ * Theme: das Attribut data-wolf-theme setzen die Darstellungs-Komponenten am
+ * Wurzelelement (light | dark), abgeleitet aus context.themeType von VIS-2.
  * Ohne Attribut greift prefers-color-scheme als Rueckfallebene.
  */
 
@@ -414,6 +414,24 @@
     gap: 9px;
 }
 
+/* Einheit im Gehaeuse von Plakette (C) und Leuchtanzeige (E) — Bauteilfarben */
+.wolf-cnt-c .wolf-m3,
+.wolf-cnt-e .wolf-m3 {
+    font-family: var(--wolf-font-label);
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.wolf-cnt-c .wolf-m3 {
+    color: #4a4640;
+    letter-spacing: 0.06em;
+}
+
+.wolf-cnt-e .wolf-m3 {
+    color: #ffa23f;
+    text-shadow: 0 0 8px rgba(255, 150, 40, 0.8);
+}
+
 /* --------------------------------------- Zaehlwerk, Variante F typografisch */
 
 .wolf-cnt-f {
@@ -442,6 +460,15 @@
     font-size: 26px;
     font-weight: 700;
     color: var(--wolf-accent);
+}
+
+.wolf-cnt-f .wolf-u {
+    font-family: var(--wolf-font-label);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--wolf-muted);
+    margin-left: 6px;
+    align-self: center;
 }
 
 /* ---------------------------------------- Zaehlwerk, Variante G Kacheln */
