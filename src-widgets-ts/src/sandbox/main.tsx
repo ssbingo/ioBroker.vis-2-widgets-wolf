@@ -18,6 +18,7 @@ import { injectStyles } from '../styles/injectStyles';
 import de from '../i18n/de.json';
 
 import SimCircuit from './SimCircuit';
+import SimDhw from './SimDhw';
 
 import './sandbox.css';
 
@@ -92,6 +93,14 @@ const CIRCUITS = [
     { subtitle: 'Bestätigungsmodus', confirm: true },
     { subtitle: 'Quelle bestätigt nicht (Wartezeit 4 s)', noAck: true, timeoutMs: 4000 },
     { subtitle: 'schreibgeschützt (write: false)', locked: true },
+];
+
+/** Warmwasser: mit Zirkulation und Sofortladung, wie ISM7 ohne beides, Quelle schweigt, Bestätigungsmodus */
+const DHWS = [
+    { subtitle: 'Speicher 160 l · Quelle bestätigt', temp: 52.4, extras: true },
+    { subtitle: 'wie ISM7: ohne Zirkulation und Sofortladung', temp: 47, extras: false },
+    { subtitle: 'Quelle bestätigt nicht (Wartezeit 4 s)', temp: 44, extras: true, noAck: true, timeoutMs: 4000 },
+    { subtitle: 'Bestätigungsmodus', temp: 50, extras: true, confirm: true },
 ];
 
 const TARIFF = { brennwert: 11.482, zustandszahl: 0.9612, arbeitspreis: 0.1092, grundpreis: 14.9 };
@@ -290,6 +299,22 @@ function Sandbox(): React.JSX.Element {
                         <SimCircuit
                             themeType={themeType}
                             {...c}
+                        />
+                    </div>
+                ))}
+            </div>
+
+            <h2 className="sb-h">Warmwasser — WolfDhw</h2>
+            <div className="sb-grid">
+                {DHWS.map(d => (
+                    <div
+                        key={d.subtitle}
+                        className="sb-cell sb-cell-dhw"
+                    >
+                        <SimDhw
+                            themeType={themeType}
+                            running={running}
+                            {...d}
                         />
                     </div>
                 ))}

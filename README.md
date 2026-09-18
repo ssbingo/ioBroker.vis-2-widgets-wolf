@@ -18,7 +18,7 @@ individually to an existing ioBroker object — for example from the `wolf-smart
 the `wolf` adapter (ISM8i), Modbus or your own scripts. No assumptions are made about object
 names or structure.
 
-> **Status:** early development. The gas meter, boiler status and heating circuit widgets are available so far.
+> **Status:** early development. The gas meter, boiler status, heating circuit and hot water widgets are available so far.
 
 ### Widgets
 
@@ -28,7 +28,7 @@ names or structure.
 | Boiler | Operating phase, modulation, water pressure, operating hours, burner starts | first version |
 | Heating circuit | Operating mode, day and economy temperature, setpoint correction, time program (writing) | first version |
 | Heating curve | Slope and level (writing) | planned |
-| Hot water | Tank temperature, set temperature, circulation, one-time charge (writing) | planned |
+| Hot water | Tank with set mark, set temperature, time program, optional circulation and one-time charge (writing) | first version |
 | System diagram | Hydraulic diagram with animated flow | planned |
 | Trends | Charts from history, SQL or InfluxDB | planned |
 | Messages | Fault indicator and recent messages | planned |
@@ -78,6 +78,7 @@ provide.
 * (ssbingo) Boiler status: operating phase (texts from the widget, the object's states or built-in defaults), modulation and water pressure gauges with warning zones, operating hours, burner starts, flow and return temperature
 * (ssbingo) Heating circuit: operating mode, day and economy temperature, setpoint correction and time program; limits, step size and state texts come from the linked objects
 * (ssbingo) Writing widgets: values are written with ack=false and shown as "applying" until the source confirms them with ack=true; after 10 s without confirmation the widget reports it and shows the last confirmed value again. Optional confirm mode with Apply/Discard; read-only objects lock their controls
+* (ssbingo) Hot water: tank graphic with temperature and set mark, set temperature, time program, effective setpoint and charging state; circulation and one-time charge only when linked. Switches write 0/1 to number objects and true/false otherwise
 
 ## License
 MIT License

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { decimalsOf, numberRange, selectOptions, stepValue, toObjectMeta } from './objectMeta';
+import { decimalsOf, numberRange, selectOptions, stepValue, switchValue, toObjectMeta } from './objectMeta';
 
 /** Betriebsart des direkten Heizkreises, wie wolf-smartset sie liefert */
 const BETRIEBSART = {
@@ -19,6 +19,15 @@ const BETRIEBSART = {
         },
     },
 };
+
+describe('switchValue', () => {
+    it('schreibt in Zahl-Objekte 0/1, sonst true/false', () => {
+        expect(switchValue(toObjectMeta({ common: { type: 'number', states: { 0: 'Aus', 1: 'Ein' } } }), true)).toBe(1);
+        expect(switchValue(toObjectMeta({ common: { type: 'number' } }), false)).toBe(0);
+        expect(switchValue(toObjectMeta({ common: { type: 'boolean' } }), true)).toBe(true);
+        expect(switchValue(undefined, false)).toBe(false);
+    });
+});
 
 describe('toObjectMeta', () => {
     it('liest Schreibrecht, Grenzen, Schrittweite und Klartexte', () => {

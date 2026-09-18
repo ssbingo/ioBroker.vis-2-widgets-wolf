@@ -95,7 +95,8 @@
                 "components": [
                     "WolfGasMeter",
                     "WolfBoiler",
-                    "WolfCircuit"
+                    "WolfCircuit",
+                    "WolfDhw"
                 ]
             }
         }

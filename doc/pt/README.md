@@ -8,7 +8,7 @@ Widgets VIS-2 que apresentam e permitem operar um sistema de aquecimento [WOLF](
 
 O conjunto de widgets não lê dados diretamente do sistema de aquecimento. Cada valor é ligado individualmente a um objeto ioBroker existente — por exemplo do adaptador `wolf-smartset`, do adaptador `wolf` (ISM8i), de Modbus ou de scripts próprios.
 
-> **Estado:** desenvolvimento inicial. Por agora estão disponíveis o contador de gás, o estado da caldeira e o circuito de aquecimento.
+> **Estado:** desenvolvimento inicial. Por agora estão disponíveis o contador de gás, o estado da caldeira, o circuito de aquecimento e a água quente.
 
 ### Requisitos
 
