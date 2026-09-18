@@ -50,7 +50,13 @@ npm run build                    # builds the widgets into widgets/vis-2-widgets
 npm run lint
 npm test
 cd src-widgets-ts && npm start   # sandbox: widgets with simulated values, no ioBroker needed
+npm run dev-server setup         # once: local ioBroker instance for testing
+npm run dev-server run           # admin on http://localhost:8081, vis-2 on http://localhost:8082/vis-2/
 ```
+
+vis-2 >= 2.20.0 is not yet published on npm. Until it is, install a build of the
+[ioBroker.vis-2](https://github.com/ioBroker/ioBroker.vis-2) master branch into the dev-server
+instance (`.dev-server/default`).
 
 ### Disclaimer
 

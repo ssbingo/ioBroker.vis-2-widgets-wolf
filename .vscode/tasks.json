@@ -38,7 +38,7 @@
         {
             "label": "Dev-Server starten",
             "type": "shell",
-            "command": "dev-server watch",
+            "command": "npm run dev-server watch",
             "isBackground": true,
             "problemMatcher": []
         }

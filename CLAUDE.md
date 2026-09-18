@@ -58,6 +58,26 @@ Englisch, die übrigen unter `doc/<sprache>/` in der jeweiligen Sprache.
 - Zahlen in der Sprache von VIS-2 formatieren (`fmt(…, locale)` mit `getLanguage()`)
 - `widgets/` ist Build-Ausgabe — nie von Hand bearbeiten, `tasks.js` löscht den Ordner
 
+## Testen im dev-server
+
+- `@iobroker/dev-server` ist Dev-Abhängigkeit: `npm run dev-server setup` (einmalig),
+  `npm run dev-server run` (startet js-controller, admin, web und vis-2)
+- Admin: Port 8081 — der dev-server-Proxy lauscht auf **allen** Schnittstellen, ohne Login.
+  vis-2 über web.0: Port 8082, nur `127.0.0.1` (von außen per Portweiterleitung in VS Code)
+- **vis-2 >= 2.20 ist noch nicht auf npm.** Das Setup holt aus dem Beta-Repository vis-2 2.13.8
+  (React 18). Deshalb im Profil einen eigenen Build einspielen:
+  1. `~/ioBroker.vis-2` (Klon von `master`): `npm run install-monorepo && npm run build`,
+     dann `npm pack --pack-destination ..` in `packages/iobroker.vis-2`
+  2. in `.dev-server/default`: `npm install <pfad>/iobroker.vis-2-<version>.tgz iobroker.web@latest`,
+     dann `node node_modules/iobroker.js-controller/iobroker.js upload vis-2` (ebenso `web`)
+  3. falls nötig `… add vis-2 0`
+  Ein erneutes `setup` oder `update` ersetzt vis-2 wieder durch die Repository-Version.
+- Nach Änderungen an den Widgets: `npm run build`, dann `npm run dev-server upload`,
+  Browser neu laden
+- Testdaten: `0_userdata.0.wolftest.*`; Testprojekt `main`
+  - Runtime: `http://127.0.0.1:8082/vis-2/index.html?main#main`
+  - Editor: `http://127.0.0.1:8082/vis-2/edit.html?main#main`
+
 ## Schreibende Widgets
 
 - Schreiben mit `ack: false`, Anzeige folgt erst nach `ack: true`
@@ -78,7 +98,7 @@ Englisch, die übrigen unter `doc/<sprache>/` in der jeweiligen Sprache.
 - Changelog in **allen elf** README-Dateien vorangestellt, im Format des Release-Scripts:
   `### x.y.z (JJJJ-MM-TT)` und darunter `* (ssbingo) …`. Das Release-Script pflegt nur
   `README.md` — die zehn Dateien unter `doc/` von Hand nachziehen.
-- Adapter-Check auf https://adapter-check.iobroker.in/ ohne Fehler
+- Adapter-Check auf <https://adapter-check.iobroker.in/> ohne Fehler
 - GitHub Actions grün, dann Tag `vX.Y.Z` pushen — niemals lokal veröffentlichen
 
 ## Sprachen
