@@ -196,7 +196,7 @@ function Sandbox(): React.JSX.Element {
         if (!running) {
             return undefined;
         }
-        const timer = setInterval(() => {
+        const timer = globalThis.setInterval(() => {
             setMeters(ms => ms.map(step));
             setBoilers(bs => bs.map(stepBoiler));
         }, TICK_MS);

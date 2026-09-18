@@ -10,6 +10,7 @@
   "homepage": "https://github.com/ssbingo/ioBroker.vis-2-widgets-wolf",
   "license": "MIT",
   "keywords": [
+    "ioBroker",
     "wolf",
     "heating",
     "vis-2",
@@ -34,7 +35,6 @@
     "@iobroker/eslint-config": "^2.3.4",
     "@iobroker/testing": "^6.2.2",
     "@iobroker/types-vis-2": "^2.20.1",
-    "eslint": "^9.39.5",
     "typescript": "~6.0.3"
   },
   "main": "widgets/vis-2-widgets-wolf/customWidgets.js",

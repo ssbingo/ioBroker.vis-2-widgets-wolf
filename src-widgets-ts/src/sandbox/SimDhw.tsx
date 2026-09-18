@@ -58,7 +58,7 @@ export default function SimDhw(props: SimDhwProps): React.JSX.Element {
         if (!props.running) {
             return undefined;
         }
-        const timer = setInterval(() => {
+        const timer = globalThis.setInterval(() => {
             const v = latest.current;
             const temp = Number(v.temp);
             const target = Number(v.setpoint);

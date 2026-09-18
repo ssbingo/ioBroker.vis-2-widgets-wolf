@@ -255,7 +255,7 @@ export default class WolfGasMeter extends WolfWidgetBase<WolfGasMeterRxData, Wol
             this.setState(s => ({ ...s, bases: null }));
             return;
         }
-        this.baseTimer = setTimeout(() => void this.loadBases(), nextDayStart(now) - now.getTime() + 5_000);
+        this.baseTimer = globalThis.setTimeout(() => void this.loadBases(), nextDayStart(now) - now.getTime() + 5_000);
         let bases: Bases;
         try {
             const [day, month] = await Promise.all([

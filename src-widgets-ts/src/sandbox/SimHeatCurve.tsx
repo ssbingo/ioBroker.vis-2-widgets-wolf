@@ -49,7 +49,7 @@ export default function SimHeatCurve(props: SimHeatCurveProps): React.JSX.Elemen
         if (!props.running) {
             return undefined;
         }
-        const timer = setInterval(() => {
+        const timer = globalThis.setInterval(() => {
             const step = 0.4 + Math.random() * 0.4;
             const toggle = Math.random() < 0.1;
             setOutside(o => {

@@ -63,7 +63,7 @@ export function useSimSource(start: SimValues, options: SimOptions): SimSource {
                 if (noAck) {
                     return;
                 }
-                const timer = setTimeout(() => {
+                const timer = globalThis.setTimeout(() => {
                     timers.delete(timer);
                     setValues(s => ({ ...s, [id]: value }));
                     tracker.onState(id, { val: value, ack: true });

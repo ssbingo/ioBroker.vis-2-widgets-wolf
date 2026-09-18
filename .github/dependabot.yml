@@ -4,33 +4,42 @@ updates:
     directory: "/"
     schedule:
       interval: monthly
-      day: 23
       time: "00:05"
       timezone: Europe/Berlin
-    open-pull-requests-limit: 5
+    # neue Versionen erst nach 7 Tagen übernehmen — weniger Risiko durch kompromittierte Pakete
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 15
     assignees:
       - ssbingo
     versioning-strategy: increase
+    ignore:
+      # @types/node folgt der kleinsten unterstützten Node.js-Version, nicht der neuesten
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: npm
     directory: "/src-widgets-ts"
     schedule:
       interval: monthly
-      day: 23
       time: "00:05"
       timezone: Europe/Berlin
-    open-pull-requests-limit: 5
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 15
     assignees:
       - ssbingo
     versioning-strategy: increase
+    ignore:
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
       interval: monthly
-      day: 23
       time: "00:05"
       timezone: Europe/Berlin
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 15
     assignees:
       - ssbingo

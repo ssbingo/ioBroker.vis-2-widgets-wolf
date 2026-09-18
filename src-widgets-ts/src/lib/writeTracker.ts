@@ -109,7 +109,7 @@ export class WriteTracker {
             this.send(id);
             return;
         } else {
-            entry.debounceTimer = setTimeout(() => this.send(id), this.opts.debounceMs);
+            entry.debounceTimer = globalThis.setTimeout(() => this.send(id), this.opts.debounceMs);
         }
         this.opts.onChange();
     }
@@ -202,7 +202,7 @@ export class WriteTracker {
         entry.phase = 'pending';
         try {
             this.opts.write(id, entry.value);
-            entry.timeoutTimer = setTimeout(() => {
+            entry.timeoutTimer = globalThis.setTimeout(() => {
                 entry.phase = 'timeout';
                 this.opts.onChange();
             }, this.opts.timeoutMs);
