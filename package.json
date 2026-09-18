@@ -35,7 +35,7 @@
     "@iobroker/eslint-config": "^2.3.4",
     "@iobroker/testing": "^6.2.2",
     "@iobroker/types-vis-2": "^2.20.1",
-    "typescript": "~6.0.3"
+    "typescript": "~7.0.2"
   },
   "main": "widgets/vis-2-widgets-wolf/customWidgets.js",
   "files": [
