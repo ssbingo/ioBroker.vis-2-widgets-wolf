@@ -1,0 +1,36 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: monthly
+      day: 23
+      time: "00:05"
+      timezone: Europe/Berlin
+    open-pull-requests-limit: 5
+    assignees:
+      - ssbingo
+    versioning-strategy: increase
+
+  - package-ecosystem: npm
+    directory: "/src-widgets-ts"
+    schedule:
+      interval: monthly
+      day: 23
+      time: "00:05"
+      timezone: Europe/Berlin
+    open-pull-requests-limit: 5
+    assignees:
+      - ssbingo
+    versioning-strategy: increase
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+      day: 23
+      time: "00:05"
+      timezone: Europe/Berlin
+    open-pull-requests-limit: 5
+    assignees:
+      - ssbingo

@@ -1,0 +1,91 @@
+name: Test and Release
+
+# Läuft bei jedem Push und Pull Request sowie bei Tags mit semantischer Version
+on:
+  push:
+    branches:
+      - "main"
+    tags:
+      # normale Versionen
+      - "v[0-9]+.[0-9]+.[0-9]+"
+      # Vorabversionen
+      - "v[0-9]+.[0-9]+.[0-9]+-**"
+  pull_request: {}
+
+# Ältere Läufe desselben Branches abbrechen, wenn ein neuer Commit kommt
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Schnelle Prüfungen vor den eigentlichen Tests
+  check-and-lint:
+    if: contains(github.event.head_commit.message, '[skip ci]') == false
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: ioBroker/testing-action-check@v2
+        with:
+          node-version: "24.x"
+          # Lint läuft in src-widgets-ts, deshalb dort ebenfalls installieren
+          install-command: "npm i && npm --prefix src-widgets-ts i"
+          lint: true
+
+  # Baut die Widgets und prüft die Paketdateien auf allen unterstützten Node.js-Versionen
+  adapter-tests:
+    needs: [check-and-lint]
+    if: contains(github.event.head_commit.message, '[skip ci]') == false
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22.x, 24.x, 26.x]
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Dependencies
+        run: npm i
+
+      - name: Build
+        run: npm run build
+
+      - name: Run package tests
+        run: npm test
+
+  # Veröffentlicht auf npm über Trusted Publishing (OIDC) — kein NPM_TOKEN.
+  # Voraussetzung: Trusted Publisher auf npmjs.com eingerichtet
+  # (Repository ssbingo/ioBroker.vis-2-widgets-wolf, Workflow test-and-release.yml).
+  # Siehe https://docs.npmjs.com/trusted-publishers
+  deploy:
+    # beide Jobs — sonst Repochecker E3011
+    needs: [check-and-lint, adapter-tests]
+
+    # nur bei Tags mit Versionsnummer
+    if: |
+      contains(github.event.head_commit.message, '[skip ci]') == false &&
+      github.event_name == 'push' &&
+      startsWith(github.ref, 'refs/tags/v')
+
+    runs-on: ubuntu-latest
+
+    # id-token: Trusted Publishing; contents: GitHub-Release anlegen
+    permissions:
+      id-token: write
+      contents: write
+
+    steps:
+      - uses: ioBroker/testing-action-deploy@v1
+        with:
+          node-version: "24.x"
+          install-command: "npm i"
+          build: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # kein npm-token: Veröffentlichung über Trusted Publishing

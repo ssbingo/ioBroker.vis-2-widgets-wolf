@@ -1,10 +1,16 @@
-# Abhängigkeiten und Build-Zwischenstände
+# Keine Punkt-Verzeichnisse außer .github und .vscode
+.*/
+!.vscode/
+!.github/
+
+*.code-workspace
 node_modules/
-src-widgets-ts/node_modules/
+nbproject
+
+# Widget-Quellen: Abhängigkeiten und Build-Zwischenstände
 src-widgets-ts/package-lock.json
 src-widgets-ts/build/
 src-widgets-ts/.__mf__temp/
-src-widgets-ts/.mf/
 
 # ioBroker dev-server
 .dev-server/
@@ -12,6 +18,13 @@ www/
 
 # npm-Pakete
 iobroker.*.tgz
+
+# Release-Script
+.commitinfo
+
+# i18n-Zwischendateien
+admin/i18n/flat.txt
+admin/i18n/*/flat.txt
 
 # Planungsunterlagen — bewusst nicht im (später öffentlichen) Repository
 Projektplan_*.md
@@ -21,4 +34,3 @@ Projektplan_*.pdf
 *.log
 .DS_Store
 Thumbs.db
-.commitinfo

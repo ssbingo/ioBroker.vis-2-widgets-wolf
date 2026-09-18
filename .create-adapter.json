@@ -1,0 +1,30 @@
+{
+    "cli": true,
+    "target": "directory",
+    "adapterName": "vis-2-widgets-wolf",
+    "title": "Wolf Heating Widgets",
+    "description": "Widgets for Wolf heating systems",
+    "keywords": [
+        "wolf",
+        "heating",
+        "vis-2",
+        "widgets",
+        "gas"
+    ],
+    "expert": "yes",
+    "features": [
+        "vis"
+    ],
+    "type": "visualization-widgets",
+    "widgetIsMainFunction": "main",
+    "releaseScript": "yes",
+    "authorName": "ssbingo",
+    "authorGithub": "ssbingo",
+    "authorEmail": "ssbingo@online.de",
+    "gitRemoteProtocol": "SSH",
+    "gitCommit": "no",
+    "defaultBranch": "main",
+    "license": "MIT License",
+    "dependabot": "yes",
+    "creatorVersion": "3.1.5"
+}

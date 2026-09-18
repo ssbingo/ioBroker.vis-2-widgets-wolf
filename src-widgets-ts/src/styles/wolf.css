@@ -799,6 +799,21 @@
     background: var(--wolf-cool);
 }
 
+/* ------------------------------------------------------------ Gaszaehler */
+/* Bisher als Inline-Stile im Vanilla-Code des Design-Pakets */
+
+.wolf-gasmeter .wolf-counter-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.wolf-gasmeter .wolf-big {
+    text-align: left;
+    font-size: 32px;
+}
+
 /* ------------------------------------------------------- Barrierefreiheit */
 
 @media (prefers-reduced-motion: reduce) {

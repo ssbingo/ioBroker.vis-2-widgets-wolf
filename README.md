@@ -1,0 +1,91 @@
+![Logo](admin/vis-2-widgets-wolf.png)
+
+# ioBroker.vis-2-widgets-wolf
+
+[![NPM version](https://img.shields.io/npm/v/iobroker.vis-2-widgets-wolf.svg)](https://www.npmjs.com/package/iobroker.vis-2-widgets-wolf)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.vis-2-widgets-wolf.svg)](https://www.npmjs.com/package/iobroker.vis-2-widgets-wolf)
+![Number of Installations](https://iobroker.live/badges/vis-2-widgets-wolf-installed.svg)
+![Current version in stable repository](https://iobroker.live/badges/vis-2-widgets-wolf-stable.svg)
+
+**Tests:** ![Test and Release](https://github.com/ssbingo/ioBroker.vis-2-widgets-wolf/workflows/Test%20and%20Release/badge.svg)
+
+## Wolf heating widgets for ioBroker VIS-2
+
+VIS-2 widgets that display and operate a [WOLF](https://www.wolf.eu/) heating system in ioBroker.
+
+The widget set does not read any data from the heating system itself. Every value is bound
+individually to an existing ioBroker object — for example from the `wolf-smartset` adapter,
+the `wolf` adapter (ISM8i), Modbus or your own scripts. No assumptions are made about object
+names or structure.
+
+> **Status:** early development. Only the gas meter widget is available so far.
+
+### Widgets
+
+| Widget | Purpose | Status |
+|---|---|---|
+| Gas meter | Meter reading, instantaneous flow, daily/monthly consumption, costs | first version |
+| Boiler | Operating phase, modulation, water pressure, operating hours, burner starts | planned |
+| Heating circuit | Operating mode and room set temperature (writing) | planned |
+| Heating curve | Slope and level (writing) | planned |
+| Hot water | Tank temperature, set temperature, circulation, one-time charge (writing) | planned |
+| System diagram | Hydraulic diagram with animated flow | planned |
+| Trends | Charts from history, SQL or InfluxDB | planned |
+| Messages | Fault indicator and recent messages | planned |
+
+All widgets follow the light or dark theme of VIS-2.
+
+### Requirements
+
+- js-controller >= 7.2.2
+- vis-2 >= 2.20.0 (the first vis-2 version with React 19)
+- Node.js >= 22
+
+### Development
+
+```bash
+npm install
+npm --prefix src-widgets-ts install
+npm run build                    # builds the widgets into widgets/vis-2-widgets-wolf/
+npm run lint
+npm test
+cd src-widgets-ts && npm start   # sandbox: widgets with simulated values, no ioBroker needed
+```
+
+### Disclaimer
+
+WOLF and the WOLF logo are trademarks of WOLF GmbH. This project is not affiliated with,
+endorsed by or connected to WOLF GmbH. It only visualises data that other ioBroker adapters
+provide.
+
+## Changelog
+<!--
+    Placeholder for the next version (at the beginning of the line):
+    ### **WORK IN PROGRESS**
+-->
+
+### **WORK IN PROGRESS**
+* (ssbingo) Initial version: widget set built with React 19 and TypeScript, first version of the gas meter widget
+
+## License
+MIT License
+
+Copyright (c) 2026 ssbingo <ssbingo@online.de>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

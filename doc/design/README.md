@@ -10,17 +10,18 @@ nicht neu erfunden.
 | `zaehlwerk-varianten.html` | acht Zählwerk-Varianten im Vergleich | A, B, C, E, F, G, H übernommen — D verworfen |
 | `wolf-heizung.html` | Anlagenschema, Kesselstatus, Heizkreis, Heizkurve, Warmwasser, Verläufe, Meldungen | freigegeben |
 
-In VS Code mit der Erweiterung *Live Server* öffnen (Rechtsklick → „Open with Live Server")
-oder direkt im Browser. Die Seiten laufen eigenständig, ohne ioBroker.
+Die Seiten laufen eigenständig im Browser, ohne ioBroker.
 
 ## Verhältnis zum Widget-Code
 
 Die Entwürfe sind **Referenz, nicht Quelltext.** Der ausführbare Stand liegt in:
 
 ```
-widgets/vis-2-widgets-wolf/css/vis-2-widgets-wolf.css   ← Farbtokens und Komponenten
-widgets/vis-2-widgets-wolf/js/vis-2-widgets-wolf.js     ← Bausteine und Widget-Klassen
-sandbox/index.html                                       ← lädt genau diese beiden Dateien
+src-widgets-ts/src/styles/wolf.css     ← Farbtokens und Komponenten
+src-widgets-ts/src/styles/fonts.ts     ← Schriften, lokal als woff2
+src-widgets-ts/src/components/         ← Darstellung (React), ohne ioBroker-Zugriff
+src-widgets-ts/src/widgets/            ← Anbindung an VIS-2
+src-widgets-ts/sandbox.html            ← Sandbox: dieselben Komponenten mit simulierten Werten
 ```
 
 Der Unterschied zwischen Entwurf und Widget-Code ist beabsichtigt:
@@ -31,11 +32,12 @@ Der Unterschied zwischen Entwurf und Widget-Code ist beabsichtigt:
 | Selektoren global (`.card`, `.led`) | alles mit `.wolf-` präfixiert, damit nichts in VIS ausblutet |
 | Werte aus einer Simulationsschleife | Werte aus gebundenen ioBroker-Objekten |
 | eine Seite | acht einzeln platzierbare Widget-Klassen |
+| Vanilla-JS | React 19 und TypeScript |
 
 ## Arbeitsweise bei Designänderungen
 
-1. Änderung zuerst in `widgets/.../css` bzw. `widgets/.../js` umsetzen
-2. In `sandbox/index.html` prüfen — hell **und** dunkel
+1. Änderung zuerst in `src-widgets-ts/src/` umsetzen
+2. In der Sandbox prüfen (`npm start` in `src-widgets-ts/`) — hell **und** dunkel
 3. Erst dann die Referenzdatei hier nachziehen, damit Entwurf und Code nicht auseinanderlaufen
 
 Wird die Optik grundlegend geändert, gilt die neue Fassung erst nach ausdrücklicher Freigabe

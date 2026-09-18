@@ -1,0 +1,34 @@
+![Logo](../../admin/vis-2-widgets-wolf.png)
+
+# ioBroker.vis-2-widgets-wolf
+
+## 适用于 ioBroker VIS-2 的 Wolf 供暖小部件
+
+用于在 ioBroker 中显示和操作 [WOLF](https://www.wolf.eu/) 供暖系统的 VIS-2 小部件。
+
+该小部件集本身不从供暖系统读取数据。每个数值都单独绑定到已有的 ioBroker 对象——例如来自 `wolf-smartset` 适配器、`wolf` 适配器（ISM8i）、Modbus 或自有脚本。
+
+> **状态：** 早期开发阶段。目前仅提供燃气表小部件。
+
+### 要求
+
+- js-controller >= 7.2.2
+- vis-2 >= 2.20.0（首个使用 React 19 的 vis-2 版本）
+- Node.js >= 22
+
+### 免责声明
+
+WOLF 及 WOLF 标志是 WOLF GmbH 的商标。本项目与 WOLF GmbH 无任何关联，也未获其认可。它仅显示其他 ioBroker 适配器提供的数据。
+
+## Changelog
+<!--
+    Placeholder for the next version (at the beginning of the line):
+    ### **WORK IN PROGRESS**
+-->
+
+### **WORK IN PROGRESS**
+* (ssbingo) 首个版本：基于 React 19 和 TypeScript 的小部件集，燃气表小部件的首个版本
+
+## 许可证
+
+MIT — 参见 [LICENSE](../../LICENSE)
