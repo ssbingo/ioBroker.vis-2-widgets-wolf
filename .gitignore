@@ -29,6 +29,8 @@ admin/i18n/*/flat.txt
 # Planungsunterlagen — bewusst nicht im (später öffentlichen) Repository
 Projektplan_*.md
 Projektplan_*.pdf
+Wolf_Heizkurve_*.md
+Wolf_Heizkurve_*.pdf
 
 # Sonstiges
 *.log
