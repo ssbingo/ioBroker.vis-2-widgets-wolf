@@ -8,7 +8,7 @@ Widgets VIS-2 que muestran y permiten manejar una instalación de calefacción [
 
 El conjunto de widgets no lee datos directamente de la calefacción. Cada valor se vincula individualmente a un objeto de ioBroker existente — por ejemplo del adaptador `wolf-smartset`, del adaptador `wolf` (ISM8i), de Modbus o de scripts propios.
 
-> **Estado:** desarrollo temprano. De momento están disponibles el contador de gas, el estado de la caldera, el circuito de calefacción, el agua caliente, la curva de calefacción y los mensajes.
+> **Estado:** desarrollo temprano. De momento están disponibles el contador de gas, el estado de la caldera, el circuito de calefacción, el agua caliente, la curva de calefacción, los mensajes y el esquema de la instalación.
 
 ### Requisitos
 

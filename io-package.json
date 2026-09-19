@@ -98,7 +98,8 @@
           "WolfCircuit",
           "WolfDhw",
           "WolfHeatCurve",
-          "WolfMessages"
+          "WolfMessages",
+          "WolfSchema"
         ]
       }
     }

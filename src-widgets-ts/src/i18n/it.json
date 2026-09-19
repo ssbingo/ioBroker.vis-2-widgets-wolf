@@ -177,5 +177,22 @@
     "msg_unknown": "nessun valore",
     "msg_collective": "Guasto cumulativo",
     "msg_code": "Guasto",
-    "since": "dal"
+    "since": "dal",
+    "schema": "Schema dell'impianto",
+    "schema_boiler": "Generatore di calore",
+    "boiler_label": "Denominazione generatore (vuoto = Generatore di calore)",
+    "oid_pumpe": "Pompa caldaia (on/off o %)",
+    "oid_pumpe_tooltip": "Mandata e ritorno scorrono finché la pompa funziona; vuoto: finché il bruciatore è acceso",
+    "show_ww": "Mostra bollitore acqua calda",
+    "group_circuits": "Circuiti di riscaldamento",
+    "hk_count": "Numero di circuiti di riscaldamento",
+    "hk_label": "Denominazione (vuoto = Circuito di riscaldamento n)",
+    "oid_hk_vorlauf": "Mandata (°C)",
+    "oid_hk_pumpe": "Pompa / attivo (vuoto = come il generatore)",
+    "show_aussen": "Mostra temperatura esterna",
+    "flow_animation": "Animazione del flusso",
+    "distributor": "Distributore",
+    "legend_flow": "Mandata",
+    "legend_hk_on": "Circuito attivo",
+    "legend_hk_off": "Circuito spento"
 }

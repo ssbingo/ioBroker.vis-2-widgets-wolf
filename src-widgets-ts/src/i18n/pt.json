@@ -177,5 +177,22 @@
     "msg_unknown": "sem valor",
     "msg_collective": "Avaria geral",
     "msg_code": "Avaria",
-    "since": "desde"
+    "since": "desde",
+    "schema": "Esquema da instalação",
+    "schema_boiler": "Gerador de calor",
+    "boiler_label": "Designação do gerador de calor (vazio = Gerador de calor)",
+    "oid_pumpe": "Bomba da caldeira (lig./desl. ou %)",
+    "oid_pumpe_tooltip": "Ida e retorno aparecem em movimento enquanto a bomba funciona; vazio: enquanto o queimador está ligado",
+    "show_ww": "Mostrar depósito de água quente",
+    "group_circuits": "Circuitos de aquecimento",
+    "hk_count": "Número de circuitos de aquecimento",
+    "hk_label": "Designação (vazio = Circuito de aquecimento n)",
+    "oid_hk_vorlauf": "Ida (°C)",
+    "oid_hk_pumpe": "Bomba / ativo (vazio = como o gerador de calor)",
+    "show_aussen": "Mostrar temperatura exterior",
+    "flow_animation": "Animação do fluxo",
+    "distributor": "Distribuidor",
+    "legend_flow": "Ida",
+    "legend_hk_on": "Circuito ativo",
+    "legend_hk_off": "Circuito desligado"
 }

@@ -840,6 +840,101 @@
     fill: var(--wolf-cool);
 }
 
+/* Kachel als Spalte: das Schema füllt die Resthöhe und skaliert mit (viewBox, meet) */
+.wolf-w.wolf-schema {
+    display: flex;
+    flex-direction: column;
+}
+
+.wolf-schema-svg {
+    display: block;
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+}
+
+.wolf-schema-static .wolf-flow {
+    animation: none;
+}
+
+.wolf-flow-warm {
+    stroke: var(--wolf-warm);
+}
+
+.wolf-flow-cool {
+    stroke: var(--wolf-cool);
+}
+
+.wolf-flow-on {
+    stroke: var(--wolf-warm-2);
+}
+
+.wolf-flow-off {
+    stroke: var(--wolf-cool-2);
+}
+
+.wolf-schema-fill {
+    fill: var(--wolf-warm);
+    opacity: 0.24;
+    transition:
+        y 0.6s ease,
+        height 0.6s ease;
+}
+
+.wolf-schema-radiator line {
+    stroke: var(--wolf-line-strong);
+    stroke-width: 2;
+}
+
+.wolf-schema-dist {
+    fill: var(--wolf-line-strong);
+}
+
+.wolf-flame {
+    transition: opacity 0.6s ease;
+}
+
+.wolf-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--wolf-line);
+    flex: none;
+}
+
+.wolf-lg {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12.5px;
+    color: var(--wolf-muted);
+}
+
+.wolf-lg i {
+    width: 16px;
+    height: 4px;
+    border-radius: 2px;
+    display: block;
+}
+
+.wolf-lg-warm {
+    background: var(--wolf-warm);
+}
+
+.wolf-lg-cool {
+    background: var(--wolf-cool);
+}
+
+.wolf-lg-on {
+    background: var(--wolf-warm-2);
+}
+
+.wolf-lg-off {
+    background: var(--wolf-cool-2);
+}
+
 /* ----------------------------------------------------------- Meldungen */
 
 .wolf-msgs {
@@ -947,7 +1042,9 @@
     .wolf-cnt-b .wolf-strip,
     .wolf-bar span,
     .wolf-gauge .wolf-arc-v,
-    .wolf-tank-fill {
+    .wolf-tank-fill,
+    .wolf-schema-fill,
+    .wolf-flame {
         transition: none;
     }
 }

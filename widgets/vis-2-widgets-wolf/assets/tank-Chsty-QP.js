@@ -1,0 +1,1 @@
+function e(e){return{min:10,max:Math.max(e,30)}}function t(e,t){let n=t.max-t.min;return e===null||!Number.isFinite(e)||!(n>0)?null:Math.min(1,Math.max(0,(e-t.min)/n))}export{e as n,t};
