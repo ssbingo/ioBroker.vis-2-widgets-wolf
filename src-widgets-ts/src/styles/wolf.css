@@ -881,6 +881,34 @@
     background: var(--wolf-cool);
 }
 
+/* erfüllte Prüfung, z. B. „TW-Vorlauf: i. O." */
+.wolf-dot.wolf-ok {
+    background: var(--wolf-ok);
+}
+
+.wolf-msg-t {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+.wolf-msg-m {
+    font-family: var(--wolf-font-num);
+    font-size: 12px;
+    color: var(--wolf-muted);
+    margin-top: 2px;
+}
+
+.wolf-msg-none {
+    font-size: 13px;
+    color: var(--wolf-muted);
+    padding: 10px 2px;
+}
+
+.wolf-w.wolf-messages {
+    overflow-y: auto;
+}
+
 /* ------------------------------------------------------------ Gaszaehler */
 /* Bisher als Inline-Stile im Vanilla-Code des Design-Pakets */
 

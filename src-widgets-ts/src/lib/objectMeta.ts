@@ -16,6 +16,8 @@ export interface ObjectMeta {
     states: ValueMap;
     /** common.type, z. B. number oder boolean */
     type?: string;
+    /** common.name — Text oder Übersetzungen je Sprache */
+    name?: string | Record<string, string>;
 }
 
 /** Auswahlmöglichkeit für Segmentschalter */
@@ -51,7 +53,29 @@ export function toObjectMeta(obj: { common?: unknown } | null | undefined): Obje
         step: toNumber(common.step) ?? undefined,
         states: statesToValueMap(common.states),
         type: typeof common.type === 'string' ? common.type : undefined,
+        name:
+            typeof common.name === 'string' || (common.name && typeof common.name === 'object')
+                ? (common.name as string | Record<string, string>)
+                : undefined,
     };
+}
+
+/**
+ * Name des Objekts in der Sprache von VIS-2, sonst Englisch, sonst die erste Übersetzung.
+ *
+ * @param meta Metadaten
+ * @param lang Sprache, z. B. de
+ * @returns Name oder undefined
+ */
+export function objectName(meta: ObjectMeta | undefined, lang: string): string | undefined {
+    const name = meta?.name;
+    if (!name) {
+        return undefined;
+    }
+    if (typeof name === 'string') {
+        return name || undefined;
+    }
+    return name[lang] || name.en || Object.values(name).find(Boolean);
 }
 
 /**

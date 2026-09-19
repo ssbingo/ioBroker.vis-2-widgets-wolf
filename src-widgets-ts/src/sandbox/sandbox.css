@@ -102,3 +102,6 @@ body.sb-dark {
 .sb-cell-curve {
     height: 500px;
 }
+.sb-cell-messages {
+    height: 400px;
+}

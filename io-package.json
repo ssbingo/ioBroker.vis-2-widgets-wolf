@@ -97,7 +97,8 @@
           "WolfBoiler",
           "WolfCircuit",
           "WolfDhw",
-          "WolfHeatCurve"
+          "WolfHeatCurve",
+          "WolfMessages"
         ]
       }
     }
