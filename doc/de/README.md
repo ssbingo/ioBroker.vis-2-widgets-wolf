@@ -58,9 +58,10 @@ Wartezeit *keine Bestätigung* und zeigt wieder den zuletzt bestätigten Wert. O
 | Wartezeit auf Bestätigung | 10 s | Zeit bis *keine Bestätigung* erscheint |
 | Vor dem Schreiben bestätigen | aus | Änderungen werden erst nach *Übernehmen* geschrieben |
 
-`wolf-smartset` spricht mit der Wolf-Cloud. Kommt die Bestätigung erst mit der nächsten Abfrage,
-die *Wartezeit auf Bestätigung* entsprechend erhöhen (bis 300 s). Eine späte Bestätigung wird
-trotzdem noch angenommen.
+`wolf-smartset` bestätigt einen geschriebenen Wert, sobald die Wolf-Cloud ihn angenommen hat — im
+Test mit einem ISM7 etwa 1,5 s nach dem Klick, die 800 ms Verzögerung eingerechnet —, die Vorgabe
+von 10 s reicht also gut. Bei langsamer Verbindung die *Wartezeit auf Bestätigung* erhöhen (bis
+300 s); eine späte Bestätigung wird trotzdem noch angenommen.
 
 ### Einrichtung mit wolf-smartset (ISM7)
 

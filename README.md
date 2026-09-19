@@ -70,8 +70,9 @@ with a different value does not end the wait. Without confirmation the widget re
 | Wait for confirmation | 10 s | Time until *no confirmation* is shown |
 | Confirm before writing | off | Changes are only written after *Apply* |
 
-`wolf-smartset` talks to the Wolf cloud. If a written value is only confirmed with the next
-poll, raise *Wait for confirmation* accordingly (up to 300 s). A late confirmation is still
+`wolf-smartset` confirms a written value as soon as the Wolf cloud has accepted it — in a test with
+an ISM7 about 1.5 s after the click, including the 800 ms delay — so the default of 10 s is ample.
+On slow connections raise *Wait for confirmation* (up to 300 s); a late confirmation is still
 accepted.
 
 ### Setting up with wolf-smartset (ISM7)
