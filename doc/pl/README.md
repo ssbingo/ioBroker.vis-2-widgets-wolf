@@ -44,6 +44,9 @@ WOLF i logo WOLF są znakami towarowymi WOLF GmbH. Ten projekt nie jest powiąza
     ### **WORK IN PROGRESS**
 -->
 
+### 0.4.0 (2026-09-19)
+* (ssbingo) Obraz podglądu dla każdego widżetu w palecie VIS-2; wąskie kafelki do ok. 260 px (schemat instalacji przechodzi w układ pionowy); przebiegi obsługiwane z klawiatury; dokumentacja z konfiguracją dla wolf-smartset (ISM7).
+
 ### 0.3.0 (2026-09-19)
 * (ssbingo) Nowe widżety: schemat instalacji z animacją przepływu, przebiegi z history, sql lub influxdb oraz komunikaty jako lista stanów z diodą usterki — dostępnych jest teraz wszystkie osiem widżetów.
 

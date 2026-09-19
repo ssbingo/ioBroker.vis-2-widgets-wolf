@@ -44,6 +44,9 @@ WOLF en het WOLF-logo zijn merken van WOLF GmbH. Dit project is niet verbonden m
     ### **WORK IN PROGRESS**
 -->
 
+### 0.4.0 (2026-09-19)
+* (ssbingo) Voorbeeldafbeelding voor elke widget in het VIS-2-palet; smalle tegels tot ongeveer 260 px (het installatieschema wordt staand); verloop met het toetsenbord te bedienen; documentatie met de instelling voor wolf-smartset (ISM7).
+
 ### 0.3.0 (2026-09-19)
 * (ssbingo) Nieuwe widgets: installatieschema met stromingsanimatie, verloop uit history, sql of influxdb en meldingen als statuslijst met storings-LED — alle acht widgets zijn nu beschikbaar.
 

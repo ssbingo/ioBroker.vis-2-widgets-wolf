@@ -1,20 +1,20 @@
 {
   "common": {
     "name": "vis-2-widgets-wolf",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "news": {
-      "0.3.0": {
-        "en": "New widgets: system diagram with animated flow, trends from history, sql or influxdb, and messages as a status list with fault LED — all eight widgets are now available.",
-        "de": "Neue Widgets: Anlagenschema mit Flussanimation, Verläufe aus history, sql oder influxdb und Meldungen als Zustandsliste mit Störungs-LED — damit sind alle acht Widgets verfügbar.",
-        "ru": "Новые виджеты: схема установки с анимацией потока, графики из history, sql или influxdb и сообщения в виде списка состояний с индикатором неисправности — теперь доступны все восемь виджетов.",
-        "pt": "Novos widgets: esquema da instalação com animação do fluxo, históricos a partir de history, sql ou influxdb e mensagens como lista de estados com LED de avaria — os oito widgets estão agora disponíveis.",
-        "nl": "Nieuwe widgets: installatieschema met stromingsanimatie, verloop uit history, sql of influxdb en meldingen als statuslijst met storings-LED — alle acht widgets zijn nu beschikbaar.",
-        "fr": "Nouveaux widgets : schéma de l'installation avec animation du débit, historiques depuis history, sql ou influxdb et messages sous forme de liste d'états avec LED de défaut — les huit widgets sont désormais disponibles.",
-        "it": "Nuovi widget: schema dell'impianto con animazione del flusso, andamenti da history, sql o influxdb e messaggi come elenco di stati con LED di guasto — ora sono disponibili tutti gli otto widget.",
-        "es": "Nuevos widgets: esquema de la instalación con animación del flujo, históricos desde history, sql o influxdb y mensajes como lista de estados con LED de avería; ya están disponibles los ocho widgets.",
-        "pl": "Nowe widżety: schemat instalacji z animacją przepływu, przebiegi z history, sql lub influxdb oraz komunikaty jako lista stanów z diodą usterki — dostępnych jest teraz wszystkie osiem widżetów.",
-        "uk": "Нові віджети: схема установки з анімацією потоку, графіки з history, sql або influxdb і повідомлення як список станів з індикатором несправності — тепер доступні всі вісім віджетів.",
-        "zh-cn": "新增小部件：带流动动画的系统图、来自 history、sql 或 influxdb 的趋势图，以及带故障指示灯的状态列表形式的消息——现在全部八个小部件均已可用。"
+      "0.4.0": {
+        "en": "Preview image for every widget in the VIS-2 palette; narrow tiles down to about 260 px (the system diagram switches to an upright layout); keyboard operation of the trends chart; documentation with the setup for wolf-smartset (ISM7).",
+        "de": "Vorschaubild für jedes Widget in der VIS-2-Palette; schmale Kacheln bis etwa 260 px (das Anlagenschema stellt sich hochkant); Verläufe mit der Tastatur bedienbar; Anleitung mit der Einrichtung für wolf-smartset (ISM7).",
+        "ru": "Изображение предпросмотра для каждого виджета в палитре VIS-2; узкие плитки до 260 px (схема установки переходит в вертикальный вид); управление графиками с клавиатуры; документация с настройкой для wolf-smartset (ISM7).",
+        "pt": "Imagem de pré-visualização para cada widget na paleta do VIS-2; mosaicos estreitos até cerca de 260 px (o esquema da instalação passa a vertical); históricos operáveis pelo teclado; documentação com a configuração para wolf-smartset (ISM7).",
+        "nl": "Voorbeeldafbeelding voor elke widget in het VIS-2-palet; smalle tegels tot ongeveer 260 px (het installatieschema wordt staand); verloop met het toetsenbord te bedienen; documentatie met de instelling voor wolf-smartset (ISM7).",
+        "fr": "Image d'aperçu pour chaque widget dans la palette VIS-2 ; tuiles étroites jusqu'à environ 260 px (le schéma de l'installation passe à la verticale) ; historiques utilisables au clavier ; documentation avec la configuration pour wolf-smartset (ISM7).",
+        "it": "Immagine di anteprima per ogni widget nella tavolozza di VIS-2; riquadri stretti fino a circa 260 px (lo schema dell'impianto passa in verticale); andamenti utilizzabili da tastiera; documentazione con la configurazione per wolf-smartset (ISM7).",
+        "es": "Imagen de vista previa para cada widget en la paleta de VIS-2; mosaicos estrechos hasta unos 260 px (el esquema de la instalación pasa a vertical); históricos manejables con el teclado; documentación con la configuración para wolf-smartset (ISM7).",
+        "pl": "Obraz podglądu dla każdego widżetu w palecie VIS-2; wąskie kafelki do ok. 260 px (schemat instalacji przechodzi w układ pionowy); przebiegi obsługiwane z klawiatury; dokumentacja z konfiguracją dla wolf-smartset (ISM7).",
+        "uk": "Зображення попереднього перегляду для кожного віджета в палітрі VIS-2; вузькі плитки до близько 260 px (схема установки переходить у вертикальний вигляд); графіки керуються з клавіатури; документація з налаштуванням для wolf-smartset (ISM7).",
+        "zh-cn": "VIS-2 调色板中每个小部件都有预览图；支持约 260 px 宽的窄磁贴（系统图改为竖向布局）；趋势图可用键盘操作；文档包含 wolf-smartset (ISM7) 的设置说明。"
       }
     },
     "titleLang": {

@@ -44,6 +44,9 @@ WOLF e il logo WOLF sono marchi di WOLF GmbH. Questo progetto non è affiliato a
     ### **WORK IN PROGRESS**
 -->
 
+### 0.4.0 (2026-09-19)
+* (ssbingo) Immagine di anteprima per ogni widget nella tavolozza di VIS-2; riquadri stretti fino a circa 260 px (lo schema dell'impianto passa in verticale); andamenti utilizzabili da tastiera; documentazione con la configurazione per wolf-smartset (ISM7).
+
 ### 0.3.0 (2026-09-19)
 * (ssbingo) Nuovi widget: schema dell'impianto con animazione del flusso, andamenti da history, sql o influxdb e messaggi come elenco di stati con LED di guasto — ora sono disponibili tutti gli otto widget.
 
