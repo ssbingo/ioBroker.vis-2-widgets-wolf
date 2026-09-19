@@ -1,20 +1,20 @@
 {
   "common": {
     "name": "vis-2-widgets-wolf",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "news": {
-      "0.2.0": {
-        "en": "First release: widget set for VIS-2 (React 19) with gas meter, boiler status, heating circuit, hot water and heating curve. Operating widgets show a value only after it has been confirmed (ack); the heating curve is an approximation (not a Wolf formula). The gas meter calculates daily and monthly consumption from the history.",
-        "de": "Erste Version: Widget-Set für VIS-2 (React 19) mit Gaszähler, Kesselstatus, Heizkreis, Warmwasser und Heizkurve. Bedienende Widgets zeigen einen Wert erst nach der Bestätigung (ack); die Heizkurve ist eine Näherung (keine Wolf-Formel). Der Gaszähler rechnet Tages- und Monatsverbrauch aus dem Verlauf.",
-        "ru": "Первая версия: набор виджетов для VIS-2 (React 19) — газовый счётчик, состояние котла, контур отопления, горячая вода и отопительная кривая. Управляющие виджеты показывают значение только после подтверждения (ack); отопительная кривая — приближение (не формула Wolf). Газовый счётчик вычисляет суточный и месячный расход из истории.",
-        "pt": "Primeira versão: conjunto de widgets para VIS-2 (React 19) com contador de gás, estado da caldeira, circuito de aquecimento, água quente e curva de aquecimento. Os widgets de controlo só mostram um valor após a confirmação (ack); a curva de aquecimento é uma aproximação (não é uma fórmula Wolf). O contador de gás calcula o consumo diário e mensal a partir do histórico.",
-        "nl": "Eerste versie: widgetset voor VIS-2 (React 19) met gasmeter, ketelstatus, verwarmingscircuit, warm water en stooklijn. Bedienende widgets tonen een waarde pas na bevestiging (ack); de stooklijn is een benadering (geen Wolf-formule). De gasmeter berekent dag- en maandverbruik uit de historie.",
-        "fr": "Première version : ensemble de widgets pour VIS-2 (React 19) avec compteur de gaz, état de la chaudière, circuit de chauffage, eau chaude et courbe de chauffe. Les widgets de commande n'affichent une valeur qu'après confirmation (ack) ; la courbe de chauffe est une approximation (pas une formule Wolf). Le compteur de gaz calcule la consommation journalière et mensuelle à partir de l'historique.",
-        "it": "Prima versione: set di widget per VIS-2 (React 19) con contatore del gas, stato caldaia, circuito di riscaldamento, acqua calda e curva di riscaldamento. I widget di comando mostrano un valore solo dopo la conferma (ack); la curva di riscaldamento è un'approssimazione (non una formula Wolf). Il contatore del gas calcola il consumo giornaliero e mensile dallo storico.",
-        "es": "Primera versión: conjunto de widgets para VIS-2 (React 19) con contador de gas, estado de la caldera, circuito de calefacción, agua caliente y curva de calefacción. Los widgets de control solo muestran un valor tras la confirmación (ack); la curva de calefacción es una aproximación (no es una fórmula Wolf). El contador de gas calcula el consumo diario y mensual a partir del historial.",
-        "pl": "Pierwsza wersja: zestaw widżetów dla VIS-2 (React 19) z licznikiem gazu, stanem kotła, obiegiem grzewczym, ciepłą wodą i krzywą grzewczą. Widżety sterujące pokazują wartość dopiero po potwierdzeniu (ack); krzywa grzewcza jest przybliżeniem (nie formułą Wolf). Licznik gazu oblicza zużycie dzienne i miesięczne z historii.",
-        "uk": "Перша версія: набір віджетів для VIS-2 (React 19) — газовий лічильник, стан котла, контур опалення, гаряча вода та опалювальна крива. Віджети керування показують значення лише після підтвердження (ack); опалювальна крива — наближення (не формула Wolf). Газовий лічильник обчислює добову та місячну витрату з історії.",
-        "zh-cn": "首个版本：适用于 VIS-2（React 19）的小部件集，包含燃气表、锅炉状态、供暖回路、生活热水和供暖曲线。控制类小部件仅在确认（ack）后显示数值；供暖曲线为近似值（非 Wolf 公式）。燃气表根据历史记录计算日用量和月用量。"
+      "0.3.0": {
+        "en": "New widgets: system diagram with animated flow, trends from history, sql or influxdb, and messages as a status list with fault LED — all eight widgets are now available.",
+        "de": "Neue Widgets: Anlagenschema mit Flussanimation, Verläufe aus history, sql oder influxdb und Meldungen als Zustandsliste mit Störungs-LED — damit sind alle acht Widgets verfügbar.",
+        "ru": "Новые виджеты: схема установки с анимацией потока, графики из history, sql или influxdb и сообщения в виде списка состояний с индикатором неисправности — теперь доступны все восемь виджетов.",
+        "pt": "Novos widgets: esquema da instalação com animação do fluxo, históricos a partir de history, sql ou influxdb e mensagens como lista de estados com LED de avaria — os oito widgets estão agora disponíveis.",
+        "nl": "Nieuwe widgets: installatieschema met stromingsanimatie, verloop uit history, sql of influxdb en meldingen als statuslijst met storings-LED — alle acht widgets zijn nu beschikbaar.",
+        "fr": "Nouveaux widgets : schéma de l'installation avec animation du débit, historiques depuis history, sql ou influxdb et messages sous forme de liste d'états avec LED de défaut — les huit widgets sont désormais disponibles.",
+        "it": "Nuovi widget: schema dell'impianto con animazione del flusso, andamenti da history, sql o influxdb e messaggi come elenco di stati con LED di guasto — ora sono disponibili tutti gli otto widget.",
+        "es": "Nuevos widgets: esquema de la instalación con animación del flujo, históricos desde history, sql o influxdb y mensajes como lista de estados con LED de avería; ya están disponibles los ocho widgets.",
+        "pl": "Nowe widżety: schemat instalacji z animacją przepływu, przebiegi z history, sql lub influxdb oraz komunikaty jako lista stanów z diodą usterki — dostępnych jest teraz wszystkie osiem widżetów.",
+        "uk": "Нові віджети: схема установки з анімацією потоку, графіки з history, sql або influxdb і повідомлення як список станів з індикатором несправності — тепер доступні всі вісім віджетів.",
+        "zh-cn": "新增小部件：带流动动画的系统图、来自 history、sql 或 influxdb 的趋势图，以及带故障指示灯的状态列表形式的消息——现在全部八个小部件均已可用。"
       }
     },
     "titleLang": {
