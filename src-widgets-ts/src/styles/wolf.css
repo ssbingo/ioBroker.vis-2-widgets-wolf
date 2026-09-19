@@ -1369,3 +1369,199 @@
     flex: none;
     text-align: left;
 }
+
+/* -------------------------------------------------------------- Verläufe */
+
+.wolf-w.wolf-trends {
+    display: flex;
+    flex-direction: column;
+}
+
+/* das Diagramm füllt die Resthöhe und zeichnet in echter Pixelgröße (ResizeObserver) */
+.wolf-chart-wrap {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+.wolf-chart {
+    position: absolute;
+    inset: 0;
+}
+
+.wolf-chart svg {
+    display: block;
+}
+
+.wolf-chart-grid {
+    stroke: var(--wolf-line);
+    stroke-width: 1;
+}
+
+.wolf-chart-tick {
+    font-family: var(--wolf-font-num);
+    font-size: 11px;
+    fill: var(--wolf-muted);
+}
+
+.wolf-chart-time {
+    font-family: var(--wolf-font);
+}
+
+.wolf-chart-area {
+    fill: var(--wolf-accent-soft);
+    stroke: none;
+}
+
+.wolf-chart-line {
+    fill: none;
+    stroke-width: 2.2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+
+.wolf-chart-cursor {
+    stroke: var(--wolf-ink-2);
+    stroke-width: 1;
+    stroke-dasharray: 3 3;
+    opacity: 0.6;
+}
+
+.wolf-chart-dot {
+    stroke: var(--wolf-surface);
+    stroke-width: 2;
+}
+
+.wolf-chart-hit {
+    fill: transparent;
+    cursor: crosshair;
+}
+
+.wolf-chart-msg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--wolf-muted);
+    pointer-events: none;
+}
+
+.wolf-chart-msg-warn {
+    color: var(--wolf-warn);
+    font-weight: 600;
+}
+
+.wolf-lg-v {
+    font-family: var(--wolf-font-num);
+    font-weight: 600;
+    color: var(--wolf-ink);
+    margin-left: 2px;
+}
+
+.wolf-lg i.wolf-lg-area {
+    height: 8px;
+    background: var(--wolf-accent-soft);
+    border: 1px solid var(--wolf-accent);
+}
+
+/* Kurvenfarben aus den Tokens: Linie, Punkt, Legende */
+
+.wolf-stroke-warm {
+    stroke: var(--wolf-warm);
+}
+
+.wolf-fill-warm {
+    fill: var(--wolf-warm);
+}
+
+.wolf-bg-warm {
+    background: var(--wolf-warm);
+}
+
+.wolf-stroke-cool {
+    stroke: var(--wolf-cool);
+}
+
+.wolf-fill-cool {
+    fill: var(--wolf-cool);
+}
+
+.wolf-bg-cool {
+    background: var(--wolf-cool);
+}
+
+.wolf-stroke-ok {
+    stroke: var(--wolf-ok);
+}
+
+.wolf-fill-ok {
+    fill: var(--wolf-ok);
+}
+
+.wolf-bg-ok {
+    background: var(--wolf-ok);
+}
+
+.wolf-stroke-accent {
+    stroke: var(--wolf-accent);
+}
+
+.wolf-fill-accent {
+    fill: var(--wolf-accent);
+}
+
+.wolf-bg-accent {
+    background: var(--wolf-accent);
+}
+
+.wolf-stroke-warn {
+    stroke: var(--wolf-warn);
+}
+
+.wolf-fill-warn {
+    fill: var(--wolf-warn);
+}
+
+.wolf-bg-warn {
+    background: var(--wolf-warn);
+}
+
+.wolf-stroke-warm2 {
+    stroke: var(--wolf-warm-2);
+}
+
+.wolf-fill-warm2 {
+    fill: var(--wolf-warm-2);
+}
+
+.wolf-bg-warm2 {
+    background: var(--wolf-warm-2);
+}
+
+.wolf-stroke-cool2 {
+    stroke: var(--wolf-cool-2);
+}
+
+.wolf-fill-cool2 {
+    fill: var(--wolf-cool-2);
+}
+
+.wolf-bg-cool2 {
+    background: var(--wolf-cool-2);
+}
+
+.wolf-stroke-ink {
+    stroke: var(--wolf-ink);
+}
+
+.wolf-fill-ink {
+    fill: var(--wolf-ink);
+}
+
+.wolf-bg-ink {
+    background: var(--wolf-ink);
+}

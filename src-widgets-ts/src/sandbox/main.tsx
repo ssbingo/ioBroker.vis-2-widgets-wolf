@@ -23,6 +23,7 @@ import SimCircuit from './SimCircuit';
 import SimDhw from './SimDhw';
 import SimHeatCurve from './SimHeatCurve';
 import SimSchema from './SimSchema';
+import SimTrends from './SimTrends';
 
 import './sandbox.css';
 
@@ -419,6 +420,26 @@ function Sandbox(): React.JSX.Element {
                             { label: 'Wohnräume', pump: null },
                             { label: 'Fußboden', pump: false },
                         ]}
+                    />
+                </div>
+            </div>
+
+            <h2 className="sb-h">Verläufe — WolfTrends</h2>
+            <div className="sb-grid sb-grid-wide">
+                <div className="sb-cell sb-cell-trends">
+                    <SimTrends
+                        themeType={themeType}
+                        subtitle="24 Stunden, Modulation als Fläche"
+                        hours={24}
+                        withArea
+                    />
+                </div>
+                <div className="sb-cell sb-cell-trends">
+                    <SimTrends
+                        themeType={themeType}
+                        subtitle="7 Tage, ohne Fläche"
+                        hours={168}
+                        withArea={false}
                     />
                 </div>
             </div>
