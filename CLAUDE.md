@@ -45,6 +45,9 @@ ist als diese Datei (Node 18/20, `NPM_TOKEN`, 9 READMEs), gilt diese Datei.
 
 ## Sprache
 
+**Mit dem Nutzer ausschließlich auf Deutsch kommunizieren — jede Zeile**, auch Zwischenmeldungen
+zwischen Arbeitsschritten und Rückfragen (zwingende Grundregel).
+
 Code-Kommentare und Commit-Nachrichten auf Deutsch. README.md im Wurzelverzeichnis auf
 Englisch, die übrigen unter `doc/<sprache>/` in der jeweiligen Sprache.
 
