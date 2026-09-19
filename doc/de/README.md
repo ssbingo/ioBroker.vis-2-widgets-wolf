@@ -8,7 +8,7 @@ VIS-2-Widgets, die eine [WOLF](https://www.wolf.eu/)-Heizungsanlage in ioBroker 
 
 Das Widget-Set liest selbst keine Daten aus der Heizung. Jeder Wert wird einzeln an ein vorhandenes ioBroker-Objekt gebunden — zum Beispiel aus dem Adapter `wolf-smartset`, dem Adapter `wolf` (ISM8i), Modbus oder eigenen Skripten.
 
-> **Stand:** frühe Entwicklung. Verfügbar sind bisher der Gaszähler, der Kesselstatus, der Heizkreis, das Warmwasser, die Heizkurve, die Meldungen und das Anlagenschema.
+> **Stand:** frühe Entwicklung. Verfügbar sind alle acht Widgets: Anlagenschema, Kesselstatus, Heizkreis, Heizkurve, Warmwasser, Verläufe, Meldungen und Gaszähler.
 
 ### Voraussetzungen
 

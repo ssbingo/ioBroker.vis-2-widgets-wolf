@@ -18,7 +18,7 @@ individually to an existing ioBroker object — for example from the `wolf-smart
 the `wolf` adapter (ISM8i), Modbus or your own scripts. No assumptions are made about object
 names or structure.
 
-> **Status:** early development. The gas meter, boiler status, heating circuit, hot water, heating curve, messages and system diagram widgets are available so far.
+> **Status:** early development. All eight widgets are available: system diagram, boiler status, heating circuit, heating curve, hot water, trends, messages and gas meter.
 
 ### Widgets
 
@@ -30,7 +30,7 @@ names or structure.
 | Heating curve | Approximated curve with the controller's operating point, setpoint correction (writing) | first version |
 | Hot water | Tank with set mark, set temperature, time program, optional circulation and one-time charge (writing) | first version |
 | System diagram | Hydraulic diagram with burner flame, tank, up to four heating circuits and animated flow where water actually flows | first version |
-| Trends | Charts from history, SQL or InfluxDB | planned |
+| Trends | Up to four curves and a background area from history, SQL or InfluxDB; 6 h to 7 days, crosshair with values | first version |
 | Messages | Fault LED and a status list: configurable checks (e.g. safety temperature limiters, connection), collective fault, fault code, message list | first version |
 
 Each widget can be set to light or dark, or follow the VIS-2 theme automatically (default).
@@ -87,6 +87,7 @@ provide.
     ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
+* (ssbingo) Trends: up to four curves and a background area (e.g. modulation) from the history adapter (history, sql, influxdb), 6 h to 7 days, average/min-max/raw values, current value at the right edge, crosshair with values in the legend
 * (ssbingo) System diagram: heat generator with flame, distributor, hot water tank, up to four heating circuits and outside temperature; the flow animation follows the pump (or the burner), tank charging and each circuit's pump
 * (ssbingo) Messages: fault LED and a status list with up to eight configurable checks (e.g. the safety temperature limiters and the connection to the ISM7), collective fault, fault code with texts and an optional message list (JSON)
 

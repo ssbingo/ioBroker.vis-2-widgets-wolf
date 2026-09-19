@@ -99,7 +99,8 @@
           "WolfDhw",
           "WolfHeatCurve",
           "WolfMessages",
-          "WolfSchema"
+          "WolfSchema",
+          "WolfTrends"
         ]
       }
     }

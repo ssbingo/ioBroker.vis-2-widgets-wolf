@@ -8,7 +8,7 @@ Widget VIS-2 che visualizzano e permettono di comandare un impianto di riscaldam
 
 Il set di widget non legge direttamente alcun dato dall'impianto. Ogni valore viene collegato singolarmente a un oggetto ioBroker esistente — ad esempio dall'adattatore `wolf-smartset`, dall'adattatore `wolf` (ISM8i), da Modbus o da script propri.
 
-> **Stato:** sviluppo iniziale. Per ora sono disponibili il contatore del gas, lo stato caldaia, il circuito di riscaldamento, l'acqua calda, la curva di riscaldamento, i messaggi e lo schema dell'impianto.
+> **Stato:** sviluppo iniziale. Sono disponibili tutti gli otto widget: schema dell'impianto, stato caldaia, circuito di riscaldamento, curva di riscaldamento, acqua calda, andamenti, messaggi e contatore del gas.
 
 ### Requisiti
 
