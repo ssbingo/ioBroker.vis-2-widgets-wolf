@@ -10,6 +10,24 @@
 
 > **Стан:** рання стадія розробки. Доступні всі вісім віджетів: схема установки, стан котла, контур опалення, опалювальна крива, гаряча вода, графіки, повідомлення і газовий лічильник.
 
+### Віджети
+
+| Віджет | Призначення |
+|---|---|
+| Схема установки | Гідравлічна схема з полум'ям пальника, бойлером, до чотирьох контурів і анімацією потоку |
+| Стан котла | Фаза роботи, пальник, модуляція і тиск (якщо задані), години роботи, запуски, подача і зворотка |
+| Контур опалення | Режим роботи, денна та економна температура, корекція, програма часу — з керуванням |
+| Опалювальна крива | Наближена крива з робочою точкою регулятора; корекція з керуванням |
+| Гаряча вода | Бойлер з позначкою уставки, задана температура, програма часу, опційно циркуляція та одноразове завантаження |
+| Графіки | До чотирьох кривих і фонова область з history, SQL або InfluxDB; від 6 годин до 7 днів |
+| Повідомлення | Індикатор несправності та список станів: перевірки, загальна несправність, код несправності |
+| Газовий лічильник | Показник у семи варіантах лічильного механізму, витрата, добове та місячне споживання, вартість |
+
+<img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_schema.png" height="110" alt="Схема установки"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_boiler.png" height="110" alt="Стан котла"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_circuit.png" height="110" alt="Контур опалення"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_heatcurve.png" height="110" alt="Опалювальна крива">
+<img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_dhw.png" height="110" alt="Гаряча вода"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_trends.png" height="110" alt="Графіки"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_messages.png" height="110" alt="Повідомлення"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_gasmeter.png" height="110" alt="Газовий лічильник">
+
+Детальне налаштування, зокрема призначення об'єктів wolf-smartset (ISM7): див. [англійську документацію](../../README.md).
+
 ### Вимоги
 
 - js-controller >= 7.2.2

@@ -10,6 +10,24 @@ El conjunto de widgets no lee datos directamente de la calefacción. Cada valor 
 
 > **Estado:** desarrollo temprano. Están disponibles los ocho widgets: esquema de la instalación, estado de la caldera, circuito de calefacción, curva de calefacción, agua caliente, históricos, mensajes y contador de gas.
 
+### Widgets
+
+| Widget | Función |
+|---|---|
+| Esquema de la instalación | Esquema hidráulico con llama del quemador, acumulador, hasta cuatro circuitos y animación del flujo |
+| Estado de la caldera | Fase de funcionamiento, quemador, modulación y presión (si están vinculadas), horas de funcionamiento, arranques, impulsión y retorno |
+| Circuito de calefacción | Modo de funcionamiento, temperatura de día y económica, corrección, programa horario — con mando |
+| Curva de calefacción | Curva aproximada con el punto de trabajo de la regulación; corrección con mando |
+| Agua caliente | Acumulador con marca de consigna, temperatura de consigna, programa horario, opcionalmente recirculación y carga única |
+| Históricos | Hasta cuatro curvas y un área de fondo desde history, SQL o InfluxDB; de 6 horas a 7 días |
+| Mensajes | LED de avería y lista de estados: comprobaciones, avería general, código de avería |
+| Contador de gas | Lectura en siete estilos de totalizador, caudal, consumo diario y mensual, costes |
+
+<img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_schema.png" height="110" alt="Esquema de la instalación"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_boiler.png" height="110" alt="Estado de la caldera"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_circuit.png" height="110" alt="Circuito de calefacción"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_heatcurve.png" height="110" alt="Curva de calefacción">
+<img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_dhw.png" height="110" alt="Agua caliente"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_trends.png" height="110" alt="Históricos"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_messages.png" height="110" alt="Mensajes"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_gasmeter.png" height="110" alt="Contador de gas">
+
+Configuración detallada, incluida la asignación de los objetos de wolf-smartset (ISM7): véase la [documentación en inglés](../../README.md).
+
 ### Requisitos
 
 - js-controller >= 7.2.2

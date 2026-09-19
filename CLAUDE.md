@@ -59,6 +59,12 @@ Englisch, die übrigen unter `doc/<sprache>/` in der jeweiligen Sprache.
   folgt `context.themeType` von VIS-2), `light`, `dark` — aufgelöst über `resolveTheme()` in
   `src/lib/theme.ts`. Das VIS-2-Theme ist das der Bedienoberfläche, nicht das der Visualisierung.
 - Zahlen in der Sprache von VIS-2 formatieren (`fmt(…, locale)` mit `getLanguage()`)
+- Schmale Kacheln über Container-Abfragen (`.wolf-w` hat `container-type: inline-size`), nicht
+  über Media-Queries — maßgeblich ist die Kachelbreite. Alle Widgets bis etwa 260 px prüfen
+- Jedes Widget hat ein eigenes Vorschaubild `public/img/prev_<name>.png` (aus der Sandbox,
+  höchstens 360 × 220) und `visSetIcon`; VIS-2 übernimmt neue Bilder erst nach einem Neustart
+- Übersetzungen prüft `src/i18n/i18n.test.ts`: gleiche Schlüssel in allen Sprachen, jeder im Code
+  verwendete Schlüssel vorhanden, „Wolf" nie übersetzt
 - `widgets/` ist Build-Ausgabe — nie von Hand bearbeiten, `tasks.js` löscht den Ordner
 
 ## Testen im dev-server
@@ -111,6 +117,7 @@ Englisch, die übrigen unter `doc/<sprache>/` in der jeweiligen Sprache.
 - Changelog in **allen elf** README-Dateien vorangestellt, im Format des Release-Scripts:
   `### x.y.z (JJJJ-MM-TT)` und darunter `* (ssbingo) …`. Das Release-Script pflegt nur
   `README.md` — die zehn Dateien unter `doc/` von Hand nachziehen.
+- Release-ZIP mit `npm run zip` (git archive des letzten Commits)
 - Adapter-Check auf <https://adapter-check.iobroker.in/> ohne Fehler
 - GitHub Actions grün, dann Tag `vX.Y.Z` pushen — niemals lokal veröffentlichen
 
