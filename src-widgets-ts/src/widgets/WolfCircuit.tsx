@@ -40,6 +40,7 @@ export default class WolfCircuit extends WolfWidgetBase<WolfCircuitRxData> {
             visSet: 'vis-2-widgets-wolf',
             visSetLabel: 'set_label',
             visSetColor: '#c2561f',
+            visSetIcon: 'widgets/vis-2-widgets-wolf/img/vis-2-widgets-wolf.png',
             visName: 'WolfCircuit',
             visWidgetLabel: 'circuit',
             // Jede Gruppe hat Felder mit Vorgabe (notfalls ''), sonst legt VIS-2 sie beim Platzieren
@@ -109,7 +110,7 @@ export default class WolfCircuit extends WolfWidgetBase<WolfCircuitRxData> {
             ],
             // 620: Platz für die Leiste „Übernehmen" im Bestätigungsmodus
             visDefaultStyle: { width: 360, height: 620 },
-            visPrev: 'widgets/vis-2-widgets-wolf/img/vis-2-widgets-wolf.png',
+            visPrev: 'widgets/vis-2-widgets-wolf/img/prev_circuit.png',
         };
     }
 

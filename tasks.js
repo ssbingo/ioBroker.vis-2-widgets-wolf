@@ -24,7 +24,27 @@ function copyAllFiles() {
     copyFiles([`${SRC_TS}build/img/*`], `widgets/${adapterName}/img`);
 }
 
-if (process.argv.includes('--typescript') || process.argv.length === 2) {
+/*
+ * Release-ZIP: genau der letzte Commit (git archive) — ohne node_modules, .dev-server,
+ * src-widgets-ts/build, www und die lokalen Planungsunterlagen, weil die nicht versioniert sind.
+ */
+function zip() {
+    const { execFileSync } = require('node:child_process');
+    const { version } = require('./package.json');
+    const pending = execFileSync('git', ['status', '--porcelain'], { cwd: __dirname }).toString().trim();
+    if (pending) {
+        console.warn('Achtung: nicht übernommene Änderungen fehlen im ZIP — es enthält nur den letzten Commit.');
+    }
+    const file = `iobroker.vis-2-widgets-wolf-${version}.zip`;
+    execFileSync('git', ['archive', '--format=zip', '--prefix=ioBroker.vis-2-widgets-wolf/', '-o', file, 'HEAD'], {
+        cwd: __dirname,
+    });
+    console.log(`${file} erstellt`);
+}
+
+if (process.argv.includes('--zip')) {
+    zip();
+} else if (process.argv.includes('--typescript') || process.argv.length === 2) {
     clean();
     const installed = existsSync(`${srcTs}node_modules`) ? Promise.resolve() : npmInstall(srcTs);
     installed

@@ -16,8 +16,9 @@ src-widgets-ts/.__mf__temp/
 .dev-server/
 www/
 
-# npm-Pakete
+# npm-Pakete und Release-ZIP
 iobroker.*.tgz
+iobroker.*.zip
 
 # Release-Script
 .commitinfo

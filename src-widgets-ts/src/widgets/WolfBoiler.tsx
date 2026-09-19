@@ -38,6 +38,7 @@ export default class WolfBoiler extends WolfWidgetBase<WolfBoilerRxData> {
             visSet: 'vis-2-widgets-wolf',
             visSetLabel: 'set_label',
             visSetColor: '#c2561f',
+            visSetIcon: 'widgets/vis-2-widgets-wolf/img/vis-2-widgets-wolf.png',
             visName: 'WolfBoiler',
             visWidgetLabel: 'boiler',
             // Jede Gruppe hat Felder mit Vorgabe (notfalls ''), sonst legt VIS-2 sie beim Platzieren
@@ -88,7 +89,7 @@ export default class WolfBoiler extends WolfWidgetBase<WolfBoilerRxData> {
                 },
             ],
             visDefaultStyle: { width: 340, height: 390 },
-            visPrev: 'widgets/vis-2-widgets-wolf/img/vis-2-widgets-wolf.png',
+            visPrev: 'widgets/vis-2-widgets-wolf/img/prev_boiler.png',
         };
     }
 

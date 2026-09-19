@@ -90,6 +90,7 @@ export default class WolfGasMeter extends WolfWidgetBase<WolfGasMeterRxData, Wol
             visSet: 'vis-2-widgets-wolf',
             visSetLabel: 'set_label',
             visSetColor: '#c2561f',
+            visSetIcon: 'widgets/vis-2-widgets-wolf/img/vis-2-widgets-wolf.png',
             visName: 'WolfGasMeter',
             visWidgetLabel: 'gasmeter',
             // Jede Gruppe hat Felder mit Vorgabe (notfalls ''), sonst legt VIS-2 sie beim Platzieren
@@ -204,7 +205,7 @@ export default class WolfGasMeter extends WolfWidgetBase<WolfGasMeterRxData, Wol
                 },
             ],
             visDefaultStyle: { width: 380, height: 350 },
-            visPrev: 'widgets/vis-2-widgets-wolf/img/vis-2-widgets-wolf.png',
+            visPrev: 'widgets/vis-2-widgets-wolf/img/prev_gasmeter.png',
         };
     }
 

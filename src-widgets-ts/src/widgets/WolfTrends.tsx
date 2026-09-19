@@ -79,6 +79,7 @@ export default class WolfTrends extends WolfWidgetBase<WolfTrendsRxData, WolfTre
             visSet: 'vis-2-widgets-wolf',
             visSetLabel: 'set_label',
             visSetColor: '#c2561f',
+            visSetIcon: 'widgets/vis-2-widgets-wolf/img/vis-2-widgets-wolf.png',
             visName: 'WolfTrends',
             visWidgetLabel: 'trends',
             // Jede Gruppe hat Felder mit Vorgabe (notfalls ''), sonst legt VIS-2 sie beim Platzieren
@@ -173,7 +174,7 @@ export default class WolfTrends extends WolfWidgetBase<WolfTrendsRxData, WolfTre
                 },
             ],
             visDefaultStyle: { width: 640, height: 360 },
-            visPrev: 'widgets/vis-2-widgets-wolf/img/vis-2-widgets-wolf.png',
+            visPrev: 'widgets/vis-2-widgets-wolf/img/prev_trends.png',
         };
     }
 

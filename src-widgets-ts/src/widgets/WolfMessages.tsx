@@ -61,6 +61,7 @@ export default class WolfMessages extends WolfWidgetBase<WolfMessagesRxData> {
             visSet: 'vis-2-widgets-wolf',
             visSetLabel: 'set_label',
             visSetColor: '#c2561f',
+            visSetIcon: 'widgets/vis-2-widgets-wolf/img/vis-2-widgets-wolf.png',
             visName: 'WolfMessages',
             visWidgetLabel: 'messages',
             // Jede Gruppe hat Felder mit Vorgabe (notfalls ''), sonst legt VIS-2 sie beim Platzieren
@@ -141,7 +142,7 @@ export default class WolfMessages extends WolfWidgetBase<WolfMessagesRxData> {
                 },
             ],
             visDefaultStyle: { width: 360, height: 400 },
-            visPrev: 'widgets/vis-2-widgets-wolf/img/vis-2-widgets-wolf.png',
+            visPrev: 'widgets/vis-2-widgets-wolf/img/prev_messages.png',
         };
     }
 

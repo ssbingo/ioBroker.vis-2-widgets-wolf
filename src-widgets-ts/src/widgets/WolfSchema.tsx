@@ -42,6 +42,7 @@ export default class WolfSchema extends WolfWidgetBase<WolfSchemaRxData> {
             visSet: 'vis-2-widgets-wolf',
             visSetLabel: 'set_label',
             visSetColor: '#c2561f',
+            visSetIcon: 'widgets/vis-2-widgets-wolf/img/vis-2-widgets-wolf.png',
             visName: 'WolfSchema',
             visWidgetLabel: 'schema',
             // Jede Gruppe hat Felder mit Vorgabe (notfalls ''), sonst legt VIS-2 sie beim Platzieren
@@ -120,7 +121,7 @@ export default class WolfSchema extends WolfWidgetBase<WolfSchemaRxData> {
                 },
             ],
             visDefaultStyle: { width: 640, height: 400 },
-            visPrev: 'widgets/vis-2-widgets-wolf/img/vis-2-widgets-wolf.png',
+            visPrev: 'widgets/vis-2-widgets-wolf/img/prev_schema.png',
         };
     }
 
