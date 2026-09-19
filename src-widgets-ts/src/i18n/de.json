@@ -177,5 +177,22 @@
     "msg_unknown": "kein Wert",
     "msg_collective": "Sammelstörung",
     "msg_code": "Störung",
-    "since": "seit"
+    "since": "seit",
+    "schema": "Anlagenschema",
+    "schema_boiler": "Heizgerät",
+    "boiler_label": "Bezeichnung Heizgerät (leer = Heizgerät)",
+    "oid_pumpe": "Kesselpumpe (Ein/Aus oder %)",
+    "oid_pumpe_tooltip": "Vor- und Rücklauf fließen, solange die Pumpe läuft; leer: solange der Brenner brennt",
+    "show_ww": "Warmwasserspeicher zeigen",
+    "group_circuits": "Heizkreise",
+    "hk_count": "Anzahl Heizkreise",
+    "hk_label": "Bezeichnung (leer = Heizkreis n)",
+    "oid_hk_vorlauf": "Vorlauf (°C)",
+    "oid_hk_pumpe": "Pumpe / aktiv (leer = wie Heizgerät)",
+    "show_aussen": "Außentemperatur zeigen",
+    "flow_animation": "Flussanimation",
+    "distributor": "Verteiler",
+    "legend_flow": "Vorlauf",
+    "legend_hk_on": "Heizkreis aktiv",
+    "legend_hk_off": "Heizkreis aus"
 }

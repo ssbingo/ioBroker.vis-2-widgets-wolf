@@ -22,6 +22,7 @@ import de from '../i18n/de.json';
 import SimCircuit from './SimCircuit';
 import SimDhw from './SimDhw';
 import SimHeatCurve from './SimHeatCurve';
+import SimSchema from './SimSchema';
 
 import './sandbox.css';
 
@@ -393,6 +394,33 @@ function Sandbox(): React.JSX.Element {
                         />
                     </div>
                 ))}
+            </div>
+
+            <h2 className="sb-h">Anlagenschema — WolfSchema</h2>
+            <div className="sb-grid sb-grid-wide">
+                <div className="sb-cell sb-cell-schema">
+                    <SimSchema
+                        themeType={themeType}
+                        running={running}
+                        subtitle="wie die Anlage: Speicher, direkter Heizkreis, ohne Modulationswert"
+                        boilerLabel="CGB-2"
+                        modulation={false}
+                        circuits={[{ label: 'Heizkörper', pump: null }]}
+                    />
+                </div>
+                <div className="sb-cell sb-cell-schema">
+                    <SimSchema
+                        themeType={themeType}
+                        running={running}
+                        subtitle="mit Modulation, zwei Heizkreise, einer aus"
+                        boilerLabel="Brennwertgerät"
+                        modulation
+                        circuits={[
+                            { label: 'Wohnräume', pump: null },
+                            { label: 'Fußboden', pump: false },
+                        ]}
+                    />
+                </div>
             </div>
 
             <h2 className="sb-h">Meldungen — WolfMessages</h2>

@@ -177,5 +177,22 @@
     "msg_unknown": "无数值",
     "msg_collective": "综合故障",
     "msg_code": "故障",
-    "since": "自"
+    "since": "自",
+    "schema": "系统图",
+    "schema_boiler": "热源",
+    "boiler_label": "热源名称（留空 = 热源）",
+    "oid_pumpe": "锅炉泵（开/关或 %）",
+    "oid_pumpe_tooltip": "泵运行时供回水显示流动；留空：燃烧器工作时",
+    "show_ww": "显示热水箱",
+    "group_circuits": "供暖回路",
+    "hk_count": "供暖回路数量",
+    "hk_label": "名称（留空 = 供暖回路 n）",
+    "oid_hk_vorlauf": "供水 (°C)",
+    "oid_hk_pumpe": "泵 / 运行（留空 = 同热源）",
+    "show_aussen": "显示室外温度",
+    "flow_animation": "流动动画",
+    "distributor": "分配器",
+    "legend_flow": "供水",
+    "legend_hk_on": "回路运行",
+    "legend_hk_off": "回路关闭"
 }

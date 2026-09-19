@@ -177,5 +177,22 @@
     "msg_unknown": "brak wartości",
     "msg_collective": "Usterka zbiorcza",
     "msg_code": "Usterka",
-    "since": "od"
+    "since": "od",
+    "schema": "Schemat instalacji",
+    "schema_boiler": "Źródło ciepła",
+    "boiler_label": "Nazwa źródła ciepła (puste = Źródło ciepła)",
+    "oid_pumpe": "Pompa kotła (wł./wył. lub %)",
+    "oid_pumpe_tooltip": "Zasilanie i powrót płyną, dopóki pracuje pompa; puste: dopóki pali się palnik",
+    "show_ww": "Pokaż zasobnik c.w.u.",
+    "group_circuits": "Obiegi grzewcze",
+    "hk_count": "Liczba obiegów grzewczych",
+    "hk_label": "Nazwa (puste = Obieg grzewczy n)",
+    "oid_hk_vorlauf": "Zasilanie (°C)",
+    "oid_hk_pumpe": "Pompa / aktywny (puste = jak źródło ciepła)",
+    "show_aussen": "Pokaż temperaturę zewnętrzną",
+    "flow_animation": "Animacja przepływu",
+    "distributor": "Rozdzielacz",
+    "legend_flow": "Zasilanie",
+    "legend_hk_on": "Obieg aktywny",
+    "legend_hk_off": "Obieg wyłączony"
 }

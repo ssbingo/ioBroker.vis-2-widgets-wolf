@@ -177,5 +177,22 @@
     "msg_unknown": "aucune valeur",
     "msg_collective": "Défaut général",
     "msg_code": "Défaut",
-    "since": "depuis"
+    "since": "depuis",
+    "schema": "Schéma de l'installation",
+    "schema_boiler": "Générateur de chaleur",
+    "boiler_label": "Libellé du générateur (vide = Générateur de chaleur)",
+    "oid_pumpe": "Pompe de chaudière (marche/arrêt ou %)",
+    "oid_pumpe_tooltip": "Départ et retour circulent tant que la pompe tourne ; vide : tant que le brûleur est allumé",
+    "show_ww": "Afficher le ballon d'eau chaude",
+    "group_circuits": "Circuits de chauffage",
+    "hk_count": "Nombre de circuits de chauffage",
+    "hk_label": "Libellé (vide = Circuit de chauffage n)",
+    "oid_hk_vorlauf": "Départ (°C)",
+    "oid_hk_pumpe": "Pompe / actif (vide = comme le générateur)",
+    "show_aussen": "Afficher la température extérieure",
+    "flow_animation": "Animation du débit",
+    "distributor": "Répartiteur",
+    "legend_flow": "Départ",
+    "legend_hk_on": "Circuit actif",
+    "legend_hk_off": "Circuit arrêté"
 }

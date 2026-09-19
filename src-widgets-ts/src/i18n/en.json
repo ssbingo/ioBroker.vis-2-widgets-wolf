@@ -177,5 +177,22 @@
     "msg_unknown": "no value",
     "msg_collective": "Collective fault",
     "msg_code": "Fault",
-    "since": "since"
+    "since": "since",
+    "schema": "System diagram",
+    "schema_boiler": "Heat generator",
+    "boiler_label": "Heat generator label (empty = Heat generator)",
+    "oid_pumpe": "Boiler pump (on/off or %)",
+    "oid_pumpe_tooltip": "Flow and return are shown flowing while the pump runs; empty: while the burner is on",
+    "show_ww": "Show hot water tank",
+    "group_circuits": "Heating circuits",
+    "hk_count": "Number of heating circuits",
+    "hk_label": "Label (empty = Heating circuit n)",
+    "oid_hk_vorlauf": "Flow (°C)",
+    "oid_hk_pumpe": "Pump / active (empty = like the heat generator)",
+    "show_aussen": "Show outside temperature",
+    "flow_animation": "Flow animation",
+    "distributor": "Distributor",
+    "legend_flow": "Flow",
+    "legend_hk_on": "Circuit active",
+    "legend_hk_off": "Circuit off"
 }

@@ -105,3 +105,9 @@ body.sb-dark {
 .sb-cell-messages {
     height: 400px;
 }
+.sb-grid-wide {
+    grid-template-columns: repeat(auto-fit, minmax(560px, 1fr));
+}
+.sb-cell-schema {
+    height: 400px;
+}

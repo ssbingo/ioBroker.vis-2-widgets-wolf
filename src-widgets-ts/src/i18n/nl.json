@@ -177,5 +177,22 @@
     "msg_unknown": "geen waarde",
     "msg_collective": "Verzamelstoring",
     "msg_code": "Storing",
-    "since": "sinds"
+    "since": "sinds",
+    "schema": "Installatieschema",
+    "schema_boiler": "Warmteopwekker",
+    "boiler_label": "Omschrijving warmteopwekker (leeg = Warmteopwekker)",
+    "oid_pumpe": "Ketelpomp (aan/uit of %)",
+    "oid_pumpe_tooltip": "Aanvoer en retour stromen zolang de pomp draait; leeg: zolang de brander brandt",
+    "show_ww": "Warmwaterboiler tonen",
+    "group_circuits": "Verwarmingscircuits",
+    "hk_count": "Aantal verwarmingscircuits",
+    "hk_label": "Omschrijving (leeg = Verwarmingscircuit n)",
+    "oid_hk_vorlauf": "Aanvoer (°C)",
+    "oid_hk_pumpe": "Pomp / actief (leeg = zoals warmteopwekker)",
+    "show_aussen": "Buitentemperatuur tonen",
+    "flow_animation": "Stromingsanimatie",
+    "distributor": "Verdeler",
+    "legend_flow": "Aanvoer",
+    "legend_hk_on": "Circuit actief",
+    "legend_hk_off": "Circuit uit"
 }
