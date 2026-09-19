@@ -21,6 +21,7 @@ const config: UserConfig = {
                 './WolfCircuit': './src/widgets/WolfCircuit',
                 './WolfDhw': './src/widgets/WolfDhw',
                 './WolfHeatCurve': './src/widgets/WolfHeatCurve',
+                './WolfMessages': './src/widgets/WolfMessages',
                 './translations': './src/translations',
             },
             remotes: {},

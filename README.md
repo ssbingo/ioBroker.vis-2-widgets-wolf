@@ -18,7 +18,7 @@ individually to an existing ioBroker object — for example from the `wolf-smart
 the `wolf` adapter (ISM8i), Modbus or your own scripts. No assumptions are made about object
 names or structure.
 
-> **Status:** early development. The gas meter, boiler status, heating circuit, hot water and heating curve widgets are available so far.
+> **Status:** early development. The gas meter, boiler status, heating circuit, hot water, heating curve and messages widgets are available so far.
 
 ### Widgets
 
@@ -31,7 +31,7 @@ names or structure.
 | Hot water | Tank with set mark, set temperature, time program, optional circulation and one-time charge (writing) | first version |
 | System diagram | Hydraulic diagram with animated flow | planned |
 | Trends | Charts from history, SQL or InfluxDB | planned |
-| Messages | Fault indicator and recent messages | planned |
+| Messages | Fault LED and a status list: configurable checks (e.g. safety temperature limiters, connection), collective fault, fault code, message list | first version |
 
 Each widget can be set to light or dark, or follow the VIS-2 theme automatically (default).
 
@@ -86,6 +86,9 @@ provide.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (ssbingo) Messages: fault LED and a status list with up to eight configurable checks (e.g. the safety temperature limiters and the connection to the ISM7), collective fault, fault code with texts and an optional message list (JSON)
+
 ### 0.2.0 (2026-09-18)
 * (ssbingo) Initial version: widget set built with React 19 and TypeScript, first version of the gas meter widget
 * (ssbingo) Gas meter: all seven counter styles (A, B, C, E, F, G, H) and a status LED for consumption

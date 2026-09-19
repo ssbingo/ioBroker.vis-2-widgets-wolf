@@ -8,7 +8,7 @@ Widżety VIS-2 do wyświetlania i obsługi instalacji grzewczej [WOLF](https://w
 
 Zestaw widżetów sam nie odczytuje danych z instalacji grzewczej. Każda wartość jest osobno powiązana z istniejącym obiektem ioBroker — na przykład z adaptera `wolf-smartset`, adaptera `wolf` (ISM8i), Modbus lub własnych skryptów.
 
-> **Stan:** wczesna faza rozwoju. Na razie dostępne są licznik gazu, stan kotła, obieg grzewczy, ciepła woda i krzywa grzewcza.
+> **Stan:** wczesna faza rozwoju. Na razie dostępne są licznik gazu, stan kotła, obieg grzewczy, ciepła woda, krzywa grzewcza i komunikaty.
 
 ### Wymagania
 

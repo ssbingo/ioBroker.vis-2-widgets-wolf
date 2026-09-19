@@ -13,7 +13,9 @@ import { createRoot } from 'react-dom/client';
 import BoilerView from '../components/BoilerView';
 import Counter, { COUNTER_VARIANTS, toVariant } from '../components/Counter';
 import GasMeterView from '../components/GasMeterView';
+import MessagesView from '../components/MessagesView';
 import { monthlyCost } from '../lib/gas';
+import { parseMessages, sortRows, type MessageRow } from '../lib/messages';
 import { injectStyles } from '../styles/injectStyles';
 import de from '../i18n/de.json';
 
@@ -130,6 +132,32 @@ const CURVES = [
         exponent: 1,
         noAck: true,
         timeoutMs: 4000,
+    },
+];
+
+const HOUR = 3_600_000;
+const NOW = Date.now();
+/** Meldungen: wie ISM7 über wolf-smartset (alles in Ordnung) und mit Störung, Warnung und Meldungsliste */
+const MESSAGES: Array<{ subtitle: string; rows: MessageRow[] }> = [
+    {
+        subtitle: 'wie ISM7: Temperaturwächter und Verbindung',
+        rows: [
+            { key: 'c1', severity: 'ok', text: 'TW-Vorlauf: i. O.', ts: NOW - 30 * 24 * HOUR, since: true },
+            { key: 'c2', severity: 'ok', text: 'TW-Abgas: i. O.', ts: NOW - 30 * 24 * HOUR, since: true },
+            { key: 'c3', severity: 'ok', text: 'Verbindung ISM7: in Ordnung', ts: NOW - 5 * HOUR, since: true },
+        ],
+    },
+    {
+        subtitle: 'mit Störung, Warnung und Meldungsliste',
+        rows: [
+            { key: 'c1', severity: 'err', text: 'TW-Abgas: Ausgelöst', ts: NOW - 2 * HOUR, since: true },
+            { key: 'c2', severity: 'warn', text: 'Verbindung ISM7: getrennt', ts: NOW - 20 * 60_000, since: true },
+            { key: 'c3', severity: 'ok', text: 'TW-Vorlauf: i. O.', ts: NOW - 30 * 24 * HOUR, since: true },
+            ...parseMessages([
+                { text: 'Wartung fällig in 34 Tagen', ts: NOW - 6 * 24 * HOUR, severity: 'info' },
+                { text: 'Sommerbetrieb beendet', ts: NOW - 25 * 24 * HOUR, severity: 'info' },
+            ]),
+        ],
     },
 ];
 
@@ -362,6 +390,31 @@ function Sandbox(): React.JSX.Element {
                             themeType={themeType}
                             running={running}
                             {...c}
+                        />
+                    </div>
+                ))}
+            </div>
+
+            <h2 className="sb-h">Meldungen — WolfMessages</h2>
+            <div className="sb-grid">
+                {MESSAGES.map(m => (
+                    <div
+                        key={m.subtitle}
+                        className="sb-cell sb-cell-messages"
+                    >
+                        <MessagesView
+                            themeType={themeType}
+                            title={de.messages}
+                            subtitle={m.subtitle}
+                            fault={m.rows.some(r => r.severity === 'err')}
+                            rows={sortRows(m.rows)}
+                            labels={{
+                                faultOn: de.fault_on,
+                                faultOff: de.fault_off,
+                                none: de.msg_none,
+                                since: de.since,
+                            }}
+                            locale="de-DE"
                         />
                     </div>
                 ))}
