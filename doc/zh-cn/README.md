@@ -52,6 +52,9 @@ WOLF 及 WOLF 标志是 WOLF GmbH 的商标。本项目与 WOLF GmbH 无任何�
     ### **WORK IN PROGRESS**
 -->
 
+### 0.4.1 (2026-09-19)
+* (ssbingo) 所有 README 文件顶部加入 Buy me a coffee 按钮。
+
 ### 0.4.0 (2026-09-19)
 * (ssbingo) VIS-2 调色板中每个小部件都有预览图；支持约 260 px 宽的窄磁贴（系统图改为竖向布局）；趋势图可用键盘操作；文档包含 wolf-smartset (ISM7) 的设置说明。
 

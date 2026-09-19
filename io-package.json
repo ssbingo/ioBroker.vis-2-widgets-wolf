@@ -1,20 +1,20 @@
 {
   "common": {
     "name": "vis-2-widgets-wolf",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "news": {
-      "0.4.0": {
-        "en": "Preview image for every widget in the VIS-2 palette; narrow tiles down to about 260 px (the system diagram switches to an upright layout); keyboard operation of the trends chart; documentation with the setup for wolf-smartset (ISM7).",
-        "de": "Vorschaubild für jedes Widget in der VIS-2-Palette; schmale Kacheln bis etwa 260 px (das Anlagenschema stellt sich hochkant); Verläufe mit der Tastatur bedienbar; Anleitung mit der Einrichtung für wolf-smartset (ISM7).",
-        "ru": "Изображение предпросмотра для каждого виджета в палитре VIS-2; узкие плитки до 260 px (схема установки переходит в вертикальный вид); управление графиками с клавиатуры; документация с настройкой для wolf-smartset (ISM7).",
-        "pt": "Imagem de pré-visualização para cada widget na paleta do VIS-2; mosaicos estreitos até cerca de 260 px (o esquema da instalação passa a vertical); históricos operáveis pelo teclado; documentação com a configuração para wolf-smartset (ISM7).",
-        "nl": "Voorbeeldafbeelding voor elke widget in het VIS-2-palet; smalle tegels tot ongeveer 260 px (het installatieschema wordt staand); verloop met het toetsenbord te bedienen; documentatie met de instelling voor wolf-smartset (ISM7).",
-        "fr": "Image d'aperçu pour chaque widget dans la palette VIS-2 ; tuiles étroites jusqu'à environ 260 px (le schéma de l'installation passe à la verticale) ; historiques utilisables au clavier ; documentation avec la configuration pour wolf-smartset (ISM7).",
-        "it": "Immagine di anteprima per ogni widget nella tavolozza di VIS-2; riquadri stretti fino a circa 260 px (lo schema dell'impianto passa in verticale); andamenti utilizzabili da tastiera; documentazione con la configurazione per wolf-smartset (ISM7).",
-        "es": "Imagen de vista previa para cada widget en la paleta de VIS-2; mosaicos estrechos hasta unos 260 px (el esquema de la instalación pasa a vertical); históricos manejables con el teclado; documentación con la configuración para wolf-smartset (ISM7).",
-        "pl": "Obraz podglądu dla każdego widżetu w palecie VIS-2; wąskie kafelki do ok. 260 px (schemat instalacji przechodzi w układ pionowy); przebiegi obsługiwane z klawiatury; dokumentacja z konfiguracją dla wolf-smartset (ISM7).",
-        "uk": "Зображення попереднього перегляду для кожного віджета в палітрі VIS-2; вузькі плитки до близько 260 px (схема установки переходить у вертикальний вигляд); графіки керуються з клавіатури; документація з налаштуванням для wolf-smartset (ISM7).",
-        "zh-cn": "VIS-2 调色板中每个小部件都有预览图；支持约 260 px 宽的窄磁贴（系统图改为竖向布局）；趋势图可用键盘操作；文档包含 wolf-smartset (ISM7) 的设置说明。"
+      "0.4.1": {
+        "en": "Buy me a coffee button at the top of all README files.",
+        "de": "Buy-Me-a-Coffee-Button oben in allen README-Dateien.",
+        "ru": "Кнопка Buy me a coffee вверху всех файлов README.",
+        "pt": "Botão Buy me a coffee no topo de todos os ficheiros README.",
+        "nl": "Buy me a coffee-knop bovenaan alle README-bestanden.",
+        "fr": "Bouton Buy me a coffee en haut de tous les fichiers README.",
+        "it": "Pulsante Buy me a coffee in cima a tutti i file README.",
+        "es": "Botón Buy me a coffee al principio de todos los archivos README.",
+        "pl": "Przycisk Buy me a coffee na początku wszystkich plików README.",
+        "uk": "Кнопка Buy me a coffee вгорі всіх файлів README.",
+        "zh-cn": "所有 README 文件顶部加入 Buy me a coffee 按钮。"
       }
     },
     "titleLang": {

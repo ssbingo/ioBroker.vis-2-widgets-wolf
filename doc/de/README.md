@@ -211,6 +211,9 @@ WOLF und das WOLF-Logo sind Marken der WOLF GmbH. Dieses Projekt steht in keiner
     ### **WORK IN PROGRESS**
 -->
 
+### 0.4.1 (2026-09-19)
+* (ssbingo) Buy-Me-a-Coffee-Button oben in allen README-Dateien.
+
 ### 0.4.0 (2026-09-19)
 * (ssbingo) Vorschaubild für jedes Widget in der VIS-2-Palette; schmale Kacheln bis etwa 260 px (das Anlagenschema stellt sich hochkant); Verläufe mit der Tastatur bedienbar; Anleitung mit der Einrichtung für wolf-smartset (ISM7).
 

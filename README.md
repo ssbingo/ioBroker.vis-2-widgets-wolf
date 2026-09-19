@@ -241,6 +241,9 @@ provide.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### 0.4.1 (2026-09-19)
+* (ssbingo) Buy me a coffee button at the top of all README files
+
 ### 0.4.0 (2026-09-19)
 * (ssbingo) Preview image for every widget in the VIS-2 palette, icon for the widget group
 * (ssbingo) Narrow tiles: the system diagram switches to an upright layout below 480 px; small steppers and LED texts adapt down to about 260 px

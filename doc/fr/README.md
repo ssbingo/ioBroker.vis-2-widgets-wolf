@@ -52,6 +52,9 @@ WOLF et le logo WOLF sont des marques de WOLF GmbH. Ce projet n'est ni affilié 
     ### **WORK IN PROGRESS**
 -->
 
+### 0.4.1 (2026-09-19)
+* (ssbingo) Bouton Buy me a coffee en haut de tous les fichiers README.
+
 ### 0.4.0 (2026-09-19)
 * (ssbingo) Image d'aperçu pour chaque widget dans la palette VIS-2 ; tuiles étroites jusqu'à environ 260 px (le schéma de l'installation passe à la verticale) ; historiques utilisables au clavier ; documentation avec la configuration pour wolf-smartset (ISM7).
 
