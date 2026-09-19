@@ -2,6 +2,14 @@
 
 # ioBroker.vis-2-widgets-wolf
 
+---
+
+<p align="center">
+  <a href="https://www.buymeacoffee.com/ssbingo"><img src="https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=ssbingo&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" alt="Buy me a coffee" /></a>
+</p>
+
+---
+
 ## 适用于 ioBroker VIS-2 的 Wolf 供暖小部件
 
 用于在 ioBroker 中显示和操作 [WOLF](https://www.wolf.eu/) 供暖系统的 VIS-2 小部件。

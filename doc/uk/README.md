@@ -2,6 +2,14 @@
 
 # ioBroker.vis-2-widgets-wolf
 
+---
+
+<p align="center">
+  <a href="https://www.buymeacoffee.com/ssbingo"><img src="https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=ssbingo&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" alt="Buy me a coffee" /></a>
+</p>
+
+---
+
 ## Віджети опалення Wolf для ioBroker VIS-2
 
 Віджети VIS-2 для відображення та керування системою опалення [WOLF](https://www.wolf.eu/) в ioBroker.

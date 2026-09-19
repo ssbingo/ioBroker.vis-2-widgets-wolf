@@ -2,6 +2,14 @@
 
 # ioBroker.vis-2-widgets-wolf
 
+---
+
+<p align="center">
+  <a href="https://www.buymeacoffee.com/ssbingo"><img src="https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=ssbingo&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" alt="Buy me a coffee" /></a>
+</p>
+
+---
+
 ## Wolf-verwarmingswidgets voor ioBroker VIS-2
 
 VIS-2-widgets die een [WOLF](https://www.wolf.eu/)-verwarmingsinstallatie in ioBroker weergeven en bedienbaar maken.

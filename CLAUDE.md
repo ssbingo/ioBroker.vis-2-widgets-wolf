@@ -29,6 +29,20 @@ ist als diese Datei (Node 18/20, `NPM_TOKEN`, 9 READMEs), gilt diese Datei.
 - Das Gerüst stammt vom Adapter-Creator (`.create-adapter.json`, Version 3.1.5).
   Diese Datei nicht löschen.
 
+## README — zwingende Grundregel
+
+- **Buy-Me-a-Coffee-Eintrag immer oben** in `README.md` und in allen `doc/<sprache>/README.md`:
+  direkt nach den Badges bzw. dem Titel, zwischen zwei `---`, zentriert — wie in
+  `ioBroker.sigenergy` und `ioBroker.vis-2-widgets-automatic-feeder`:
+
+  ```html
+  <p align="center">
+    <a href="https://www.buymeacoffee.com/ssbingo"><img src="https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=ssbingo&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" alt="Buy me a coffee" /></a>
+  </p>
+  ```
+
+  Gilt für alle Projekte des Nutzers, ohne Ausnahme, und ist bei jeder README-Änderung zu prüfen.
+
 ## Sprache
 
 Code-Kommentare und Commit-Nachrichten auf Deutsch. README.md im Wurzelverzeichnis auf
