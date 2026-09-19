@@ -1,7 +1,8 @@
-import React, { useEffect, useId, useState } from 'react';
+import React, { useId, useState } from 'react';
 
 import { linePath, nearest, niceScale, timeLabel, timeTicks, type ChartPoint } from '../lib/chart';
 import { fmt } from '../lib/fmt';
+import { useSize } from './useSize';
 
 /** Farben der Kurven — nur Tokens, damit hell und dunkel stimmen */
 export const SERIES_COLORS = ['warm', 'cool', 'ok', 'accent', 'warn', 'warm2', 'cool2', 'ink'] as const;
@@ -50,30 +51,6 @@ export interface TrendsChartProps {
 const PAD = { left: 40, right: 12, top: 10, bottom: 24 };
 /** Anteil der Zeichenhöhe, den die Fläche höchstens einnimmt (Entwurf: 42 %) */
 const AREA_SHARE = 0.42;
-
-/**
- * Größe eines Elements, laufend über ResizeObserver.
- *
- * @param el Element oder null
- * @returns Breite und Höhe in Pixeln
- */
-function useSize(el: HTMLElement | null): { width: number; height: number } {
-    const [size, setSize] = useState({ width: 0, height: 0 });
-    useEffect(() => {
-        if (!el) {
-            return undefined;
-        }
-        const observer = new ResizeObserver(entries => {
-            const r = entries[0]?.contentRect;
-            if (r) {
-                setSize({ width: Math.floor(r.width), height: Math.floor(r.height) });
-            }
-        });
-        observer.observe(el);
-        return () => observer.disconnect();
-    }, [el]);
-    return size;
-}
 
 /**
  * Verlaufsdiagramm in echter Pixelgröße: Schrift und Linien bleiben bei jeder Kachelgröße gleich.
