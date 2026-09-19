@@ -41,6 +41,8 @@ export interface TrendsChartProps {
     onHover: (ts: number | null) => void;
     /** Beschreibung für Screenreader */
     label: string;
+    /** Bedienhinweis für die Tastatur, wird an die Beschreibung angehängt */
+    keyHint: string;
     /** Sprachregion */
     locale?: string;
 }
@@ -105,6 +107,28 @@ export default function TrendsChart(props: TrendsChartProps): React.JSX.Element 
         areaPath = `${linePath(pts, x, yArea)} L${x(pts[pts.length - 1].ts).toFixed(1)} ${PAD.top + ih} L${x(pts[0].ts).toFixed(1)} ${PAD.top + ih} Z`;
     }
 
+    // Tastatur: 48 Schritte über den Zeitraum (bei 24 h eine halbe Stunde)
+    const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>): void => {
+        const step = span / 48;
+        const current = props.hover ?? props.end;
+        const target =
+            e.key === 'ArrowLeft'
+                ? current - step
+                : e.key === 'ArrowRight'
+                  ? current + step
+                  : e.key === 'Home'
+                    ? props.start
+                    : e.key === 'End'
+                      ? props.end
+                      : undefined;
+        if (target !== undefined) {
+            e.preventDefault();
+            props.onHover(Math.max(props.start, Math.min(props.end, target)));
+        } else if (e.key === 'Escape') {
+            props.onHover(null);
+        }
+    };
+
     const pointerTs = (e: React.PointerEvent<SVGRectElement>): number => {
         const r = e.currentTarget.getBoundingClientRect();
         const frac = Math.max(0, Math.min(1, (e.clientX - r.left) / Math.max(1, r.width)));
@@ -115,6 +139,11 @@ export default function TrendsChart(props: TrendsChartProps): React.JSX.Element 
         <div
             className="wolf-chart"
             ref={setBox}
+            role="group"
+            tabIndex={0}
+            aria-label={`${props.label}. ${props.keyHint}`}
+            onKeyDown={onKeyDown}
+            onBlur={() => props.onHover(null)}
         >
             {width > 0 && height > 0 ? (
                 <svg

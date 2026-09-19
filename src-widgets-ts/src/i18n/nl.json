@@ -233,5 +233,6 @@
     "trend_empty": "Geen waarden in deze periode",
     "trend_error": "Historie niet beschikbaar — controleer de instantie",
     "trend_no_instance": "Geen historie-instantie — stel die in de widget of in de systeeminstellingen in",
-    "trend_chart": "Verloop in de gekozen periode"
+    "trend_chart": "Verloop in de gekozen periode",
+    "trend_keys": "Pijltoetsen verschuiven het dradenkruis, Home en End springen naar de randen, Esc verbergt het"
 }

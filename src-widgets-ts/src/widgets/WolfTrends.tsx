@@ -361,6 +361,7 @@ export default class WolfTrends extends WolfWidgetBase<WolfTrendsRxData, WolfTre
                     error: this.tr('trend_error'),
                     noInstance: this.tr('trend_no_instance'),
                     chart: this.tr('trend_chart'),
+                    keyHint: this.tr('trend_keys'),
                 }}
                 locale={this.locale()}
             />

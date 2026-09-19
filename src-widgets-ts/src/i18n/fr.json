@@ -233,5 +233,6 @@
     "trend_empty": "Aucune valeur sur la période",
     "trend_error": "Historique indisponible — vérifier l'instance",
     "trend_no_instance": "Aucune instance d'historique — la définir dans le widget ou dans les paramètres système",
-    "trend_chart": "Historiques sur la période choisie"
+    "trend_chart": "Historiques sur la période choisie",
+    "trend_keys": "Les flèches déplacent le réticule, Début et Fin sautent aux bords, Échap le masque"
 }

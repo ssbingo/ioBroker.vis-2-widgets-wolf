@@ -233,5 +233,6 @@
     "trend_empty": "Keine Werte im Zeitraum",
     "trend_error": "Verlauf nicht abrufbar — Instanz prüfen",
     "trend_no_instance": "Keine Verlaufsinstanz — im Widget oder in den Systemeinstellungen festlegen",
-    "trend_chart": "Verläufe im gewählten Zeitraum"
+    "trend_chart": "Verläufe im gewählten Zeitraum",
+    "trend_keys": "Pfeiltasten verschieben das Fadenkreuz, Pos1 und Ende springen an die Ränder, Esc blendet es aus"
 }

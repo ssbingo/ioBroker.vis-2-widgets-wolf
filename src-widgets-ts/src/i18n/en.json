@@ -233,5 +233,6 @@
     "trend_empty": "No values in this period",
     "trend_error": "History not available — check the instance",
     "trend_no_instance": "No history instance — set one in the widget or in the system settings",
-    "trend_chart": "Trends over the selected period"
+    "trend_chart": "Trends over the selected period",
+    "trend_keys": "Arrow keys move the crosshair, Home and End jump to the edges, Escape hides it"
 }

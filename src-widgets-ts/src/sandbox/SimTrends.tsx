@@ -82,6 +82,7 @@ export default function SimTrends(props: SimTrendsProps): React.JSX.Element {
                 error: de.trend_error,
                 noInstance: de.trend_no_instance,
                 chart: de.trend_chart,
+                keyHint: de.trend_keys,
             }}
             locale="de-DE"
         />
