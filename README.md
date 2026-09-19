@@ -256,6 +256,8 @@ provide.
 * (ssbingo) Heating curve: approximation (labelled as such, not a Wolf formula) with the controller's operating point; setpoint correction writable, slope and level only where the object allows writing; the operating point is marked as distorted while the tank is charging
 * (ssbingo) Gas meter: today's and this month's consumption from the history of the meter reading when no objects are linked; meter reading correction for sensors that count from their installation (e.g. HmIP-ESI); warnings for an unreachable sensor, low battery and a questionable counter status
 
+Older changes: [CHANGELOG_OLD.md](CHANGELOG_OLD.md)
+
 ## License
 MIT License
 
