@@ -233,5 +233,6 @@
     "trend_empty": "Nessun valore nel periodo",
     "trend_error": "Storico non disponibile — verificare l'istanza",
     "trend_no_instance": "Nessuna istanza di storico — impostarla nel widget o nelle impostazioni di sistema",
-    "trend_chart": "Andamenti nel periodo scelto"
+    "trend_chart": "Andamenti nel periodo scelto",
+    "trend_keys": "Le frecce spostano il mirino, Home e Fine saltano ai bordi, Esc lo nasconde"
 }

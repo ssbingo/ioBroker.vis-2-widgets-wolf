@@ -233,5 +233,6 @@
     "trend_empty": "Brak wartości w okresie",
     "trend_error": "Historia niedostępna — sprawdź instancję",
     "trend_no_instance": "Brak instancji historii — ustaw w widżecie lub w ustawieniach systemu",
-    "trend_chart": "Przebiegi w wybranym okresie"
+    "trend_chart": "Przebiegi w wybranym okresie",
+    "trend_keys": "Strzałki przesuwają celownik, Home i End przeskakują do krawędzi, Esc go ukrywa"
 }

@@ -1,10 +1,11 @@
-import React, { useId } from 'react';
+import React, { useId, useState } from 'react';
 
 import { fmt } from '../lib/fmt';
 import { schemaLayout, type ConsumerLayout } from '../lib/schemaLayout';
 import { tankFraction, tankScale } from '../lib/tank';
 import type { ThemeType } from '../lib/theme';
 import Led from './Led';
+import { useSize } from './useSize';
 
 /** Ein Heizkreis im Schema */
 export interface SchemaCircuit {
@@ -64,6 +65,8 @@ export interface SchemaViewProps {
 
 /** Skala der Speicherfüllung wie im Entwurf */
 const TANK_SCALE = tankScale(70);
+/** unter dieser Breite (px) zeichnet das Schema hochkant — die Schrift bleibt so lesbar */
+export const PORTRAIT_BELOW = 480;
 
 /**
  * Hydraulisches Anlagenschema — Heizgerät mit Flamme, Verteiler, Speicher, Heizkreise und
@@ -75,10 +78,13 @@ const TANK_SCALE = tankScale(70);
 export default function SchemaView(props: SchemaViewProps): React.JSX.Element {
     const { labels, locale } = props;
     const clipId = `${useId().replace(/:/g, '')}-tank`;
+    const [box, setBox] = useState<HTMLDivElement | null>(null);
+    const { width } = useSize(box);
     const layout = schemaLayout({
         tank: !!props.tank,
         circuits: props.circuits.length,
         outside: props.outsideTemp !== undefined,
+        orientation: width > 0 && width < PORTRAIT_BELOW ? 'portrait' : 'landscape',
     });
     const temp = (value: number | null | undefined): string => `${fmt(value ?? null, 1, undefined, locale)} °C`;
     const flow = (active: boolean, extra = ''): string =>
@@ -203,172 +209,188 @@ export default function SchemaView(props: SchemaViewProps): React.JSX.Element {
                 ) : null}
             </div>
 
-            <svg
-                className={props.animate ? 'wolf-schema-svg' : 'wolf-schema-svg wolf-schema-static'}
-                viewBox={`0 0 ${layout.width} ${layout.height}`}
-                role="img"
-                aria-label={labels.schema}
+            <div
+                className="wolf-schema-box"
+                ref={setBox}
             >
-                {/* Rohre: Hintergrund, darüber der Fluss */}
-                <path
-                    className="wolf-pipe wolf-pipe-bg"
-                    d={layout.flowPipe}
-                />
-                <path
-                    className="wolf-pipe wolf-pipe-bg"
-                    d={layout.returnPipe}
-                />
-                {layout.consumers.map(c => (
+                <svg
+                    className={props.animate ? 'wolf-schema-svg' : 'wolf-schema-svg wolf-schema-static'}
+                    viewBox={`0 0 ${layout.width} ${layout.height}`}
+                    role="img"
+                    aria-label={labels.schema}
+                >
+                    {/* Rohre: Hintergrund, darüber der Fluss */}
                     <path
-                        key={`bg-${c.kind}${c.index}`}
                         className="wolf-pipe wolf-pipe-bg"
-                        d={c.pipe}
+                        d={layout.flowPipe}
                     />
-                ))}
-                <path
-                    className={flow(props.primaryActive, 'wolf-flow-warm')}
-                    d={layout.flowPipe}
-                />
-                <path
-                    className={flow(props.primaryActive, 'wolf-flow-cool wolf-rev')}
-                    d={layout.returnPipe}
-                />
-                {layout.consumers.map(c => {
-                    const active = c.kind === 'tank' ? !!props.tank?.active : !!props.circuits[c.index - 1]?.active;
-                    const color = c.kind === 'tank' ? 'wolf-flow-warm' : active ? 'wolf-flow-on' : 'wolf-flow-off';
-                    return (
+                    <path
+                        className="wolf-pipe wolf-pipe-bg"
+                        d={layout.returnPipe}
+                    />
+                    {layout.consumers.map(c => (
                         <path
-                            key={`flow-${c.kind}${c.index}`}
-                            className={flow(active, color)}
+                            key={`bg-${c.kind}${c.index}`}
+                            className="wolf-pipe wolf-pipe-bg"
                             d={c.pipe}
                         />
-                    );
-                })}
+                    ))}
+                    <path
+                        className={flow(props.primaryActive, 'wolf-flow-warm')}
+                        d={layout.flowPipe}
+                    />
+                    <path
+                        className={flow(props.primaryActive, 'wolf-flow-cool wolf-rev')}
+                        d={layout.returnPipe}
+                    />
+                    {layout.consumers.map(c => {
+                        const active = c.kind === 'tank' ? !!props.tank?.active : !!props.circuits[c.index - 1]?.active;
+                        const color = c.kind === 'tank' ? 'wolf-flow-warm' : active ? 'wolf-flow-on' : 'wolf-flow-off';
+                        return (
+                            <path
+                                key={`flow-${c.kind}${c.index}`}
+                                className={flow(active, color)}
+                                d={c.pipe}
+                            />
+                        );
+                    })}
 
-                {/* Heizgerät */}
-                <rect
-                    className="wolf-node"
-                    x={b.x}
-                    y={b.y}
-                    width={b.width}
-                    height={b.height}
-                    rx="12"
-                />
-                <text
-                    className="wolf-slab"
-                    x={b.x + 16}
-                    y={b.y + 24}
-                >
-                    {props.boilerLabel}
-                </text>
-                <text
-                    className="wolf-sval"
-                    x={b.x + 16}
-                    y={b.y + 48}
-                >
-                    {temp(props.flowTemp)}
-                </text>
-                <g
-                    className="wolf-flame"
-                    transform={`translate(${b.x + 75},${b.y + 122})`}
-                    style={{ opacity: flameOpacity }}
-                >
-                    <path
-                        d="M0 -42 C 16 -24 24 -12 24 2 C 24 18 12 30 0 30 C -12 30 -24 18 -24 2 C -24 -12 -16 -24 0 -42 Z"
-                        fill="var(--wolf-warm)"
-                        opacity=".28"
+                    {/* Heizgerät */}
+                    <rect
+                        className="wolf-node"
+                        x={b.x}
+                        y={b.y}
+                        width={b.width}
+                        height={b.height}
+                        rx="12"
                     />
-                    <path
-                        d="M0 -26 C 9 -14 14 -6 14 3 C 14 13 7 20 0 20 C -7 20 -14 13 -14 3 C -14 -6 -9 -14 0 -26 Z"
-                        fill="var(--wolf-warm-2)"
-                    />
-                    {/* heller Kern der Flamme — physische Nachbildung, bewusst fest */}
-                    <path
-                        d="M0 -12 C 5 -6 7 -2 7 3 C 7 9 4 13 0 13 C -4 13 -7 9 -7 3 C -7 -2 -5 -6 0 -12 Z"
-                        fill="#ffe1a8"
-                    />
-                </g>
-                {props.modulation !== null ? (
                     <text
                         className="wolf-slab"
                         x={b.x + 16}
-                        y={b.y + 168}
+                        y={b.y + 24}
                     >
-                        {`${labels.modulation} ${fmt(props.modulation, 0, undefined, locale)} %`}
+                        {props.boilerLabel}
                     </text>
-                ) : null}
-
-                {/* Rücklauftemperatur unter dem Rücklaufrohr, Bezeichnung und Wert in zwei Zeilen */}
-                {props.returnTemp !== undefined ? (
-                    <g>
-                        <text
-                            className="wolf-slab"
-                            x={(b.x + b.width + layout.distributor.x) / 2}
-                            y={layout.returnY + 22}
-                            textAnchor="middle"
-                        >
-                            {labels.returnFlow}
-                        </text>
-                        <text
-                            className="wolf-sval wolf-cool"
-                            x={(b.x + b.width + layout.distributor.x) / 2}
-                            y={layout.returnY + 40}
-                            textAnchor="middle"
-                        >
-                            {temp(props.returnTemp)}
-                        </text>
-                    </g>
-                ) : null}
-
-                {/* Verteiler */}
-                <rect
-                    className="wolf-schema-dist"
-                    x={layout.distributor.x}
-                    y={layout.distributor.y}
-                    width={layout.distributor.width}
-                    height={layout.distributor.height}
-                    rx="6"
-                />
-                <text
-                    className="wolf-slab"
-                    x={layout.distributor.x + layout.distributor.width / 2}
-                    y={layout.distributor.y - 8}
-                    textAnchor="middle"
-                >
-                    {labels.distributor}
-                </text>
-
-                {layout.consumers.map(consumer)}
-
-                {layout.outside ? (
-                    <g>
-                        <rect
-                            className="wolf-node"
-                            x={layout.outside.x}
-                            y={layout.outside.y}
-                            width={layout.outside.width}
-                            height={layout.outside.height}
-                            rx="10"
+                    <text
+                        className="wolf-sval"
+                        x={b.x + 16}
+                        y={b.y + 48}
+                    >
+                        {temp(props.flowTemp)}
+                    </text>
+                    <g
+                        className="wolf-flame"
+                        transform={`translate(${b.x + 75},${b.y + 122})`}
+                        style={{ opacity: flameOpacity }}
+                    >
+                        <path
+                            d="M0 -42 C 16 -24 24 -12 24 2 C 24 18 12 30 0 30 C -12 30 -24 18 -24 2 C -24 -12 -16 -24 0 -42 Z"
+                            fill="var(--wolf-warm)"
+                            opacity=".28"
                         />
+                        <path
+                            d="M0 -26 C 9 -14 14 -6 14 3 C 14 13 7 20 0 20 C -7 20 -14 13 -14 3 C -14 -6 -9 -14 0 -26 Z"
+                            fill="var(--wolf-warm-2)"
+                        />
+                        {/* heller Kern der Flamme — physische Nachbildung, bewusst fest */}
+                        <path
+                            d="M0 -12 C 5 -6 7 -2 7 3 C 7 9 4 13 0 13 C -4 13 -7 9 -7 3 C -7 -2 -5 -6 0 -12 Z"
+                            fill="#ffe1a8"
+                        />
+                    </g>
+                    {props.modulation !== null ? (
                         <text
                             className="wolf-slab"
-                            x={layout.outside.x + layout.outside.width / 2}
-                            y={layout.outside.y + 26}
-                            textAnchor="middle"
+                            x={b.x + 16}
+                            y={b.y + 168}
                         >
-                            {labels.outside}
+                            {`${labels.modulation} ${fmt(props.modulation, 0, undefined, locale)} %`}
                         </text>
-                        <text
-                            className="wolf-sval wolf-cool"
-                            x={layout.outside.x + layout.outside.width / 2}
-                            y={layout.outside.y + 56}
-                            textAnchor="middle"
-                        >
-                            {temp(props.outsideTemp)}
-                        </text>
-                    </g>
-                ) : null}
-            </svg>
+                    ) : null}
+
+                    {/* Rücklauftemperatur: quer unter dem Rohr in zwei Zeilen, hochkant in einer */}
+                    {props.returnTemp !== undefined ? (
+                        layout.returnLabel.inline ? (
+                            <text
+                                x={layout.returnLabel.x}
+                                y={layout.returnLabel.y}
+                                textAnchor={layout.returnLabel.anchor}
+                            >
+                                <tspan className="wolf-slab">{`${labels.returnFlow} `}</tspan>
+                                <tspan className="wolf-sval wolf-cool">{temp(props.returnTemp)}</tspan>
+                            </text>
+                        ) : (
+                            <g>
+                                <text
+                                    className="wolf-slab"
+                                    x={layout.returnLabel.x}
+                                    y={layout.returnLabel.y}
+                                    textAnchor={layout.returnLabel.anchor}
+                                >
+                                    {labels.returnFlow}
+                                </text>
+                                <text
+                                    className="wolf-sval wolf-cool"
+                                    x={layout.returnLabel.x}
+                                    y={layout.returnLabel.y + 18}
+                                    textAnchor={layout.returnLabel.anchor}
+                                >
+                                    {temp(props.returnTemp)}
+                                </text>
+                            </g>
+                        )
+                    ) : null}
+
+                    {/* Verteiler */}
+                    <rect
+                        className="wolf-schema-dist"
+                        x={layout.distributor.x}
+                        y={layout.distributor.y}
+                        width={layout.distributor.width}
+                        height={layout.distributor.height}
+                        rx="6"
+                    />
+                    <text
+                        className="wolf-slab"
+                        x={layout.distributorLabel.x}
+                        y={layout.distributorLabel.y}
+                        textAnchor={layout.distributorLabel.anchor}
+                    >
+                        {labels.distributor}
+                    </text>
+
+                    {layout.consumers.map(consumer)}
+
+                    {layout.outside ? (
+                        <g>
+                            <rect
+                                className="wolf-node"
+                                x={layout.outside.x}
+                                y={layout.outside.y}
+                                width={layout.outside.width}
+                                height={layout.outside.height}
+                                rx="10"
+                            />
+                            <text
+                                className="wolf-slab"
+                                x={layout.outside.x + layout.outside.width / 2}
+                                y={layout.outside.y + 26}
+                                textAnchor="middle"
+                            >
+                                {labels.outside}
+                            </text>
+                            <text
+                                className="wolf-sval wolf-cool"
+                                x={layout.outside.x + layout.outside.width / 2}
+                                y={layout.outside.y + 56}
+                                textAnchor="middle"
+                            >
+                                {temp(props.outsideTemp)}
+                            </text>
+                        </g>
+                    ) : null}
+                </svg>
+            </div>
 
             <div className="wolf-legend">
                 <span className="wolf-lg">

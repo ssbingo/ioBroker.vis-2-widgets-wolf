@@ -48,6 +48,7 @@
   ],
   "scripts": {
     "build": "node tasks --typescript",
+    "zip": "node tasks --zip",
     "lint": "cd src-widgets-ts && eslint -c eslint.config.mjs",
     "test:package": "mocha test/package --exit",
     "test:unit": "npm --prefix src-widgets-ts test",

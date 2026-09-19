@@ -44,6 +44,7 @@ export interface TrendsViewProps {
         error: string;
         noInstance: string;
         chart: string;
+        keyHint: string;
     };
     /** Sprachregion */
     locale?: string;
@@ -108,6 +109,7 @@ export default function TrendsView(props: TrendsViewProps): React.JSX.Element {
                     hover={hover}
                     onHover={setHover}
                     label={labels.chart}
+                    keyHint={labels.keyHint}
                     locale={locale}
                 />
                 {message ? (
@@ -124,7 +126,11 @@ export default function TrendsView(props: TrendsViewProps): React.JSX.Element {
                 ) : null}
             </div>
 
-            <div className="wolf-legend">
+            {/* Werte unter dem Fadenkreuz ansagen — nur solange es steht, sonst wären es die Live-Werte */}
+            <div
+                className="wolf-legend"
+                aria-live={hover !== null ? 'polite' : 'off'}
+            >
                 {props.series.map(s => (
                     <span
                         key={s.key}

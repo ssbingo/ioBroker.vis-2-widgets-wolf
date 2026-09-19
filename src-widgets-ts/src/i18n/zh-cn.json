@@ -233,5 +233,6 @@
     "trend_empty": "该时间段内没有数值",
     "trend_error": "无法获取历史 — 请检查实例",
     "trend_no_instance": "没有历史实例 — 请在小部件或系统设置中指定",
-    "trend_chart": "所选时间段内的趋势"
+    "trend_chart": "所选时间段内的趋势",
+    "trend_keys": "方向键移动十字线，Home 和 End 跳到两端，Esc 隐藏十字线"
 }

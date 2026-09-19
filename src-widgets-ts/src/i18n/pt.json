@@ -233,5 +233,6 @@
     "trend_empty": "Sem valores no período",
     "trend_error": "Histórico indisponível — verifique a instância",
     "trend_no_instance": "Sem instância de histórico — defina no widget ou nas definições do sistema",
-    "trend_chart": "Históricos no período selecionado"
+    "trend_chart": "Históricos no período selecionado",
+    "trend_keys": "As setas movem a mira, Home e End saltam para as extremidades, Esc oculta-a"
 }

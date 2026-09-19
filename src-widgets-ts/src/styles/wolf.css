@@ -100,6 +100,8 @@
 /* ------------------------------------------------------------- Grundgeruest */
 
 .wolf-w {
+    /* Container-Abfragen richten sich nach der Kachelbreite, nicht nach dem Bildschirm */
+    container-type: inline-size;
     box-sizing: border-box;
     font-family: var(--wolf-font);
     font-size: 15px;
@@ -139,6 +141,11 @@
     justify-content: space-between;
     gap: 12px;
     margin-bottom: 14px;
+}
+
+/* Titel darf umbrechen, statt LED und Beschriftung aus der Kachel zu schieben */
+.wolf-head > div:first-child {
+    min-width: 0;
 }
 
 .wolf-head h3 {
@@ -846,11 +853,19 @@
     flex-direction: column;
 }
 
-.wolf-schema-svg {
-    display: block;
+/* die Box wird gemessen (Quer- oder Hochformat), das SVG füllt sie */
+.wolf-schema-box {
+    position: relative;
     flex: 1 1 auto;
     min-height: 0;
+}
+
+.wolf-schema-svg {
+    position: absolute;
+    inset: 0;
+    display: block;
     width: 100%;
+    height: 100%;
 }
 
 .wolf-schema-static .wolf-flow {
@@ -1112,6 +1127,12 @@
     width: 100%;
     margin: 0;
     accent-color: var(--wolf-accent);
+}
+
+.wolf-range:focus-visible {
+    outline: 2px solid var(--wolf-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
 }
 
 .wolf-mini-grid {
@@ -1387,6 +1408,13 @@
 .wolf-chart {
     position: absolute;
     inset: 0;
+    border-radius: 6px;
+}
+
+/* mit der Tastatur bedienbar: Pfeiltasten verschieben das Fadenkreuz */
+.wolf-chart:focus-visible {
+    outline: 2px solid var(--wolf-accent);
+    outline-offset: 2px;
 }
 
 .wolf-chart svg {
@@ -1564,4 +1592,22 @@
 
 .wolf-bg-ink {
     background: var(--wolf-ink);
+}
+
+/* ------------------------------------------------------- Schmale Kacheln */
+
+/* bis etwa 290 px Kachelbreite (Inhalt 250 px): kleine Stepper untereinander, LED-Text unter
+   die LED, damit nichts aus der Kachel ragt */
+@container (max-width: 250px) {
+    .wolf-mini-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .wolf-led-box {
+        flex: 0 1 auto;
+        flex-direction: column;
+        gap: 4px;
+        max-width: 96px;
+        text-align: center;
+    }
 }

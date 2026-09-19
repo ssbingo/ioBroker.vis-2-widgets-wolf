@@ -39,6 +39,7 @@ export default class WolfDhw extends WolfWidgetBase<WolfDhwRxData> {
             visSet: 'vis-2-widgets-wolf',
             visSetLabel: 'set_label',
             visSetColor: '#c2561f',
+            visSetIcon: 'widgets/vis-2-widgets-wolf/img/vis-2-widgets-wolf.png',
             visName: 'WolfDhw',
             visWidgetLabel: 'dhw',
             // Gruppen mit einer Vorgabe (notfalls '') legt VIS-2 beim Platzieren ausgewählt an, die übrigen
@@ -107,7 +108,7 @@ export default class WolfDhw extends WolfWidgetBase<WolfDhwRxData> {
             ],
             // 480: Platz für die Leiste „Übernehmen" im Bestätigungsmodus
             visDefaultStyle: { width: 360, height: 480 },
-            visPrev: 'widgets/vis-2-widgets-wolf/img/vis-2-widgets-wolf.png',
+            visPrev: 'widgets/vis-2-widgets-wolf/img/prev_dhw.png',
         };
     }
 

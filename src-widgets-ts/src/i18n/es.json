@@ -233,5 +233,6 @@
     "trend_empty": "Sin valores en el periodo",
     "trend_error": "Historial no disponible — compruebe la instancia",
     "trend_no_instance": "Sin instancia de historial — defínala en el widget o en la configuración del sistema",
-    "trend_chart": "Históricos en el periodo elegido"
+    "trend_chart": "Históricos en el periodo elegido",
+    "trend_keys": "Las flechas mueven la cruz, Inicio y Fin saltan a los extremos, Esc la oculta"
 }

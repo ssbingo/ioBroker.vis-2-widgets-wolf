@@ -3,7 +3,11 @@
  * doc/design/wolf-heizung.html, waagerecht gestrafft, damit Schrift und Werte auch in einer
  * 640 px breiten Kachel lesbar bleiben: Heizgerät links, Verteiler in der Mitte, rechts die Verbraucher
  * untereinander (Speicher, Heizkreise), oben rechts die Außentemperatur. Die Höhe wächst mit der
- * Zahl der Verbraucher. Ohne React, damit testbar.
+ * Zahl der Verbraucher.
+ *
+ * Für schmale Kacheln (Handy) gibt es ein Hochformat: Heizgerät und Außentemperatur oben, der
+ * Verteiler als waagerechter Balken darunter, die Verbraucher darunter gestapelt. Die Schrift
+ * bleibt so auch in 300 px Breite lesbar. Ohne React, damit testbar.
  */
 
 /** Rechteck */
@@ -42,15 +46,28 @@ export interface SchemaLayout {
     flowPipe: string;
     /** Rücklauf Verteiler → Heizgerät */
     returnPipe: string;
-    /** Höhe des Vorlaufrohrs */
-    flowY: number;
-    /** Höhe des Rücklaufrohrs */
-    returnY: number;
+    /** Rücklauftemperatur: Ort und ob Bezeichnung und Wert in einer Zeile stehen */
+    returnLabel: TextSpot & { inline: boolean };
+    /** Beschriftung des Verteilers */
+    distributorLabel: TextSpot;
     /** Verbraucher von oben nach unten */
     consumers: ConsumerLayout[];
     /** Außentemperatur; null, wenn ausgeblendet */
     outside: Box | null;
 }
+
+/** Ort einer Beschriftung */
+export interface TextSpot {
+    /** Bezugspunkt waagerecht */
+    x: number;
+    /** Grundlinie */
+    y: number;
+    /** Ausrichtung am Bezugspunkt */
+    anchor: 'start' | 'middle';
+}
+
+/** Querformat (Vorgabe) oder Hochformat für schmale Kacheln */
+export type SchemaOrientation = 'landscape' | 'portrait';
 
 /** Was dargestellt wird */
 export interface SchemaOptions {
@@ -60,6 +77,8 @@ export interface SchemaOptions {
     circuits: number;
     /** Außentemperatur */
     outside: boolean;
+    /** Anordnung, Vorgabe Querformat */
+    orientation?: SchemaOrientation;
 }
 
 const PAD = 20;
@@ -77,25 +96,88 @@ export const RETURN_LABEL = 44;
 /** höchstens so viele Heizkreise */
 export const MAX_CIRCUITS = 4;
 
+/** Hochformat: feste Maße, Breite 340 */
+const PORTRAIT = {
+    width: 340,
+    boiler: { x: 20, y: PAD, width: 150, height: 180 },
+    outside: { x: 190, y: PAD, width: 130, height: 80 },
+    dist: { x: 30, y: 232, width: 130, height: 16 },
+    flowX: 65,
+    returnX: 125,
+    consumerX: 180,
+    outletStep: 22,
+};
+
+/**
+ * Verbraucher untereinander ab `top`, jeweils mit dem Punkt, an dem das Rohr ankommt.
+ *
+ * @param options dargestellte Anlagenteile
+ * @param x linke Kante der Verbraucher
+ * @param top obere Kante des ersten Verbrauchers
+ * @returns Verbraucher ohne Rohr und die Unterkante des letzten
+ */
+function stackConsumers(
+    options: SchemaOptions,
+    x: number,
+    top: number,
+): { stack: Array<Omit<ConsumerLayout, 'pipe'> & { connectY: number }>; bottom: number } {
+    const circuits = Math.max(0, Math.min(MAX_CIRCUITS, Math.round(options.circuits)));
+    const stack: Array<Omit<ConsumerLayout, 'pipe'> & { connectY: number }> = [];
+    let y = top;
+    if (options.tank) {
+        stack.push({ kind: 'tank', index: 0, x, y, ...TANK, connectY: y + TANK.height / 2 });
+        y += TANK.height + GAP;
+    }
+    for (let i = 1; i <= circuits; i++) {
+        stack.push({ kind: 'circuit', index: i, x, y, ...CIRCUIT, connectY: y + CIRCUIT.height / 2 });
+        y += CIRCUIT.height + GAP;
+    }
+    return { stack, bottom: stack.length ? y - GAP : top };
+}
+
+/**
+ * Hochformat: Abgänge unten am Verteiler, der oberste Verbraucher am weitesten rechts —
+ * so kreuzen sich die Rohre nicht.
+ *
+ * @param options dargestellte Anlagenteile
+ * @returns Geometrie in viewBox-Einheiten
+ */
+function portraitLayout(options: SchemaOptions): SchemaLayout {
+    const P = PORTRAIT;
+    const distBottom = P.dist.y + P.dist.height;
+    const { stack, bottom: consumersBottom } = stackConsumers(options, P.consumerX, distBottom + 30);
+    const distRight = P.dist.x + P.dist.width;
+    const consumers: ConsumerLayout[] = stack.map(({ connectY, ...c }, i) => {
+        const outletX = distRight - 14 - i * P.outletStep;
+        return { ...c, pipe: `M${outletX} ${distBottom} V${connectY} H${P.consumerX}` };
+    });
+    const boilerBottom = P.boiler.y + P.boiler.height;
+    const outside: Box | null = options.outside ? { ...P.outside } : null;
+    return {
+        width: P.width,
+        height: Math.max(consumersBottom, distBottom, boilerBottom, outside ? P.outside.y + P.outside.height : 0) + PAD,
+        boiler: { ...P.boiler },
+        distributor: { ...P.dist },
+        flowPipe: `M${P.flowX} ${boilerBottom} V${P.dist.y}`,
+        returnPipe: `M${P.returnX} ${boilerBottom} V${P.dist.y}`,
+        // zwischen Heizgerät und Verteiler ist nur Platz für eine Zeile
+        returnLabel: { x: P.returnX + 10, y: boilerBottom + 21, anchor: 'start', inline: true },
+        distributorLabel: { x: distRight + 8, y: P.dist.y + 12, anchor: 'start' },
+        consumers,
+        outside,
+    };
+}
+
 /**
  * @param options dargestellte Anlagenteile
  * @returns Geometrie in viewBox-Einheiten
  */
 export function schemaLayout(options: SchemaOptions): SchemaLayout {
-    const circuits = Math.max(0, Math.min(MAX_CIRCUITS, Math.round(options.circuits)));
+    if (options.orientation === 'portrait') {
+        return portraitLayout(options);
+    }
 
-    // Verbraucher untereinander, jeweils mit dem Punkt, an dem das Rohr ankommt
-    const stack: Array<Omit<ConsumerLayout, 'pipe'> & { connectY: number }> = [];
-    let y = PAD;
-    if (options.tank) {
-        stack.push({ kind: 'tank', index: 0, x: CONSUMER_X, y, ...TANK, connectY: y + TANK.height / 2 });
-        y += TANK.height + GAP;
-    }
-    for (let i = 1; i <= circuits; i++) {
-        stack.push({ kind: 'circuit', index: i, x: CONSUMER_X, y, ...CIRCUIT, connectY: y + CIRCUIT.height / 2 });
-        y += CIRCUIT.height + GAP;
-    }
-    const consumersBottom = stack.length ? y - GAP : PAD;
+    const { stack, bottom: consumersBottom } = stackConsumers(options, CONSUMER_X, PAD);
 
     // Verteiler mittig zu den Verbrauchern, mindestens so hoch wie für Vor- und Rücklauf nötig
     const outlets = stack.length;
@@ -138,8 +220,8 @@ export function schemaLayout(options: SchemaOptions): SchemaLayout {
         distributor,
         flowPipe: `M${boilerRight} ${flowY} H${DIST.x}`,
         returnPipe: `M${boilerRight} ${returnY} H${DIST.x}`,
-        flowY,
-        returnY,
+        returnLabel: { x: (boilerRight + DIST.x) / 2, y: returnY + 22, anchor: 'middle', inline: false },
+        distributorLabel: { x: DIST.x + DIST.width / 2, y: distTop - 8, anchor: 'middle' },
         consumers,
         outside,
     };

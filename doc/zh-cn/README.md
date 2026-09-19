@@ -10,6 +10,24 @@
 
 > **状态：** 早期开发阶段。全部八个小部件均已可用：系统图、锅炉状态、供暖回路、供暖曲线、生活热水、趋势、消息和燃气表。
 
+### 小部件
+
+| 小部件 | 用途 |
+|---|---|
+| 系统图 | 液压系统图，含燃烧器火焰、水箱、最多四个供暖回路和流动动画 |
+| 锅炉状态 | 运行阶段、燃烧器、调制度和水压（已关联时）、运行小时、启动次数、供水和回水 |
+| 供暖回路 | 运行模式、白天和节能温度、修正值、时间程序 —— 可操作 |
+| 供暖曲线 | 近似曲线及控制器工作点；修正值可操作 |
+| 生活热水 | 带设定值标记的水箱、设定温度、时间程序，可选循环和单次加热 |
+| 趋势 | 来自 history、SQL 或 InfluxDB 的最多四条曲线和一个背景区域；6 小时到 7 天 |
+| 消息 | 故障指示灯和状态列表：检查项、综合故障、故障代码 |
+| 燃气表 | 七种计数器样式的读数、流量、日用量和月用量、费用 |
+
+<img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_schema.png" height="110" alt="系统图"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_boiler.png" height="110" alt="锅炉状态"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_circuit.png" height="110" alt="供暖回路"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_heatcurve.png" height="110" alt="供暖曲线">
+<img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_dhw.png" height="110" alt="生活热水"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_trends.png" height="110" alt="趋势"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_messages.png" height="110" alt="消息"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_gasmeter.png" height="110" alt="燃气表">
+
+详细设置（包括 wolf-smartset (ISM7) 对象的分配）：参见[英文文档](../../README.md)。
+
 ### 要求
 
 - js-controller >= 7.2.2
