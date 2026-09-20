@@ -90,6 +90,9 @@ body.sb-dark {
     align-items: flex-start;
 }
 /* Kessel-Kachel in ihrer Vorgabegröße */
+.sb-cell-gas-stats {
+    height: 460px;
+}
 .sb-cell-boiler {
     height: 390px;
 }

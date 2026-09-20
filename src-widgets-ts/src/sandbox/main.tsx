@@ -12,7 +12,7 @@ import { createRoot } from 'react-dom/client';
 
 import BoilerView from '../components/BoilerView';
 import Counter, { COUNTER_VARIANTS, toVariant } from '../components/Counter';
-import GasMeterView from '../components/GasMeterView';
+import GasMeterView, { type GasValue } from '../components/GasMeterView';
 import MessagesView from '../components/MessagesView';
 import { monthlyCost } from '../lib/gas';
 import { parseMessages, sortRows, type MessageRow } from '../lib/messages';
@@ -36,6 +36,8 @@ interface Meter {
     flow: number;
     today: number;
     month: number;
+    /** Werte des Statistik-Skripts (addOn/Gasverbrauch_statistik.js), wenn verknüpft */
+    stats?: { yesterday: number; days7: number; days30: number; lastMonth: number };
 }
 
 const START: Meter[] = [
@@ -48,6 +50,15 @@ const START: Meter[] = [
         flow: 0.92,
         today: 2.14,
         month: 51.7,
+    },
+    {
+        title: 'Gaszähler mit Statistik-Skript',
+        subtitle: '0_userdata.0.Gas',
+        reading: 11248.317,
+        flow: 1.36,
+        today: 3.41,
+        month: 74.2,
+        stats: { yesterday: 5.87, days7: 38.4, days30: 162.9, lastMonth: 188.3 },
     },
 ];
 
@@ -169,6 +180,36 @@ const MESSAGES: Array<{ subtitle: string; rows: MessageRow[] }> = [
 ];
 
 const TARIFF = { brennwert: 11.482, zustandszahl: 0.9612, arbeitspreis: 0.1092, grundpreis: 14.9 };
+/**
+ * Werte der Fußzeile wie im Widget: Heute und Monat immer, die Werte des Statistik-Skripts
+ * nur, wenn sie verknüpft sind, dazu die Kosten des Monats.
+ *
+ * @param m Zählerzustand
+ * @returns die Werte in der Reihenfolge der Anzeige
+ */
+function gasValues(m: Meter): GasValue[] {
+    const values: GasValue[] = [{ key: 'today', label: de.today, value: m.today, unit: 'm³', decimals: 2 }];
+    if (m.stats) {
+        values.push(
+            { key: 'yesterday', label: de.yesterday, value: m.stats.yesterday, unit: 'm³', decimals: 2 },
+            { key: 'days7', label: de.days7, value: m.stats.days7, unit: 'm³', decimals: 1 },
+            { key: 'days30', label: de.days30, value: m.stats.days30, unit: 'm³', decimals: 1 },
+        );
+    }
+    values.push({ key: 'month', label: de.month, value: m.month, unit: 'm³', decimals: 1 });
+    if (m.stats) {
+        values.push({ key: 'last_month', label: de.last_month, value: m.stats.lastMonth, unit: 'm³', decimals: 1 });
+    }
+    values.push({
+        key: 'cost_month',
+        label: de.cost_month,
+        value: monthlyCost(m.month, TARIFF),
+        unit: '€',
+        decimals: 2,
+    });
+    return values;
+}
+
 const TICK_MS = 2000;
 const PARAMS = new URLSearchParams(window.location.search);
 
@@ -286,7 +327,7 @@ function Sandbox(): React.JSX.Element {
                 {meters.map(m => (
                     <div
                         key={m.subtitle}
-                        className="sb-cell"
+                        className={m.stats ? 'sb-cell sb-cell-gas-stats' : 'sb-cell'}
                     >
                         <GasMeterView
                             themeType={themeType}
@@ -294,9 +335,7 @@ function Sandbox(): React.JSX.Element {
                             subtitle={m.subtitle}
                             reading={m.reading}
                             flow={m.flow}
-                            today={m.today}
-                            month={m.month}
-                            costMonth={monthlyCost(m.month, TARIFF)}
+                            values={gasValues(m)}
                             variant={variant}
                             threshold={0.02}
                             maxFlow={3}
@@ -305,9 +344,6 @@ function Sandbox(): React.JSX.Element {
                             warnings={m.warnings}
                             labels={{
                                 flow: de.flow,
-                                today: de.today,
-                                month: de.month,
-                                costMonth: de.cost_month,
                                 consumption: de.consumption,
                                 noConsumption: de.no_consumption,
                             }}

@@ -170,6 +170,12 @@
     margin-top: 14px;
 }
 
+/* mehr als drei Werte (z. B. mit dem Statistik-Skript): umbrechen statt quetschen */
+.wolf-foot-auto {
+    grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
+    row-gap: 12px;
+}
+
 .wolf-foot .wolf-v {
     font-size: 16px;
     font-weight: 600;
@@ -1167,10 +1173,12 @@
     cursor: not-allowed;
 }
 
-/* Bedien-Kacheln: lieber scrollen als ein Bedienelement abschneiden */
+/* Bedien-Kacheln: lieber scrollen als ein Bedienelement abschneiden.
+   Der Gaszähler ebenso, sobald er die Werte des Statistik-Skripts zeigt. */
 .wolf-w.wolf-circuit,
 .wolf-w.wolf-dhw,
-.wolf-w.wolf-heatcurve {
+.wolf-w.wolf-heatcurve,
+.wolf-w.wolf-gasmeter {
     overflow-y: auto;
 }
 

@@ -1,9 +1,15 @@
 import React from 'react';
 
-import type { RxRenderWidgetProps, RxWidgetInfo, VisRxWidgetProps } from '@iobroker/types-vis-2';
+import type {
+    RxRenderWidgetProps,
+    RxWidgetInfo,
+    RxWidgetInfoFieldChangeHandler,
+    VisRxWidgetProps,
+    WidgetData,
+} from '@iobroker/types-vis-2';
 
 import { COUNTER_VARIANTS } from '../components/Counter';
-import GasMeterView from '../components/GasMeterView';
+import GasMeterView, { type GasValue } from '../components/GasMeterView';
 import {
     baseValue,
     consumptionSince,
@@ -14,6 +20,7 @@ import {
     type HistoryEntry,
 } from '../lib/consumption';
 import { toBoolean, toNumber } from '../lib/fmt';
+import { gasStatsIds } from '../lib/gasStats';
 import { DEFAULT_BRENNWERT, DEFAULT_ZUSTANDSZAHL, monthlyCost } from '../lib/gas';
 import { THEME_OPTIONS } from '../lib/theme';
 import WolfWidgetBase, { attrNumber, type WolfBaseRxData, type WolfBaseState } from './WolfWidgetBase';
@@ -22,7 +29,12 @@ interface WolfGasMeterRxData extends WolfBaseRxData {
     oid_zaehlerstand?: string;
     oid_durchfluss?: string;
     oid_heute?: string;
+    oid_gestern?: string;
+    oid_7tage?: string;
+    oid_30tage?: string;
     oid_monat?: string;
+    oid_vormonat?: string;
+    stats_path?: string;
     oid_sensor_status?: string;
     oid_unreach?: string;
     oid_lowbat?: string;
@@ -63,11 +75,40 @@ const WINDOWS = [HOUR, DAY, LOOKBACK_DAYS * DAY];
 const MAX_ENTRIES = 500;
 
 /**
+ * Ordner des Statistik-Skripts gewählt: die States, die es dort anlegt, in die Objektfelder
+ * eintragen — aber nur die, die es wirklich gibt. Der Zählerstand bleibt unangetastet, wenn dort
+ * schon etwas steht: meist zeigt er auf den Sensor selbst.
+ *
+ * @param _field das geänderte Feld
+ * @param data Attribute des Widgets
+ * @param changeData übernimmt die geänderten Attribute
+ * @param socket Verbindung zum ioBroker, um die Objekte zu prüfen
+ */
+const applyStatsPath: RxWidgetInfoFieldChangeHandler = async (_field, data, changeData, socket) => {
+    const ids = gasStatsIds(data.stats_path as string | undefined);
+    if (!ids.length) {
+        return;
+    }
+    const next: WidgetData = { ...data };
+    for (const { attr, id } of ids) {
+        if (attr === 'oid_zaehlerstand' && next[attr]) {
+            continue;
+        }
+        const obj = await socket.getObject(id).catch(() => null);
+        if (obj) {
+            next[attr] = id;
+        }
+    }
+    changeData(next);
+};
+
+/**
  * Anbindung des Gaszählers an VIS-2: Attribute und Objektwerte.
  *
  * Heute und Monat kommen aus verknüpften Objekten; fehlen die, rechnet das Widget sie aus dem
  * Verlauf des Zählerstands (sql, history, influxdb): Stand jetzt minus Stand zu Tages- bzw.
- * Monatsbeginn — zwei Abfragen am Tag. Für Sensoren wie den HmIP-ESI, die ab Einbau zählen,
+ * Monatsbeginn — zwei Abfragen am Tag. Die Objekte kann auch das Statistik-Skript aus addOn/
+ * liefern, das zusätzlich Gestern, 7 Tage, 30 Tage und den Vormonat führt. Für Sensoren wie den HmIP-ESI, die ab Einbau zählen,
  * gleicht ein Korrekturwert den Zählerstand an.
  * Die Darstellung liegt in components/GasMeterView und ist ohne ioBroker prüfbar (Sandbox).
  */
@@ -110,11 +151,54 @@ export default class WolfGasMeter extends WolfWidgetBase<WolfGasMeterRxData, Wol
                             default: '',
                         },
                         {
+                            name: 'oid_gestern',
+                            type: 'id',
+                            label: 'oid_gestern',
+                            tooltip: 'stats_tooltip',
+                            default: '',
+                        },
+                        {
+                            name: 'oid_7tage',
+                            type: 'id',
+                            label: 'oid_7tage',
+                            tooltip: 'stats_tooltip',
+                            default: '',
+                        },
+                        {
+                            name: 'oid_30tage',
+                            type: 'id',
+                            label: 'oid_30tage',
+                            tooltip: 'stats_tooltip',
+                            default: '',
+                        },
+                        {
                             name: 'oid_monat',
                             type: 'id',
                             label: 'oid_monat',
                             tooltip: 'consumption_tooltip',
                             default: '',
+                        },
+                        {
+                            name: 'oid_vormonat',
+                            type: 'id',
+                            label: 'oid_vormonat',
+                            tooltip: 'stats_tooltip',
+                            default: '',
+                        },
+                    ],
+                },
+                {
+                    name: 'stats',
+                    label: 'group_stats',
+                    fields: [
+                        {
+                            // Ordner, kein State: deshalb ohne oid_-Präfix, VIS-2 abonniert ihn nicht
+                            name: 'stats_path',
+                            type: 'id',
+                            label: 'stats_path',
+                            tooltip: 'stats_path_tooltip',
+                            default: '',
+                            onChange: applyStatsPath,
                         },
                     ],
                 },
@@ -307,6 +391,46 @@ export default class WolfGasMeter extends WolfWidgetBase<WolfGasMeterRxData, Wol
         return baseValue([], after ?? []);
     }
 
+    /**
+     * Werte der Fußzeile: Heute und Monat immer, die Werte des Statistik-Skripts nur, wenn ihr
+     * Objekt verknüpft ist, dazu die Kosten des laufenden Monats.
+     *
+     * @param today Verbrauch heute
+     * @param month Verbrauch im laufenden Monat
+     * @returns die Werte in der Reihenfolge der Anzeige
+     */
+    private values(today: number | null, month: number | null): GasValue[] {
+        const rx = this.state.rxData;
+        const values: GasValue[] = [];
+        const add = (key: string, value: number | null, decimals: number, unit = 'm³'): void => {
+            values.push({ key, label: this.tr(key), value, unit, decimals });
+        };
+        const addLinked = (key: string, oid: string | undefined, decimals: number): void => {
+            if (oid) {
+                add(key, this.objectNumber(oid), decimals);
+            }
+        };
+        // Reihenfolge und Schlüssel stehen auch in GAS_VALUE_KEYS — daran prüft der Übersetzungstest
+        add('today', today, 2);
+        addLinked('yesterday', rx.oid_gestern, 2);
+        addLinked('days7', rx.oid_7tage, 1);
+        addLinked('days30', rx.oid_30tage, 1);
+        add('month', month, 1);
+        addLinked('last_month', rx.oid_vormonat, 1);
+        add(
+            'cost_month',
+            monthlyCost(month, {
+                brennwert: toNumber(rx.brennwert) ?? undefined,
+                zustandszahl: toNumber(rx.zustandszahl) ?? undefined,
+                arbeitspreis: toNumber(rx.arbeitspreis) ?? undefined,
+                grundpreis: toNumber(rx.grundpreis) ?? undefined,
+            }),
+            2,
+            '€',
+        );
+        return values;
+    }
+
     /** @returns Hinweise zum Sensor aus den verknüpften Zustandsobjekten */
     private warnings(): string[] {
         const rx = this.state.rxData;
@@ -347,15 +471,8 @@ export default class WolfGasMeter extends WolfWidgetBase<WolfGasMeterRxData, Wol
                 subtitle={rx.subtitle}
                 reading={reading}
                 flow={this.objectNumber(rx.oid_durchfluss)}
-                today={today}
-                month={month}
+                values={this.values(today, month)}
                 warnings={this.warnings()}
-                costMonth={monthlyCost(month, {
-                    brennwert: toNumber(rx.brennwert) ?? undefined,
-                    zustandszahl: toNumber(rx.zustandszahl) ?? undefined,
-                    arbeitspreis: toNumber(rx.arbeitspreis) ?? undefined,
-                    grundpreis: toNumber(rx.grundpreis) ?? undefined,
-                })}
                 variant={rx.variant || 'A'}
                 threshold={attrNumber(rx.schwelle, 0.02)}
                 maxFlow={attrNumber(rx.max_flow, 4)}
@@ -363,9 +480,6 @@ export default class WolfGasMeter extends WolfWidgetBase<WolfGasMeterRxData, Wol
                 decDigits={attrNumber(rx.digits_dec, 3)}
                 labels={{
                     flow: this.tr('flow'),
-                    today: this.tr('today'),
-                    month: this.tr('month'),
-                    costMonth: this.tr('cost_month'),
                     consumption: this.tr('consumption'),
                     noConsumption: this.tr('no_consumption'),
                 }}

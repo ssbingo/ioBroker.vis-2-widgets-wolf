@@ -39,7 +39,7 @@ names or structure.
 | Hot water | Tank with set mark, set temperature, time program, optional circulation and one-time charge — writing |
 | Trends | Up to four curves and a background area from history, SQL or InfluxDB; 6 h to 7 days |
 | Messages | Fault LED and status list: configurable checks, collective fault, fault code, message list |
-| Gas meter | Meter reading in seven counter styles, flow, daily and monthly consumption, costs, sensor warnings |
+| Gas meter | Meter reading in seven counter styles, flow, consumption from day to previous month, costs, sensor warnings |
 
 <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_schema.png" height="110" alt="System diagram"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_boiler.png" height="110" alt="Boiler status"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_circuit.png" height="110" alt="Heating circuit"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_heatcurve.png" height="110" alt="Heating curve">
 <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_dhw.png" height="110" alt="Hot water"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_trends.png" height="110" alt="Trends"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_messages.png" height="110" alt="Messages"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_gasmeter.png" height="110" alt="Gas meter">
@@ -200,6 +200,27 @@ text. Rows are sorted fault → warning → notice → OK; the time shown is the
 state. The LED turns red as soon as one row is a fault. For systems with a fault code there are
 also *collective fault*, *fault code* with texts (`code=text;…`) and a *message list* (JSON array
 with `text`, `ts`, `severity`).
+
+#### Gas meter: values from the statistics script
+
+The folder [`addOn/`](https://github.com/ssbingo/ioBroker.vis-2-widgets-wolf/tree/main/addOn) contains the ioBroker script `gasverbrauch_statistik.js` together
+with its manual (`gasverbrauch_statistik.md`, also as PDF). From the meter reading it derives
+exactly the values the CCU web UI of an HmIP-ESI shows — *today*, *yesterday*, *last 7 days*,
+*last 30 days* — plus the current and the previous month, and stores them below a folder of your
+choice (default `0_userdata.0.Gas`). A history adapter is only needed for the initial backfill,
+not for normal operation.
+
+Create the script in the `javascript` adapter (paste the content, point `SRC` at the meter
+reading) and start it. Then pick the folder in the widget under *Statistics script*: the states
+that exist are filled into the objects above — the meter reading only if that field is still
+empty, because it usually points at the sensor itself. The tile shows every linked value and
+wraps the row when needed; for all seven values it should be about 460 px high.
+
+After installation the script is also available in the browser:
+`http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik.js`
+
+Without the script nothing changes: link your own objects for today and month — or leave both
+empty and let the widget calculate them from the history.
 
 #### Gas meter: consumption from the history
 

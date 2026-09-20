@@ -22,6 +22,9 @@ function copyAllFiles() {
     copyFiles([`${SRC_TS}build/mf-manifest.json`], `widgets/${adapterName}`);
     copyFiles([`${SRC_TS}build/assets/*.*`], `widgets/${adapterName}/assets`);
     copyFiles([`${SRC_TS}build/img/*`], `widgets/${adapterName}/img`);
+    // Statistik-Skript für den Gaszähler: über vis-2 abrufbar unter
+    // /vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik.js
+    copyFiles(['addOn/*.*'], `widgets/${adapterName}/addon`);
 }
 
 /*

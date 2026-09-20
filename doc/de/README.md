@@ -29,7 +29,7 @@ Das Widget-Set liest selbst keine Daten aus der Heizung. Jeder Wert wird einzeln
 | Warmwasser | Speicher mit Sollmarke, Solltemperatur, Zeitprogramm, optional Zirkulation und Sofortladung — schreibend |
 | Verläufe | Bis zu vier Kurven und eine Fläche im Hintergrund aus history, SQL oder InfluxDB; 6 Stunden bis 7 Tage |
 | Meldungen | Störungs-LED und Zustandsliste: frei einstellbare Prüfungen, Sammelstörung, Störcode, Meldungsliste |
-| Gaszähler | Zählerstand in sieben Zählwerk-Varianten, Durchfluss, Tages- und Monatsverbrauch, Kosten, Sensorhinweise |
+| Gaszähler | Zählerstand in sieben Zählwerk-Varianten, Durchfluss, Verbrauch von Tag bis Vormonat, Kosten, Sensorhinweise |
 
 <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_schema.png" height="110" alt="Anlagenschema"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_boiler.png" height="110" alt="Kesselstatus"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_circuit.png" height="110" alt="Heizkreis"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_heatcurve.png" height="110" alt="Heizkurve">
 <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_dhw.png" height="110" alt="Warmwasser"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_trends.png" height="110" alt="Verläufe"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_messages.png" height="110" alt="Meldungen"> <img src="https://raw.githubusercontent.com/ssbingo/ioBroker.vis-2-widgets-wolf/main/widgets/vis-2-widgets-wolf/img/prev_gasmeter.png" height="110" alt="Gaszähler">
@@ -189,6 +189,27 @@ den Klartext des Objekts. Sortiert wird Störung → Warnung → Hinweis → in 
 letzte Zustandsänderung. Die LED wird rot, sobald eine Zeile eine Störung ist. Für Anlagen mit
 Störcode gibt es zusätzlich *Sammelstörung*, *Störcode* mit Klartexten (`Code=Text;…`) und eine
 *Meldungsliste* (JSON-Array mit `text`, `ts`, `severity`).
+
+#### Gaszähler: Werte aus dem Statistik-Skript
+
+Der Ordner [`addOn/`](https://github.com/ssbingo/ioBroker.vis-2-widgets-wolf/tree/main/addOn) enthält das ioBroker-Skript `gasverbrauch_statistik.js` mit
+Anleitung (`gasverbrauch_statistik.md`, zusätzlich als PDF). Es berechnet aus dem Zählerstand
+genau die Werte, die die CCU-WebUI eines HmIP-ESI zeigt — *Heute*, *Gestern*, *letzte 7 Tage*,
+*letzte 30 Tage* — dazu den laufenden und den vorigen Monat, und legt sie unter einem frei
+wählbaren Ordner ab (Vorgabe `0_userdata.0.Gas`). Ein History-Adapter ist nur für die einmalige
+Vorbefüllung nötig, im laufenden Betrieb nicht.
+
+Das Skript im Adapter `javascript` anlegen (Inhalt einfügen, `SRC` auf den Zählerstand setzen)
+und starten. Danach im Widget unter *Statistik-Skript* den Ordner wählen: Die vorhandenen States
+werden oben als Objekte eingetragen — der Zählerstand nur, wenn dort noch nichts steht, denn er
+zeigt meist auf den Sensor selbst. Die Kachel zeigt jeden verknüpften Wert und bricht die Zeile
+bei Bedarf um; für alle sieben Werte sollte sie etwa 460 px hoch sein.
+
+Nach der Installation liegt das Skript auch im Browser bereit:
+`http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik.js`
+
+Ohne das Skript bleibt alles wie bisher: eigene Objekte für Heute und Monat verknüpfen — oder
+beide leer lassen und aus dem Verlauf rechnen lassen.
 
 #### Gaszähler: Verbrauch aus dem Verlauf
 

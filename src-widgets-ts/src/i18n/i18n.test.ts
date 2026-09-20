@@ -9,6 +9,7 @@ import { SERIES_COLORS } from '../components/TrendsChart';
 import { AGGREGATES, RANGES } from '../lib/chart';
 import { SEVERITIES } from '../lib/messages';
 import { CIRCUIT_BLOCKS } from '../lib/circuitBlocks';
+import { GAS_VALUE_KEYS } from '../lib/gasStats';
 import { THEME_OPTIONS } from '../lib/theme';
 import translations from '../translations';
 
@@ -31,6 +32,7 @@ const DYNAMIC = [
     ...SERIES_COLORS.map(v => `color_${v}`),
     ...AGGREGATES.map(v => `aggregate_${v}`),
     ...CIRCUIT_BLOCKS.map(v => `show_${v}`),
+    ...GAS_VALUE_KEYS,
     'phase_0',
     'phase_1',
     'phase_2',

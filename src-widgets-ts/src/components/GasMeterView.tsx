@@ -4,6 +4,20 @@ import { fmt } from '../lib/fmt';
 import Counter, { unitInside } from './Counter';
 import Led from './Led';
 
+/** Ein Wert in der Fußzeile: Verbrauch eines Zeitraums oder die Kosten */
+export interface GasValue {
+    /** eindeutiger Schlüssel */
+    key: string;
+    /** Beschriftung, z. B. „Heute" */
+    label: string;
+    /** Wert; null zeigt „–" */
+    value: number | null;
+    /** Einheit, z. B. m³ oder € */
+    unit: string;
+    /** Nachkommastellen */
+    decimals: number;
+}
+
 /** Anzeigewerte und Beschriftungen des Gaszählers */
 export interface GasMeterViewProps {
     /** Hell oder dunkel, folgt dem VIS-2-Theme */
@@ -16,12 +30,8 @@ export interface GasMeterViewProps {
     reading: number | null;
     /** Momentandurchfluss in m³/h */
     flow: number | null;
-    /** Verbrauch heute in m³ */
-    today: number | null;
-    /** Verbrauch im laufenden Monat in m³ */
-    month: number | null;
-    /** Kosten im laufenden Monat in € */
-    costMonth: number | null;
+    /** Werte der Fußzeile: Verbrauch der verknüpften Zeiträume und die Kosten */
+    values: GasValue[];
     /** Skalenende des Durchflussbalkens in m³/h */
     maxFlow: number;
     /** Zählwerk-Variante A, B, C, E, F, G oder H */
@@ -37,9 +47,6 @@ export interface GasMeterViewProps {
     /** übersetzte Beschriftungen */
     labels: {
         flow: string;
-        today: string;
-        month: string;
-        costMonth: string;
         consumption: string;
         noConsumption: string;
     };
@@ -51,7 +58,8 @@ export interface GasMeterViewProps {
  * Gaszähler — Darstellung ohne Zugriff auf ioBroker.
  *
  * Zählwerk in allen freigegebenen Varianten, Status-LED (Verbrauch ab Schwelle),
- * Momentandurchfluss mit Balken, Tages- und Monatswerte, Kosten des Monats.
+ * Momentandurchfluss mit Balken und darunter die Verbrauchswerte mit den Kosten. Wie viele
+ * Werte die Fußzeile zeigt, entscheidet die Anbindung; sie bricht bei Bedarf um.
  *
  * @param props Anzeigewerte und Beschriftungen
  * @returns die Kachel
@@ -110,29 +118,19 @@ export default function GasMeterView(props: GasMeterViewProps): React.JSX.Elemen
                 </div>
             </div>
 
-            <div className="wolf-foot">
-                <div>
-                    <div className="wolf-label">{labels.today}</div>
-                    <div className="wolf-v wolf-num">
-                        {fmt(props.today, 2, undefined, locale)}
-                        <small>m³</small>
-                    </div>
+            {props.values.length ? (
+                <div className={props.values.length > 3 ? 'wolf-foot wolf-foot-auto' : 'wolf-foot'}>
+                    {props.values.map(v => (
+                        <div key={v.key}>
+                            <div className="wolf-label">{v.label}</div>
+                            <div className="wolf-v wolf-num">
+                                {fmt(v.value, v.decimals, undefined, locale)}
+                                <small>{v.unit}</small>
+                            </div>
+                        </div>
+                    ))}
                 </div>
-                <div>
-                    <div className="wolf-label">{labels.month}</div>
-                    <div className="wolf-v wolf-num">
-                        {fmt(props.month, 1, undefined, locale)}
-                        <small>m³</small>
-                    </div>
-                </div>
-                <div>
-                    <div className="wolf-label">{labels.costMonth}</div>
-                    <div className="wolf-v wolf-num">
-                        {fmt(props.costMonth, 2, undefined, locale)}
-                        <small>€</small>
-                    </div>
-                </div>
-            </div>
+            ) : null}
         </div>
     );
 }
