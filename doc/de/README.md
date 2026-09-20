@@ -192,15 +192,11 @@ Störcode gibt es zusätzlich *Sammelstörung*, *Störcode* mit Klartexten (`Cod
 
 #### Gaszähler: Werte aus dem Statistik-Skript
 
-Der Ordner [`addOn/`](https://github.com/ssbingo/ioBroker.vis-2-widgets-wolf/tree/main/addOn) enthält das ioBroker-Skript `gasverbrauch_statistik.js` mit
-Anleitung (`gasverbrauch_statistik.md`, zusätzlich als PDF). Es berechnet aus dem Zählerstand
-genau die Werte, die die CCU-WebUI eines HmIP-ESI zeigt — *Heute*, *Gestern*, *letzte 7 Tage*,
-*letzte 30 Tage* — dazu den laufenden und den vorigen Monat, und legt sie unter einem frei
-wählbaren Ordner ab (Vorgabe `0_userdata.0.Gas`). Ein History-Adapter ist nur für die einmalige
-Vorbefüllung nötig, im laufenden Betrieb nicht.
+Dem Adapter liegt das ioBroker-Skript `gasverbrauch_statistik.js` bei. Es berechnet aus dem
+Zählerstand *Heute*, *Gestern*, *letzte 7 Tage*, *letzte 30 Tage*, *diesen* und *letzten Monat*
+und legt sie als Objekte ab — Einrichtung siehe [Beiliegendes Skript](#beiliegendes-skript-gasverbrauch-statistik).
 
-Das Skript im Adapter `javascript` anlegen (Inhalt einfügen, `SRC` auf den Zählerstand setzen)
-und starten. Danach im Widget unter *Statistik-Skript* den Ordner wählen: Die vorhandenen States
+Im Widget genügt es dann, unter *Statistik-Skript* den Ordner zu wählen: Die vorhandenen States
 werden oben als Objekte eingetragen — der Zählerstand nur, wenn dort noch nichts steht, denn er
 zeigt meist auf den Sensor selbst.
 
@@ -208,9 +204,6 @@ Welche Werte die Kachel zeigt, entscheidet die Gruppe *Sichtbare Werte*: je ein 
 Heute, Gestern, 7 Tage, 30 Tage, Monat, letzten Monat und die Kosten. Heute, Monat und Kosten
 stehen immer zur Wahl, die übrigen Schalter erscheinen, sobald ihr Objekt verknüpft ist. Die
 Fußzeile bricht ab vier Werten um; für alle sieben sollte die Kachel etwa 460 px hoch sein.
-
-Nach der Installation liegt das Skript auch im Browser bereit:
-`http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik.js`
 
 Ohne das Skript bleibt alles wie bisher: eigene Objekte für Heute und Monat verknüpfen — oder
 beide leer lassen und aus dem Verlauf rechnen lassen.
@@ -228,6 +221,80 @@ HmIP-ESI im Gasmodus zum Beispiel:
 | Zählerstand | `hm-rpc.<n>.<Seriennummer>.2.GAS_VOLUME` |
 | Momentandurchfluss | `hm-rpc.<n>.<Seriennummer>.1.GAS_FLOW` |
 | Zählerstatus / nicht erreichbar / Batterie schwach | `….2.GAS_VOLUME_STATUS` / `….0.UNREACH` / `….0.LOW_BAT` |
+
+### Beiliegendes Skript: Gasverbrauch-Statistik
+
+Ein HmIP-ESI zeigt in der CCU-WebUI *Heute*, *Gestern*, *vergangene 7 Tage* und *vergangene
+30 Tage*. Diese Werte sind keine Gerätedatenpunkte — die CCU rechnet sie intern aus gespeicherten
+Zählerständen, über `hm-rpc` kommen sie deshalb nicht in ioBroker an. Das beiliegende Skript
+`gasverbrauch_statistik.js` erzeugt sie aus dem Zählerstand selbst und ergänzt den laufenden und
+den vorigen Monat. Es eignet sich für jeden monoton steigenden Zählerstand, nicht nur für den
+HmIP-ESI.
+
+Im laufenden Betrieb braucht es **keinen** History-Adapter: Die Tageswerte liegen als JSON-Ringpuffer
+in einem eigenen State und überstehen einen Neustart. Ein History-Adapter ist nur für die einmalige
+Vorbefüllung nützlich.
+
+**Woher nehmen**
+
+| Quelle | Pfad |
+|---|---|
+| Repository | [`addOn/`](https://github.com/ssbingo/ioBroker.vis-2-widgets-wolf/tree/main/addOn) |
+| installierter Adapter | `node_modules/iobroker.vis-2-widgets-wolf/widgets/vis-2-widgets-wolf/addon/` |
+| im Browser | `http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik.js` |
+
+Daneben liegen `gasverbrauch_statistik.md` und dieselbe Anleitung als PDF (auf Deutsch).
+
+**Einrichten**
+
+1. Im Adapter `javascript` ein neues Skript vom Typ *Javascript/ECMAScript* anlegen.
+2. Inhalt von `gasverbrauch_statistik.js` einfügen.
+3. Im Kopf mindestens `SRC` auf den Zählerstand setzen — z. B. `hm-rpc.0.<Seriennummer>.2.GAS_VOLUME`
+   oder die Rega-Variable `svEnergyCounter…` (dafür in `hm-rega` das Synchronisieren nicht sichtbarer
+   Variablen einschalten).
+4. Skript starten und das Log prüfen: Die States legt es selbst an.
+5. Im Gaszähler-Widget unter *Statistik-Skript* den Ordner wählen.
+
+**Einstellungen im Kopf des Skripts**
+
+| Konstante | Vorgabe | Bedeutung |
+|---|---|---|
+| `SRC` | `'hm-rega.0.12345'` | Pflicht: State mit dem Zählerstand in m³ |
+| `PFAD` | `'0_userdata.0.Gas'` | Ordner für die erzeugten States |
+| `INKL_HEUTE` | `false` | `false` zählt in 7/30 Tage nur abgeschlossene Tage (wie die CCU), `true` auch den laufenden |
+| `TAGE_HISTORIE` | `70` | vorgehaltene Tageswerte; für *Letzter Monat* mindestens 62 |
+| `NK` | `3` | Nachkommastellen der Verbrauchswerte |
+| `HISTORY_INSTANCE` | `'influxdb.0'` | Instanz für die Vorbefüllung, auch `history.0` oder `sql.0`; leer schaltet sie ab |
+| `BACKFILL_BEIM_START` | `true` | beim allerersten Start automatisch vorbefüllen |
+| `DEBUG` | `false` | zusätzliche Log-Ausgaben |
+
+**Erzeugte States** (unterhalb von `PFAD`)
+
+| State | Inhalt | im Widget |
+|---|---|---|
+| `Zaehlerstand` | gespiegelter Zählerstand in m³ | Zählerstand (nur, wenn dort noch nichts steht) |
+| `Heute` | Verbrauch seit Mitternacht | Heute |
+| `Gestern` | Verbrauch des Vortags | Gestern |
+| `Letzte7Tage` | Summe der letzten 7 Tage | 7 Tage |
+| `Letzte30Tage` | Summe der letzten 30 Tage | 30 Tage |
+| `DieserMonat` | Summe seit Monatsbeginn inkl. heute | Monat |
+| `LetzterMonat` | Summe des Vormonats | Letzter Monat |
+| `Basis`, `BasisDatum`, `Historie` | Zählerstand um Mitternacht, dessen Datum, Tageswerte als JSON | intern |
+| `Backfill` | Schalter: Historie neu aus dem History-Adapter aufbauen | — |
+
+**Vorbefüllung**
+
+Mit gesetzter `HISTORY_INSTANCE` holt sich das Skript beim ersten Start für jeden Tagesbeginn den
+Zählerstand und bildet daraus die Tageswerte — danach stimmen die 7- und 30-Tage-Summen sofort.
+Später lässt sich das jederzeit über den State `Backfill` wiederholen. Fehlt der Verlauf, bleibt
+nur, die Tageswerte ab jetzt aufzubauen.
+
+**Betrieb**
+
+Das Skript rechnet bei jeder Änderung des Zählerstands, um 0:01 Uhr und stündlich als
+Sicherheitsnetz. Ein verpasster Mitternachtslauf wird beim nächsten Lauf nachgeholt, Tage ohne
+Daten werden mit 0 aufgefüllt. Sinkt der Zählerstand (Zählerwechsel oder Reset), setzt es die Basis
+neu und wertet den Tag mit 0.
 
 ### Voraussetzungen
 

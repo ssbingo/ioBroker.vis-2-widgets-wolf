@@ -36,6 +36,14 @@ De widgetset leest zelf geen gegevens uit de verwarming. Elke waarde wordt afzon
 
 Uitgebreide instelling, inclusief de koppeling van wolf-smartset-objecten (ISM7): zie de [Engelse documentatie](../../README.md).
 
+### Script voor de gasverbruiksstatistiek
+
+Bij de adapter hoort het ioBroker-script `gasverbrauch_statistik.js` (map `addOn/`). Uit de meterstand berekent het vandaag, gisteren, de laatste 7 en 30 dagen en de huidige en vorige maand en legt ze vast als objecten (standaard in `0_userdata.0.Gas`) — precies de waarden die de CCU-webinterface van een HmIP-ESI toont, maar die via `hm-rpc` niet in ioBroker aankomen. Voor het dagelijks gebruik is geen history-adapter nodig.
+
+Maak het script aan in de adapter `javascript`, zet `SRC` op de meterstand en start het. Kies daarna in het gasmeter-widget de map onder *Statistiekscript* — de states worden automatisch ingevuld. Welke waarden de tegel toont, bepaalt de groep *Zichtbare waarden*.
+
+Na de installatie staat het script ook in de browser klaar: `http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik.js`. Details in de [Engelse documentatie](../../README.md).
+
 ### Vereisten
 
 - js-controller >= 7.2.2

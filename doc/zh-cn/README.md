@@ -36,6 +36,14 @@
 
 详细设置（包括 wolf-smartset (ISM7) 对象的分配）：参见[英文文档](../../README.md)。
 
+### 燃气用量统计脚本
+
+适配器附带 ioBroker 脚本 `gasverbrauch_statistik.js`（目录 `addOn/`）。它根据表读数计算今天、昨天、最近 7 天和 30 天以及本月和上月的用量，并保存为对象（默认在 `0_userdata.0.Gas`）——正是 CCU 网页界面为 HmIP-ESI 显示、却无法通过 `hm-rpc` 进入 ioBroker 的那些数值。日常运行不需要历史适配器。
+
+在 `javascript` 适配器中新建脚本，把 `SRC` 指向表读数并启动。随后在燃气表小部件的 *统计脚本* 中选择该目录——状态会自动填入。磁贴显示哪些数值，由 *显示的数值* 分组决定。
+
+安装后脚本也可在浏览器中获取：`http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik.js`。详情见[英文文档](../../README.md)。
+
 ### 要求
 
 - js-controller >= 7.2.2

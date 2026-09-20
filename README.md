@@ -203,25 +203,18 @@ with `text`, `ts`, `severity`).
 
 #### Gas meter: values from the statistics script
 
-The folder [`addOn/`](https://github.com/ssbingo/ioBroker.vis-2-widgets-wolf/tree/main/addOn) contains the ioBroker script `gasverbrauch_statistik.js` together
-with its manual (`gasverbrauch_statistik.md`, also as PDF). From the meter reading it derives
-exactly the values the CCU web UI of an HmIP-ESI shows — *today*, *yesterday*, *last 7 days*,
-*last 30 days* — plus the current and the previous month, and stores them below a folder of your
-choice (default `0_userdata.0.Gas`). A history adapter is only needed for the initial backfill,
-not for normal operation.
+The adapter ships the ioBroker script `gasverbrauch_statistik.js`. From the meter reading it
+derives *today*, *yesterday*, *last 7 days*, *last 30 days*, *this* and *last month* and stores
+them as objects — see [Bundled script](#bundled-script-gas-consumption-statistics) for the setup.
 
-Create the script in the `javascript` adapter (paste the content, point `SRC` at the meter
-reading) and start it. Then pick the folder in the widget under *Statistics script*: the states
-that exist are filled into the objects above — the meter reading only if that field is still
-empty, because it usually points at the sensor itself.
+In the widget it is then enough to pick the folder under *Statistics script*: the states that
+exist are filled into the objects above — the meter reading only if that field is still empty,
+because it usually points at the sensor itself.
 
 Which values the tile shows is up to the group *Visible values*: one switch each for today,
 yesterday, 7 days, 30 days, month, last month and the costs. Today, month and costs are always
 available, the other switches appear as soon as their object is linked. The footer wraps from
 four values on; for all seven the tile should be about 460 px high.
-
-After installation the script is also available in the browser:
-`http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik.js`
 
 Without the script nothing changes: link your own objects for today and month — or leave both
 empty and let the widget calculate them from the history.
@@ -239,6 +232,76 @@ enter the difference as the meter reading correction. With an HmIP-ESI in gas mo
 | Meter reading | `hm-rpc.<n>.<serial>.2.GAS_VOLUME` |
 | Instantaneous flow | `hm-rpc.<n>.<serial>.1.GAS_FLOW` |
 | Counter status / not reachable / low battery | `….2.GAS_VOLUME_STATUS` / `….0.UNREACH` / `….0.LOW_BAT` |
+
+### Bundled script: gas consumption statistics
+
+An HmIP-ESI shows *today*, *yesterday*, *last 7 days* and *last 30 days* in the CCU web UI. Those
+values are not device data points — the CCU derives them internally from stored meter readings, so
+they never arrive in ioBroker through `hm-rpc`. The bundled script `gasverbrauch_statistik.js`
+derives them from the meter reading itself and adds the current and the previous month. It works
+with any monotonically rising meter reading, not just the HmIP-ESI.
+
+During normal operation it needs **no** history adapter: the daily values live in a state as a JSON
+ring buffer and survive a restart. A history adapter is only useful for the initial backfill.
+
+**Where to get it**
+
+| Source | Path |
+|---|---|
+| Repository | [`addOn/`](https://github.com/ssbingo/ioBroker.vis-2-widgets-wolf/tree/main/addOn) |
+| Installed adapter | `node_modules/iobroker.vis-2-widgets-wolf/widgets/vis-2-widgets-wolf/addon/` |
+| In the browser | `http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik.js` |
+
+Next to it are `gasverbrauch_statistik.md` and the same manual as PDF (in German).
+
+**Setting it up**
+
+1. In the `javascript` adapter create a new script of type *Javascript/ECMAScript*.
+2. Paste the content of `gasverbrauch_statistik.js`.
+3. At the top set at least `SRC` to the meter reading — e.g. `hm-rpc.0.<serial>.2.GAS_VOLUME` or the
+   Rega variable `svEnergyCounter…` (for that, enable syncing of invisible variables in `hm-rega`).
+4. Start the script and check the log: it creates the states itself.
+5. In the gas meter widget pick the folder under *Statistics script*.
+
+**Settings at the top of the script**
+
+| Constant | Default | Meaning |
+|---|---|---|
+| `SRC` | `'hm-rega.0.12345'` | Required: state holding the meter reading in m³ |
+| `PFAD` | `'0_userdata.0.Gas'` | Folder for the states it creates |
+| `INKL_HEUTE` | `false` | `false` counts only finished days in 7/30 days (like the CCU), `true` includes the running one |
+| `TAGE_HISTORIE` | `70` | daily values kept; at least 62 for *last month* |
+| `NK` | `3` | decimals of the consumption values |
+| `HISTORY_INSTANCE` | `'influxdb.0'` | instance used for the backfill, also `history.0` or `sql.0`; empty disables it |
+| `BACKFILL_BEIM_START` | `true` | backfill automatically on the very first start |
+| `DEBUG` | `false` | additional log output |
+
+**States it creates** (below `PFAD`)
+
+| State | Content | In the widget |
+|---|---|---|
+| `Zaehlerstand` | mirrored meter reading in m³ | meter reading (only if that field is still empty) |
+| `Heute` | consumption since midnight | today |
+| `Gestern` | consumption of the previous day | yesterday |
+| `Letzte7Tage` | sum of the last 7 days | 7 days |
+| `Letzte30Tage` | sum of the last 30 days | 30 days |
+| `DieserMonat` | sum since the start of the month, today included | month |
+| `LetzterMonat` | sum of the previous month | last month |
+| `Basis`, `BasisDatum`, `Historie` | meter reading at midnight, its date, daily values as JSON | internal |
+| `Backfill` | button: rebuild the history from the history adapter | — |
+
+**Backfill**
+
+With `HISTORY_INSTANCE` set, the script fetches the meter reading for every start of day on its
+first run and derives the daily values from it — the 7 and 30 day sums are then correct right away.
+It can be repeated at any time through the state `Backfill`. Without a history, the daily values
+simply start building up from now on.
+
+**Operation**
+
+The script recalculates on every change of the meter reading, at 00:01 and hourly as a safety net.
+A missed midnight run is caught up on the next run, days without data are filled with 0. If the
+meter reading drops (meter exchange or reset), it sets a new baseline and counts that day as 0.
 
 ### Requirements
 
