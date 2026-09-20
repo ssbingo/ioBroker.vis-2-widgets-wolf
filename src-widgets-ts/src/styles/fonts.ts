@@ -4,7 +4,13 @@
  * Die @font-face-Regeln entstehen hier im Code statt in wolf.css: Vite löst die ?url-Importe
  * relativ zu import.meta.url auf. Damit stimmen die Pfade auch dann, wenn VIS-2 die Widgets
  * per Module Federation aus einem anderen Verzeichnis lädt als die Seite selbst.
+ *
+ * Die Schriftpakete stehen in src-widgets-ts/package.json; das Wurzel-package.json des Adapters
+ * kennt sie nicht, weil sie nur zum Bauen der Widgets gebraucht werden:
  */
+// @repochecker: optional dependency '@fontsource/archivo'
+// @repochecker: optional dependency '@fontsource/barlow-semi-condensed'
+// @repochecker: optional dependency '@fontsource/jetbrains-mono'
 import archivo400 from '@fontsource/archivo/files/archivo-latin-400-normal.woff2?url';
 import archivo500 from '@fontsource/archivo/files/archivo-latin-500-normal.woff2?url';
 import archivo600 from '@fontsource/archivo/files/archivo-latin-600-normal.woff2?url';

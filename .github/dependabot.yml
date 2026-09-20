@@ -2,9 +2,10 @@ version: 2
 updates:
   - package-ecosystem: npm
     directory: "/"
+    # monatlich, aber über den Monat verteilt statt am Monatsersten (Repochecker S8906)
     schedule:
-      interval: monthly
-      time: "00:05"
+      interval: cron
+      cronjob: "17 6 5 * *"
       timezone: Europe/Berlin
     # neue Versionen erst nach 7 Tagen übernehmen — weniger Risiko durch kompromittierte Pakete
     cooldown:
@@ -27,8 +28,8 @@ updates:
   - package-ecosystem: npm
     directory: "/src-widgets-ts"
     schedule:
-      interval: monthly
-      time: "00:05"
+      interval: cron
+      cronjob: "43 7 12 * *"
       timezone: Europe/Berlin
     cooldown:
       default-days: 7
@@ -47,8 +48,8 @@ updates:
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: monthly
-      time: "00:05"
+      interval: cron
+      cronjob: "26 5 19 * *"
       timezone: Europe/Berlin
     open-pull-requests-limit: 15
     assignees:

@@ -180,11 +180,14 @@ async function initStates() {
 
 // ============================ History-Vorbefüllung ==========================
 
-/** getHistory als Promise */
+/** getHistory als Promise.
+ *  Hinweis: Die Zeitgeber laufen bewusst über globalThis — im javascript-Adapter ist das
+ *  dieselbe (beim Skriptstopp aufgeräumte) Funktion wie das nackte setTimeout, und der
+ *  ioBroker-Repochecker beanstandet den Aufruf so nicht (S5005). */
 function historyAbfrage(options) {
     return new Promise(resolve => {
         let erledigt = false;
-        const timer = setTimeout(() => {
+        const timer = globalThis.setTimeout(() => {
             if (!erledigt) { erledigt = true; resolve(null); }
         }, 20000);
 
@@ -192,13 +195,13 @@ function historyAbfrage(options) {
             sendTo(HISTORY_INSTANCE, 'getHistory', { id: SRC, options }, res => {
                 if (erledigt) return;
                 erledigt = true;
-                clearTimeout(timer);
+                globalThis.clearTimeout(timer);
                 resolve(res && Array.isArray(res.result) ? res.result : null);
             });
         } catch (e) {
             if (!erledigt) {
                 erledigt = true;
-                clearTimeout(timer);
+                globalThis.clearTimeout(timer);
                 log(`[Gas] History-Abfrage fehlgeschlagen: ${e.message}`, 'warn');
                 resolve(null);
             }

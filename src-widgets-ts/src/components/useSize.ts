@@ -1,3 +1,8 @@
+/*
+ * React liefert VIS-2 zur Laufzeit; es wird nie mitgebündelt und steht deshalb nur in
+ * src-widgets-ts/package.json, nicht in den Abhängigkeiten des Adapters:
+ */
+// @repochecker: optional dependency 'react'
 import { useEffect, useState } from 'react';
 
 /**
