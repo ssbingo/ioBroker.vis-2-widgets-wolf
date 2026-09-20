@@ -337,6 +337,11 @@ provide.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (ssbingo) Statistics script: the timers run through globalThis, so the ioBroker repository checker no longer reports them — the behaviour is unchanged
+* (ssbingo) react and the font packages are marked as optional dependencies for the repository checker: the fonts are bundled at build time, React is provided by vis-2 at runtime
+* (ssbingo) Dependabot still checks monthly, but spread across the month
+
 ### 0.5.0 (2026-09-20)
 * (ssbingo) Heating circuit: every block can be shown or hidden individually
 * (ssbingo) Gas meter: consumption values from the bundled statistics script — yesterday, last 7 and 30 days, previous month
