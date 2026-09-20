@@ -3,6 +3,7 @@ import React from 'react';
 import type {
     RxRenderWidgetProps,
     RxWidgetInfo,
+    RxWidgetInfoAttributesFieldCheckbox,
     RxWidgetInfoFieldChangeHandler,
     VisRxWidgetProps,
     WidgetData,
@@ -20,7 +21,7 @@ import {
     type HistoryEntry,
 } from '../lib/consumption';
 import { toBoolean, toNumber } from '../lib/fmt';
-import { gasStatsIds } from '../lib/gasStats';
+import { GAS_VALUES, gasStatsIds } from '../lib/gasStats';
 import { DEFAULT_BRENNWERT, DEFAULT_ZUSTANDSZAHL, monthlyCost } from '../lib/gas';
 import { THEME_OPTIONS } from '../lib/theme';
 import WolfWidgetBase, { attrNumber, type WolfBaseRxData, type WolfBaseState } from './WolfWidgetBase';
@@ -35,6 +36,8 @@ interface WolfGasMeterRxData extends WolfBaseRxData {
     oid_monat?: string;
     oid_vormonat?: string;
     stats_path?: string;
+    /** Schalter der Gruppe „Sichtbare Werte“: show_today bis show_cost_month */
+    [key: `show_${string}`]: boolean | string | undefined;
     oid_sensor_status?: string;
     oid_unreach?: string;
     oid_lowbat?: string;
@@ -201,6 +204,19 @@ export default class WolfGasMeter extends WolfWidgetBase<WolfGasMeterRxData, Wol
                             onChange: applyStatsPath,
                         },
                     ],
+                },
+                {
+                    name: 'blocks',
+                    label: 'group_values',
+                    // Ein Schalter je Wert der Fußzeile. Werte aus einem eigenen Objekt bekommen
+                    // ihren Schalter erst, wenn dieses Objekt verknüpft ist.
+                    fields: GAS_VALUES.map((v): RxWidgetInfoAttributesFieldCheckbox => ({
+                        name: `show_${v.key}`,
+                        type: 'checkbox',
+                        label: `show_${v.key}`,
+                        default: true,
+                        hidden: v.oid ? (data: WidgetData) => !data[v.oid as string] : undefined,
+                    })),
                 },
                 {
                     name: 'history',
@@ -392,8 +408,9 @@ export default class WolfGasMeter extends WolfWidgetBase<WolfGasMeterRxData, Wol
     }
 
     /**
-     * Werte der Fußzeile: Heute und Monat immer, die Werte des Statistik-Skripts nur, wenn ihr
-     * Objekt verknüpft ist, dazu die Kosten des laufenden Monats.
+     * Werte der Fußzeile in der Reihenfolge von GAS_VALUES: Heute, Monat und Kosten rechnet das
+     * Widget selbst, die übrigen kommen aus verknüpften Objekten. Ein Wert entfällt, wenn sein
+     * Schalter in der Gruppe „Sichtbare Werte“ aus ist oder sein Objekt fehlt.
      *
      * @param today Verbrauch heute
      * @param month Verbrauch im laufenden Monat
@@ -401,33 +418,35 @@ export default class WolfGasMeter extends WolfWidgetBase<WolfGasMeterRxData, Wol
      */
     private values(today: number | null, month: number | null): GasValue[] {
         const rx = this.state.rxData;
-        const values: GasValue[] = [];
-        const add = (key: string, value: number | null, decimals: number, unit = 'm³'): void => {
-            values.push({ key, label: this.tr(key), value, unit, decimals });
-        };
-        const addLinked = (key: string, oid: string | undefined, decimals: number): void => {
-            if (oid) {
-                add(key, this.objectNumber(oid), decimals);
-            }
-        };
-        // Reihenfolge und Schlüssel stehen auch in GAS_VALUE_KEYS — daran prüft der Übersetzungstest
-        add('today', today, 2);
-        addLinked('yesterday', rx.oid_gestern, 2);
-        addLinked('days7', rx.oid_7tage, 1);
-        addLinked('days30', rx.oid_30tage, 1);
-        add('month', month, 1);
-        addLinked('last_month', rx.oid_vormonat, 1);
-        add(
-            'cost_month',
-            monthlyCost(month, {
+        const eigene: Record<string, number | null> = {
+            today,
+            month,
+            cost_month: monthlyCost(month, {
                 brennwert: toNumber(rx.brennwert) ?? undefined,
                 zustandszahl: toNumber(rx.zustandszahl) ?? undefined,
                 arbeitspreis: toNumber(rx.arbeitspreis) ?? undefined,
                 grundpreis: toNumber(rx.grundpreis) ?? undefined,
             }),
-            2,
-            '€',
-        );
+        };
+        const values: GasValue[] = [];
+        for (const v of GAS_VALUES) {
+            // in der Gruppe „Sichtbare Werte“ abgeschaltet (Vorgabe an)
+            if (toBoolean(rx[`show_${v.key}`]) === false) {
+                continue;
+            }
+            const oid = v.oid ? (rx[v.oid as keyof typeof rx] as string | undefined) : undefined;
+            // Werte aus einem eigenen Objekt entfallen, solange keines verknüpft ist
+            if (v.oid && !oid) {
+                continue;
+            }
+            values.push({
+                key: v.key,
+                label: this.tr(v.key),
+                value: oid ? this.objectNumber(oid) : (eigene[v.key] ?? null),
+                unit: v.unit ?? 'm³',
+                decimals: v.decimals,
+            });
+        }
         return values;
     }
 

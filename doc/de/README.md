@@ -202,8 +202,12 @@ Vorbefüllung nötig, im laufenden Betrieb nicht.
 Das Skript im Adapter `javascript` anlegen (Inhalt einfügen, `SRC` auf den Zählerstand setzen)
 und starten. Danach im Widget unter *Statistik-Skript* den Ordner wählen: Die vorhandenen States
 werden oben als Objekte eingetragen — der Zählerstand nur, wenn dort noch nichts steht, denn er
-zeigt meist auf den Sensor selbst. Die Kachel zeigt jeden verknüpften Wert und bricht die Zeile
-bei Bedarf um; für alle sieben Werte sollte sie etwa 460 px hoch sein.
+zeigt meist auf den Sensor selbst.
+
+Welche Werte die Kachel zeigt, entscheidet die Gruppe *Sichtbare Werte*: je ein Schalter für
+Heute, Gestern, 7 Tage, 30 Tage, Monat, letzten Monat und die Kosten. Heute, Monat und Kosten
+stehen immer zur Wahl, die übrigen Schalter erscheinen, sobald ihr Objekt verknüpft ist. Die
+Fußzeile bricht ab vier Werten um; für alle sieben sollte die Kachel etwa 460 px hoch sein.
 
 Nach der Installation liegt das Skript auch im Browser bereit:
 `http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik.js`

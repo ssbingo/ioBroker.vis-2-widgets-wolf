@@ -213,8 +213,12 @@ not for normal operation.
 Create the script in the `javascript` adapter (paste the content, point `SRC` at the meter
 reading) and start it. Then pick the folder in the widget under *Statistics script*: the states
 that exist are filled into the objects above — the meter reading only if that field is still
-empty, because it usually points at the sensor itself. The tile shows every linked value and
-wraps the row when needed; for all seven values it should be about 460 px high.
+empty, because it usually points at the sensor itself.
+
+Which values the tile shows is up to the group *Visible values*: one switch each for today,
+yesterday, 7 days, 30 days, month, last month and the costs. Today, month and costs are always
+available, the other switches appear as soon as their object is linked. The footer wraps from
+four values on; for all seven the tile should be about 460 px high.
 
 After installation the script is also available in the browser:
 `http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik.js`

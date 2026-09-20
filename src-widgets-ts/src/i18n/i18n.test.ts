@@ -33,6 +33,7 @@ const DYNAMIC = [
     ...AGGREGATES.map(v => `aggregate_${v}`),
     ...CIRCUIT_BLOCKS.map(v => `show_${v}`),
     ...GAS_VALUE_KEYS,
+    ...GAS_VALUE_KEYS.map(v => `show_${v}`),
     'phase_0',
     'phase_1',
     'phase_2',

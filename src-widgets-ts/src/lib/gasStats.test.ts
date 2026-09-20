@@ -3,7 +3,7 @@
  */
 import { describe, expect, it } from 'vitest';
 
-import { GAS_STATS_FIELDS, gasStatsIds } from './gasStats';
+import { GAS_STATS_FIELDS, GAS_VALUES, gasStatsIds } from './gasStats';
 
 describe('gasStatsIds', () => {
     it('hängt die State-Namen des Skripts an den Ordner', () => {
@@ -21,5 +21,20 @@ describe('gasStatsIds', () => {
     it('liefert ohne Ordner nichts', () => {
         expect(gasStatsIds('')).toEqual([]);
         expect(gasStatsIds(undefined)).toEqual([]);
+    });
+});
+
+describe('GAS_VALUES', () => {
+    it('nennt jeden Wert genau einmal und verweist nur auf Objektfelder des Widgets', () => {
+        const keys = GAS_VALUES.map(v => v.key);
+        expect(new Set(keys).size).toBe(keys.length);
+        const felder = GAS_STATS_FIELDS.map(f => f.attr);
+        for (const v of GAS_VALUES.filter(v => v.oid)) {
+            expect(felder, v.key).toContain(v.oid);
+        }
+    });
+
+    it('rechnet Heute, Monat und Kosten ohne eigenes Objekt', () => {
+        expect(GAS_VALUES.filter(v => !v.oid).map(v => v.key)).toEqual(['today', 'month', 'cost_month']);
     });
 });

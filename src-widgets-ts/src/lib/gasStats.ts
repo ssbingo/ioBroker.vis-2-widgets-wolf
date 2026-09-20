@@ -38,8 +38,32 @@ export function gasStatsIds(path: string | undefined): Array<{ attr: string; id:
     return GAS_STATS_FIELDS.map(f => ({ attr: f.attr, id: `${base}.${f.state}` }));
 }
 
+/** Ein Wert der Fußzeile: Schlüssel, Herkunft und Nachkommastellen */
+export interface GasValueSpec {
+    /** Schlüssel des Werts — zugleich Übersetzung und Name des Schalters (show_<key>) */
+    key: string;
+    /** Objekt-Attribut, aus dem der Wert kommt; ohne Angabe rechnet das Widget ihn selbst */
+    oid?: string;
+    /** Nachkommastellen in der Anzeige */
+    decimals: number;
+    /** Einheit; ohne Angabe m³ */
+    unit?: string;
+}
+
 /**
- * Schlüssel der Werte in der Fußzeile — zugleich die Übersetzungsschlüssel. Die Anbindung setzt
- * sie zur Laufzeit zusammen, deshalb prüft der Übersetzungstest sie über diese Liste.
+ * Werte der Fußzeile in der Reihenfolge der Anzeige. Heute, Monat und die Kosten rechnet das
+ * Widget selbst (aus Objekt oder Verlauf), die übrigen kommen aus verknüpften Objekten — meist
+ * aus dem Statistik-Skript. Jeder Wert hat in der Gruppe „Sichtbare Werte" einen Schalter.
  */
-export const GAS_VALUE_KEYS = ['today', 'yesterday', 'days7', 'days30', 'month', 'last_month', 'cost_month'] as const;
+export const GAS_VALUES: GasValueSpec[] = [
+    { key: 'today', decimals: 2 },
+    { key: 'yesterday', oid: 'oid_gestern', decimals: 2 },
+    { key: 'days7', oid: 'oid_7tage', decimals: 1 },
+    { key: 'days30', oid: 'oid_30tage', decimals: 1 },
+    { key: 'month', decimals: 1 },
+    { key: 'last_month', oid: 'oid_vormonat', decimals: 1 },
+    { key: 'cost_month', decimals: 2, unit: '€' },
+];
+
+/** Schlüssel der Werte — der Übersetzungstest prüft darüber „<key>" und „show_<key>" */
+export const GAS_VALUE_KEYS = GAS_VALUES.map(v => v.key);

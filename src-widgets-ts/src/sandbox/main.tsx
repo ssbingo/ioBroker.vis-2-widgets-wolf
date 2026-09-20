@@ -36,8 +36,10 @@ interface Meter {
     flow: number;
     today: number;
     month: number;
-    /** Werte des Statistik-Skripts (addOn/Gasverbrauch_statistik.js), wenn verknüpft */
+    /** Werte des Statistik-Skripts (addOn/gasverbrauch_statistik.js), wenn verknüpft */
     stats?: { yesterday: number; days7: number; days30: number; lastMonth: number };
+    /** sichtbare Werte wie in der Gruppe „Sichtbare Werte"; ohne Angabe alle */
+    werte?: string[];
 }
 
 const START: Meter[] = [
@@ -53,12 +55,22 @@ const START: Meter[] = [
     },
     {
         title: 'Gaszähler mit Statistik-Skript',
-        subtitle: '0_userdata.0.Gas',
+        subtitle: '0_userdata.0.Gas · alle Werte',
         reading: 11248.317,
         flow: 1.36,
         today: 3.41,
         month: 74.2,
         stats: { yesterday: 5.87, days7: 38.4, days30: 162.9, lastMonth: 188.3 },
+    },
+    {
+        title: 'Gaszähler, Auswahl',
+        subtitle: 'nur Heute, 30 Tage und Kosten',
+        reading: 11248.317,
+        flow: 0,
+        today: 3.41,
+        month: 74.2,
+        stats: { yesterday: 5.87, days7: 38.4, days30: 162.9, lastMonth: 188.3 },
+        werte: ['today', 'days30', 'cost_month'],
     },
 ];
 
@@ -188,26 +200,26 @@ const TARIFF = { brennwert: 11.482, zustandszahl: 0.9612, arbeitspreis: 0.1092, 
  * @returns die Werte in der Reihenfolge der Anzeige
  */
 function gasValues(m: Meter): GasValue[] {
-    const values: GasValue[] = [{ key: 'today', label: de.today, value: m.today, unit: 'm³', decimals: 2 }];
+    const alle: GasValue[] = [{ key: 'today', label: de.today, value: m.today, unit: 'm³', decimals: 2 }];
     if (m.stats) {
-        values.push(
+        alle.push(
             { key: 'yesterday', label: de.yesterday, value: m.stats.yesterday, unit: 'm³', decimals: 2 },
             { key: 'days7', label: de.days7, value: m.stats.days7, unit: 'm³', decimals: 1 },
             { key: 'days30', label: de.days30, value: m.stats.days30, unit: 'm³', decimals: 1 },
         );
     }
-    values.push({ key: 'month', label: de.month, value: m.month, unit: 'm³', decimals: 1 });
+    alle.push({ key: 'month', label: de.month, value: m.month, unit: 'm³', decimals: 1 });
     if (m.stats) {
-        values.push({ key: 'last_month', label: de.last_month, value: m.stats.lastMonth, unit: 'm³', decimals: 1 });
+        alle.push({ key: 'last_month', label: de.last_month, value: m.stats.lastMonth, unit: 'm³', decimals: 1 });
     }
-    values.push({
+    alle.push({
         key: 'cost_month',
         label: de.cost_month,
         value: monthlyCost(m.month, TARIFF),
         unit: '€',
         decimals: 2,
     });
-    return values;
+    return m.werte ? alle.filter(v => m.werte?.includes(v.key)) : alle;
 }
 
 const TICK_MS = 2000;
