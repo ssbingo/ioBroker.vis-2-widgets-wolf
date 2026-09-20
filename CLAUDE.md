@@ -83,6 +83,10 @@ Englisch, die übrigen unter `doc/<sprache>/` in der jeweiligen Sprache.
 - Übersetzungen prüft `src/i18n/i18n.test.ts`: gleiche Schlüssel in allen Sprachen, jeder im Code
   verwendete Schlüssel vorhanden, „Wolf" nie übersetzt
 - `widgets/` ist Build-Ausgabe — nie von Hand bearbeiten, `tasks.js` löscht den Ordner
+- `addOn/` enthält das beiliegende ioBroker-Skript `gasverbrauch_statistik.js` (Gaszähler-Statistik)
+  mit Anleitung als md und pdf. `tasks.js` kopiert den Ordner nach
+  `widgets/vis-2-widgets-wolf/addon/`, damit er über vis-2 abrufbar ist. Änderungen am Skript
+  gehören auch in die Dokumentation aller elf READMEs.
 
 ## Testen im dev-server
 
@@ -134,6 +138,8 @@ Englisch, die übrigen unter `doc/<sprache>/` in der jeweiligen Sprache.
 - Changelog in **allen elf** README-Dateien vorangestellt, im Format des Release-Scripts:
   `### x.y.z (JJJJ-MM-TT)` und darunter `* (ssbingo) …`. Das Release-Script pflegt nur
   `README.md` — die zehn Dateien unter `doc/` von Hand nachziehen.
+- **Höchstens zehn Einträge** je README. Ältere Einträge wandern nach `CHANGELOG_OLD.md`;
+  jede README verweist am Ende des Changelogs darauf.
 - Release-ZIP mit `npm run zip` (git archive des letzten Commits)
 - Adapter-Check auf <https://adapter-check.iobroker.in/> ohne Fehler
 - GitHub Actions grün, dann Tag `vX.Y.Z` pushen — niemals lokal veröffentlichen

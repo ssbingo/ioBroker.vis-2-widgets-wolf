@@ -337,6 +337,12 @@ provide.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### 0.5.0 (2026-09-20)
+* (ssbingo) Heating circuit: every block can be shown or hidden individually
+* (ssbingo) Gas meter: consumption values from the bundled statistics script — yesterday, last 7 and 30 days, previous month
+* (ssbingo) Gas meter: every value of the footer can be shown or hidden individually
+* (ssbingo) The statistics script `gasverbrauch_statistik.js` ships with the adapter and is documented in all READMEs
+
 ### 0.4.1 (2026-09-19)
 * (ssbingo) Buy me a coffee button at the top of all README files
 

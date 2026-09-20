@@ -60,6 +60,12 @@ WOLF en het WOLF-logo zijn merken van WOLF GmbH. Dit project is niet verbonden m
     ### **WORK IN PROGRESS**
 -->
 
+### 0.5.0 (2026-09-20)
+* (ssbingo) Verwarmingscircuit: elk blok afzonderlijk te tonen of te verbergen
+* (ssbingo) Gasmeter: verbruikswaarden uit het meegeleverde statistiekscript — gisteren, laatste 7 en 30 dagen, vorige maand
+* (ssbingo) Gasmeter: elke waarde in de voettekst afzonderlijk te tonen of te verbergen
+* (ssbingo) Het statistiekscript `gasverbrauch_statistik.js` wordt meegeleverd en is in alle README's beschreven
+
 ### 0.4.1 (2026-09-19)
 * (ssbingo) Buy me a coffee-knop bovenaan alle README-bestanden.
 
@@ -71,6 +77,8 @@ WOLF en het WOLF-logo zijn merken van WOLF GmbH. Dit project is niet verbonden m
 
 ### 0.2.0 (2026-09-18)
 * (ssbingo) Eerste versie: widgetset voor VIS-2 (React 19) met gasmeter, ketelstatus, verwarmingscircuit, warm water en stooklijn. Bedienende widgets tonen een waarde pas na bevestiging (ack); de stooklijn is een benadering (geen Wolf-formule). De gasmeter berekent dag- en maandverbruik uit de historie.
+
+Oudere wijzigingen: [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 
 ## Licentie
 

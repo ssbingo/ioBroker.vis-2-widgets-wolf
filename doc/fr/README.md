@@ -60,6 +60,12 @@ WOLF et le logo WOLF sont des marques de WOLF GmbH. Ce projet n'est ni affilié 
     ### **WORK IN PROGRESS**
 -->
 
+### 0.5.0 (2026-09-20)
+* (ssbingo) Circuit de chauffage : chaque bloc peut être affiché ou masqué
+* (ssbingo) Compteur de gaz : valeurs de consommation issues du script de statistiques fourni — hier, 7 et 30 derniers jours, mois dernier
+* (ssbingo) Compteur de gaz : chaque valeur du pied de vignette peut être affichée ou masquée
+* (ssbingo) Le script de statistiques `gasverbrauch_statistik.js` est fourni avec l'adaptateur et documenté dans tous les README
+
 ### 0.4.1 (2026-09-19)
 * (ssbingo) Bouton Buy me a coffee en haut de tous les fichiers README.
 
@@ -71,6 +77,8 @@ WOLF et le logo WOLF sont des marques de WOLF GmbH. Ce projet n'est ni affilié 
 
 ### 0.2.0 (2026-09-18)
 * (ssbingo) Première version : ensemble de widgets pour VIS-2 (React 19) avec compteur de gaz, état de la chaudière, circuit de chauffage, eau chaude et courbe de chauffe. Les widgets de commande n'affichent une valeur qu'après confirmation (ack) ; la courbe de chauffe est une approximation (pas une formule Wolf). Le compteur de gaz calcule la consommation journalière et mensuelle à partir de l'historique.
+
+Modifications plus anciennes : [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 
 ## Licence
 

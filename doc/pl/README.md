@@ -60,6 +60,12 @@ WOLF i logo WOLF są znakami towarowymi WOLF GmbH. Ten projekt nie jest powiąza
     ### **WORK IN PROGRESS**
 -->
 
+### 0.5.0 (2026-09-20)
+* (ssbingo) Obieg grzewczy: każdy blok można pokazać lub ukryć
+* (ssbingo) Licznik gazu: wartości zużycia z dołączonego skryptu statystyk — wczoraj, ostatnie 7 i 30 dni, poprzedni miesiąc
+* (ssbingo) Licznik gazu: każdą wartość w stopce można pokazać lub ukryć
+* (ssbingo) Skrypt statystyk `gasverbrauch_statistik.js` jest dołączony do adaptera i opisany we wszystkich plikach README
+
 ### 0.4.1 (2026-09-19)
 * (ssbingo) Przycisk Buy me a coffee na początku wszystkich plików README.
 
@@ -71,6 +77,8 @@ WOLF i logo WOLF są znakami towarowymi WOLF GmbH. Ten projekt nie jest powiąza
 
 ### 0.2.0 (2026-09-18)
 * (ssbingo) Pierwsza wersja: zestaw widżetów dla VIS-2 (React 19) z licznikiem gazu, stanem kotła, obiegiem grzewczym, ciepłą wodą i krzywą grzewczą. Widżety sterujące pokazują wartość dopiero po potwierdzeniu (ack); krzywa grzewcza jest przybliżeniem (nie formułą Wolf). Licznik gazu oblicza zużycie dzienne i miesięczne z historii.
+
+Starsze zmiany: [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 
 ## Licencja
 

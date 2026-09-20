@@ -60,6 +60,12 @@ WOLF y el logotipo de WOLF son marcas de WOLF GmbH. Este proyecto no está afili
     ### **WORK IN PROGRESS**
 -->
 
+### 0.5.0 (2026-09-20)
+* (ssbingo) Circuito de calefacción: cada bloque se puede mostrar u ocultar
+* (ssbingo) Contador de gas: valores de consumo del script de estadísticas incluido — ayer, últimos 7 y 30 días, mes pasado
+* (ssbingo) Contador de gas: cada valor del pie se puede mostrar u ocultar
+* (ssbingo) El script de estadísticas `gasverbrauch_statistik.js` se entrega con el adaptador y está descrito en todos los README
+
 ### 0.4.1 (2026-09-19)
 * (ssbingo) Botón Buy me a coffee al principio de todos los archivos README.
 
@@ -71,6 +77,8 @@ WOLF y el logotipo de WOLF son marcas de WOLF GmbH. Este proyecto no está afili
 
 ### 0.2.0 (2026-09-18)
 * (ssbingo) Primera versión: conjunto de widgets para VIS-2 (React 19) con contador de gas, estado de la caldera, circuito de calefacción, agua caliente y curva de calefacción. Los widgets de control solo muestran un valor tras la confirmación (ack); la curva de calefacción es una aproximación (no es una fórmula Wolf). El contador de gas calcula el consumo diario y mensual a partir del historial.
+
+Cambios anteriores: [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 
 ## Licencia
 

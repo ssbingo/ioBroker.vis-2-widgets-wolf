@@ -312,6 +312,12 @@ WOLF und das WOLF-Logo sind Marken der WOLF GmbH. Dieses Projekt steht in keiner
     ### **WORK IN PROGRESS**
 -->
 
+### 0.5.0 (2026-09-20)
+* (ssbingo) Heizkreis: jeder Block einzeln ein- und ausblendbar
+* (ssbingo) Gaszähler: Verbrauchswerte aus dem beiliegenden Statistik-Skript — Gestern, letzte 7 und 30 Tage, Vormonat
+* (ssbingo) Gaszähler: jeder Wert der Fußzeile einzeln ein- und ausblendbar
+* (ssbingo) Das Statistik-Skript `gasverbrauch_statistik.js` liegt dem Adapter bei und ist in allen READMEs beschrieben
+
 ### 0.4.1 (2026-09-19)
 * (ssbingo) Buy-Me-a-Coffee-Button oben in allen README-Dateien.
 
@@ -323,6 +329,8 @@ WOLF und das WOLF-Logo sind Marken der WOLF GmbH. Dieses Projekt steht in keiner
 
 ### 0.2.0 (2026-09-18)
 * (ssbingo) Erste Version: Widget-Set für VIS-2 (React 19) mit Gaszähler, Kesselstatus, Heizkreis, Warmwasser und Heizkurve. Bedienende Widgets zeigen einen Wert erst nach der Bestätigung (ack); die Heizkurve ist eine Näherung (keine Wolf-Formel). Der Gaszähler rechnet Tages- und Monatsverbrauch aus dem Verlauf.
+
+Ältere Änderungen: [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 
 ## Lizenz
 
