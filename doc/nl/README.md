@@ -60,6 +60,11 @@ WOLF en het WOLF-logo zijn merken van WOLF GmbH. Dit project is niet verbonden m
     ### **WORK IN PROGRESS**
 -->
 
+### 0.5.1 (2026-09-20)
+* (ssbingo) Statistiekscript: de timers lopen via globalThis zodat de ioBroker-repositorychecker ze niet meer meldt — het gedrag blijft gelijk
+* (ssbingo) react en de lettertypepakketten zijn voor de checker als optionele afhankelijkheden gemarkeerd: de lettertypen worden bij het bouwen ingesloten, React komt tijdens runtime van vis-2
+* (ssbingo) Dependabot controleert nog steeds maandelijks, maar verspreid over de maand
+
 ### 0.5.0 (2026-09-20)
 * (ssbingo) Verwarmingscircuit: elk blok afzonderlijk te tonen of te verbergen
 * (ssbingo) Gasmeter: verbruikswaarden uit het meegeleverde statistiekscript — gisteren, laatste 7 en 30 dagen, vorige maand

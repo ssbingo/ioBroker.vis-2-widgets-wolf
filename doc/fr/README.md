@@ -60,6 +60,11 @@ WOLF et le logo WOLF sont des marques de WOLF GmbH. Ce projet n'est ni affilié 
     ### **WORK IN PROGRESS**
 -->
 
+### 0.5.1 (2026-09-20)
+* (ssbingo) Script de statistiques : les minuteries passent par globalThis afin que le vérificateur de dépôts ioBroker ne les signale plus — le comportement est inchangé
+* (ssbingo) react et les paquets de polices sont marqués comme dépendances optionnelles pour le vérificateur : les polices sont intégrées à la compilation, React est fourni par vis-2 à l'exécution
+* (ssbingo) Dependabot vérifie toujours une fois par mois, mais réparti sur le mois
+
 ### 0.5.0 (2026-09-20)
 * (ssbingo) Circuit de chauffage : chaque bloc peut être affiché ou masqué
 * (ssbingo) Compteur de gaz : valeurs de consommation issues du script de statistiques fourni — hier, 7 et 30 derniers jours, mois dernier

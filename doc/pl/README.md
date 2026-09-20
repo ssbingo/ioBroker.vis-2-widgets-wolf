@@ -60,6 +60,11 @@ WOLF i logo WOLF są znakami towarowymi WOLF GmbH. Ten projekt nie jest powiąza
     ### **WORK IN PROGRESS**
 -->
 
+### 0.5.1 (2026-09-20)
+* (ssbingo) Skrypt statystyk: timery działają przez globalThis, aby kontroler repozytoriów ioBroker ich nie zgłaszał — działanie pozostaje bez zmian
+* (ssbingo) react i pakiety czcionek są oznaczone dla kontrolera jako zależności opcjonalne: czcionki są osadzane podczas budowania, React dostarcza vis-2 w czasie działania
+* (ssbingo) Dependabot nadal sprawdza co miesiąc, ale w rozłożeniu na cały miesiąc
+
 ### 0.5.0 (2026-09-20)
 * (ssbingo) Obieg grzewczy: każdy blok można pokazać lub ukryć
 * (ssbingo) Licznik gazu: wartości zużycia z dołączonego skryptu statystyk — wczoraj, ostatnie 7 i 30 dni, poprzedni miesiąc

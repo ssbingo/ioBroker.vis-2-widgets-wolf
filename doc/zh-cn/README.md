@@ -60,6 +60,11 @@ WOLF 及 WOLF 标志是 WOLF GmbH 的商标。本项目与 WOLF GmbH 无任何�
     ### **WORK IN PROGRESS**
 -->
 
+### 0.5.1 (2026-09-20)
+* (ssbingo) 统计脚本：定时器改为通过 globalThis 调用，ioBroker 仓库检查器不再提示——行为保持不变
+* (ssbingo) react 与字体包已为仓库检查器标记为可选依赖：字体在构建时内嵌，React 由 vis-2 在运行时提供
+* (ssbingo) Dependabot 仍每月检查一次，但在月内分散执行
+
 ### 0.5.0 (2026-09-20)
 * (ssbingo) 采暖回路：每个模块都可单独显示或隐藏
 * (ssbingo) 燃气表：使用附带统计脚本的用量数值——昨天、最近 7 天和 30 天、上月

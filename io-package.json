@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "vis-2-widgets-wolf",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "news": {
-      "NEXT": {
+      "0.5.1": {
         "en": "Maintenance: timers in the bundled statistics script run through globalThis, remarks of the ioBroker adapter checker addressed.",
         "de": "Wartung: Zeitgeber im beiliegenden Statistik-Skript laufen über globalThis, Hinweise des ioBroker-Adapter-Checkers abgearbeitet.",
         "ru": "Обслуживание: таймеры в прилагаемом скрипте статистики работают через globalThis, замечания проверки адаптеров ioBroker устранены.",
@@ -15,19 +15,6 @@
         "pl": "Konserwacja: timery w dołączonym skrypcie statystyk działają przez globalThis, uwagi kontrolera adapterów ioBroker zrealizowane.",
         "uk": "Обслуговування: таймери в доданому скрипті статистики працюють через globalThis, зауваження перевірки адаптерів ioBroker опрацьовані.",
         "zh-cn": "维护：附带统计脚本的定时器改为通过 globalThis 调用，已处理 ioBroker 适配器检查器的提示。"
-      },
-      "0.5.0": {
-        "en": "Heating circuit: each block can be shown or hidden. Gas meter: values from the bundled statistics script (yesterday, 7 and 30 days, last month), each value selectable.",
-        "de": "Heizkreis: jeder Block einzeln ein- und ausblendbar. Gaszähler: Werte aus dem beiliegenden Statistik-Skript (Gestern, 7 und 30 Tage, letzter Monat), jeder Wert einzeln wählbar.",
-        "ru": "Контур отопления: каждый блок можно показать или скрыть. Счётчик газа: значения из прилагаемого скрипта статистики (вчера, 7 и 30 дней, прошлый месяц), каждое значение выбирается отдельно.",
-        "pt": "Circuito de aquecimento: cada bloco pode ser mostrado ou ocultado. Contador de gás: valores do script de estatísticas incluído (ontem, 7 e 30 dias, mês passado), cada valor selecionável.",
-        "nl": "Verwarmingscircuit: elk blok afzonderlijk tonen of verbergen. Gasmeter: waarden uit het meegeleverde statistiekscript (gisteren, 7 en 30 dagen, vorige maand), elke waarde apart te kiezen.",
-        "fr": "Circuit de chauffage : chaque bloc peut être affiché ou masqué. Compteur de gaz : valeurs issues du script de statistiques fourni (hier, 7 et 30 jours, mois dernier), chaque valeur au choix.",
-        "it": "Circuito di riscaldamento: ogni blocco si può mostrare o nascondere. Contatore del gas: valori dallo script di statistica incluso (ieri, 7 e 30 giorni, mese scorso), ogni valore selezionabile.",
-        "es": "Circuito de calefacción: cada bloque se puede mostrar u ocultar. Contador de gas: valores del script de estadísticas incluido (ayer, 7 y 30 días, mes pasado), cada valor seleccionable.",
-        "pl": "Obieg grzewczy: każdy blok można pokazać lub ukryć. Licznik gazu: wartości z dołączonego skryptu statystyk (wczoraj, 7 i 30 dni, poprzedni miesiąc), każda wartość do wyboru.",
-        "uk": "Контур опалення: кожен блок можна показати або сховати. Лічильник газу: значення з доданого скрипта статистики (учора, 7 і 30 днів, минулий місяць), кожне значення обирається окремо.",
-        "zh-cn": "采暖回路：每个模块都可单独显示或隐藏。燃气表：使用附带统计脚本的数值（昨天、7 天和 30 天、上月），每个数值都可单独选择。"
       }
     },
     "titleLang": {

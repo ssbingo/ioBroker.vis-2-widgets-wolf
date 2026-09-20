@@ -312,6 +312,11 @@ WOLF und das WOLF-Logo sind Marken der WOLF GmbH. Dieses Projekt steht in keiner
     ### **WORK IN PROGRESS**
 -->
 
+### 0.5.1 (2026-09-20)
+* (ssbingo) Statistik-Skript: Die Zeitgeber laufen über globalThis, damit der ioBroker-Repository-Checker sie nicht mehr meldet — das Verhalten bleibt gleich
+* (ssbingo) react und die Schriftpakete sind für den Repository-Checker als optionale Abhängigkeiten gekennzeichnet: Die Schriften werden beim Bauen eingebettet, React liefert vis-2 zur Laufzeit
+* (ssbingo) Dependabot prüft weiterhin monatlich, aber über den Monat verteilt
+
 ### 0.5.0 (2026-09-20)
 * (ssbingo) Heizkreis: jeder Block einzeln ein- und ausblendbar
 * (ssbingo) Gaszähler: Verbrauchswerte aus dem beiliegenden Statistik-Skript — Gestern, letzte 7 und 30 Tage, Vormonat

@@ -139,7 +139,8 @@ Englisch, die übrigen unter `doc/<sprache>/` in der jeweiligen Sprache.
   `### x.y.z (JJJJ-MM-TT)` und darunter `* (ssbingo) …`. Das Release-Script pflegt nur
   `README.md` — die zehn Dateien unter `doc/` von Hand nachziehen.
 - **Höchstens zehn Einträge** je README. Ältere Einträge wandern nach `CHANGELOG_OLD.md`;
-  jede README verweist am Ende des Changelogs darauf.
+  jede README verweist am Ende des Changelogs darauf. Das Release-Script kürzt sonst schon bei
+  fünf — deshalb immer mit `--numChangelogEntries 10` aufrufen.
 - Release-ZIP mit `npm run zip` (git archive des letzten Commits)
 - Adapter-Check auf <https://adapter-check.iobroker.in/> ohne Fehler
 - GitHub Actions grün, dann Tag `vX.Y.Z` pushen — niemals lokal veröffentlichen
