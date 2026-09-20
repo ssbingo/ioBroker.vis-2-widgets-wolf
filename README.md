@@ -167,6 +167,13 @@ object: while the burner is on), the tank branch while charging, each heating ci
 pump runs (without a pump object: like the boiler). Tank, outside temperature and zero to four
 heating circuits can be shown or hidden; the diagram arranges itself accordingly.
 
+#### Heating circuit: visible blocks
+
+The group *Visible blocks* switches each block off individually: operating mode, day temperature,
+economy temperature, setpoint correction, time program and the three readings (room actual, room
+setpoint, flow setpoint). The linked objects stay in place, so the tile also fits a small area. A
+switch only appears once its object is linked; without an object the block stays hidden anyway.
+
 #### Heating curve: an approximation
 
 Wolf does not publish the formula of its heating curve. The widget therefore draws the usual

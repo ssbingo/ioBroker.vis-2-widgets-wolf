@@ -1,9 +1,16 @@
 import React from 'react';
 
-import type { RxRenderWidgetProps, RxWidgetInfo } from '@iobroker/types-vis-2';
+import type {
+    RxRenderWidgetProps,
+    RxWidgetInfo,
+    RxWidgetInfoAttributesFieldCheckbox,
+    WidgetData,
+} from '@iobroker/types-vis-2';
 
 import CircuitView from '../components/CircuitView';
 import type { Reading } from '../components/controls';
+import { CIRCUIT_BLOCKS, type CircuitBlock } from '../lib/circuitBlocks';
+import { toBoolean } from '../lib/fmt';
 import { numberRange, selectOptions } from '../lib/objectMeta';
 import { THEME_OPTIONS } from '../lib/theme';
 import WolfWidgetBase, { type WolfBaseRxData } from './WolfWidgetBase';
@@ -21,6 +28,8 @@ interface WolfCircuitRxData extends WolfBaseRxData {
     temp_min?: number | string;
     temp_max?: number | string;
     temp_step?: number | string;
+    /** Schalter der Gruppe „Sichtbare Blöcke": show_betriebsart … show_vorlauf_soll */
+    [key: `show_${string}`]: boolean | string | undefined;
 }
 
 /** Wertebereiche, wenn weder Attribut noch Objekt etwas angeben */
@@ -65,6 +74,20 @@ export default class WolfCircuit extends WolfWidgetBase<WolfCircuitRxData> {
                         { name: 'oid_raumsoll', type: 'id', label: 'oid_raumsoll', default: '' },
                         { name: 'oid_vorlauf_soll', type: 'id', label: 'oid_vorlauf_soll', default: '' },
                     ],
+                },
+                {
+                    name: 'blocks',
+                    label: 'group_blocks',
+                    // Ein Schalter je Block — so lässt sich die Kachel kürzen, ohne die
+                    // Verknüpfung zu verlieren. Ohne Objekt gibt es nichts zu zeigen, dann
+                    // bleibt auch der Schalter verborgen.
+                    fields: CIRCUIT_BLOCKS.map((name): RxWidgetInfoAttributesFieldCheckbox => ({
+                        name: `show_${name}`,
+                        type: 'checkbox',
+                        label: `show_${name}`,
+                        default: true,
+                        hidden: (data: WidgetData) => !data[`oid_${name}`],
+                    })),
                 },
                 {
                     name: 'limits',
@@ -130,35 +153,39 @@ export default class WolfCircuit extends WolfWidgetBase<WolfCircuitRxData> {
         super.renderWidgetBody(props);
         const rx = this.state.rxData;
         const tempAttrs = { min: rx.temp_min, max: rx.temp_max, step: rx.temp_step };
+        // Objekt-ID nur, wenn der Block in der Gruppe „Sichtbare Blöcke" eingeschaltet ist (Vorgabe an)
+        const oid = (name: CircuitBlock): string | undefined =>
+            toBoolean(rx[`show_${name}`]) === false ? undefined : rx[`oid_${name}`];
         const readings: Reading[] = [];
-        const addReading = (oid: string | undefined, label: string): void => {
-            if (oid) {
-                readings.push({ label, value: this.objectNumber(oid), unit: '°C', decimals: 1 });
+        const addReading = (name: CircuitBlock, label: string): void => {
+            const id = oid(name);
+            if (id) {
+                readings.push({ label, value: this.objectNumber(id), unit: '°C', decimals: 1 });
             }
         };
-        addReading(rx.oid_raumtemp, this.tr('room_actual'));
-        addReading(rx.oid_raumsoll, this.tr('room_setpoint'));
-        addReading(rx.oid_vorlauf_soll, this.tr('flow_setpoint'));
+        addReading('raumtemp', this.tr('room_actual'));
+        addReading('raumsoll', this.tr('room_setpoint'));
+        addReading('vorlauf_soll', this.tr('flow_setpoint'));
 
         return (
             <CircuitView
                 themeType={this.themeType()}
                 title={rx.title || this.tr('circuit')}
                 subtitle={rx.subtitle}
-                mode={this.selectControl(rx.oid_betriebsart, selectOptions(this.meta(rx.oid_betriebsart), rx.modes))}
+                mode={this.selectControl(oid('betriebsart'), selectOptions(this.meta(rx.oid_betriebsart), rx.modes))}
                 dayTemp={this.numberControl(
-                    rx.oid_tagtemp,
+                    oid('tagtemp'),
                     numberRange(this.meta(rx.oid_tagtemp), tempAttrs, TEMP_FALLBACK),
                 )}
                 ecoTemp={this.numberControl(
-                    rx.oid_spartemp,
+                    oid('spartemp'),
                     numberRange(this.meta(rx.oid_spartemp), tempAttrs, TEMP_FALLBACK),
                 )}
                 correction={this.numberControl(
-                    rx.oid_korrektur,
+                    oid('korrektur'),
                     numberRange(this.meta(rx.oid_korrektur), {}, CORRECTION_FALLBACK),
                 )}
-                program={this.selectControl(rx.oid_zeitprogramm, selectOptions(this.meta(rx.oid_zeitprogramm)))}
+                program={this.selectControl(oid('zeitprogramm'), selectOptions(this.meta(rx.oid_zeitprogramm)))}
                 readings={readings}
                 staged={this.writes.hasStaged()}
                 onCommit={() => this.writes.commit()}

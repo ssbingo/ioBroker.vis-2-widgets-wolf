@@ -24,12 +24,17 @@ const CORRECTION: NumberRange = { min: -4, max: 4, step: 0.5 };
 /** Startwerte wie im wolf-smartset-Export */
 const START: SimValues = { mode: 5, day: 22, eco: 18, correction: 1, program: 2 };
 
+/** Blöcke der Kachel — im Widget steuert sie die Attributgruppe „Sichtbare Blöcke" */
+export type SimBlock = 'mode' | 'day' | 'eco' | 'correction' | 'program' | 'readings';
+
 /** Eigenschaften der simulierten Kachel */
 export interface SimCircuitProps extends SimOptions {
     /** Hell oder dunkel */
     themeType: ThemeType;
     /** Unterzeile */
     subtitle: string;
+    /** sichtbare Blöcke; ohne Angabe alle */
+    blocks?: SimBlock[];
 }
 
 /**
@@ -41,27 +46,32 @@ export interface SimCircuitProps extends SimOptions {
 export default function SimCircuit(props: SimCircuitProps): React.JSX.Element {
     const sim = useSimSource(START, props);
     const { values, writes } = sim;
+    const shows = (block: SimBlock): boolean => !props.blocks || props.blocks.includes(block);
 
     return (
         <CircuitView
             themeType={props.themeType}
             title={de.circuit}
             subtitle={props.subtitle}
-            mode={sim.select('mode', MODES)}
-            dayTemp={sim.number('day', TEMP)}
-            ecoTemp={sim.number('eco', TEMP)}
-            correction={sim.number('correction', CORRECTION)}
-            program={sim.select('program', PROGRAMS)}
-            readings={[
-                { label: de.room_actual, value: 21.4, unit: '°C', decimals: 1 },
-                {
-                    label: de.room_setpoint,
-                    value: Number(values.day) + Number(values.correction),
-                    unit: '°C',
-                    decimals: 1,
-                },
-                { label: de.flow_setpoint, value: 41.5, unit: '°C', decimals: 1 },
-            ]}
+            mode={shows('mode') ? sim.select('mode', MODES) : null}
+            dayTemp={shows('day') ? sim.number('day', TEMP) : null}
+            ecoTemp={shows('eco') ? sim.number('eco', TEMP) : null}
+            correction={shows('correction') ? sim.number('correction', CORRECTION) : null}
+            program={shows('program') ? sim.select('program', PROGRAMS) : null}
+            readings={
+                shows('readings')
+                    ? [
+                          { label: de.room_actual, value: 21.4, unit: '°C', decimals: 1 },
+                          {
+                              label: de.room_setpoint,
+                              value: Number(values.day) + Number(values.correction),
+                              unit: '°C',
+                              decimals: 1,
+                          },
+                          { label: de.flow_setpoint, value: 41.5, unit: '°C', decimals: 1 },
+                      ]
+                    : []
+            }
             staged={writes.hasStaged()}
             onCommit={() => writes.commit()}
             onDiscard={() => writes.discard()}

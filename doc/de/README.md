@@ -155,6 +155,14 @@ Pumpen-Objekt: solange der Brenner brennt), der Speicherzweig während der Ladun
 solange seine Pumpe läuft (ohne Pumpen-Objekt: wie das Heizgerät). Speicher, Außentemperatur und
 null bis vier Heizkreise lassen sich ein- und ausblenden; das Schema ordnet sich danach an.
 
+#### Heizkreis: sichtbare Blöcke
+
+In der Gruppe *Sichtbare Blöcke* lässt sich jeder Block einzeln abschalten: Betriebsart,
+Tagtemperatur, Spartemperatur, Sollwertkorrektur, Zeitprogramm und die drei Anzeigewerte (Raum
+Ist, Raumsoll, Vorlauf Soll). Die Verknüpfung bleibt dabei erhalten, sodass die Kachel auch auf
+eine kleine Fläche passt. Ein Schalter erscheint erst, wenn das zugehörige Objekt verknüpft ist;
+ohne Objekt bleibt der Block ohnehin aus.
+
 #### Heizkurve: eine Näherung
 
 Wolf veröffentlicht keine Formel für die Heizkurve. Das Widget zeichnet deshalb die übliche

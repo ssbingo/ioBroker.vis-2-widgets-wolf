@@ -8,6 +8,7 @@ import { COUNTER_VARIANTS } from '../components/Counter';
 import { SERIES_COLORS } from '../components/TrendsChart';
 import { AGGREGATES, RANGES } from '../lib/chart';
 import { SEVERITIES } from '../lib/messages';
+import { CIRCUIT_BLOCKS } from '../lib/circuitBlocks';
 import { THEME_OPTIONS } from '../lib/theme';
 import translations from '../translations';
 
@@ -29,6 +30,7 @@ const DYNAMIC = [
     ...SEVERITIES.map(v => `severity_${v}`),
     ...SERIES_COLORS.map(v => `color_${v}`),
     ...AGGREGATES.map(v => `aggregate_${v}`),
+    ...CIRCUIT_BLOCKS.map(v => `show_${v}`),
     'phase_0',
     'phase_1',
     'phase_2',

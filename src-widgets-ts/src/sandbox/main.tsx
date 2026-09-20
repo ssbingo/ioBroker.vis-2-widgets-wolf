@@ -19,7 +19,7 @@ import { parseMessages, sortRows, type MessageRow } from '../lib/messages';
 import { injectStyles } from '../styles/injectStyles';
 import de from '../i18n/de.json';
 
-import SimCircuit from './SimCircuit';
+import SimCircuit, { type SimCircuitProps } from './SimCircuit';
 import SimDhw from './SimDhw';
 import SimHeatCurve from './SimHeatCurve';
 import SimSchema from './SimSchema';
@@ -102,12 +102,17 @@ const BOILERS: Boiler[] = [
 ];
 const PHASES = [de.phase_0, de.phase_1, de.phase_2];
 
-/** Heizkreis: Quelle bestätigt, Bestätigungsmodus, Quelle schweigt (kurze Wartezeit), schreibgeschützt */
-const CIRCUITS = [
+/**
+ * Heizkreis: Quelle bestätigt, Bestätigungsmodus, Quelle schweigt (kurze Wartezeit),
+ * schreibgeschützt, und zwei verkürzte Kacheln über die Gruppe „Sichtbare Blöcke"
+ */
+const CIRCUITS: Array<Omit<SimCircuitProps, 'themeType'>> = [
     { subtitle: 'Quelle bestätigt nach 1,5 s' },
     { subtitle: 'Bestätigungsmodus', confirm: true },
     { subtitle: 'Quelle bestätigt nicht (Wartezeit 4 s)', noAck: true, timeoutMs: 4000 },
     { subtitle: 'schreibgeschützt (write: false)', locked: true },
+    { subtitle: 'Blöcke: nur Betriebsart und Anzeigewerte', blocks: ['mode', 'readings'] },
+    { subtitle: 'Blöcke: nur Tagtemperatur', blocks: ['day'] },
 ];
 
 /** Warmwasser: mit Zirkulation und Sofortladung, wie ISM7 ohne beides, Quelle schweigt, Bestätigungsmodus */
