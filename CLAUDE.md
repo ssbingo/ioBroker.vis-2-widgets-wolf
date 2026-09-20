@@ -144,6 +144,20 @@ Englisch, die übrigen unter `doc/<sprache>/` in der jeweiligen Sprache.
 - Adapter-Check auf <https://adapter-check.iobroker.in/> ohne Fehler
 - GitHub Actions grün, dann Tag `vX.Y.Z` pushen — niemals lokal veröffentlichen
 
+## Adapter-Check — bewusst offene Meldungen
+
+Stand 2026-09-20 (Version 0.5.0). Alles andere muss sauber sein.
+
+- `E4031` / `E4033` / `W4001`: vis-2 >= 2.20.0 steht in keinem ioBroker-Repository. Aufnahme in
+  das Latest-Repository und 1.0.0 warten darauf.
+- `W0083`: TypeScript bleibt bei 6.0.x, solange `typescript-eslint` nur `typescript <6.1.0`
+  unterstützt; ESLint bleibt aus demselben Grund bei 9.x (`eslint-plugin-react` bis `eslint ^9.7`).
+- `S5066` für `react` und die drei `@fontsource/*`-Pakete: bleiben im Quelltext als
+  `// @repochecker: optional dependency '…'` gekennzeichnet (Entscheidung des Nutzers). Die
+  Schriften werden beim Bauen als woff2 ins Bundle eingebettet, React liefert VIS-2 zur Laufzeit —
+  auf dem Zielsystem fehlt nichts, und die Adapterinstallation bleibt ohne unnötigen Ballast.
+- `W3050`: Der Checker kann ohne GitHub-Token keine Job-Logs lesen. Nichts am Repository zu ändern.
+
 ## Sprachen
 
 `en, de, ru, pt, nl, fr, it, es, pl, uk, zh-cn` — vollständig in `titleLang`, `desc`, `news`
