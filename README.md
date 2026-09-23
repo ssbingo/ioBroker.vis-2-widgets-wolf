@@ -431,6 +431,10 @@ provide.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (ssbingo) Gas meter: picking the script folder now also fills in the corrected meter reading and the derived flow — until now those two fields were left alone when they already held the sensor, so the tile kept showing the uncorrected reading
+* (ssbingo) Gas meter: the tile points out a meter reading correction that is still set while the reading comes from the script, because it would be corrected twice
+
 ### 0.7.0 (2026-09-23)
 * (ssbingo) Gas meter: new object field *cost of the month* — when linked, the tile shows that value instead of calculating from the tariff, which suits the bundled script because its figure includes base price, VAT and instalment
 * (ssbingo) Bundled statistics script in version 3.0.0: it aligns entered meter readings (correction factor against lost pulses), calculates costs and sends daily and monthly reports via Telegram and e-mail, optionally with a PDF

@@ -3,6 +3,19 @@
     "name": "vis-2-widgets-wolf",
     "version": "0.7.0",
     "news": {
+      "NEXT": {
+        "en": "Gas meter: picking the script folder now also fills in the corrected meter reading and the derived flow, and the tile warns when a correction value would apply twice.",
+        "de": "Gaszähler: Die Ordnerwahl trägt jetzt auch den korrigierten Zählerstand und den berechneten Durchfluss ein; die Kachel warnt vor doppelter Korrektur.",
+        "ru": "Счётчик газа: выбор папки теперь подставляет и скорректированные показания, и вычисленный расход; плитка предупреждает о двойной коррекции.",
+        "pt": "Contador de gás: a escolha da pasta passa a preencher também a leitura corrigida e o caudal calculado; o widget avisa se a correção for aplicada duas vezes.",
+        "nl": "Gasmeter: de mapkeuze vult nu ook de gecorrigeerde meterstand en het berekende debiet in; de tegel waarschuwt voor dubbele correctie.",
+        "fr": "Compteur de gaz : le choix du dossier renseigne désormais aussi l'index corrigé et le débit calculé ; la vignette avertit d'une double correction.",
+        "it": "Contatore del gas: la scelta della cartella inserisce ora anche la lettura corretta e la portata calcolata; la piastrella avvisa di una doppia correzione.",
+        "es": "Contador de gas: la elección de la carpeta rellena ahora también la lectura corregida y el caudal calculado; la tarjeta avisa de una corrección doble.",
+        "pl": "Licznik gazu: wybór folderu wpisuje teraz także skorygowany stan licznika i wyliczony przepływ; kafelek ostrzega przed podwójną korektą.",
+        "uk": "Лічильник газу: вибір теки тепер підставляє й скориговані показання та обчислену витрату; плитка попереджає про подвійну корекцію.",
+        "zh-cn": "燃气表：选择脚本目录时也会填入已校准的表读数与计算得到的流量；磁贴会提示重复修正。"
+      },
       "0.7.0": {
         "en": "Gas meter: the cost of the month can come from the bundled statistics script, which now also aligns meter readings, calculates costs with VAT and sends reports.",
         "de": "Gaszähler: Die Kosten des Monats können aus dem beiliegenden Statistik-Skript kommen — es gleicht jetzt auch Ablesungen ab, rechnet Kosten mit Mehrwertsteuer und verschickt Berichte.",
