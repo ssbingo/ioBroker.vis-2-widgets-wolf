@@ -431,7 +431,7 @@ provide.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.7.1 (2026-09-23)
 * (ssbingo) Gas meter: picking the script folder now also fills in the corrected meter reading and the derived flow — until now those two fields were left alone when they already held the sensor, so the tile kept showing the uncorrected reading
 * (ssbingo) Gas meter: the tile points out a meter reading correction that is still set while the reading comes from the script, because it would be corrected twice
 
@@ -475,11 +475,6 @@ provide.
 * (ssbingo) Narrow tiles: the system diagram switches to an upright layout below 480 px; small steppers and LED texts adapt down to about 260 px
 * (ssbingo) Keyboard: the trends chart can be operated with the arrow keys; visible focus on all controls
 * (ssbingo) Documentation: setup with wolf-smartset (ISM7) for every widget
-
-### 0.3.0 (2026-09-19)
-* (ssbingo) Trends: up to four curves and a background area (e.g. modulation) from the history adapter (history, sql, influxdb), 6 h to 7 days, average/min-max/raw values, current value at the right edge, crosshair with values in the legend
-* (ssbingo) System diagram: heat generator with flame, distributor, hot water tank, up to four heating circuits and outside temperature; the flow animation follows the pump (or the burner), tank charging and each circuit's pump
-* (ssbingo) Messages: fault LED and a status list with up to eight configurable checks (e.g. the safety temperature limiters and the connection to the ISM7), collective fault, fault code with texts and an optional message list (JSON)
 
 Older changes: [CHANGELOG_OLD.md](CHANGELOG_OLD.md)
 

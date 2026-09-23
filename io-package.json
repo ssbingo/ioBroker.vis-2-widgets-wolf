@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "vis-2-widgets-wolf",
-    "version": "0.7.0",
+    "version": "0.7.1",
     "news": {
-      "NEXT": {
+      "0.7.1": {
         "en": "Gas meter: picking the script folder now also fills in the corrected meter reading and the derived flow, and the tile warns when a correction value would apply twice.",
         "de": "Gaszähler: Die Ordnerwahl trägt jetzt auch den korrigierten Zählerstand und den berechneten Durchfluss ein; die Kachel warnt vor doppelter Korrektur.",
         "ru": "Счётчик газа: выбор папки теперь подставляет и скорректированные показания, и вычисленный расход; плитка предупреждает о двойной коррекции.",
@@ -15,19 +15,6 @@
         "pl": "Licznik gazu: wybór folderu wpisuje teraz także skorygowany stan licznika i wyliczony przepływ; kafelek ostrzega przed podwójną korektą.",
         "uk": "Лічильник газу: вибір теки тепер підставляє й скориговані показання та обчислену витрату; плитка попереджає про подвійну корекцію.",
         "zh-cn": "燃气表：选择脚本目录时也会填入已校准的表读数与计算得到的流量；磁贴会提示重复修正。"
-      },
-      "0.7.0": {
-        "en": "Gas meter: the cost of the month can come from the bundled statistics script, which now also aligns meter readings, calculates costs with VAT and sends reports.",
-        "de": "Gaszähler: Die Kosten des Monats können aus dem beiliegenden Statistik-Skript kommen — es gleicht jetzt auch Ablesungen ab, rechnet Kosten mit Mehrwertsteuer und verschickt Berichte.",
-        "ru": "Счётчик газа: затраты за месяц могут поступать из прилагаемого скрипта статистики — он теперь сверяет показания, считает затраты с НДС и отправляет отчёты.",
-        "pt": "Contador de gás: o custo do mês pode vir do script de estatísticas incluído — que agora também concilia leituras, calcula custos com IVA e envia relatórios.",
-        "nl": "Gasmeter: de kosten van de maand kunnen uit het meegeleverde statistiekscript komen — dat nu ook meterstanden afstemt, kosten met btw berekent en rapporten verstuurt.",
-        "fr": "Compteur de gaz : le coût du mois peut provenir du script de statistiques fourni, qui recale désormais les index, calcule les coûts avec TVA et envoie des rapports.",
-        "it": "Contatore del gas: il costo del mese può arrivare dallo script di statistica incluso, che ora allinea anche le letture, calcola i costi con IVA e invia report.",
-        "es": "Contador de gas: el coste del mes puede venir del script de estadísticas incluido, que ahora concilia lecturas, calcula costes con IVA y envía informes.",
-        "pl": "Licznik gazu: koszt miesiąca może pochodzić z dołączonego skryptu statystyk, który uzgadnia teraz odczyty, wylicza koszty z VAT i wysyła raporty.",
-        "uk": "Лічильник газу: витрати за місяць можуть надходити з доданого скрипта статистики, який тепер звіряє показання, рахує витрати з ПДВ і надсилає звіти.",
-        "zh-cn": "燃气表：本月费用可来自附带的统计脚本——该脚本现在还能校准抄表读数、计算含增值税的费用并发送报告。"
       }
     },
     "titleLang": {

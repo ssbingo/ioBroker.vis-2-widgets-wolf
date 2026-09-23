@@ -62,6 +62,10 @@ WOLF en het WOLF-logo zijn merken van WOLF GmbH. Dit project is niet verbonden m
     ### **WORK IN PROGRESS**
 -->
 
+### 0.7.1 (2026-09-23)
+* (ssbingo) Gasmeter: de mapkeuze vult nu ook de gecorrigeerde meterstand en het berekende debiet in — voorheen bleven beide velden staan als de sensor er al in stond, waardoor de tegel de ongecorrigeerde stand bleef tonen
+* (ssbingo) Gasmeter: de tegel wijst op een correctiewaarde die nog is ingesteld terwijl de stand uit het script komt, anders wordt er dubbel gecorrigeerd
+
 ### 0.7.0 (2026-09-23)
 * (ssbingo) Gasmeter: nieuw objectveld *Kosten maand* — gekoppeld toont de tegel die waarde in plaats van zelf uit het tarief te rekenen; dat past bij het meegeleverde script, waarvan het bedrag vastrecht, btw en voorschot bevat
 * (ssbingo) Meegeleverd statistiekscript in versie 3.0.0: het stemt afgelezen meterstanden af (correctiefactor tegen verloren pulsen), berekent kosten en verstuurt dag- en maandrapporten via Telegram en e-mail, desgewenst met PDF
@@ -99,9 +103,6 @@ WOLF en het WOLF-logo zijn merken van WOLF GmbH. Dit project is niet verbonden m
 
 ### 0.4.0 (2026-09-19)
 * (ssbingo) Voorbeeldafbeelding voor elke widget in het VIS-2-palet; smalle tegels tot ongeveer 260 px (het installatieschema wordt staand); verloop met het toetsenbord te bedienen; documentatie met de instelling voor wolf-smartset (ISM7).
-
-### 0.3.0 (2026-09-19)
-* (ssbingo) Nieuwe widgets: installatieschema met stromingsanimatie, verloop uit history, sql of influxdb en meldingen als statuslijst met storings-LED — alle acht widgets zijn nu beschikbaar.
 
 Oudere wijzigingen: [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 

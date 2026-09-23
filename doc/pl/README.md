@@ -62,6 +62,10 @@ WOLF i logo WOLF są znakami towarowymi WOLF GmbH. Ten projekt nie jest powiąza
     ### **WORK IN PROGRESS**
 -->
 
+### 0.7.1 (2026-09-23)
+* (ssbingo) Licznik gazu: wybór folderu wpisuje teraz także skorygowany stan licznika i wyliczony przepływ — dotychczas oba pola pozostawały nietknięte, jeśli był w nich czujnik, więc kafelek nadal pokazywał stan bez korekty
+* (ssbingo) Licznik gazu: kafelek ostrzega o korekcie, która wciąż jest ustawiona, choć stan pochodzi ze skryptu — inaczej korekta zadziała dwa razy
+
 ### 0.7.0 (2026-09-23)
 * (ssbingo) Licznik gazu: nowe pole obiektu *Koszt miesiąca* — po powiązaniu kafelek pokazuje tę wartość zamiast liczyć z taryfy; pasuje to do dołączonego skryptu, którego kwota zawiera opłatę stałą, VAT i zaliczkę
 * (ssbingo) Dołączony skrypt statystyk w wersji 3.0.0: uzgadnia odczyty licznika (współczynnik korekcji wobec utraconych impulsów), wylicza koszty i wysyła raporty dzienne oraz miesięczne przez Telegram i e-mail, w razie potrzeby z PDF
@@ -99,9 +103,6 @@ WOLF i logo WOLF są znakami towarowymi WOLF GmbH. Ten projekt nie jest powiąza
 
 ### 0.4.0 (2026-09-19)
 * (ssbingo) Obraz podglądu dla każdego widżetu w palecie VIS-2; wąskie kafelki do ok. 260 px (schemat instalacji przechodzi w układ pionowy); przebiegi obsługiwane z klawiatury; dokumentacja z konfiguracją dla wolf-smartset (ISM7).
-
-### 0.3.0 (2026-09-19)
-* (ssbingo) Nowe widżety: schemat instalacji z animacją przepływu, przebiegi z history, sql lub influxdb oraz komunikaty jako lista stanów z diodą usterki — dostępnych jest teraz wszystkie osiem widżetów.
 
 Starsze zmiany: [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 

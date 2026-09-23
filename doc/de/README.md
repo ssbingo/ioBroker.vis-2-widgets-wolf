@@ -405,6 +405,10 @@ WOLF und das WOLF-Logo sind Marken der WOLF GmbH. Dieses Projekt steht in keiner
     ### **WORK IN PROGRESS**
 -->
 
+### 0.7.1 (2026-09-23)
+* (ssbingo) Gaszähler: Die Ordnerwahl trägt jetzt auch den korrigierten Zählerstand und den berechneten Durchfluss ein — bisher blieben beide Felder unangetastet, wenn dort schon der Sensor stand, sodass die Kachel weiter den unkorrigierten Stand zeigte
+* (ssbingo) Gaszähler: Die Kachel weist auf einen Korrekturwert hin, der noch gesetzt ist, während der Stand aus dem Skript kommt — sonst wird zweimal korrigiert
+
 ### 0.7.0 (2026-09-23)
 * (ssbingo) Gaszähler: neues Objektfeld *Kosten Monat* — verknüpft zeigt die Kachel diesen Wert, statt aus dem Tarif zu rechnen; das passt zum beiliegenden Skript, dessen Betrag Grundpreis, Mehrwertsteuer und Abschlag enthält
 * (ssbingo) Beiliegendes Statistik-Skript in Fassung 3.0.0: Es gleicht abgelesene Zählerstände ab (Korrekturfaktor gegen verlorene Impulse), rechnet Kosten und verschickt Tages- und Monatsberichte über Telegram und E-Mail, auf Wunsch mit PDF
@@ -442,9 +446,6 @@ WOLF und das WOLF-Logo sind Marken der WOLF GmbH. Dieses Projekt steht in keiner
 
 ### 0.4.0 (2026-09-19)
 * (ssbingo) Vorschaubild für jedes Widget in der VIS-2-Palette; schmale Kacheln bis etwa 260 px (das Anlagenschema stellt sich hochkant); Verläufe mit der Tastatur bedienbar; Anleitung mit der Einrichtung für wolf-smartset (ISM7).
-
-### 0.3.0 (2026-09-19)
-* (ssbingo) Neue Widgets: Anlagenschema mit Flussanimation, Verläufe aus history, sql oder influxdb und Meldungen als Zustandsliste mit Störungs-LED — damit sind alle acht Widgets verfügbar.
 
 Ältere Änderungen: [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 

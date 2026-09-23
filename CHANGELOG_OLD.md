@@ -1,4 +1,9 @@
 # Older changes
+## 0.3.0 (2026-09-19)
+* (ssbingo) Trends: up to four curves and a background area (e.g. modulation) from the history adapter (history, sql, influxdb), 6 h to 7 days, average/min-max/raw values, current value at the right edge, crosshair with values in the legend
+* (ssbingo) System diagram: heat generator with flame, distributor, hot water tank, up to four heating circuits and outside temperature; the flow animation follows the pump (or the burner), tank charging and each circuit's pump
+* (ssbingo) Messages: fault LED and a status list with up to eight configurable checks (e.g. the safety temperature limiters and the connection to the ISM7), collective fault, fault code with texts and an optional message list (JSON)
+
 ## 0.2.0 (2026-09-18)
 * (ssbingo) Initial version: widget set built with React 19 and TypeScript, first version of the gas meter widget
 * (ssbingo) Gas meter: all seven counter styles (A, B, C, E, F, G, H) and a status LED for consumption

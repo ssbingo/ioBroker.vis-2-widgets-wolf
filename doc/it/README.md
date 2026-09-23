@@ -62,6 +62,10 @@ WOLF e il logo WOLF sono marchi di WOLF GmbH. Questo progetto non è affiliato a
     ### **WORK IN PROGRESS**
 -->
 
+### 0.7.1 (2026-09-23)
+* (ssbingo) Contatore del gas: la scelta della cartella inserisce ora anche la lettura corretta e la portata calcolata — prima i due campi restavano invariati se contenevano già il sensore e la piastrella mostrava la lettura non corretta
+* (ssbingo) Contatore del gas: la piastrella segnala un valore di correzione ancora impostato mentre la lettura arriva dallo script, altrimenti la correzione viene applicata due volte
+
 ### 0.7.0 (2026-09-23)
 * (ssbingo) Contatore del gas: nuovo campo oggetto *Costo del mese* — se collegato la piastrella mostra quel valore invece di calcolarlo dalla tariffa; si adatta allo script incluso, il cui importo comprende quota fissa, IVA e acconto
 * (ssbingo) Script di statistica incluso nella versione 3.0.0: allinea le letture del contatore (fattore di correzione contro gli impulsi persi), calcola i costi e invia report giornalieri e mensili via Telegram ed e-mail, se si vuole con PDF
@@ -99,9 +103,6 @@ WOLF e il logo WOLF sono marchi di WOLF GmbH. Questo progetto non è affiliato a
 
 ### 0.4.0 (2026-09-19)
 * (ssbingo) Immagine di anteprima per ogni widget nella tavolozza di VIS-2; riquadri stretti fino a circa 260 px (lo schema dell'impianto passa in verticale); andamenti utilizzabili da tastiera; documentazione con la configurazione per wolf-smartset (ISM7).
-
-### 0.3.0 (2026-09-19)
-* (ssbingo) Nuovi widget: schema dell'impianto con animazione del flusso, andamenti da history, sql o influxdb e messaggi come elenco di stati con LED di guasto — ora sono disponibili tutti gli otto widget.
 
 Modifiche precedenti: [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 

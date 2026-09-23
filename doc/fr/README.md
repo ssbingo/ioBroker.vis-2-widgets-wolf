@@ -62,6 +62,10 @@ WOLF et le logo WOLF sont des marques de WOLF GmbH. Ce projet n'est ni affilié 
     ### **WORK IN PROGRESS**
 -->
 
+### 0.7.1 (2026-09-23)
+* (ssbingo) Compteur de gaz : le choix du dossier renseigne désormais aussi l'index corrigé et le débit calculé — auparavant ces deux champs restaient inchangés s'ils contenaient déjà le capteur, et la vignette affichait l'index non corrigé
+* (ssbingo) Compteur de gaz : la vignette signale une valeur de correction encore présente alors que l'index vient du script, sinon la correction s'applique deux fois
+
 ### 0.7.0 (2026-09-23)
 * (ssbingo) Compteur de gaz : nouveau champ d'objet *Coût du mois* — s'il est lié, la vignette affiche cette valeur au lieu de calculer d'après le tarif ; cela convient au script fourni, dont le montant inclut abonnement, TVA et acompte
 * (ssbingo) Script de statistiques fourni en version 3.0.0 : il recale les index relevés (facteur de correction contre les impulsions perdues), calcule les coûts et envoie des rapports quotidiens et mensuels par Telegram et e-mail, au besoin avec un PDF
@@ -99,9 +103,6 @@ WOLF et le logo WOLF sont des marques de WOLF GmbH. Ce projet n'est ni affilié 
 
 ### 0.4.0 (2026-09-19)
 * (ssbingo) Image d'aperçu pour chaque widget dans la palette VIS-2 ; tuiles étroites jusqu'à environ 260 px (le schéma de l'installation passe à la verticale) ; historiques utilisables au clavier ; documentation avec la configuration pour wolf-smartset (ISM7).
-
-### 0.3.0 (2026-09-19)
-* (ssbingo) Nouveaux widgets : schéma de l'installation avec animation du débit, historiques depuis history, sql ou influxdb et messages sous forme de liste d'états avec LED de défaut — les huit widgets sont désormais disponibles.
 
 Modifications plus anciennes : [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 
