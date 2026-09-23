@@ -2,6 +2,8 @@
     "set_label": "Aquecimento Wolf",
     "gasmeter": "Contador de gás",
     "group_objects": "Objetos",
+    "source_instance": "Instalação (instância do adaptador)",
+    "source_instance_tooltip": "Escolha uma instância de wolf-smartset (ISM7) ou wolf (ISM8i) — os seus objetos são preenchidos nos campos abaixo. Sem escolha, tudo continua manual; os objetos preenchidos podem ser alterados individualmente depois",
     "group_counter": "Mostrador",
     "group_costs": "Cálculo de custos",
     "group_display": "Apresentação",

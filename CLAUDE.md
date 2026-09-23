@@ -82,6 +82,12 @@ Englisch, die übrigen unter `doc/<sprache>/` in der jeweiligen Sprache.
   höchstens 360 × 220) und `visSetIcon`; VIS-2 übernimmt neue Bilder erst nach einem Neustart
 - Übersetzungen prüft `src/i18n/i18n.test.ts`: gleiche Schlüssel in allen Sprachen, jeder im Code
   verwendete Schlüssel vorhanden, „Wolf" nie übersetzt
+- Jedes Widget außer dem Gaszähler hat als erstes Feld der Gruppe „Objekte" das Attribut
+  `source_instance` (`widgets/sourceField.tsx`): Es belegt die Objektfelder aus einer Instanz von
+  `wolf-smartset` (Zuordnung über `native.ParameterId`) oder `wolf`/ISM8i (feste Pfade wie
+  `hg1_t.4`). Neue Objektfelder gehören in die Tabelle in `lib/wolfSource.ts`. Das VIS-2-Feld vom
+  Typ `instance` filtert mit `adapters` als **Array**, obwohl `@iobroker/types-vis-2` dort `string`
+  deklariert.
 - `widgets/` ist Build-Ausgabe — nie von Hand bearbeiten, `tasks.js` löscht den Ordner
 - `addOn/` enthält das beiliegende ioBroker-Skript `gasverbrauch_statistik.js` (Gaszähler-Statistik)
   mit Anleitung als md und pdf. `tasks.js` kopiert den Ordner nach

@@ -6,6 +6,7 @@ import BoilerView from '../components/BoilerView';
 import { toBoolean } from '../lib/fmt';
 import { THEME_OPTIONS } from '../lib/theme';
 import { mapValue, parseValueMap, type ValueMap } from '../lib/valueMap';
+import { sourceField } from './sourceField';
 import WolfWidgetBase, { attrNumber, type WolfBaseRxData } from './WolfWidgetBase';
 
 interface WolfBoilerRxData extends WolfBaseRxData {
@@ -48,6 +49,7 @@ export default class WolfBoiler extends WolfWidgetBase<WolfBoilerRxData> {
                     name: 'common',
                     label: 'group_objects',
                     fields: [
+                        sourceField('tplWolfBoiler'),
                         { name: 'oid_phase', type: 'id', label: 'oid_phase', default: '' },
                         { name: 'oid_brenner', type: 'id', label: 'oid_brenner', default: '' },
                         { name: 'oid_modulation', type: 'id', label: 'oid_modulation', default: '' },

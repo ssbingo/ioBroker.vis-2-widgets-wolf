@@ -2,6 +2,8 @@
     "set_label": "Wolf heating",
     "gasmeter": "Gas meter",
     "group_objects": "Objects",
+    "source_instance": "System (adapter instance)",
+    "source_instance_tooltip": "Pick an instance of wolf-smartset (ISM7) or wolf (ISM8i) — its objects are then filled into the fields below. Without a choice everything stays manual; filled objects can be changed individually afterwards",
     "group_counter": "Counter",
     "group_costs": "Cost calculation",
     "group_display": "Display",

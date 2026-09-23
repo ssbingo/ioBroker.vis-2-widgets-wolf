@@ -2,6 +2,8 @@
     "set_label": "Chauffage Wolf",
     "gasmeter": "Compteur de gaz",
     "group_objects": "Objets",
+    "source_instance": "Installation (instance d'adaptateur)",
+    "source_instance_tooltip": "Choisissez une instance de wolf-smartset (ISM7) ou wolf (ISM8i) — ses objets sont alors renseignés dans les champs ci-dessous. Sans choix, tout reste manuel ; les objets renseignés peuvent ensuite être modifiés un par un",
     "group_counter": "Totalisateur",
     "group_costs": "Calcul des coûts",
     "group_display": "Affichage",

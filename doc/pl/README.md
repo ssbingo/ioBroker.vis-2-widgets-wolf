@@ -36,6 +36,8 @@ Zestaw widżetów sam nie odczytuje danych z instalacji grzewczej. Każda warto�
 
 Szczegółowa konfiguracja, w tym przypisanie obiektów wolf-smartset (ISM7): zob. [dokumentację w języku angielskim](../../README.md).
 
+W każdym widżecie poza licznikiem gazu pierwszym polem grupy „Obiekty" jest **Instalacja (instancja adaptera)**: wybierz instancję `wolf-smartset` (ISM7) lub `wolf` (ISM8i), a obiekty zostaną wpisane automatycznie. Bez wyboru wszystko łączysz ręcznie jak dotąd.
+
 ### Skrypt statystyk zużycia gazu
 
 Do adaptera dołączony jest skrypt ioBroker `gasverbrauch_statistik.js` (folder `addOn/`). Ze stanu licznika wylicza dziś, wczoraj, ostatnie 7 i 30 dni oraz bieżący i poprzedni miesiąc i zapisuje je jako obiekty (domyślnie w `0_userdata.0.Gas`) — dokładnie te wartości, które interfejs webowy CCU pokazuje dla HmIP-ESI, a które przez `hm-rpc` nie trafiają do ioBrokera. W codziennej pracy adapter historii nie jest potrzebny.

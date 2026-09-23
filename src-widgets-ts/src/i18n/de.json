@@ -2,6 +2,8 @@
     "set_label": "Wolf Heizung",
     "gasmeter": "Gaszähler",
     "group_objects": "Objekte",
+    "source_instance": "Anlage (Adapterinstanz)",
+    "source_instance_tooltip": "Instanz von wolf-smartset (ISM7) oder wolf (ISM8i) wählen — die Objekte dieser Anlage werden dann in die Felder unten eingetragen. Ohne Auswahl bleibt alles von Hand verknüpfbar; eingetragene Objekte lassen sich danach einzeln ändern",
     "group_counter": "Zählwerk",
     "group_costs": "Kostenrechnung",
     "group_display": "Darstellung",

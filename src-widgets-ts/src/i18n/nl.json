@@ -2,6 +2,8 @@
     "set_label": "Wolf verwarming",
     "gasmeter": "Gasmeter",
     "group_objects": "Objecten",
+    "source_instance": "Installatie (adapterinstantie)",
+    "source_instance_tooltip": "Kies een instantie van wolf-smartset (ISM7) of wolf (ISM8i) — de objecten daarvan worden in de velden hieronder ingevuld. Zonder keuze blijft alles handmatig; ingevulde objecten kun je daarna afzonderlijk wijzigen",
     "group_counter": "Telwerk",
     "group_costs": "Kostenberekening",
     "group_display": "Weergave",

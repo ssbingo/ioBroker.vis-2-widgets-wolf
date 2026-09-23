@@ -36,6 +36,8 @@ Le jeu de widgets ne lit aucune donnée directement depuis le chauffage. Chaque 
 
 Configuration détaillée, y compris l'affectation des objets wolf-smartset (ISM7) : voir la [documentation en anglais](../../README.md).
 
+Dans chaque widget sauf le compteur de gaz, le premier champ du groupe « Objets » est l'**Installation (instance d'adaptateur)** : choisissez une instance de `wolf-smartset` (ISM7) ou `wolf` (ISM8i) et les objets sont renseignés automatiquement. Sans choix, tout se relie à la main comme avant.
+
 ### Script de statistiques de consommation de gaz
 
 L'adaptateur est livré avec le script ioBroker `gasverbrauch_statistik.js` (dossier `addOn/`). À partir de l'index du compteur, il calcule aujourd'hui, hier, les 7 et 30 derniers jours ainsi que le mois en cours et le mois dernier, et les enregistre comme objets (par défaut dans `0_userdata.0.Gas`) — exactement les valeurs affichées par l'interface web de la CCU pour un HmIP-ESI, qui n'arrivent pas dans ioBroker via `hm-rpc`. En fonctionnement courant, aucun adaptateur d'historique n'est nécessaire.

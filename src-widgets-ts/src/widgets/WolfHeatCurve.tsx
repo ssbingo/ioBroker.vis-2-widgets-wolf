@@ -9,6 +9,7 @@ import { fmt, toBoolean } from '../lib/fmt';
 import { curvePoints, flowSetpoint, type CurveParams } from '../lib/heatCurve';
 import { decimalsOf, numberRange, type NumberRange } from '../lib/objectMeta';
 import { THEME_OPTIONS } from '../lib/theme';
+import { sourceField } from './sourceField';
 import WolfWidgetBase, { attrNumber, type WolfBaseRxData } from './WolfWidgetBase';
 
 interface WolfHeatCurveRxData extends WolfBaseRxData {
@@ -57,6 +58,7 @@ export default class WolfHeatCurve extends WolfWidgetBase<WolfHeatCurveRxData> {
                     name: 'common',
                     label: 'group_objects',
                     fields: [
+                        sourceField('tplWolfHeatCurve'),
                         { name: 'oid_korrektur', type: 'id', label: 'oid_korrektur', default: '' },
                         { name: 'oid_steilheit', type: 'id', label: 'oid_steilheit', default: '' },
                         { name: 'oid_niveau', type: 'id', label: 'oid_niveau', default: '' },

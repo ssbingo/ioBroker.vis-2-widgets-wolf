@@ -36,6 +36,8 @@
 
 详细设置（包括 wolf-smartset (ISM7) 对象的分配）：参见[英文文档](../../README.md)。
 
+除燃气表外，每个小部件在“对象”分组中的第一个字段都是**设备（适配器实例）**：选择 `wolf-smartset`（ISM7）或 `wolf`（ISM8i）的实例，对象便会自动填入。不选择时仍像以前一样手动关联。
+
 ### 燃气用量统计脚本
 
 适配器附带 ioBroker 脚本 `gasverbrauch_statistik.js`（目录 `addOn/`）。它根据表读数计算今天、昨天、最近 7 天和 30 天以及本月和上月的用量，并保存为对象（默认在 `0_userdata.0.Gas`）——正是 CCU 网页界面为 HmIP-ESI 显示、却无法通过 `hm-rpc` 进入 ioBroker 的那些数值。日常运行不需要历史适配器。

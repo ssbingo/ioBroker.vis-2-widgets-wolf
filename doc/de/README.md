@@ -151,6 +151,38 @@ als Fläche. Vorher im Verlaufsadapter die Aufzeichnung dieser Objekte einschalt
 
 ### Hinweise zu den Widgets
 
+#### Objekte aus der Anlage vorbelegen
+
+Jedes Widget außer dem Gaszähler hat als erstes Feld der Gruppe *Objekte* die
+**Anlage (Adapterinstanz)**. Dort eine Instanz von `wolf-smartset` (ISM7) oder `wolf` (ISM8i)
+wählen — das Widget trägt die passenden Objekte selbst ein. Ohne Auswahl bleibt alles wie bisher
+von Hand verknüpfbar, und eingetragene Objekte lassen sich danach einzeln ändern oder löschen.
+
+Wie die Zuordnung funktioniert:
+
+- **wolf-smartset** bildet die Anlagenstruktur in den Objekt-IDs ab, und die heißt je Anlage
+  anders. Stabil ist die Wolf-Parameternummer in `native.ParameterId` — daran erkennt das Widget
+  die Objekte, unabhängig von den Kanalnamen der eigenen Anlage.
+- **wolf (ISM8i)** hat eine feste Struktur `<instanz>.<gerät>.<nummer>`, zum Beispiel `hg1_t.4`
+  für die Kesseltemperatur oder `bm1_t.57` für die Programmwahl des Heizkreises. Diese Nummern
+  stammen aus dem Adapter selbst (`js/datapoints.json`).
+
+| Widget | vorbelegt |
+|---|---|
+| Anlagenschema | Vorlauf, Rücklauf, Brenner, Kesselpumpe, Außentemperatur, Speicher, Ladung, Umschaltventil, Heizkreis 1 |
+| Kesselstatus | Betriebsphase, Brenner, Betriebsstunden, Brennerstarts, Vorlauf, Rücklauf (ISM8i zusätzlich Modulation und Anlagendruck) |
+| Heizkreis | Betriebsart, Tag- und Spartemperatur, Sollwertkorrektur, Zeitprogramm, Raumtemperatur, Raumsollwert, Vorlauf Soll |
+| Heizkurve | Sollwertkorrektur, Steilheit, Außentemperatur (auch gemittelt), Vorlauf Soll, Raumsollwert, Ladung |
+| Warmwasser | Speichertemperatur, Solltemperatur, Zeitprogramm, wirksamer Sollwert, Ladung (ISM8i zusätzlich Sofortladung) |
+| Meldungen | die beiden Temperaturwächter (ISM8i: die Störungsmeldungen von Heizgerät und Bedienmodul) |
+| Verläufe | Vorlauf, Rücklauf, Außentemperatur und Warmwasser als Kurven |
+
+Was ein Adapter nicht liefert, bleibt leer: über `wolf-smartset` gibt es weder Modulation noch
+Anlagendruck, über das ISM8i weder Tag- und Spartemperatur noch Betriebsstunden, Zeitprogrammwahl
+oder Heizkurve. Beim Anlagenschema wird der *Wert für Warmwasser* des Umschaltventils gleich
+mitgesetzt — `1` bei wolf-smartset, `Open` beim ISM8i (dort `true`, wenn der Adapter Schaltzustände
+als Wahrheitswerte ablegt).
+
 #### Anlagenschema
 
 Die Pfeile laufen nur, wo Wasser fließt: Vor- und Rücklauf solange die Kesselpumpe läuft (ohne

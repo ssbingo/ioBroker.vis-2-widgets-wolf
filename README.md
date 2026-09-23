@@ -163,6 +163,38 @@ background area. Enable recording for these objects in your history adapter firs
 
 ### Widget notes
 
+#### Filling the objects from the system
+
+Every widget except the gas meter has **System (adapter instance)** as the first field of the
+*Objects* group. Pick an instance of `wolf-smartset` (ISM7) or `wolf` (ISM8i) there and the widget
+fills in the matching objects itself. Without a choice everything stays manual as before, and
+filled objects can be changed or cleared individually afterwards.
+
+How the mapping works:
+
+- **wolf-smartset** puts the system structure into the object IDs, and that structure is named
+  differently on every system. What is stable is the Wolf parameter number in
+  `native.ParameterId` — the widget recognises the objects by it, whatever the channels are called.
+- **wolf (ISM8i)** has a fixed structure `<instance>.<device>.<number>`, for example `hg1_t.4` for
+  the boiler temperature or `bm1_t.57` for the heating circuit program. Those numbers come from the
+  adapter itself (`js/datapoints.json`).
+
+| Widget | filled in |
+|---|---|
+| System diagram | flow, return, burner, boiler pump, outside temperature, tank, charging, diverter valve, circuit 1 |
+| Boiler status | operating phase, burner, operating hours, burner starts, flow, return (ISM8i also modulation and pressure) |
+| Heating circuit | operating mode, day and economy temperature, setpoint correction, time program, room temperature, room setpoint, flow setpoint |
+| Heating curve | setpoint correction, slope, outside temperature (also averaged), flow setpoint, room setpoint, charging |
+| Hot water | tank temperature, set temperature, time program, effective setpoint, charging (ISM8i also one-time charge) |
+| Messages | the two temperature limiters (ISM8i: the fault states of appliance and control module) |
+| Trends | flow, return, outside temperature and hot water as curves |
+
+Whatever an adapter does not provide stays empty: `wolf-smartset` offers neither modulation nor
+system pressure, the ISM8i offers neither day/economy temperature nor operating hours, program
+selection or heating curve. For the system diagram the *value for hot water* of the diverter valve
+is set along with it — `1` for wolf-smartset, `Open` for the ISM8i (or `true` there if the adapter
+stores switch states as booleans).
+
 #### System diagram
 
 Arrows only move where water flows: flow and return while the boiler pump runs (without a pump

@@ -8,6 +8,7 @@ import { AGGREGATES, CHART_POINTS, rangeMs, RANGES, toPoints, type Aggregate, ty
 import { toNumber } from '../lib/fmt';
 import { objectName } from '../lib/objectMeta';
 import { THEME_OPTIONS } from '../lib/theme';
+import { sourceField } from './sourceField';
 import WolfWidgetBase, { attrNumber, type WolfBaseRxData, type WolfBaseState } from './WolfWidgetBase';
 
 interface WolfTrendsRxData extends WolfBaseRxData {
@@ -89,6 +90,7 @@ export default class WolfTrends extends WolfWidgetBase<WolfTrendsRxData, WolfTre
                     name: 'common',
                     label: 'group_source',
                     fields: [
+                        sourceField('tplWolfTrends'),
                         {
                             name: 'history_instance',
                             type: 'instance',

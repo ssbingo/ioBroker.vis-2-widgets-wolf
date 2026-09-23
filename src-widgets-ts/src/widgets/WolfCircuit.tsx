@@ -13,6 +13,7 @@ import { CIRCUIT_BLOCKS, type CircuitBlock } from '../lib/circuitBlocks';
 import { toBoolean } from '../lib/fmt';
 import { numberRange, selectOptions } from '../lib/objectMeta';
 import { THEME_OPTIONS } from '../lib/theme';
+import { sourceField } from './sourceField';
 import WolfWidgetBase, { type WolfBaseRxData } from './WolfWidgetBase';
 
 interface WolfCircuitRxData extends WolfBaseRxData {
@@ -59,6 +60,7 @@ export default class WolfCircuit extends WolfWidgetBase<WolfCircuitRxData> {
                     name: 'common',
                     label: 'group_objects',
                     fields: [
+                        sourceField('tplWolfCircuit'),
                         { name: 'oid_betriebsart', type: 'id', label: 'oid_betriebsart', default: '' },
                         { name: 'oid_tagtemp', type: 'id', label: 'oid_tagtemp', default: '' },
                         { name: 'oid_spartemp', type: 'id', label: 'oid_spartemp', default: '' },

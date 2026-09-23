@@ -36,6 +36,8 @@ De widgetset leest zelf geen gegevens uit de verwarming. Elke waarde wordt afzon
 
 Uitgebreide instelling, inclusief de koppeling van wolf-smartset-objecten (ISM7): zie de [Engelse documentatie](../../README.md).
 
+In elk widget behalve de gasmeter is het eerste veld van de groep «Objecten» de **Installatie (adapterinstantie)**: kies een instantie van `wolf-smartset` (ISM7) of `wolf` (ISM8i) en de objecten worden automatisch ingevuld. Zonder keuze koppel je alles handmatig zoals voorheen.
+
 ### Script voor de gasverbruiksstatistiek
 
 Bij de adapter hoort het ioBroker-script `gasverbrauch_statistik.js` (map `addOn/`). Uit de meterstand berekent het vandaag, gisteren, de laatste 7 en 30 dagen en de huidige en vorige maand en legt ze vast als objecten (standaard in `0_userdata.0.Gas`) — precies de waarden die de CCU-webinterface van een HmIP-ESI toont, maar die via `hm-rpc` niet in ioBroker aankomen. Voor het dagelijks gebruik is geen history-adapter nodig.

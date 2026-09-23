@@ -8,6 +8,7 @@ import { isOk } from '../lib/messages';
 import { circuitActive, tankActive } from '../lib/schemaFlow';
 import { MAX_CIRCUITS } from '../lib/schemaLayout';
 import { THEME_OPTIONS } from '../lib/theme';
+import { sourceField } from './sourceField';
 import WolfWidgetBase, { attrNumber, type WolfBaseRxData } from './WolfWidgetBase';
 
 interface WolfSchemaRxData extends WolfBaseRxData {
@@ -58,6 +59,7 @@ export default class WolfSchema extends WolfWidgetBase<WolfSchemaRxData> {
                     name: 'common',
                     label: 'group_objects',
                     fields: [
+                        sourceField('tplWolfSchema'),
                         { name: 'oid_vorlauf', type: 'id', label: 'oid_vorlauf', default: '' },
                         { name: 'oid_ruecklauf', type: 'id', label: 'oid_ruecklauf', default: '' },
                         { name: 'oid_brenner', type: 'id', label: 'oid_brenner', default: '' },

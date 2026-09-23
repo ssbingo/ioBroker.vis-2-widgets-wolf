@@ -2,6 +2,8 @@
     "set_label": "Riscaldamento Wolf",
     "gasmeter": "Contatore del gas",
     "group_objects": "Oggetti",
+    "source_instance": "Impianto (istanza dell'adattatore)",
+    "source_instance_tooltip": "Scegli un'istanza di wolf-smartset (ISM7) o wolf (ISM8i): i suoi oggetti vengono inseriti nei campi qui sotto. Senza scelta tutto resta manuale; gli oggetti inseriti si possono poi modificare singolarmente",
     "group_counter": "Totalizzatore",
     "group_costs": "Calcolo dei costi",
     "group_display": "Visualizzazione",

@@ -2,6 +2,8 @@
     "set_label": "Calefacción Wolf",
     "gasmeter": "Contador de gas",
     "group_objects": "Objetos",
+    "source_instance": "Instalación (instancia del adaptador)",
+    "source_instance_tooltip": "Elige una instancia de wolf-smartset (ISM7) o wolf (ISM8i): sus objetos se rellenan en los campos de abajo. Sin elección todo sigue siendo manual; los objetos rellenados se pueden cambiar después uno a uno",
     "group_counter": "Totalizador",
     "group_costs": "Cálculo de costes",
     "group_display": "Visualización",

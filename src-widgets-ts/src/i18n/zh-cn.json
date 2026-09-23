@@ -2,6 +2,8 @@
     "set_label": "Wolf 供暖",
     "gasmeter": "燃气表",
     "group_objects": "对象",
+    "source_instance": "设备（适配器实例）",
+    "source_instance_tooltip": "选择 wolf-smartset（ISM7）或 wolf（ISM8i）的实例——其对象会填入下方字段。不选择则仍可手动关联；填入的对象之后可逐个修改",
     "group_counter": "计数器",
     "group_costs": "费用计算",
     "group_display": "显示",

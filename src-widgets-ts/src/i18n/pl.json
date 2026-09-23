@@ -2,6 +2,8 @@
     "set_label": "Ogrzewanie Wolf",
     "gasmeter": "Licznik gazu",
     "group_objects": "Obiekty",
+    "source_instance": "Instalacja (instancja adaptera)",
+    "source_instance_tooltip": "Wybierz instancję wolf-smartset (ISM7) lub wolf (ISM8i) — jej obiekty zostaną wpisane w pola poniżej. Bez wyboru wszystko pozostaje ręczne; wpisane obiekty można potem zmieniać pojedynczo",
     "group_counter": "Liczydło",
     "group_costs": "Kalkulacja kosztów",
     "group_display": "Wygląd",

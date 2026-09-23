@@ -8,6 +8,7 @@ import { isOk, parseMessages, SEVERITIES, sortRows, toSeverity, type MessageRow 
 import { objectName } from '../lib/objectMeta';
 import { THEME_OPTIONS } from '../lib/theme';
 import { mapValue, parseValueMap, type ValueMap } from '../lib/valueMap';
+import { sourceField } from './sourceField';
 import WolfWidgetBase, { attrNumber, type WolfBaseRxData } from './WolfWidgetBase';
 
 interface WolfMessagesRxData extends WolfBaseRxData {
@@ -71,6 +72,7 @@ export default class WolfMessages extends WolfWidgetBase<WolfMessagesRxData> {
                     name: 'common',
                     label: 'group_objects',
                     fields: [
+                        sourceField('tplWolfMessages'),
                         {
                             name: 'checks',
                             type: 'number',

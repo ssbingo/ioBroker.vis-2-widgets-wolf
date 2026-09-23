@@ -7,6 +7,7 @@ import { fmt, toBoolean, toNumber } from '../lib/fmt';
 import { numberRange, selectOptions } from '../lib/objectMeta';
 import { tankScale } from '../lib/tank';
 import { THEME_OPTIONS } from '../lib/theme';
+import { sourceField } from './sourceField';
 import WolfWidgetBase, { type WolfBaseRxData } from './WolfWidgetBase';
 
 interface WolfDhwRxData extends WolfBaseRxData {
@@ -49,6 +50,7 @@ export default class WolfDhw extends WolfWidgetBase<WolfDhwRxData> {
                     name: 'common',
                     label: 'group_objects',
                     fields: [
+                        sourceField('tplWolfDhw'),
                         { name: 'oid_ww_temp', type: 'id', label: 'oid_ww_temp', default: '' },
                         { name: 'oid_ww_soll', type: 'id', label: 'oid_ww_soll', default: '' },
                         { name: 'oid_zeitprogramm', type: 'id', label: 'oid_zeitprogramm', default: '' },
