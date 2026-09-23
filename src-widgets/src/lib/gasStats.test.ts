@@ -20,6 +20,12 @@ describe('gasStatsIds', () => {
         );
     });
 
+    it('kennt die Kosten des Monats ab Skriptfassung 3.0', () => {
+        expect(gasStatsIds('0_userdata.0.Gas').find(i => i.attr === 'oid_kosten_monat')?.id).toBe(
+            '0_userdata.0.Gas.Kosten.KostenMonat',
+        );
+    });
+
     it('verträgt Leerzeichen und einen Punkt am Ende', () => {
         expect(gasStatsIds('  0_userdata.0.Gas.  ')[2].id).toBe('0_userdata.0.Gas.Heute');
     });
@@ -40,7 +46,11 @@ describe('GAS_VALUES', () => {
         }
     });
 
-    it('rechnet Heute, Monat und Kosten ohne eigenes Objekt', () => {
-        expect(GAS_VALUES.filter(v => !v.oid).map(v => v.key)).toEqual(['today', 'month', 'cost_month']);
+    it('ermittelt Heute, Monat und Kosten notfalls selbst', () => {
+        expect(GAS_VALUES.filter(v => v.self).map(v => v.key)).toEqual(['today', 'month', 'cost_month']);
+    });
+
+    it('nimmt für die Kosten ein verknüpftes Objekt vorrangig', () => {
+        expect(GAS_VALUES.find(v => v.key === 'cost_month')?.oid).toBe('oid_kosten_monat');
     });
 });

@@ -15,6 +15,8 @@
     "oid_7tage": "Consumo ultimi 7 giorni (m³)",
     "oid_30tage": "Consumo ultimi 30 giorni (m³)",
     "oid_vormonat": "Consumo mese scorso (m³)",
+    "oid_kosten_monat": "Costo del mese (€)",
+    "oid_kosten_monat_tooltip": "Costi dallo script di statistica (lordi, con quota fissa e IVA). Se collegato, questo valore sostituisce il calcolo interno dalla tariffa",
     "variant": "Stile del totalizzatore",
     "variant_A": "A — Rulli meccanici",
     "variant_B": "B — Tamburi animati",

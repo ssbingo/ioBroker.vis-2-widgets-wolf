@@ -2,7 +2,7 @@
  * Statistik-Skript des Gaszählers: Das Skript aus dem Ordner addOn/ legt unter einem frei
  * wählbaren Ordner (Vorgabe 0_userdata.0.Gas) je einen State für Zählerstand, Heute, Gestern,
  * 7 Tage, 30 Tage, laufenden Monat und Vormonat an — ab Fassung 2.1 auch für den berechneten
- * Durchfluss. Das Widget verknüpft diese States wie jede andere Quelle; das Feld
+ * Durchfluss, ab Fassung 3.0 für die Kosten des laufenden Monats. Das Widget verknüpft diese States wie jede andere Quelle; das Feld
  * „Ordner des Statistik-Skripts" trägt sie nur bequem ein.
  */
 
@@ -25,6 +25,8 @@ export const GAS_STATS_FIELDS: GasStatsField[] = [
     { attr: 'oid_30tage', state: 'Letzte30Tage' },
     { attr: 'oid_monat', state: 'DieserMonat' },
     { attr: 'oid_vormonat', state: 'LetzterMonat' },
+    // ab Skriptfassung 3.0: Kosten brutto, mit Grundpreis und Mehrwertsteuer
+    { attr: 'oid_kosten_monat', state: 'Kosten.KostenMonat' },
 ];
 
 /**
@@ -45,8 +47,10 @@ export function gasStatsIds(path: string | undefined): Array<{ attr: string; id:
 export interface GasValueSpec {
     /** Schlüssel des Werts — zugleich Übersetzung und Name des Schalters (show_<key>) */
     key: string;
-    /** Objekt-Attribut, aus dem der Wert kommt; ohne Angabe rechnet das Widget ihn selbst */
+    /** Objekt-Attribut, aus dem der Wert kommt, wenn eines verknüpft ist */
     oid?: string;
+    /** das Widget kann den Wert auch selbst ermitteln, wenn kein Objekt verknüpft ist */
+    self?: boolean;
     /** Nachkommastellen in der Anzeige */
     decimals: number;
     /** Einheit; ohne Angabe m³ */
@@ -54,18 +58,19 @@ export interface GasValueSpec {
 }
 
 /**
- * Werte der Fußzeile in der Reihenfolge der Anzeige. Heute, Monat und die Kosten rechnet das
- * Widget selbst (aus Objekt oder Verlauf), die übrigen kommen aus verknüpften Objekten — meist
- * aus dem Statistik-Skript. Jeder Wert hat in der Gruppe „Sichtbare Werte" einen Schalter.
+ * Werte der Fußzeile in der Reihenfolge der Anzeige. Ein verknüpftes Objekt hat immer Vorrang;
+ * Heute, Monat und die Kosten ermittelt das Widget sonst selbst (aus dem Verlauf beziehungsweise
+ * aus dem Tarif). Jeder Wert hat in der Gruppe „Sichtbare Werte" einen Schalter.
  */
 export const GAS_VALUES: GasValueSpec[] = [
-    { key: 'today', decimals: 2 },
+    { key: 'today', self: true, decimals: 2 },
     { key: 'yesterday', oid: 'oid_gestern', decimals: 2 },
     { key: 'days7', oid: 'oid_7tage', decimals: 1 },
     { key: 'days30', oid: 'oid_30tage', decimals: 1 },
-    { key: 'month', decimals: 1 },
+    { key: 'month', self: true, decimals: 1 },
     { key: 'last_month', oid: 'oid_vormonat', decimals: 1 },
-    { key: 'cost_month', decimals: 2, unit: '€' },
+    // verknüpft: Kosten aus dem Skript (brutto), sonst die eigene Rechnung aus dem Tarif
+    { key: 'cost_month', oid: 'oid_kosten_monat', self: true, decimals: 2, unit: '€' },
 ];
 
 /** Schlüssel der Werte — der Übersetzungstest prüft darüber „<key>" und „show_<key>" */

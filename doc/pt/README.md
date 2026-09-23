@@ -40,7 +40,7 @@ Em todos os widgets exceto o contador de gás, o primeiro campo do grupo «Objet
 
 ### Script de estatísticas de consumo de gás
 
-O adaptador inclui o script ioBroker `gasverbrauch_statistik_v2.1.0.js` (pasta `addOn/`). A partir da leitura do contador calcula hoje, ontem, os últimos 7 e 30 dias, o mês atual e o anterior, e guarda-os como objetos (por omissão em `0_userdata.0.Gas`) — exatamente os valores que a interface web da CCU mostra num HmIP-ESI e que não chegam ao ioBroker através de `hm-rpc`. Em funcionamento normal não é necessário nenhum adaptador de histórico.
+O adaptador inclui o script ioBroker `gasverbrauch_statistik_v2.1.0.js` (pasta `addOn/`). A partir da leitura do contador calcula hoje, ontem, os últimos 7 e 30 dias, o mês atual e o anterior, e guarda-os como objetos (por omissão em `0_userdata.0.Gas`) — exatamente os valores que a interface web da CCU mostra num HmIP-ESI e que não chegam ao ioBroker através de `hm-rpc`. Em funcionamento normal não é necessário nenhum adaptador de histórico. A partir da versão 3.0 também concilia leituras do contador, calcula custos (com preço base, IVA e adiantamento) e envia relatórios diários e mensais por Telegram e e-mail.
 
 Crie o script no adaptador `javascript`, aponte `SRC` para a leitura do contador e inicie-o. Depois, no widget do contador de gás, escolha a pasta em *Script de estatísticas* — os estados são preenchidos automaticamente. Os valores apresentados são definidos no grupo *Valores visíveis*.
 

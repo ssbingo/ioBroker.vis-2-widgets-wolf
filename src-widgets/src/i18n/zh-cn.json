@@ -15,6 +15,8 @@
     "oid_7tage": "最近 7 天用量 (m³)",
     "oid_30tage": "最近 30 天用量 (m³)",
     "oid_vormonat": "上月用量 (m³)",
+    "oid_kosten_monat": "本月费用 (€)",
+    "oid_kosten_monat_tooltip": "来自统计脚本的费用（含基本费与增值税的总额）。关联后该数值将取代小部件按费率的自行计算",
     "variant": "计数器样式",
     "variant_A": "A — 机械滚轮计数器",
     "variant_B": "B — 动画滚筒",

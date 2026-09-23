@@ -15,6 +15,8 @@
     "oid_7tage": "Zużycie w ostatnich 7 dniach (m³)",
     "oid_30tage": "Zużycie w ostatnich 30 dniach (m³)",
     "oid_vormonat": "Zużycie w poprzednim miesiącu (m³)",
+    "oid_kosten_monat": "Koszt miesiąca (€)",
+    "oid_kosten_monat_tooltip": "Koszty ze skryptu statystyk (brutto, z opłatą stałą i VAT). Po powiązaniu wartość zastępuje własne wyliczenie z taryfy",
     "variant": "Styl liczydła",
     "variant_A": "A — Mechaniczne rolki",
     "variant_B": "B — Animowane bębny",

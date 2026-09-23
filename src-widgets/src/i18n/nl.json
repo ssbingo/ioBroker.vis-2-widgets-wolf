@@ -15,6 +15,8 @@
     "oid_7tage": "Verbruik laatste 7 dagen (m³)",
     "oid_30tage": "Verbruik laatste 30 dagen (m³)",
     "oid_vormonat": "Verbruik vorige maand (m³)",
+    "oid_kosten_monat": "Kosten maand (€)",
+    "oid_kosten_monat_tooltip": "Kosten uit het statistiekscript (bruto, met vastrecht en btw). Gekoppeld vervangt deze waarde de eigen berekening uit het tarief",
     "variant": "Telwerkstijl",
     "variant_A": "A — Mechanisch rollentelwerk",
     "variant_B": "B — Geanimeerde rollen",

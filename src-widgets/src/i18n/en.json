@@ -15,6 +15,8 @@
     "oid_7tage": "Consumption last 7 days (m³)",
     "oid_30tage": "Consumption last 30 days (m³)",
     "oid_vormonat": "Consumption last month (m³)",
+    "oid_kosten_monat": "Cost of the month (€)",
+    "oid_kosten_monat_tooltip": "Costs from the statistics script (gross, with base price and VAT). When linked, this value replaces the widget’s own calculation from the tariff",
     "variant": "Counter style",
     "variant_A": "A — Mechanical roller counter",
     "variant_B": "B — Animated drums",

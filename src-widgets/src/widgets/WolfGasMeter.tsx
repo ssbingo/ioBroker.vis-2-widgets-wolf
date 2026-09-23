@@ -42,6 +42,7 @@ interface WolfGasMeterRxData extends WolfBaseRxData {
     oid_30tage?: string;
     oid_monat?: string;
     oid_vormonat?: string;
+    oid_kosten_monat?: string;
     stats_path?: string;
     /** Schalter der Gruppe „Sichtbare Werte“: show_today bis show_cost_month */
     [key: `show_${string}`]: boolean | string | undefined;
@@ -194,6 +195,13 @@ export default class WolfGasMeter extends WolfWidgetBase<WolfGasMeterRxData, Wol
                             type: 'id',
                             label: 'oid_vormonat',
                             tooltip: 'stats_tooltip',
+                            default: '',
+                        },
+                        {
+                            name: 'oid_kosten_monat',
+                            type: 'id',
+                            label: 'oid_kosten_monat',
+                            tooltip: 'oid_kosten_monat_tooltip',
                             default: '',
                         },
                     ],
@@ -458,8 +466,8 @@ export default class WolfGasMeter extends WolfWidgetBase<WolfGasMeterRxData, Wol
                 continue;
             }
             const oid = v.oid ? (rx[v.oid as keyof typeof rx] as string | undefined) : undefined;
-            // Werte aus einem eigenen Objekt entfallen, solange keines verknüpft ist
-            if (v.oid && !oid) {
+            // ohne Objekt bleibt nur, was das Widget selbst ermittelt
+            if (!oid && !v.self) {
                 continue;
             }
             values.push({
@@ -493,8 +501,9 @@ export default class WolfGasMeter extends WolfWidgetBase<WolfGasMeterRxData, Wol
         if (rx.oid_sensor_status && status !== null && status !== 0) {
             warnings.push(this.tr('warn_status'));
         }
-        // Cent statt Euro im Arbeitspreis verfälscht die Kosten um den Faktor 100
-        const price = this.pricePerKwh();
+        // Cent statt Euro im Arbeitspreis verfälscht die Kosten um den Faktor 100 — kommen die
+        // Kosten aus einem Objekt, rechnet das Widget gar nicht und der Hinweis entfällt
+        const price = rx.oid_kosten_monat ? null : this.pricePerKwh();
         if (priceSuspicious(price)) {
             warnings.push(`${this.tr('warn_price')} ${fmt(price, 4, undefined, this.locale())} €/kWh`);
         }

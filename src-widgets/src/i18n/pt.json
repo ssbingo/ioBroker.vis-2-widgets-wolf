@@ -15,6 +15,8 @@
     "oid_7tage": "Consumo últimos 7 dias (m³)",
     "oid_30tage": "Consumo últimos 30 dias (m³)",
     "oid_vormonat": "Consumo mês passado (m³)",
+    "oid_kosten_monat": "Custo do mês (€)",
+    "oid_kosten_monat_tooltip": "Custos do script de estatísticas (bruto, com preço base e IVA). Quando ligado, este valor substitui o cálculo próprio a partir do tarifário",
     "variant": "Estilo do mostrador",
     "variant_A": "A — Rolos mecânicos",
     "variant_B": "B — Tambores animados",

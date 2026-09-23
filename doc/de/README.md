@@ -243,7 +243,7 @@ weist die Kachel auf einen Arbeitspreis hin, der außerhalb von 0,01 bis 1,00 �
 
 #### Gaszähler: Werte aus dem Statistik-Skript
 
-Dem Adapter liegt das ioBroker-Skript `gasverbrauch_statistik_v2.1.0.js` bei. Es berechnet aus dem
+Dem Adapter liegt das ioBroker-Skript `gasverbrauch_statistik_v3.0.0.js` bei. Es berechnet aus dem
 Zählerstand *Heute*, *Gestern*, *letzte 7 Tage*, *letzte 30 Tage*, *diesen* und *letzten Monat*
 und legt sie als Objekte ab — Einrichtung siehe [Beiliegendes Skript](#beiliegendes-skript-gasverbrauch-statistik).
 
@@ -253,6 +253,10 @@ denn sie zeigen meist auf den Sensor selbst. Ab Fassung 2.1 rechnet das Skript a
 Durchfluss aus der Zähleränderung; er fällt nach einer Pause zuverlässig auf 0, anders als der
 träge Wert mancher Sensoren. Wer ihn nutzen will, trägt `<Ordner>.Durchfluss` von Hand als
 *Momentandurchfluss* ein oder leert das Feld vor der Ordnerwahl.
+
+Ab Fassung 3.0 rechnet das Skript die Kosten selbst — mit Grundpreis, Mehrwertsteuer und
+Abschlag. Ist `<Ordner>.Kosten.KostenMonat` als *Kosten Monat* verknüpft, zeigt die Kachel diesen
+Wert statt der eigenen Rechnung aus dem Tarif; die Ordnerwahl trägt ihn gleich mit ein.
 
 Welche Werte die Kachel zeigt, entscheidet die Gruppe *Sichtbare Werte*: je ein Schalter für
 Heute, Gestern, 7 Tage, 30 Tage, Monat, letzten Monat und die Kosten. Heute, Monat und Kosten
@@ -281,9 +285,20 @@ HmIP-ESI im Gasmodus zum Beispiel:
 Ein HmIP-ESI zeigt in der CCU-WebUI *Heute*, *Gestern*, *vergangene 7 Tage* und *vergangene
 30 Tage*. Diese Werte sind keine Gerätedatenpunkte — die CCU rechnet sie intern aus gespeicherten
 Zählerständen, über `hm-rpc` kommen sie deshalb nicht in ioBroker an. Das beiliegende Skript
-`gasverbrauch_statistik_v2.1.0.js` erzeugt sie aus dem Zählerstand selbst und ergänzt den laufenden und
-den vorigen Monat. Es eignet sich für jeden monoton steigenden Zählerstand, nicht nur für den
+`gasverbrauch_statistik_v3.0.0.js` erzeugt sie aus dem Zählerstand selbst und ergänzt den laufenden
+und den vorigen Monat. Es eignet sich für jeden monoton steigenden Zählerstand, nicht nur für den
 HmIP-ESI.
+
+Darüber hinaus kann es:
+
+- **Durchfluss** aus der Zähleränderung rechnen — er fällt nach `NULL_NACH_MIN` Minuten ohne
+  Impuls zuverlässig auf 0, während der `GAS_FLOW` des Geräts dafür bis zu zwei Stunden braucht
+- **Abgleich auf den echten Zähler**: abgelesene Zählerstände als Ankerpunkte, daraus ein
+  Korrekturfaktor gegen verlorene Impulse und ein abrechnungsfähiger Zählerstand
+- **Kosten** rechnen: m³ → kWh → Euro, mit Grundpreis, Mehrwertsteuer und Abschlag
+- **Berichte** senden: Tagesübersicht über Telegram, Monatsabrechnung über Telegram und E-Mail,
+  auf Wunsch mit PDF im Anhang (dafür das npm-Modul `pdfkit` in der javascript-Instanz eintragen;
+  fehlt es, laufen Telegram und E-Mail ohne Anhang weiter)
 
 Im laufenden Betrieb braucht es **keinen** History-Adapter: Die Tageswerte liegen als JSON-Ringpuffer
 in einem eigenen State und überstehen einen Neustart. Ein History-Adapter ist nur für die einmalige
@@ -295,14 +310,14 @@ Vorbefüllung nützlich.
 |---|---|
 | Repository | [`addOn/`](https://github.com/ssbingo/ioBroker.vis-2-widgets-wolf/tree/main/addOn) |
 | installierter Adapter | `node_modules/iobroker.vis-2-widgets-wolf/widgets/vis-2-widgets-wolf/addon/` |
-| im Browser | `http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik_v2.1.0.js` |
+| im Browser | `http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik_v3.0.0.js` |
 
-Daneben liegen `gasverbrauch_statistik_v2.1.0.md` und dieselbe Anleitung als PDF (auf Deutsch).
+Daneben liegen `gasverbrauch_statistik_v3.0.0.md` und dieselbe Anleitung als PDF (auf Deutsch).
 
 **Einrichten**
 
 1. Im Adapter `javascript` ein neues Skript vom Typ *Javascript/ECMAScript* anlegen.
-2. Inhalt von `gasverbrauch_statistik_v2.1.0.js` einfügen.
+2. Inhalt von `gasverbrauch_statistik_v3.0.0.js` einfügen.
 3. Im Kopf mindestens `SRC` auf den Zählerstand setzen — z. B. `hm-rpc.0.<Seriennummer>.2.GAS_VOLUME`
    oder die Rega-Variable `svEnergyCounter…` (dafür in `hm-rega` das Synchronisieren nicht sichtbarer
    Variablen einschalten).
@@ -326,6 +341,15 @@ Daneben liegen `gasverbrauch_statistik_v2.1.0.md` und dieselbe Anleitung als PDF
 | `LUECKE_MIN` | `7` | ab dieser Pause zwischen zwei Änderungen gilt die Zeit dazwischen als Stillstand |
 | `ANLAUF_MIN` | `3` | angenommene Dauer der ersten Änderung nach einer Pause |
 | `MAX_DURCHFLUSS` | `10` | Plausibilitätsgrenze in m³/h (ein G4-Zähler schafft 6) |
+| `KORREKTUR_AKTIV` | `true` | Abgleich auf abgelesene Zählerstände (ab Fassung 3.0) |
+| `FAKTOR_AUTO` · `FAKTOR_MANUELL` | `true` · `1` | Korrekturfaktor aus den Ablesungen oder fest vorgegeben |
+| `FAKTOR_MIN` · `FAKTOR_MAX` | `0,8` · `1,25` | Grenzen, in denen ein Faktor übernommen wird |
+| `BRENNWERT` · `ZUSTANDSZAHL` | `11,2` · `0,95` | Tarifwerte für die Umrechnung in kWh |
+| `ARBEITSPREIS_CT_KWH` · `GRUNDPREIS_EUR_MONAT` | `8,90` · `12,50` | Arbeitspreis in Cent, Grundpreis je Monat |
+| `MWST_PROZENT` · `ABSCHLAG_EUR` | `19` · `120,00` | Mehrwertsteuer und monatlicher Abschlag |
+| `TELEGRAM_INSTANZ` · `EMAIL_INSTANZ` | `telegram.0` · `email.0` | Wege für die Berichte |
+| `TAGESBERICHT_CRON` · `MONATSBERICHT_CRON` | `1 0 * * *` · `10 0 1 * *` | wann die Berichte gehen |
+| `PDF_AKTIV` · `PDF_PFAD` | `true` · `…/gasabrechnung` | PDF der Monatsabrechnung und sein Ablageort |
 | `DEBUG` | `false` | zusätzliche Log-Ausgaben |
 
 **Erzeugte States** (unterhalb von `PFAD`)
@@ -341,6 +365,11 @@ Daneben liegen `gasverbrauch_statistik_v2.1.0.md` und dieselbe Anleitung als PDF
 | `LetzterMonat` | Summe des Vormonats | Letzter Monat |
 | `Durchfluss` | berechneter Durchfluss in m³/h (ab Fassung 2.1) | Momentandurchfluss |
 | `VerbrauchAktiv` | true, solange Gas fließt | — |
+| `Ablesung` | **Eingabe:** hier den am Zähler abgelesenen Stand eintragen (ab Fassung 3.0) | — |
+| `ZaehlerstandRoh`, `LetzteAblesung`, `Korrekturfaktor`, `AbweichungProzent` | unkorrigierter Stand, letzte Ablesung, aktiver Faktor, Impulsverlust in % | — |
+| `Kosten.KostenMonat` | Kosten des laufenden Monats, brutto | Kosten Monat |
+| `Kosten.EnergieHeute`, `Kosten.EnergieMonat`, `Kosten.KostenHeute`, `Kosten.PrognoseMonat`, `Kosten.SaldoJahr` | kWh und Euro für Tag, Monat, Hochrechnung und Jahressaldo | — |
+| `Bericht.*` | Monatsarchiv, Schalter zum Senden, zuletzt erzeugte PDF-Datei | — |
 | `Basis`, `BasisDatum`, `Historie`, `ZaehlerLetzteAenderung` | Zählerstand um Mitternacht, dessen Datum, Tageswerte als JSON, Zeitpunkt der letzten Zähleränderung | intern |
 | `Backfill` | Schalter: Historie neu aus dem History-Adapter aufbauen | — |
 

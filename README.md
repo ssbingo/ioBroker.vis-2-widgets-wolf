@@ -255,7 +255,7 @@ cents into a euro field is off by a factor of 100, so the tile points out an ene
 
 #### Gas meter: values from the statistics script
 
-The adapter ships the ioBroker script `gasverbrauch_statistik_v2.1.0.js`. From the meter reading it
+The adapter ships the ioBroker script `gasverbrauch_statistik_v3.0.0.js`. From the meter reading it
 derives *today*, *yesterday*, *last 7 days*, *last 30 days*, *this* and *last month* and stores
 them as objects — see [Bundled script](#bundled-script-gas-consumption-statistics) for the setup.
 
@@ -265,6 +265,10 @@ empty, because they usually point at the sensor itself. From version 2.1 the scr
 the flow rate from the meter changes; it drops to 0 reliably after a pause, unlike the sluggish
 value of some sensors. To use it, enter `<folder>.Durchfluss` as *flow* by hand, or clear that
 field before picking the folder.
+
+From version 3.0 the script calculates the costs itself — with base price, VAT and instalment.
+Link `<folder>.Kosten.KostenMonat` as *cost of the month* and the tile shows that value instead of
+its own calculation from the tariff; picking the folder fills it in right away.
 
 Which values the tile shows is up to the group *Visible values*: one switch each for today,
 yesterday, 7 days, 30 days, month, last month and the costs. Today, month and costs are always
@@ -292,9 +296,20 @@ enter the difference as the meter reading correction. With an HmIP-ESI in gas mo
 
 An HmIP-ESI shows *today*, *yesterday*, *last 7 days* and *last 30 days* in the CCU web UI. Those
 values are not device data points — the CCU derives them internally from stored meter readings, so
-they never arrive in ioBroker through `hm-rpc`. The bundled script `gasverbrauch_statistik_v2.1.0.js`
+they never arrive in ioBroker through `hm-rpc`. The bundled script `gasverbrauch_statistik_v3.0.0.js`
 derives them from the meter reading itself and adds the current and the previous month. It works
 with any monotonically rising meter reading, not just the HmIP-ESI.
+
+Beyond that it can:
+
+- derive the **flow rate** from the meter changes — it drops to 0 reliably after `NULL_NACH_MIN`
+  minutes without a pulse, while the appliance's own `GAS_FLOW` takes up to two hours
+- **align with the real meter**: readings you enter act as anchors, giving a correction factor
+  against lost pulses and a meter reading fit for billing
+- calculate **costs**: m³ → kWh → euros, with base price, VAT and monthly instalment
+- send **reports**: a daily summary via Telegram, a monthly bill via Telegram and e-mail,
+  optionally with a PDF attached (add the npm module `pdfkit` to the javascript instance for that;
+  without it Telegram and e-mail still work, just without the attachment)
 
 During normal operation it needs **no** history adapter: the daily values live in a state as a JSON
 ring buffer and survive a restart. A history adapter is only useful for the initial backfill.
@@ -305,14 +320,14 @@ ring buffer and survive a restart. A history adapter is only useful for the init
 |---|---|
 | Repository | [`addOn/`](https://github.com/ssbingo/ioBroker.vis-2-widgets-wolf/tree/main/addOn) |
 | Installed adapter | `node_modules/iobroker.vis-2-widgets-wolf/widgets/vis-2-widgets-wolf/addon/` |
-| In the browser | `http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik_v2.1.0.js` |
+| In the browser | `http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik_v3.0.0.js` |
 
-Next to it are `gasverbrauch_statistik_v2.1.0.md` and the same manual as PDF (in German).
+Next to it are `gasverbrauch_statistik_v3.0.0.md` and the same manual as PDF (in German).
 
 **Setting it up**
 
 1. In the `javascript` adapter create a new script of type *Javascript/ECMAScript*.
-2. Paste the content of `gasverbrauch_statistik_v2.1.0.js`.
+2. Paste the content of `gasverbrauch_statistik_v3.0.0.js`.
 3. At the top set at least `SRC` to the meter reading — e.g. `hm-rpc.0.<serial>.2.GAS_VOLUME` or the
    Rega variable `svEnergyCounter…` (for that, enable syncing of invisible variables in `hm-rega`).
 4. Start the script and check the log: it creates the states itself.
@@ -335,6 +350,15 @@ Next to it are `gasverbrauch_statistik_v2.1.0.md` and the same manual as PDF (in
 | `LUECKE_MIN` | `7` | a longer gap between two changes counts as standstill in between |
 | `ANLAUF_MIN` | `3` | assumed duration of the first change after a pause |
 | `MAX_DURCHFLUSS` | `10` | plausibility limit in m³/h (a G4 meter handles 6) |
+| `KORREKTUR_AKTIV` | `true` | align with entered meter readings (from version 3.0) |
+| `FAKTOR_AUTO` · `FAKTOR_MANUELL` | `true` · `1` | correction factor from the readings or fixed |
+| `FAKTOR_MIN` · `FAKTOR_MAX` | `0.8` · `1.25` | range in which a factor is accepted |
+| `BRENNWERT` · `ZUSTANDSZAHL` | `11.2` · `0.95` | tariff values for the conversion to kWh |
+| `ARBEITSPREIS_CT_KWH` · `GRUNDPREIS_EUR_MONAT` | `8.90` · `12.50` | energy price in cents, base price per month |
+| `MWST_PROZENT` · `ABSCHLAG_EUR` | `19` · `120.00` | VAT and the monthly instalment |
+| `TELEGRAM_INSTANZ` · `EMAIL_INSTANZ` | `telegram.0` · `email.0` | channels for the reports |
+| `TAGESBERICHT_CRON` · `MONATSBERICHT_CRON` | `1 0 * * *` · `10 0 1 * *` | when the reports are sent |
+| `PDF_AKTIV` · `PDF_PFAD` | `true` · `…/gasabrechnung` | PDF of the monthly bill and where it is stored |
 | `DEBUG` | `false` | additional log output |
 
 **States it creates** (below `PFAD`)
@@ -350,6 +374,11 @@ Next to it are `gasverbrauch_statistik_v2.1.0.md` and the same manual as PDF (in
 | `LetzterMonat` | sum of the previous month | last month |
 | `Durchfluss` | derived flow rate in m³/h (from version 2.1) | flow |
 | `VerbrauchAktiv` | true while gas is flowing | — |
+| `Ablesung` | **input:** enter the value you read off the meter here (from version 3.0) | — |
+| `ZaehlerstandRoh`, `LetzteAblesung`, `Korrekturfaktor`, `AbweichungProzent` | uncorrected reading, last entry, active factor, pulse loss in % | — |
+| `Kosten.KostenMonat` | cost of the current month, gross | cost of the month |
+| `Kosten.EnergieHeute`, `Kosten.EnergieMonat`, `Kosten.KostenHeute`, `Kosten.PrognoseMonat`, `Kosten.SaldoJahr` | kWh and euros for day, month, forecast and yearly balance | — |
+| `Bericht.*` | monthly archive, buttons to send, path of the last PDF | — |
 | `Basis`, `BasisDatum`, `Historie`, `ZaehlerLetzteAenderung` | meter reading at midnight, its date, daily values as JSON, time of the last meter change | internal |
 | `Backfill` | button: rebuild the history from the history adapter | — |
 
