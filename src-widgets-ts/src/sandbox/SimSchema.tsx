@@ -1,10 +1,12 @@
 /*
  * Anlagenschema in der Sandbox: Brenner taktet, die Pumpe läuft mit, der Speicher lädt
- * gelegentlich, Temperaturen folgen dem Brenner.
+ * gelegentlich, Temperaturen folgen dem Brenner. Mit verknüpftem Umschaltventil steht dieses
+ * während der Ladung auf Warmwasser — dann stehen die Heizkreise still.
  */
 import React, { useEffect, useState } from 'react';
 
 import SchemaView, { type SchemaCircuit } from '../components/SchemaView';
+import { circuitActive, tankActive } from '../lib/schemaFlow';
 import type { ThemeType } from '../lib/theme';
 import de from '../i18n/de.json';
 
@@ -24,6 +26,8 @@ export interface SimSchemaProps {
     circuits: Array<{ label: string; pump: boolean | null }>;
     /** Simulation läuft */
     running: boolean;
+    /** 3-Wege-Umschaltventil verknüpft: während der Ladung steht es auf Warmwasser */
+    withValve?: boolean;
 }
 
 /**
@@ -70,10 +74,12 @@ export default function SimSchema(props: SimSchemaProps): React.JSX.Element {
     }, [props.running]);
 
     const primary = s.burner || s.charging;
+    // mit Ventil: es steht genau während der Speicherladung auf Warmwasser
+    const valveToDhw = props.withValve ? s.charging : null;
     const circuits: SchemaCircuit[] = props.circuits.map((c, i) => ({
         label: c.label,
         temp: c.pump === false ? 24 : s.flow - i * 12,
-        active: c.pump === null ? primary : c.pump,
+        active: circuitActive(c.pump, primary, valveToDhw),
     }));
 
     return (
@@ -87,7 +93,7 @@ export default function SimSchema(props: SimSchemaProps): React.JSX.Element {
             flowTemp={s.flow}
             returnTemp={s.ret}
             primaryActive={primary}
-            tank={{ temp: s.tank, active: s.charging }}
+            tank={{ temp: s.tank, active: tankActive(s.charging, primary, valveToDhw) }}
             circuits={circuits}
             outsideTemp={s.outside}
             animate

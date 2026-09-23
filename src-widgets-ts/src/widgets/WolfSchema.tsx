@@ -4,6 +4,8 @@ import type { RxRenderWidgetProps, RxWidgetInfo } from '@iobroker/types-vis-2';
 
 import SchemaView, { type SchemaCircuit } from '../components/SchemaView';
 import { toBoolean } from '../lib/fmt';
+import { isOk } from '../lib/messages';
+import { circuitActive, tankActive } from '../lib/schemaFlow';
 import { MAX_CIRCUITS } from '../lib/schemaLayout';
 import { THEME_OPTIONS } from '../lib/theme';
 import WolfWidgetBase, { attrNumber, type WolfBaseRxData } from './WolfWidgetBase';
@@ -18,6 +20,8 @@ interface WolfSchemaRxData extends WolfBaseRxData {
     show_ww?: boolean | string;
     oid_ww_temp?: string;
     oid_ww_ladung?: string;
+    oid_3wuv?: string;
+    dhw_value?: string;
     hk_count?: number | string;
     boiler_label?: string;
     show_aussen?: boolean | string;
@@ -32,7 +36,9 @@ interface WolfSchemaRxData extends WolfBaseRxData {
  * Anlagenschema: Heizgerät mit Flamme, Verteiler, Warmwasserspeicher, bis zu vier Heizkreise und
  * Außentemperatur. Die Flusspfeile laufen nur, wo Wasser fließt: Vor- und Rücklauf solange die
  * Kesselpumpe läuft (ohne Objekt: solange der Brenner brennt), der Speicher während der Ladung,
- * ein Heizkreis solange seine Pumpe läuft (ohne Objekt: wie das Heizgerät).
+ * ein Heizkreis solange seine Pumpe läuft (ohne Objekt: wie das Heizgerät). Ist das
+ * 3-Wege-Umschaltventil verknüpft, entscheidet es: auf Warmwasser umgeschaltet lädt nur der
+ * Speicher, die Heizkreise stehen still.
  */
 export default class WolfSchema extends WolfWidgetBase<WolfSchemaRxData> {
     /** Beschreibung des Widgets für die VIS-2-Palette und den Attribut-Editor */
@@ -73,6 +79,20 @@ export default class WolfSchema extends WolfWidgetBase<WolfSchemaRxData> {
                         { name: 'show_ww', type: 'checkbox', label: 'show_ww', default: true },
                         { name: 'oid_ww_temp', type: 'id', label: 'oid_ww_temp', default: '' },
                         { name: 'oid_ww_ladung', type: 'id', label: 'oid_ladung', default: '' },
+                        {
+                            name: 'oid_3wuv',
+                            type: 'id',
+                            label: 'oid_3wuv',
+                            tooltip: 'oid_3wuv_tooltip',
+                            default: '',
+                        },
+                        {
+                            name: 'dhw_value',
+                            type: 'text',
+                            label: 'dhw_value',
+                            tooltip: 'dhw_value_tooltip',
+                            default: '1',
+                        },
                     ],
                 },
                 {
@@ -146,6 +166,8 @@ export default class WolfSchema extends WolfWidgetBase<WolfSchemaRxData> {
         const burner = rx.oid_brenner ? this.isOn(rx.oid_brenner) : null;
         // Primärkreis: Pumpe, sonst Brenner
         const primaryActive = rx.oid_pumpe ? this.isOn(rx.oid_pumpe) : !!burner;
+        // 3-Wege-Umschaltventil: steht es auf Warmwasser, erreicht kein Wasser die Heizkreise
+        const valveToDhw = rx.oid_3wuv ? isOk(this.objectValue(rx.oid_3wuv), rx.dhw_value || '1') : null;
 
         const count = Math.max(0, Math.min(MAX_CIRCUITS, Math.round(attrNumber(rx.hk_count, 1))));
         const circuits: SchemaCircuit[] = [];
@@ -154,7 +176,7 @@ export default class WolfSchema extends WolfWidgetBase<WolfSchemaRxData> {
             circuits.push({
                 label: rx[`hk_label${i}`] || `${this.tr('circuit')} ${i}`,
                 temp: this.objectNumber(rx[`oid_hk_vorlauf${i}`]),
-                active: pump ? this.isOn(pump) : primaryActive,
+                active: circuitActive(pump ? this.isOn(pump) : null, primaryActive, valveToDhw),
             });
         }
 
@@ -176,8 +198,12 @@ export default class WolfSchema extends WolfWidgetBase<WolfSchemaRxData> {
                     showTank
                         ? {
                               temp: this.objectNumber(rx.oid_ww_temp),
-                              // Ladung: eigenes Objekt, sonst wie das Heizgerät
-                              active: rx.oid_ww_ladung ? this.isOn(rx.oid_ww_ladung) : primaryActive,
+                              // Ladung: eigenes Objekt, sonst Umschaltventil, sonst wie das Heizgerät
+                              active: tankActive(
+                                  rx.oid_ww_ladung ? this.isOn(rx.oid_ww_ladung) : null,
+                                  primaryActive,
+                                  valveToDhw,
+                              ),
                           }
                         : null
                 }

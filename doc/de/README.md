@@ -82,14 +82,17 @@ aktiviert ist. Alle IDs beginnen mit `wolf-smartset.0.`.
 | Außentemperatur | Außentemperatur | `Benutzer.Heizung.058_Direkter_Heizkreis.3000100000` |
 | Speichertemperatur | SF Speicherfühler | `Benutzer.Übersicht.8000100001` |
 | Ladung aktiv | Ausgang A1 (wenn A1 die Speicherladepumpe ist, Parameter HG14 = 6) | `Fachmann.Heizgerät.Heizgerät.422_Einstellungen_und Anzeigen.8001900001` |
+| 3-Wege-Umschaltventil | 3WUV 3-Wege-Umschaltventil | `Benutzer.Übersicht.8001800001` |
 | Heizkreis 1, Vorlauf | VF Vorlauffühler (direkter Heizkreis ohne Mischer) | `Benutzer.Übersicht.8000500001` |
 
 Einen Modulationsgrad liefert das ISM7 nicht — leer lassen; die Flamme erscheint dann bei
 brennendem Brenner voll. Die Pumpe des Heizkreises leer lassen: Der Kreis folgt dann der
-Kesselpumpe. Geräte, die den Speicher über ein Umschaltventil statt über eine Ladepumpe laden,
-können für *Ladung aktiv* das *3WUV 3-Wege-Umschaltventil* (`Benutzer.Übersicht.8001800001`)
-nehmen — jeder Wert ungleich 0 gilt als Ladung; prüfen, welche Stellung das Gerät für Warmwasser
-meldet.
+Kesselpumpe.
+
+Das *3-Wege-Umschaltventil* unbedingt verknüpfen, wenn das Gerät eines hat: Es teilt dem Schema
+mit, wohin das Kesselwasser gerade läuft. Bei dieser Anlage meldet es `1` für Warmwasser — der
+Wert steht im Feld *Wert für Warmwasser* und lässt sich dort anpassen, falls das Gerät es anders
+handhabt (im Objektbaum oder in der Wolf-Oberfläche vergleichen).
 
 **Kesselstatus**
 
@@ -154,6 +157,12 @@ Die Pfeile laufen nur, wo Wasser fließt: Vor- und Rücklauf solange die Kesselp
 Pumpen-Objekt: solange der Brenner brennt), der Speicherzweig während der Ladung, jeder Heizkreis
 solange seine Pumpe läuft (ohne Pumpen-Objekt: wie das Heizgerät). Speicher, Außentemperatur und
 null bis vier Heizkreise lassen sich ein- und ausblenden; das Schema ordnet sich danach an.
+
+Ist das *3-Wege-Umschaltventil* verknüpft, entscheidet es über die Verzweigung: Steht es auf
+Warmwasser, lädt nur der Speicher und die Heizkreise stehen still — auch bei laufender Kesselpumpe
+und brennendem Brenner, und auch dann, wenn ein Kreis eine eigene Pumpe hat. Genau das passiert im
+Sommerbetrieb während der Speicherladung. Ohne Ventil bleibt es beim bisherigen Verhalten. Für den
+Speicherzweig zählt ein eigenes Objekt *Ladung aktiv* zuerst; fehlt es, gilt die Ventilstellung.
 
 #### Heizkreis: sichtbare Blöcke
 

@@ -475,6 +475,17 @@ function Sandbox(): React.JSX.Element {
                         ]}
                     />
                 </div>
+                <div className="sb-cell sb-cell-schema">
+                    <SimSchema
+                        themeType={themeType}
+                        running={running}
+                        subtitle="mit 3-Wege-Umschaltventil: während der Ladung steht der Heizkreis"
+                        boilerLabel="CGB-2"
+                        modulation={false}
+                        withValve
+                        circuits={[{ label: 'Heizkörper', pump: null }]}
+                    />
+                </div>
             </div>
 
             <h2 className="sb-h">Verläufe — WolfTrends</h2>

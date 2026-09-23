@@ -94,13 +94,16 @@ the `wolf-smartset` instance. All IDs start with `wolf-smartset.0.`.
 | Outside temperature | Außentemperatur | `Benutzer.Heizung.058_Direkter_Heizkreis.3000100000` |
 | Tank temperature | SF Speicherfühler | `Benutzer.Übersicht.8000100001` |
 | Charging active | Ausgang A1 (if A1 is the tank charging pump, parameter HG14 = 6) | `Fachmann.Heizgerät.Heizgerät.422_Einstellungen_und Anzeigen.8001900001` |
+| 3-way diverter valve | 3WUV 3-Wege-Umschaltventil | `Benutzer.Übersicht.8001800001` |
 | Heating circuit 1, flow | VF Vorlauffühler (direct circuit without mixer) | `Benutzer.Übersicht.8000500001` |
 
 Modulation is not provided by the ISM7 — leave it empty; the flame is then shown fully when the
-burner is on. Leave the circuit pump empty: the circuit then follows the boiler pump. Appliances
-that charge the tank via a diverter valve instead of a charging pump can use *3WUV
-3-Wege-Umschaltventil* (`Benutzer.Übersicht.8001800001`) for *charging active* — any value other
-than 0 counts as charging, so check which position your appliance reports for hot water.
+burner is on. Leave the circuit pump empty: the circuit then follows the boiler pump.
+
+Do link the *3-way diverter valve* if the appliance has one: it tells the diagram where the boiler
+water currently goes. On this system it reports `1` for hot water — that value goes into *Value for
+hot water* and can be changed there if your appliance handles it differently (compare in the object
+tree or in the Wolf interface).
 
 **Boiler status**
 
@@ -166,6 +169,12 @@ Arrows only move where water flows: flow and return while the boiler pump runs (
 object: while the burner is on), the tank branch while charging, each heating circuit while its
 pump runs (without a pump object: like the boiler). Tank, outside temperature and zero to four
 heating circuits can be shown or hidden; the diagram arranges itself accordingly.
+
+When the *3-way diverter valve* is linked, it decides the branching: while it points to hot water
+only the tank is charged and the heating circuits stand still — even with the boiler pump running
+and the burner on, and even when a circuit has a pump of its own. That is exactly what happens in
+summer mode while the tank is charging. Without a valve nothing changes. For the tank branch an
+explicit *charging active* object wins; without one, the valve position decides.
 
 #### Heating circuit: visible blocks
 
