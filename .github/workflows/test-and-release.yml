@@ -28,8 +28,8 @@ jobs:
       - uses: ioBroker/testing-action-check@v2
         with:
           node-version: "24.x"
-          # Lint läuft in src-widgets-ts, deshalb dort ebenfalls installieren
-          install-command: "npm i && npm --prefix src-widgets-ts i"
+          # Lint läuft in src-widgets, deshalb dort ebenfalls installieren
+          install-command: "npm i && npm --prefix src-widgets i"
           lint: true
 
   # Baut die Widgets und prüft die Paketdateien auf allen unterstützten Node.js-Versionen

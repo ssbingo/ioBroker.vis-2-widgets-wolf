@@ -44,14 +44,14 @@
     "doc/",
     "io-package.json",
     "LICENSE",
-    "src-widgets-ts/src/i18n/"
+    "src-widgets/src/i18n/"
   ],
   "scripts": {
     "build": "node tasks --typescript",
     "zip": "node tasks --zip",
-    "lint": "cd src-widgets-ts && eslint -c eslint.config.mjs",
+    "lint": "cd src-widgets && eslint -c eslint.config.mjs",
     "test:package": "mocha test/package --exit",
-    "test:unit": "npm --prefix src-widgets-ts test",
+    "test:unit": "npm --prefix src-widgets test",
     "test": "npm run test:package && npm run test:unit",
     "dev-server": "dev-server",
     "translate": "translate-adapter",

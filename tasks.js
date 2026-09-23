@@ -1,5 +1,5 @@
 /*
- * Build der Widgets: src-widgets-ts/ bauen und die Ausgabe nach widgets/vis-2-widgets-wolf/ kopieren.
+ * Build der Widgets: src-widgets/ bauen und die Ausgabe nach widgets/vis-2-widgets-wolf/ kopieren.
  *
  * ACHTUNG: widgets/ wird dabei vollständig gelöscht — dort nie von Hand Dateien ablegen.
  */
@@ -8,20 +8,20 @@ const { deleteFoldersRecursive, copyFiles, npmInstall, buildReact } = require('@
 
 const adapterName = require('./package.json').name.replace('iobroker.', '');
 
-const SRC_TS = 'src-widgets-ts/';
-const srcTs = `${__dirname}/${SRC_TS}`;
+const SRC = 'src-widgets/';
+const srcDir = `${__dirname}/${SRC}`;
 
 function clean() {
-    deleteFoldersRecursive(`${srcTs}build`);
+    deleteFoldersRecursive(`${srcDir}build`);
     deleteFoldersRecursive(`${__dirname}/widgets`);
 }
 
 function copyAllFiles() {
-    copyFiles([`${SRC_TS}build/customWidgets.js`], `widgets/${adapterName}`);
+    copyFiles([`${SRC}build/customWidgets.js`], `widgets/${adapterName}`);
     // Pflicht: VIS-2 prüft am Manifest, ob react/jsx-runtime geteilt wird (React-19-Kompatibilität)
-    copyFiles([`${SRC_TS}build/mf-manifest.json`], `widgets/${adapterName}`);
-    copyFiles([`${SRC_TS}build/assets/*.*`], `widgets/${adapterName}/assets`);
-    copyFiles([`${SRC_TS}build/img/*`], `widgets/${adapterName}/img`);
+    copyFiles([`${SRC}build/mf-manifest.json`], `widgets/${adapterName}`);
+    copyFiles([`${SRC}build/assets/*.*`], `widgets/${adapterName}/assets`);
+    copyFiles([`${SRC}build/img/*`], `widgets/${adapterName}/img`);
     // Statistik-Skript für den Gaszähler: über vis-2 abrufbar unter
     // /vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik_v2.1.0.js
     copyFiles(['addOn/*.*'], `widgets/${adapterName}/addon`);
@@ -29,7 +29,7 @@ function copyAllFiles() {
 
 /*
  * Release-ZIP: genau der letzte Commit (git archive) — ohne node_modules, .dev-server,
- * src-widgets-ts/build, www und die lokalen Planungsunterlagen, weil die nicht versioniert sind.
+ * src-widgets/build, www und die lokalen Planungsunterlagen, weil die nicht versioniert sind.
  */
 function zip() {
     const { execFileSync } = require('node:child_process');
@@ -49,9 +49,9 @@ if (process.argv.includes('--zip')) {
     zip();
 } else if (process.argv.includes('--typescript') || process.argv.length === 2) {
     clean();
-    const installed = existsSync(`${srcTs}node_modules`) ? Promise.resolve() : npmInstall(srcTs);
+    const installed = existsSync(`${srcDir}node_modules`) ? Promise.resolve() : npmInstall(srcDir);
     installed
-        .then(() => buildReact(srcTs, { rootDir: __dirname, vite: true }))
+        .then(() => buildReact(srcDir, { rootDir: __dirname, vite: true }))
         .then(() => copyAllFiles())
         .catch(e => {
             console.error(`Build fehlgeschlagen: ${e}`);

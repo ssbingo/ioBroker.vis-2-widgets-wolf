@@ -1,9 +1,9 @@
 {
     "eslint.enable": true,
-    "eslint.workingDirectories": [{ "directory": "src-widgets-ts", "changeProcessCWD": true }],
+    "eslint.workingDirectories": [{ "directory": "src-widgets", "changeProcessCWD": true }],
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "typescript.tsdk": "src-widgets-ts/node_modules/typescript/lib",
+    "typescript.tsdk": "src-widgets/node_modules/typescript/lib",
     "json.schemas": [
         {
             "fileMatch": ["io-package.json"],
@@ -11,6 +11,6 @@
         }
     ],
     "files.exclude": {
-        "src-widgets-ts/.__mf__temp": true
+        "src-widgets/.__mf__temp": true
     }
 }

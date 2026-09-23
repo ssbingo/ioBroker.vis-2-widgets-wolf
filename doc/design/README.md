@@ -17,11 +17,11 @@ Die Seiten laufen eigenständig im Browser, ohne ioBroker.
 Die Entwürfe sind **Referenz, nicht Quelltext.** Der ausführbare Stand liegt in:
 
 ```
-src-widgets-ts/src/styles/wolf.css     ← Farbtokens und Komponenten
-src-widgets-ts/src/styles/fonts.ts     ← Schriften, lokal als woff2
-src-widgets-ts/src/components/         ← Darstellung (React), ohne ioBroker-Zugriff
-src-widgets-ts/src/widgets/            ← Anbindung an VIS-2
-src-widgets-ts/sandbox.html            ← Sandbox: dieselben Komponenten mit simulierten Werten
+src-widgets/src/styles/wolf.css     ← Farbtokens und Komponenten
+src-widgets/src/styles/fonts.ts     ← Schriften, lokal als woff2
+src-widgets/src/components/         ← Darstellung (React), ohne ioBroker-Zugriff
+src-widgets/src/widgets/            ← Anbindung an VIS-2
+src-widgets/sandbox.html            ← Sandbox: dieselben Komponenten mit simulierten Werten
 ```
 
 Der Unterschied zwischen Entwurf und Widget-Code ist beabsichtigt:
@@ -36,8 +36,8 @@ Der Unterschied zwischen Entwurf und Widget-Code ist beabsichtigt:
 
 ## Arbeitsweise bei Designänderungen
 
-1. Änderung zuerst in `src-widgets-ts/src/` umsetzen
-2. In der Sandbox prüfen (`npm start` in `src-widgets-ts/`) — hell **und** dunkel
+1. Änderung zuerst in `src-widgets/src/` umsetzen
+2. In der Sandbox prüfen (`npm start` in `src-widgets/`) — hell **und** dunkel
 3. Erst dann die Referenzdatei hier nachziehen, damit Entwurf und Code nicht auseinanderlaufen
 
 Wird die Optik grundlegend geändert, gilt die neue Fassung erst nach ausdrücklicher Freigabe

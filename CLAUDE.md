@@ -13,8 +13,8 @@ ist als diese Datei (Node 18/20, `NPM_TOKEN`, 9 READMEs), gilt diese Datei.
 | Node.js | `>= 22`, CI mit 22.x / 24.x / 26.x | `package.json` → `engines.node`, CI-Matrix |
 | js-controller | `>=7.2.2` | `io-package.json` → `common.dependencies` |
 | vis-2 | `>=2.20.0` (erste Version mit React 19) | `io-package.json` → `common.dependencies` |
-| `@iobroker/types-vis-2` | `^2.20.1` | `package.json`, `src-widgets-ts/package.json` |
-| React / MUI | 19.x / 9.x | `src-widgets-ts/package.json`, zur Laufzeit von VIS-2 |
+| `@iobroker/types-vis-2` | `^2.20.1` | `package.json`, `src-widgets/package.json` |
+| React / MUI | 19.x / 9.x | `src-widgets/package.json`, zur Laufzeit von VIS-2 |
 
 - Immer die neuesten Versionen verwenden. Ausnahmen nur, wo die Werkzeugkette es verhindert —
   derzeit: **ESLint 9.x** (`eslint-plugin-react` unterstützt ESLint 10 noch nicht) und
@@ -53,7 +53,7 @@ Englisch, die übrigen unter `doc/<sprache>/` in der jeweiligen Sprache.
 
 ## Architektur — unverhandelbar
 
-- Natives VIS-2-Widget-Set: React 19 und TypeScript in `src-widgets-ts/`, Build mit Vite und
+- Natives VIS-2-Widget-Set: React 19 und TypeScript in `src-widgets/`, Build mit Vite und
   Module Federation, Anmeldung über `common.visWidgets`
 - React, React-DOM und MUI kommen zur Laufzeit von VIS-2 — **nie mitbündeln**
 - **`mf-manifest.json` wird neben `customWidgets.js` ausgeliefert** (`tasks.js`). Fehlt
@@ -134,7 +134,7 @@ Englisch, die übrigen unter `doc/<sprache>/` in der jeweiligen Sprache.
 ## Vor jedem Commit
 
 - `npm run lint` ohne Fehler und ohne Warnungen, `npm run build` und `npm test` grün
-- Änderungen an Widgets in der Sandbox (`npm start` in `src-widgets-ts/`) sichtgeprüft,
+- Änderungen an Widgets in der Sandbox (`npm start` in `src-widgets/`) sichtgeprüft,
   hell und dunkel (`?theme=dark`)
 - Keine Versionsnummer anfassen — das geschieht ausschließlich beim Release
 
@@ -169,7 +169,7 @@ Stand 2026-09-20 (Version 0.5.0). Alles andere muss sauber sein.
 ## Sprachen
 
 `en, de, ru, pt, nl, fr, it, es, pl, uk, zh-cn` — vollständig in `titleLang`, `desc`, `news`
-und den i18n-Dateien unter `src-widgets-ts/src/i18n/`. „Wolf" ist ein Markenname und wird
+und den i18n-Dateien unter `src-widgets/src/i18n/`. „Wolf" ist ein Markenname und wird
 nie übersetzt (automatische Übersetzer machen daraus das Tier).
 
 ## Widget-Klassen

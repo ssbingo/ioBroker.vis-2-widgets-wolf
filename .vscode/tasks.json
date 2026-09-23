@@ -31,7 +31,7 @@
             "label": "Sandbox öffnen",
             "type": "shell",
             "command": "npm start",
-            "options": { "cwd": "${workspaceFolder}/src-widgets-ts" },
+            "options": { "cwd": "${workspaceFolder}/src-widgets" },
             "isBackground": true,
             "problemMatcher": []
         },

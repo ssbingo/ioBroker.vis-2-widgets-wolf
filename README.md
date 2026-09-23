@@ -376,11 +376,11 @@ meter reading drops (meter exchange or reset), it sets a new baseline and counts
 
 ```bash
 npm install
-npm --prefix src-widgets-ts install
+npm --prefix src-widgets install
 npm run build                    # builds the widgets into widgets/vis-2-widgets-wolf/
 npm run lint
 npm test
-cd src-widgets-ts && npm start   # sandbox: widgets with simulated values, no ioBroker needed
+cd src-widgets && npm start   # sandbox: widgets with simulated values, no ioBroker needed
 npm run dev-server setup         # once: local ioBroker instance for testing
 npm run dev-server run           # admin on http://localhost:8081, vis-2 on http://localhost:8082/vis-2/
 ```

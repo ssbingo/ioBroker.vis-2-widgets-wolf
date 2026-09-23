@@ -1,6 +1,6 @@
 import config from '@iobroker/eslint-config';
 
-// Die Widgets prüft die eigene Konfiguration in src-widgets-ts/. Diese Datei im
+// Die Widgets prüft die eigene Konfiguration in src-widgets/. Diese Datei im
 // Wurzelverzeichnis gibt es, damit Werkzeuge und der Repochecker eine Flat-Config finden.
 export default [
     ...config,
@@ -11,7 +11,7 @@ export default [
             'admin/',
             'widgets/',
             'node_modules/',
-            'src-widgets-ts/',
+            'src-widgets/',
             'test/',
             'tasks.js',
         ],
