@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "vis-2-widgets-wolf",
-    "version": "0.5.2",
+    "version": "0.6.0",
     "news": {
-      "NEXT": {
+      "0.6.0": {
         "en": "Widgets can fill their objects from a wolf-smartset (ISM7) or wolf (ISM8i) instance. Gas meter: the energy price can be entered in ct/kWh, with a hint when it looks implausible.",
         "de": "Widgets können ihre Objekte aus einer wolf-smartset- (ISM7) oder wolf-Instanz (ISM8i) vorbelegen. Gaszähler: Der Arbeitspreis lässt sich in ct/kWh eintragen, mit Hinweis bei unplausiblen Werten.",
         "ru": "Виджеты могут подставлять объекты из экземпляра wolf-smartset (ISM7) или wolf (ISM8i). Счётчик газа: цену за энергию можно ввести в ct/кВт·ч, с подсказкой при неправдоподобных значениях.",
@@ -15,19 +15,6 @@
         "pl": "Widżety mogą wypełniać swoje obiekty z instancji wolf-smartset (ISM7) lub wolf (ISM8i). Licznik gazu: cenę energii można podać w ct/kWh, z ostrzeżeniem przy nieprawdopodobnych wartościach.",
         "uk": "Віджети можуть підставляти свої об’єкти з екземпляра wolf-smartset (ISM7) або wolf (ISM8i). Лічильник газу: ціну за енергію можна ввести в ct/кВт·год, з підказкою за неправдоподібних значень.",
         "zh-cn": "小部件可从 wolf-smartset（ISM7）或 wolf（ISM8i）实例自动填入对象。燃气表：单价可按 ct/kWh 输入，数值不合理时会给出提示。"
-      },
-      "0.5.2": {
-        "en": "System diagram: a heating circuit now stands still while the 3-way diverter valve points to hot water — new fields for the valve and the value that means hot water.",
-        "de": "Anlagenschema: Ein Heizkreis steht jetzt still, solange das 3-Wege-Umschaltventil auf Warmwasser steht — neue Felder für das Ventil und den Wert für Warmwasser.",
-        "ru": "Схема установки: контур отопления теперь стоит, пока 3-ходовой клапан переключён на ГВС — новые поля для клапана и значения ГВС.",
-        "pt": "Esquema da instalação: um circuito de aquecimento fica agora parado enquanto a válvula de 3 vias estiver na água quente — novos campos para a válvula e para o valor de água quente.",
-        "nl": "Installatieschema: een verwarmingscircuit staat nu stil zolang de 3-weg omschakelklep op warm water staat — nieuwe velden voor de klep en de waarde voor warm water.",
-        "fr": "Schéma de l'installation : un circuit de chauffage reste désormais à l'arrêt tant que la vanne 3 voies est sur l'eau chaude — nouveaux champs pour la vanne et la valeur eau chaude.",
-        "it": "Schema dell'impianto: un circuito di riscaldamento ora resta fermo finché la valvola a 3 vie è sull'acqua calda — nuovi campi per la valvola e per il valore acqua calda.",
-        "es": "Esquema de la instalación: un circuito de calefacción ahora permanece parado mientras la válvula de 3 vías está en agua caliente: nuevos campos para la válvula y para el valor de agua caliente.",
-        "pl": "Schemat instalacji: obieg grzewczy stoi teraz, dopóki zawór 3-drogowy jest ustawiony na c.w.u. — nowe pola dla zaworu i wartości c.w.u.",
-        "uk": "Схема установки: контур опалення тепер стоїть, поки 3-ходовий клапан перемкнено на ГВП — нові поля для клапана та значення ГВП.",
-        "zh-cn": "系统示意图：只要三通换向阀切到热水，采暖回路就保持静止——新增阀门及热水数值字段。"
       }
     },
     "titleLang": {

@@ -62,6 +62,10 @@ WOLF e o logótipo WOLF são marcas da WOLF GmbH. Este projeto não tem qualquer
     ### **WORK IN PROGRESS**
 -->
 
+### 0.6.0 (2026-09-23)
+* (ssbingo) Todos os widgets exceto o contador de gás podem preencher os objetos a partir de uma instância: no primeiro campo do grupo «Objetos» escolha uma instalação wolf-smartset (ISM7) ou wolf (ISM8i) e os objetos certos são preenchidos; sem escolha tudo continua manual
+* (ssbingo) Contador de gás: o preço da energia pode ser indicado em cent/kWh, tal como aparece na maioria das faturas; o widget avisa quando o preço fica fora de 0,01 a 1,00 €/kWh
+
 ### 0.5.2 (2026-09-23)
 * (ssbingo) Esquema da instalação: um circuito de aquecimento fica parado enquanto a válvula de 3 vias estiver na água quente — antes seguia o aparelho e mostrava fluxo indevido durante a carga do depósito no modo de verão
 * (ssbingo) Esquema da instalação: novos campos para a válvula e para o valor de água quente; sem eles tudo fica como antes e um objeto próprio *carga ativa* continua a ter prioridade para o ramo do depósito

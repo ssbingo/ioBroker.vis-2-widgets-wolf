@@ -363,6 +363,10 @@ WOLF und das WOLF-Logo sind Marken der WOLF GmbH. Dieses Projekt steht in keiner
     ### **WORK IN PROGRESS**
 -->
 
+### 0.6.0 (2026-09-23)
+* (ssbingo) Jedes Widget außer dem Gaszähler kann seine Objekte aus einer Adapterinstanz vorbelegen: im ersten Feld der Gruppe *Objekte* eine Anlage von wolf-smartset (ISM7) oder wolf (ISM8i) wählen, dann werden die passenden Objekte eingetragen — ohne Auswahl bleibt alles wie bisher von Hand verknüpfbar
+* (ssbingo) Gaszähler: Der Arbeitspreis lässt sich in ct/kWh eintragen, so wie er auf den meisten Rechnungen steht; die Kachel weist auf einen Preis außerhalb von 0,01 bis 1,00 €/kWh hin — so sieht es aus, wenn Cent im Euro-Feld landen
+
 ### 0.5.2 (2026-09-23)
 * (ssbingo) Anlagenschema: Ein Heizkreis steht still, solange das 3-Wege-Umschaltventil auf Warmwasser steht — bisher folgte er dem Heizgerät und zeigte im Sommerbetrieb während der Speicherladung fälschlich Fluss
 * (ssbingo) Anlagenschema: neue Felder für das Umschaltventil und den Wert für Warmwasser; ohne sie bleibt alles wie bisher, und ein eigenes Objekt *Ladung aktiv* hat für den Speicherzweig weiter Vorrang

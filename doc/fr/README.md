@@ -62,6 +62,10 @@ WOLF et le logo WOLF sont des marques de WOLF GmbH. Ce projet n'est ni affilié 
     ### **WORK IN PROGRESS**
 -->
 
+### 0.6.0 (2026-09-23)
+* (ssbingo) Chaque widget sauf le compteur de gaz peut renseigner ses objets depuis une instance : dans le premier champ du groupe « Objets », choisissez une installation wolf-smartset (ISM7) ou wolf (ISM8i) ; sans choix, tout reste manuel
+* (ssbingo) Compteur de gaz : le prix de l'énergie peut être saisi en ct/kWh comme sur la plupart des factures ; la vignette signale un prix hors de 0,01 à 1,00 €/kWh
+
 ### 0.5.2 (2026-09-23)
 * (ssbingo) Schéma de l'installation : un circuit de chauffage reste à l'arrêt tant que la vanne 3 voies est sur l'eau chaude — il suivait jusqu'ici la chaudière et affichait à tort un débit pendant la charge du ballon en mode été
 * (ssbingo) Schéma de l'installation : nouveaux champs pour la vanne et la valeur eau chaude ; sans eux rien ne change, et un objet *charge active* garde la priorité pour la branche du ballon

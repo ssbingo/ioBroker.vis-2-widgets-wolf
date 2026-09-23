@@ -62,6 +62,10 @@ WOLF i logo WOLF są znakami towarowymi WOLF GmbH. Ten projekt nie jest powiąza
     ### **WORK IN PROGRESS**
 -->
 
+### 0.6.0 (2026-09-23)
+* (ssbingo) Każdy widżet poza licznikiem gazu może wypełnić obiekty z instancji adaptera: w pierwszym polu grupy „Obiekty” wybierz instalację wolf-smartset (ISM7) lub wolf (ISM8i); bez wyboru wszystko pozostaje ręczne
+* (ssbingo) Licznik gazu: cenę energii można podać w ct/kWh, tak jak na większości rachunków; kafelek ostrzega o cenie spoza zakresu 0,01–1,00 €/kWh
+
 ### 0.5.2 (2026-09-23)
 * (ssbingo) Schemat instalacji: obieg grzewczy stoi, dopóki zawór 3-drogowy jest ustawiony na c.w.u. — dotychczas podążał za kotłem i w trybie letnim podczas ładowania zasobnika błędnie pokazywał przepływ
 * (ssbingo) Schemat instalacji: nowe pola dla zaworu i wartości c.w.u.; bez nich wszystko pozostaje bez zmian, a własny obiekt *ładowanie aktywne* nadal ma pierwszeństwo dla gałęzi zasobnika
