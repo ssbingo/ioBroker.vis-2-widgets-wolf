@@ -20,9 +20,16 @@ import {
     startOfMonth,
     type HistoryEntry,
 } from '../lib/consumption';
-import { toBoolean, toNumber } from '../lib/fmt';
+import { fmt, toBoolean, toNumber } from '../lib/fmt';
 import { GAS_VALUES, gasStatsIds } from '../lib/gasStats';
-import { DEFAULT_BRENNWERT, DEFAULT_ZUSTANDSZAHL, monthlyCost } from '../lib/gas';
+import {
+    DEFAULT_BRENNWERT,
+    DEFAULT_ZUSTANDSZAHL,
+    monthlyCost,
+    PRICE_UNITS,
+    pricePerKwh,
+    priceSuspicious,
+} from '../lib/gas';
 import { THEME_OPTIONS } from '../lib/theme';
 import WolfWidgetBase, { attrNumber, type WolfBaseRxData, type WolfBaseState } from './WolfWidgetBase';
 
@@ -51,6 +58,7 @@ interface WolfGasMeterRxData extends WolfBaseRxData {
     brennwert?: number | string;
     zustandszahl?: number | string;
     arbeitspreis?: number | string;
+    preis_einheit?: string;
     grundpreis?: number | string;
 }
 
@@ -284,7 +292,22 @@ export default class WolfGasMeter extends WolfWidgetBase<WolfGasMeterRxData, Wol
                             default: DEFAULT_ZUSTANDSZAHL,
                             step: 0.0001,
                         },
-                        { name: 'arbeitspreis', type: 'number', label: 'arbeitspreis', min: 0, step: 0.0001 },
+                        {
+                            name: 'preis_einheit',
+                            type: 'select',
+                            label: 'preis_einheit',
+                            tooltip: 'preis_einheit_tooltip',
+                            default: 'eur',
+                            options: PRICE_UNITS.map(v => ({ value: v, label: `preis_einheit_${v}` })),
+                        },
+                        {
+                            name: 'arbeitspreis',
+                            type: 'number',
+                            label: 'arbeitspreis',
+                            tooltip: 'arbeitspreis_tooltip',
+                            min: 0,
+                            step: 0.0001,
+                        },
                         { name: 'grundpreis', type: 'number', label: 'grundpreis', min: 0, step: 0.01 },
                     ],
                 },
@@ -424,7 +447,7 @@ export default class WolfGasMeter extends WolfWidgetBase<WolfGasMeterRxData, Wol
             cost_month: monthlyCost(month, {
                 brennwert: toNumber(rx.brennwert) ?? undefined,
                 zustandszahl: toNumber(rx.zustandszahl) ?? undefined,
-                arbeitspreis: toNumber(rx.arbeitspreis) ?? undefined,
+                arbeitspreis: this.pricePerKwh() ?? undefined,
                 grundpreis: toNumber(rx.grundpreis) ?? undefined,
             }),
         };
@@ -450,7 +473,13 @@ export default class WolfGasMeter extends WolfWidgetBase<WolfGasMeterRxData, Wol
         return values;
     }
 
-    /** @returns Hinweise zum Sensor aus den verknüpften Zustandsobjekten */
+    /** @returns Arbeitspreis in €/kWh, umgerechnet aus der eingestellten Einheit */
+    private pricePerKwh(): number | null {
+        const rx = this.state.rxData;
+        return pricePerKwh(toNumber(rx.arbeitspreis), rx.preis_einheit);
+    }
+
+    /** @returns Hinweise zum Sensor und zur Kostenrechnung */
     private warnings(): string[] {
         const rx = this.state.rxData;
         const warnings: string[] = [];
@@ -463,6 +492,11 @@ export default class WolfGasMeter extends WolfWidgetBase<WolfGasMeterRxData, Wol
         const status = this.objectNumber(rx.oid_sensor_status);
         if (rx.oid_sensor_status && status !== null && status !== 0) {
             warnings.push(this.tr('warn_status'));
+        }
+        // Cent statt Euro im Arbeitspreis verfälscht die Kosten um den Faktor 100
+        const price = this.pricePerKwh();
+        if (priceSuspicious(price)) {
+            warnings.push(`${this.tr('warn_price')} ${fmt(price, 4, undefined, this.locale())} €/kWh`);
         }
         return warnings;
     }

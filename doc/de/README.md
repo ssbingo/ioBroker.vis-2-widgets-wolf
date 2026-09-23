@@ -231,6 +231,16 @@ letzte Zustandsänderung. Die LED wird rot, sobald eine Zeile eine Störung ist.
 Störcode gibt es zusätzlich *Sammelstörung*, *Störcode* mit Klartexten (`Code=Text;…`) und eine
 *Meldungsliste* (JSON-Array mit `text`, `ts`, `severity`).
 
+#### Gaszähler: Kosten des Monats
+
+Die Kachel rechnet `m³ × Brennwert × Zustandszahl = kWh`, dann `kWh × Arbeitspreis + Grundpreis`.
+Brennwert und Zustandszahl stehen auf der Gasrechnung (Vorgaben: 11,482 kWh/m³ und 0,9612).
+
+Der **Arbeitspreis** steht auf den meisten Rechnungen in Cent je Kilowattstunde — dafür gibt es
+das Feld *Einheit des Arbeitspreises*: `ct/kWh` wählen und 8,14 eintragen, oder bei `€/kWh`
+entsprechend 0,0814. Wer Cent in ein Euro-Feld einträgt, liegt um den Faktor 100 daneben; deshalb
+weist die Kachel auf einen Arbeitspreis hin, der außerhalb von 0,01 bis 1,00 €/kWh liegt.
+
 #### Gaszähler: Werte aus dem Statistik-Skript
 
 Dem Adapter liegt das ioBroker-Skript `gasverbrauch_statistik.js` bei. Es berechnet aus dem

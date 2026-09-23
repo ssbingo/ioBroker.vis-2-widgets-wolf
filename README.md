@@ -242,6 +242,17 @@ state. The LED turns red as soon as one row is a fault. For systems with a fault
 also *collective fault*, *fault code* with texts (`code=text;…`) and a *message list* (JSON array
 with `text`, `ts`, `severity`).
 
+#### Gas meter: cost of the month
+
+The tile calculates `m³ × calorific value × state number = kWh`, then
+`kWh × energy price + base price`. Calorific value and state number are on your gas bill
+(defaults: 11.482 kWh/m³ and 0.9612).
+
+Most bills state the **energy price** in cents per kilowatt hour — that is what the field *Unit of
+the energy price* is for: pick `ct/kWh` and enter 8.14, or enter 0.0814 with `€/kWh`. Entering
+cents into a euro field is off by a factor of 100, so the tile points out an energy price outside
+0.01 to 1.00 €/kWh.
+
 #### Gas meter: values from the statistics script
 
 The adapter ships the ioBroker script `gasverbrauch_statistik.js`. From the meter reading it

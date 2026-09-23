@@ -9,6 +9,7 @@ import { SERIES_COLORS } from '../components/TrendsChart';
 import { AGGREGATES, RANGES } from '../lib/chart';
 import { SEVERITIES } from '../lib/messages';
 import { CIRCUIT_BLOCKS } from '../lib/circuitBlocks';
+import { PRICE_UNITS } from '../lib/gas';
 import { GAS_VALUE_KEYS } from '../lib/gasStats';
 import { THEME_OPTIONS } from '../lib/theme';
 import translations from '../translations';
@@ -34,6 +35,7 @@ const DYNAMIC = [
     ...CIRCUIT_BLOCKS.map(v => `show_${v}`),
     ...GAS_VALUE_KEYS,
     ...GAS_VALUE_KEYS.map(v => `show_${v}`),
+    ...PRICE_UNITS.map(v => `preis_einheit_${v}`),
     'phase_0',
     'phase_1',
     'phase_2',
