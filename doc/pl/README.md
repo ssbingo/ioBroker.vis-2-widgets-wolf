@@ -62,6 +62,9 @@ WOLF i logo WOLF są znakami towarowymi WOLF GmbH. Ten projekt nie jest powiąza
     ### **WORK IN PROGRESS**
 -->
 
+### 0.6.2 (2026-09-23)
+* (ssbingo) Źródła widżetów przeniesiono z src-widgets-ts do src-widgets — tak ten folder nazywa się zwykle w ioBrokerze. Kontroler repozytorium pomija ten folder, więc jego uwagi o react i pakietach czcionek znikają bez dodawania zbędnych zależności. W dostarczanym pakiecie nic się nie zmienia
+
 ### 0.6.1 (2026-09-23)
 * (ssbingo) Dołączony skrypt statystyk w wersji 2.1.0: wylicza także przepływ ze zmian licznika (stany Durchfluss, VerbrauchAktiv, ZaehlerLetzteAenderung); plik przekonwertowano na UTF-8, a timery działają przez globalThis
 * (ssbingo) Licznik gazu: automatyka folderu zna wyliczony przepływ i nie rusza już powiązanego obiektu przepływu

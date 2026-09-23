@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "vis-2-widgets-wolf",
-    "version": "0.6.1",
+    "version": "0.6.2",
     "news": {
-      "NEXT": {
+      "0.6.2": {
         "en": "The widget sources now live in the usual folder src-widgets; nothing changes in the delivered package.",
         "de": "Die Widget-Quellen liegen jetzt im üblichen Ordner src-widgets; am ausgelieferten Paket ändert sich nichts.",
         "ru": "Исходники виджетов теперь лежат в обычной папке src-widgets; в поставляемом пакете ничего не меняется.",
@@ -15,19 +15,6 @@
         "pl": "Źródła widżetów znajdują się teraz w typowym folderze src-widgets; w dostarczanym pakiecie nic się nie zmienia.",
         "uk": "Вихідні файли віджетів тепер у звичній теці src-widgets; у пакеті, що постачається, нічого не змінюється.",
         "zh-cn": "小部件源码现位于常用目录 src-widgets；交付的安装包没有任何变化。"
-      },
-      "0.6.1": {
-        "en": "Bundled statistics script in version 2.1.0: it also derives the flow rate from the meter changes. Encoding, timers and all references fixed.",
-        "de": "Beiliegendes Statistik-Skript in Fassung 2.1.0: Es rechnet auch den Durchfluss aus der Zähleränderung. Kodierung, Zeitgeber und alle Verweise berichtigt.",
-        "ru": "Прилагаемый скрипт статистики версии 2.1.0: он также вычисляет расход из изменений счётчика. Исправлены кодировка, таймеры и все ссылки.",
-        "pt": "Script de estatísticas incluído na versão 2.1.0: também calcula o caudal a partir das variações do contador. Codificação, temporizadores e todas as referências corrigidas.",
-        "nl": "Meegeleverd statistiekscript in versie 2.1.0: het berekent ook het debiet uit de meterwijzigingen. Codering, timers en alle verwijzingen gecorrigeerd.",
-        "fr": "Script de statistiques fourni en version 2.1.0 : il calcule aussi le débit à partir des variations du compteur. Encodage, minuteries et toutes les références corrigés.",
-        "it": "Script di statistica incluso nella versione 2.1.0: calcola anche la portata dalle variazioni del contatore. Codifica, timer e tutti i riferimenti corretti.",
-        "es": "Script de estadísticas incluido en la versión 2.1.0: también calcula el caudal a partir de las variaciones del contador. Codificación, temporizadores y todas las referencias corregidas.",
-        "pl": "Dołączony skrypt statystyk w wersji 2.1.0: wylicza także przepływ ze zmian licznika. Poprawiono kodowanie, timery i wszystkie odwołania.",
-        "uk": "Доданий скрипт статистики у версії 2.1.0: він також обчислює витрату зі змін лічильника. Виправлено кодування, таймери й усі посилання.",
-        "zh-cn": "附带统计脚本升级到 2.1.0：还能根据表读数变化计算流量。已修正编码、定时器和所有引用。"
       }
     },
     "titleLang": {

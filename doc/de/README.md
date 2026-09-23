@@ -374,6 +374,9 @@ WOLF und das WOLF-Logo sind Marken der WOLF GmbH. Dieses Projekt steht in keiner
     ### **WORK IN PROGRESS**
 -->
 
+### 0.6.2 (2026-09-23)
+* (ssbingo) Die Widget-Quellen liegen jetzt im Ordner src-widgets statt src-widgets-ts — so heißt er im ioBroker-Umfeld üblicherweise. Der Repository-Checker überspringt diesen Ordner, seine Hinweise zu react und den Schriftpaketen entfallen damit ganz, ohne Abhängigkeiten aufzunehmen, die zur Laufzeit niemand braucht. Am ausgelieferten Paket ändert sich nichts
+
 ### 0.6.1 (2026-09-23)
 * (ssbingo) Beiliegendes Statistik-Skript in Fassung 2.1.0: Es rechnet auch den Durchfluss aus der Zähleränderung (States Durchfluss, VerbrauchAktiv, ZaehlerLetzteAenderung) — die Datei wurde nach UTF-8 gewandelt, ihre Zeitgeber laufen über globalThis
 * (ssbingo) Gaszähler: Die Ordner-Automatik kennt den berechneten Durchfluss und lässt ein bereits verknüpftes Durchfluss-Objekt in Ruhe

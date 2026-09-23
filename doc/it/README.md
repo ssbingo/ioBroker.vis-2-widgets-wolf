@@ -62,6 +62,9 @@ WOLF e il logo WOLF sono marchi di WOLF GmbH. Questo progetto non è affiliato a
     ### **WORK IN PROGRESS**
 -->
 
+### 0.6.2 (2026-09-23)
+* (ssbingo) I sorgenti dei widget passano da src-widgets-ts a src-widgets, il nome consueto nel mondo ioBroker. Il verificatore dei repository salta questa cartella, quindi le sue osservazioni su react e sui pacchetti dei caratteri spariscono senza aggiungere dipendenze inutili. Nel pacchetto consegnato non cambia nulla
+
 ### 0.6.1 (2026-09-23)
 * (ssbingo) Script di statistica incluso nella versione 2.1.0: calcola anche la portata dalle variazioni del contatore (stati Durchfluss, VerbrauchAktiv, ZaehlerLetzteAenderung); il file è stato convertito in UTF-8 e i timer passano per globalThis
 * (ssbingo) Contatore del gas: l'automatismo della cartella conosce la portata calcolata e lascia stare un oggetto di portata già collegato

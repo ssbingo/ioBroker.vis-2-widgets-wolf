@@ -62,6 +62,9 @@ WOLF en het WOLF-logo zijn merken van WOLF GmbH. Dit project is niet verbonden m
     ### **WORK IN PROGRESS**
 -->
 
+### 0.6.2 (2026-09-23)
+* (ssbingo) De widgetbronnen staan nu in de map src-widgets in plaats van src-widgets-ts — zo heet die map gebruikelijk binnen ioBroker. De repositorychecker slaat deze map over, waardoor de opmerkingen over react en de lettertypepakketten volledig vervallen zonder onnodige afhankelijkheden. Aan het geleverde pakket verandert niets
+
 ### 0.6.1 (2026-09-23)
 * (ssbingo) Meegeleverd statistiekscript in versie 2.1.0: het berekent ook het debiet uit de meterwijzigingen (states Durchfluss, VerbrauchAktiv, ZaehlerLetzteAenderung); het bestand is naar UTF-8 omgezet en de timers lopen via globalThis
 * (ssbingo) Gasmeter: de mapautomatisering kent het berekende debiet en laat een al gekoppeld debietobject met rust

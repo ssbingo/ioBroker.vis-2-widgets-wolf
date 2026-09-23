@@ -62,6 +62,9 @@ WOLF 及 WOLF 标志是 WOLF GmbH 的商标。本项目与 WOLF GmbH 无任何�
     ### **WORK IN PROGRESS**
 -->
 
+### 0.6.2 (2026-09-23)
+* (ssbingo) 小部件源码从 src-widgets-ts 移到 src-widgets——这是 ioBroker 生态中的惯用名称。仓库检查器会跳过该目录，因此关于 react 和字体包的提示完全消失，也无需添加运行时并不需要的依赖。交付的安装包没有变化
+
 ### 0.6.1 (2026-09-23)
 * (ssbingo) 附带统计脚本升级到 2.1.0：还能根据表读数变化计算流量（状态 Durchfluss、VerbrauchAktiv、ZaehlerLetzteAenderung）；文件已转换为 UTF-8，定时器改为通过 globalThis 调用
 * (ssbingo) 燃气表：目录自动填充已识别计算得到的流量，并且不会覆盖已关联的流量对象

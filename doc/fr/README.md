@@ -62,6 +62,9 @@ WOLF et le logo WOLF sont des marques de WOLF GmbH. Ce projet n'est ni affilié 
     ### **WORK IN PROGRESS**
 -->
 
+### 0.6.2 (2026-09-23)
+* (ssbingo) Les sources des widgets passent de src-widgets-ts à src-widgets, le nom habituel dans l'univers ioBroker. Le vérificateur de dépôts ignore ce dossier : ses remarques sur react et les paquets de polices disparaissent sans ajouter de dépendances inutiles. Rien ne change dans le paquet livré
+
 ### 0.6.1 (2026-09-23)
 * (ssbingo) Script de statistiques fourni en version 2.1.0 : il calcule aussi le débit à partir des variations du compteur (états Durchfluss, VerbrauchAktiv, ZaehlerLetzteAenderung) ; le fichier a été converti en UTF-8 et ses minuteries passent par globalThis
 * (ssbingo) Compteur de gaz : l'automatisme du dossier connaît le débit calculé et laisse tel quel un objet de débit déjà lié

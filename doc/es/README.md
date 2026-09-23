@@ -62,6 +62,9 @@ WOLF y el logotipo de WOLF son marcas de WOLF GmbH. Este proyecto no está afili
     ### **WORK IN PROGRESS**
 -->
 
+### 0.6.2 (2026-09-23)
+* (ssbingo) Las fuentes de los widgets pasan de src-widgets-ts a src-widgets, el nombre habitual en el entorno de ioBroker. El verificador de repositorios omite esa carpeta, así que sus avisos sobre react y los paquetes de fuentes desaparecen sin añadir dependencias innecesarias. En el paquete entregado no cambia nada
+
 ### 0.6.1 (2026-09-23)
 * (ssbingo) Script de estadísticas incluido en la versión 2.1.0: también calcula el caudal a partir de las variaciones del contador (estados Durchfluss, VerbrauchAktiv, ZaehlerLetzteAenderung); el archivo se pasó a UTF-8 y sus temporizadores usan globalThis
 * (ssbingo) Contador de gas: la automatización por carpeta conoce el caudal calculado y deja en paz un objeto de caudal ya enlazado
