@@ -40,6 +40,8 @@
     "warn_price": "Arbeitspreis prüfen:",
     "warn_offset": "Korrekturwert prüfen: Das Statistik-Skript korrigiert den Zählerstand bereits",
     "grundpreis": "Grundpreis (€/Monat)",
+    "mwst": "Mehrwertsteuer (%)",
+    "mwst_tooltip": "Nur nötig, wenn Arbeits- und Grundpreis netto eingetragen sind. 0 heißt: die Preise sind schon brutto",
     "title": "Titel",
     "subtitle": "Untertitel",
     "flow": "Momentandurchfluss",

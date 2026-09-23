@@ -40,6 +40,8 @@
     "warn_price": "Check the energy price:",
     "warn_offset": "Check the meter reading correction: the statistics script already corrects the reading",
     "grundpreis": "Base price (€/month)",
+    "mwst": "VAT (%)",
+    "mwst_tooltip": "Only needed when energy and base price are entered net. 0 means the prices already include tax",
     "title": "Title",
     "subtitle": "Subtitle",
     "flow": "Instantaneous flow",

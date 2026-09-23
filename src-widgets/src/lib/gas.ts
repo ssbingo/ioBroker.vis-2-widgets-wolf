@@ -8,6 +8,8 @@ export interface GasTariff {
     arbeitspreis: number;
     /** Grundpreis in €/Monat */
     grundpreis: number;
+    /** Mehrwertsteuer in Prozent; 0 heißt, die Preise sind schon brutto */
+    mwst: number;
 }
 
 /** Vorgaben für Brennwert und Zustandszahl, wenn nichts eingetragen ist. */
@@ -50,11 +52,13 @@ export function priceSuspicious(eurPerKwh: number | null): boolean {
 }
 
 /**
- * Kosten für einen Monatsverbrauch: m³ × Brennwert × Zustandszahl = kWh, dann × Arbeitspreis + Grundpreis.
+ * Kosten für einen Monatsverbrauch: m³ × Brennwert × Zustandszahl = kWh, dann × Arbeitspreis +
+ * Grundpreis und zuletzt die Mehrwertsteuer. Wer Bruttopreise einträgt, lässt die Steuer auf 0 —
+ * dann bleibt die Rechnung wie bisher.
  * Liefert null, wenn Verbrauch oder Arbeitspreis fehlen.
  *
  * @param monthM3 Monatsverbrauch in m³
- * @param tariff Brennwert, Zustandszahl, Arbeits- und Grundpreis
+ * @param tariff Brennwert, Zustandszahl, Arbeits- und Grundpreis, Mehrwertsteuer
  * @returns Kosten in € oder null
  */
 export function monthlyCost(monthM3: number | null, tariff: Partial<GasTariff>): number | null {
@@ -62,5 +66,6 @@ export function monthlyCost(monthM3: number | null, tariff: Partial<GasTariff>):
         return null;
     }
     const kwh = monthM3 * (tariff.brennwert || DEFAULT_BRENNWERT) * (tariff.zustandszahl || DEFAULT_ZUSTANDSZAHL);
-    return kwh * tariff.arbeitspreis + (tariff.grundpreis || 0);
+    const netto = kwh * tariff.arbeitspreis + (tariff.grundpreis || 0);
+    return netto * (1 + (tariff.mwst || 0) / 100);
 }

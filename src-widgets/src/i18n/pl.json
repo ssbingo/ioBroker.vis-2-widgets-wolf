@@ -40,6 +40,8 @@
     "warn_price": "Sprawdź cenę energii:",
     "warn_offset": "Sprawdź korektę: skrypt statystyk już koryguje stan licznika",
     "grundpreis": "Opłata stała (€/miesiąc)",
+    "mwst": "VAT (%)",
+    "mwst_tooltip": "Potrzebny tylko wtedy, gdy cena energii i opłata stała są podane netto. 0 oznacza, że ceny są już brutto",
     "title": "Tytuł",
     "subtitle": "Podtytuł",
     "flow": "Przepływ chwilowy",

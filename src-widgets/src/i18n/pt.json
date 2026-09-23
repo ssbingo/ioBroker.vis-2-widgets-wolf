@@ -40,6 +40,8 @@
     "warn_price": "Verifique o preço da energia:",
     "warn_offset": "Verifique a correção: o script de estatísticas já corrige a leitura do contador",
     "grundpreis": "Preço base (€/mês)",
+    "mwst": "IVA (%)",
+    "mwst_tooltip": "Só é preciso se o preço da energia e o preço base estiverem sem impostos. 0 significa que os preços já incluem IVA",
     "title": "Título",
     "subtitle": "Subtítulo",
     "flow": "Caudal instantâneo",

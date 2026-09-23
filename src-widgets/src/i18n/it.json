@@ -40,6 +40,8 @@
     "warn_price": "Controlla il prezzo dell'energia:",
     "warn_offset": "Controlla la correzione: lo script di statistica corregge già la lettura del contatore",
     "grundpreis": "Quota fissa (€/mese)",
+    "mwst": "IVA (%)",
+    "mwst_tooltip": "Serve solo se il prezzo dell'energia e la quota fissa sono inseriti al netto. 0 significa che i prezzi sono già lordi",
     "title": "Titolo",
     "subtitle": "Sottotitolo",
     "flow": "Portata istantanea",

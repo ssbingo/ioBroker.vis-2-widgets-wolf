@@ -40,6 +40,8 @@
     "warn_price": "Vérifiez le prix de l'énergie :",
     "warn_offset": "Vérifiez la correction : le script de statistiques corrige déjà l'index",
     "grundpreis": "Abonnement (€/mois)",
+    "mwst": "TVA (%)",
+    "mwst_tooltip": "Nécessaire seulement si le prix de l'énergie et l'abonnement sont saisis hors taxes. 0 signifie que les prix sont déjà TTC",
     "title": "Titre",
     "subtitle": "Sous-titre",
     "flow": "Débit instantané",

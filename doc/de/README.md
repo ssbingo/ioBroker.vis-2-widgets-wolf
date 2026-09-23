@@ -233,8 +233,16 @@ Störcode gibt es zusätzlich *Sammelstörung*, *Störcode* mit Klartexten (`Cod
 
 #### Gaszähler: Kosten des Monats
 
-Die Kachel rechnet `m³ × Brennwert × Zustandszahl = kWh`, dann `kWh × Arbeitspreis + Grundpreis`.
-Brennwert und Zustandszahl stehen auf der Gasrechnung (Vorgaben: 11,482 kWh/m³ und 0,9612).
+Die Kachel rechnet `m³ × Brennwert × Zustandszahl = kWh`, dann `kWh × Arbeitspreis + Grundpreis`
+und zuletzt die *Mehrwertsteuer*. Brennwert und Zustandszahl stehen auf der Gasrechnung
+(Vorgaben: 11,482 kWh/m³ und 0,9612).
+
+**Brutto oder netto?** Die Mehrwertsteuer steht auf 0, solange nichts anderes eingetragen ist —
+dann kommt heraus, was den eingetragenen Preisen entspricht: Brutto-Arbeitspreis, wie ihn die
+meisten Versorger Privatkunden ausweisen, ergibt einen Bruttobetrag. Wer wie das beiliegende
+Skript mit Nettopreisen rechnet, trägt hier den Satz ein (in Deutschland 19) und bekommt
+denselben Bruttobetrag wie das Skript. Kommen die Kosten aus dem Objekt
+`<Ordner>.Kosten.KostenMonat`, sind sie ohnehin brutto und das Widget rechnet gar nicht.
 
 Der **Arbeitspreis** steht auf den meisten Rechnungen in Cent je Kilowattstunde — dafür gibt es
 das Feld *Einheit des Arbeitspreises*: `ct/kWh` wählen und 8,14 eintragen, oder bei `€/kWh`

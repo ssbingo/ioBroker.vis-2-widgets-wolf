@@ -40,6 +40,8 @@
     "warn_price": "Comprueba el precio de la energía:",
     "warn_offset": "Comprueba la corrección: el script de estadísticas ya corrige la lectura del contador",
     "grundpreis": "Término fijo (€/mes)",
+    "mwst": "IVA (%)",
+    "mwst_tooltip": "Solo hace falta si el precio de la energía y la cuota fija se introducen sin impuestos. 0 significa que los precios ya son brutos",
     "title": "Título",
     "subtitle": "Subtítulo",
     "flow": "Caudal instantáneo",

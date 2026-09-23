@@ -245,8 +245,14 @@ with `text`, `ts`, `severity`).
 #### Gas meter: cost of the month
 
 The tile calculates `m³ × calorific value × state number = kWh`, then
-`kWh × energy price + base price`. Calorific value and state number are on your gas bill
-(defaults: 11.482 kWh/m³ and 0.9612).
+`kWh × energy price + base price` and finally the *VAT*. Calorific value and state number are on
+your gas bill (defaults: 11.482 kWh/m³ and 0.9612).
+
+**Gross or net?** VAT stays at 0 unless you enter something else, so the result matches the prices
+you entered: a gross energy price, the way most suppliers state it for private customers, gives a
+gross amount. If you work with net prices the way the bundled script does, enter the rate here (19
+in Germany) and you get the same gross amount as the script. When the cost comes from the object
+`<folder>.Kosten.KostenMonat` it is gross anyway and the widget does not calculate at all.
 
 Most bills state the **energy price** in cents per kilowatt hour — that is what the field *Unit of
 the energy price* is for: pick `ct/kWh` and enter 8.14, or enter 0.0814 with `€/kWh`. Entering

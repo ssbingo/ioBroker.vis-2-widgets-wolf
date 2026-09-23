@@ -23,6 +23,19 @@ describe('monthlyCost', () => {
     });
 });
 
+describe('monthlyCost mit Mehrwertsteuer', () => {
+    const tarif = { brennwert: 11.482, zustandszahl: 0.9612, arbeitspreis: 0.0814, grundpreis: 15.42 };
+
+    it('rechnet ohne Steuersatz wie bisher', () => {
+        expect(monthlyCost(15.5, tarif)).toBeCloseTo(monthlyCost(15.5, { ...tarif, mwst: 0 }) as number, 6);
+    });
+
+    it('schlägt den Satz auf Arbeits- und Grundpreis auf', () => {
+        const netto = monthlyCost(15.5, tarif) as number;
+        expect(monthlyCost(15.5, { ...tarif, mwst: 19 })).toBeCloseTo(netto * 1.19, 6);
+    });
+});
+
 describe('pricePerKwh', () => {
     it('nimmt Euro unverändert', () => {
         expect(pricePerKwh(0.0814, 'eur')).toBeCloseTo(0.0814, 6);

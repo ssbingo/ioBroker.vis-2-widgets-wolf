@@ -40,6 +40,8 @@
     "warn_price": "Controleer de energieprijs:",
     "warn_offset": "Controleer de correctiewaarde: het statistiekscript corrigeert de meterstand al",
     "grundpreis": "Vastrecht (€/maand)",
+    "mwst": "Btw (%)",
+    "mwst_tooltip": "Alleen nodig als energie- en vastrechtprijs exclusief zijn ingevoerd. 0 betekent dat de prijzen al inclusief zijn",
     "title": "Titel",
     "subtitle": "Ondertitel",
     "flow": "Momentaan debiet",

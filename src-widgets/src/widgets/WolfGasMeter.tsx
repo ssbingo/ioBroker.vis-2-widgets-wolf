@@ -61,6 +61,7 @@ interface WolfGasMeterRxData extends WolfBaseRxData {
     arbeitspreis?: number | string;
     preis_einheit?: string;
     grundpreis?: number | string;
+    mwst?: number | string;
 }
 
 /** Zählerstände zu Tages- und Monatsbeginn aus dem Verlauf */
@@ -316,6 +317,16 @@ export default class WolfGasMeter extends WolfWidgetBase<WolfGasMeterRxData, Wol
                             step: 0.0001,
                         },
                         { name: 'grundpreis', type: 'number', label: 'grundpreis', min: 0, step: 0.01 },
+                        {
+                            name: 'mwst',
+                            type: 'number',
+                            label: 'mwst',
+                            tooltip: 'mwst_tooltip',
+                            default: 0,
+                            min: 0,
+                            max: 100,
+                            step: 0.1,
+                        },
                     ],
                 },
                 {
@@ -456,6 +467,7 @@ export default class WolfGasMeter extends WolfWidgetBase<WolfGasMeterRxData, Wol
                 zustandszahl: toNumber(rx.zustandszahl) ?? undefined,
                 arbeitspreis: this.pricePerKwh() ?? undefined,
                 grundpreis: toNumber(rx.grundpreis) ?? undefined,
+                mwst: toNumber(rx.mwst) ?? undefined,
             }),
         };
         const values: GasValue[] = [];
