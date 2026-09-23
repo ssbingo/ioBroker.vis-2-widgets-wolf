@@ -62,6 +62,11 @@ WOLF et le logo WOLF sont des marques de WOLF GmbH. Ce projet n'est ni affilié 
     ### **WORK IN PROGRESS**
 -->
 
+### 0.7.0 (2026-09-23)
+* (ssbingo) Compteur de gaz : nouveau champ d'objet *Coût du mois* — s'il est lié, la vignette affiche cette valeur au lieu de calculer d'après le tarif ; cela convient au script fourni, dont le montant inclut abonnement, TVA et acompte
+* (ssbingo) Script de statistiques fourni en version 3.0.0 : il recale les index relevés (facteur de correction contre les impulsions perdues), calcule les coûts et envoie des rapports quotidiens et mensuels par Telegram et e-mail, au besoin avec un PDF
+* (ssbingo) Le choix du dossier renseigne désormais aussi l'objet de coûts ; le manuel liste les nouveaux réglages et états
+
 ### 0.6.2 (2026-09-23)
 * (ssbingo) Les sources des widgets passent de src-widgets-ts à src-widgets, le nom habituel dans l'univers ioBroker. Le vérificateur de dépôts ignore ce dossier : ses remarques sur react et les paquets de polices disparaissent sans ajouter de dépendances inutiles. Rien ne change dans le paquet livré
 
@@ -97,9 +102,6 @@ WOLF et le logo WOLF sont des marques de WOLF GmbH. Ce projet n'est ni affilié 
 
 ### 0.3.0 (2026-09-19)
 * (ssbingo) Nouveaux widgets : schéma de l'installation avec animation du débit, historiques depuis history, sql ou influxdb et messages sous forme de liste d'états avec LED de défaut — les huit widgets sont désormais disponibles.
-
-### 0.2.0 (2026-09-18)
-* (ssbingo) Première version : ensemble de widgets pour VIS-2 (React 19) avec compteur de gaz, état de la chaudière, circuit de chauffage, eau chaude et courbe de chauffe. Les widgets de commande n'affichent une valeur qu'après confirmation (ack) ; la courbe de chauffe est une approximation (pas une formule Wolf). Le compteur de gaz calcule la consommation journalière et mensuelle à partir de l'historique.
 
 Modifications plus anciennes : [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 

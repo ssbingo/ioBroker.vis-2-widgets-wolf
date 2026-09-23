@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "vis-2-widgets-wolf",
-    "version": "0.6.2",
+    "version": "0.7.0",
     "news": {
-      "NEXT": {
+      "0.7.0": {
         "en": "Gas meter: the cost of the month can come from the bundled statistics script, which now also aligns meter readings, calculates costs with VAT and sends reports.",
         "de": "Gaszähler: Die Kosten des Monats können aus dem beiliegenden Statistik-Skript kommen — es gleicht jetzt auch Ablesungen ab, rechnet Kosten mit Mehrwertsteuer und verschickt Berichte.",
         "ru": "Счётчик газа: затраты за месяц могут поступать из прилагаемого скрипта статистики — он теперь сверяет показания, считает затраты с НДС и отправляет отчёты.",
@@ -15,19 +15,6 @@
         "pl": "Licznik gazu: koszt miesiąca może pochodzić z dołączonego skryptu statystyk, który uzgadnia teraz odczyty, wylicza koszty z VAT i wysyła raporty.",
         "uk": "Лічильник газу: витрати за місяць можуть надходити з доданого скрипта статистики, який тепер звіряє показання, рахує витрати з ПДВ і надсилає звіти.",
         "zh-cn": "燃气表：本月费用可来自附带的统计脚本——该脚本现在还能校准抄表读数、计算含增值税的费用并发送报告。"
-      },
-      "0.6.2": {
-        "en": "The widget sources now live in the usual folder src-widgets; nothing changes in the delivered package.",
-        "de": "Die Widget-Quellen liegen jetzt im üblichen Ordner src-widgets; am ausgelieferten Paket ändert sich nichts.",
-        "ru": "Исходники виджетов теперь лежат в обычной папке src-widgets; в поставляемом пакете ничего не меняется.",
-        "pt": "As fontes dos widgets estão agora na pasta habitual src-widgets; nada muda no pacote entregue.",
-        "nl": "De widgetbronnen staan nu in de gebruikelijke map src-widgets; aan het geleverde pakket verandert niets.",
-        "fr": "Les sources des widgets se trouvent désormais dans le dossier habituel src-widgets ; rien ne change dans le paquet livré.",
-        "it": "I sorgenti dei widget si trovano ora nella consueta cartella src-widgets; nel pacchetto consegnato non cambia nulla.",
-        "es": "Las fuentes de los widgets están ahora en la carpeta habitual src-widgets; en el paquete entregado no cambia nada.",
-        "pl": "Źródła widżetów znajdują się teraz w typowym folderze src-widgets; w dostarczanym pakiecie nic się nie zmienia.",
-        "uk": "Вихідні файли віджетів тепер у звичній теці src-widgets; у пакеті, що постачається, нічого не змінюється.",
-        "zh-cn": "小部件源码现位于常用目录 src-widgets；交付的安装包没有任何变化。"
       }
     },
     "titleLang": {

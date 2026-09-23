@@ -62,6 +62,11 @@ WOLF e il logo WOLF sono marchi di WOLF GmbH. Questo progetto non è affiliato a
     ### **WORK IN PROGRESS**
 -->
 
+### 0.7.0 (2026-09-23)
+* (ssbingo) Contatore del gas: nuovo campo oggetto *Costo del mese* — se collegato la piastrella mostra quel valore invece di calcolarlo dalla tariffa; si adatta allo script incluso, il cui importo comprende quota fissa, IVA e acconto
+* (ssbingo) Script di statistica incluso nella versione 3.0.0: allinea le letture del contatore (fattore di correzione contro gli impulsi persi), calcola i costi e invia report giornalieri e mensili via Telegram ed e-mail, se si vuole con PDF
+* (ssbingo) La scelta della cartella inserisce ora anche l'oggetto dei costi; il manuale elenca le nuove impostazioni e gli stati
+
 ### 0.6.2 (2026-09-23)
 * (ssbingo) I sorgenti dei widget passano da src-widgets-ts a src-widgets, il nome consueto nel mondo ioBroker. Il verificatore dei repository salta questa cartella, quindi le sue osservazioni su react e sui pacchetti dei caratteri spariscono senza aggiungere dipendenze inutili. Nel pacchetto consegnato non cambia nulla
 
@@ -97,9 +102,6 @@ WOLF e il logo WOLF sono marchi di WOLF GmbH. Questo progetto non è affiliato a
 
 ### 0.3.0 (2026-09-19)
 * (ssbingo) Nuovi widget: schema dell'impianto con animazione del flusso, andamenti da history, sql o influxdb e messaggi come elenco di stati con LED di guasto — ora sono disponibili tutti gli otto widget.
-
-### 0.2.0 (2026-09-18)
-* (ssbingo) Prima versione: set di widget per VIS-2 (React 19) con contatore del gas, stato caldaia, circuito di riscaldamento, acqua calda e curva di riscaldamento. I widget di comando mostrano un valore solo dopo la conferma (ack); la curva di riscaldamento è un'approssimazione (non una formula Wolf). Il contatore del gas calcola il consumo giornaliero e mensile dallo storico.
 
 Modifiche precedenti: [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 

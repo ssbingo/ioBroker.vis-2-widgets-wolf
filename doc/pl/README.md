@@ -62,6 +62,11 @@ WOLF i logo WOLF są znakami towarowymi WOLF GmbH. Ten projekt nie jest powiąza
     ### **WORK IN PROGRESS**
 -->
 
+### 0.7.0 (2026-09-23)
+* (ssbingo) Licznik gazu: nowe pole obiektu *Koszt miesiąca* — po powiązaniu kafelek pokazuje tę wartość zamiast liczyć z taryfy; pasuje to do dołączonego skryptu, którego kwota zawiera opłatę stałą, VAT i zaliczkę
+* (ssbingo) Dołączony skrypt statystyk w wersji 3.0.0: uzgadnia odczyty licznika (współczynnik korekcji wobec utraconych impulsów), wylicza koszty i wysyła raporty dzienne oraz miesięczne przez Telegram i e-mail, w razie potrzeby z PDF
+* (ssbingo) Wybór folderu wpisuje teraz także obiekt kosztów; instrukcja wymienia nowe ustawienia i stany
+
 ### 0.6.2 (2026-09-23)
 * (ssbingo) Źródła widżetów przeniesiono z src-widgets-ts do src-widgets — tak ten folder nazywa się zwykle w ioBrokerze. Kontroler repozytorium pomija ten folder, więc jego uwagi o react i pakietach czcionek znikają bez dodawania zbędnych zależności. W dostarczanym pakiecie nic się nie zmienia
 
@@ -97,9 +102,6 @@ WOLF i logo WOLF są znakami towarowymi WOLF GmbH. Ten projekt nie jest powiąza
 
 ### 0.3.0 (2026-09-19)
 * (ssbingo) Nowe widżety: schemat instalacji z animacją przepływu, przebiegi z history, sql lub influxdb oraz komunikaty jako lista stanów z diodą usterki — dostępnych jest teraz wszystkie osiem widżetów.
-
-### 0.2.0 (2026-09-18)
-* (ssbingo) Pierwsza wersja: zestaw widżetów dla VIS-2 (React 19) z licznikiem gazu, stanem kotła, obiegiem grzewczym, ciepłą wodą i krzywą grzewczą. Widżety sterujące pokazują wartość dopiero po potwierdzeniu (ack); krzywa grzewcza jest przybliżeniem (nie formułą Wolf). Licznik gazu oblicza zużycie dzienne i miesięczne z historii.
 
 Starsze zmiany: [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 

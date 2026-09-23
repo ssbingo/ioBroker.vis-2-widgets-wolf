@@ -62,6 +62,11 @@ WOLF en het WOLF-logo zijn merken van WOLF GmbH. Dit project is niet verbonden m
     ### **WORK IN PROGRESS**
 -->
 
+### 0.7.0 (2026-09-23)
+* (ssbingo) Gasmeter: nieuw objectveld *Kosten maand* — gekoppeld toont de tegel die waarde in plaats van zelf uit het tarief te rekenen; dat past bij het meegeleverde script, waarvan het bedrag vastrecht, btw en voorschot bevat
+* (ssbingo) Meegeleverd statistiekscript in versie 3.0.0: het stemt afgelezen meterstanden af (correctiefactor tegen verloren pulsen), berekent kosten en verstuurt dag- en maandrapporten via Telegram en e-mail, desgewenst met PDF
+* (ssbingo) De mapkeuze vult nu ook het kostenobject in; de handleiding noemt de nieuwe instellingen en states
+
 ### 0.6.2 (2026-09-23)
 * (ssbingo) De widgetbronnen staan nu in de map src-widgets in plaats van src-widgets-ts — zo heet die map gebruikelijk binnen ioBroker. De repositorychecker slaat deze map over, waardoor de opmerkingen over react en de lettertypepakketten volledig vervallen zonder onnodige afhankelijkheden. Aan het geleverde pakket verandert niets
 
@@ -97,9 +102,6 @@ WOLF en het WOLF-logo zijn merken van WOLF GmbH. Dit project is niet verbonden m
 
 ### 0.3.0 (2026-09-19)
 * (ssbingo) Nieuwe widgets: installatieschema met stromingsanimatie, verloop uit history, sql of influxdb en meldingen als statuslijst met storings-LED — alle acht widgets zijn nu beschikbaar.
-
-### 0.2.0 (2026-09-18)
-* (ssbingo) Eerste versie: widgetset voor VIS-2 (React 19) met gasmeter, ketelstatus, verwarmingscircuit, warm water en stooklijn. Bedienende widgets tonen een waarde pas na bevestiging (ack); de stooklijn is een benadering (geen Wolf-formule). De gasmeter berekent dag- en maandverbruik uit de historie.
 
 Oudere wijzigingen: [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 

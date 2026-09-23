@@ -403,6 +403,11 @@ WOLF und das WOLF-Logo sind Marken der WOLF GmbH. Dieses Projekt steht in keiner
     ### **WORK IN PROGRESS**
 -->
 
+### 0.7.0 (2026-09-23)
+* (ssbingo) Gaszähler: neues Objektfeld *Kosten Monat* — verknüpft zeigt die Kachel diesen Wert, statt aus dem Tarif zu rechnen; das passt zum beiliegenden Skript, dessen Betrag Grundpreis, Mehrwertsteuer und Abschlag enthält
+* (ssbingo) Beiliegendes Statistik-Skript in Fassung 3.0.0: Es gleicht abgelesene Zählerstände ab (Korrekturfaktor gegen verlorene Impulse), rechnet Kosten und verschickt Tages- und Monatsberichte über Telegram und E-Mail, auf Wunsch mit PDF
+* (ssbingo) Die Ordnerwahl trägt jetzt auch das Kosten-Objekt ein; die Anleitung führt die neuen Einstellungen und States auf
+
 ### 0.6.2 (2026-09-23)
 * (ssbingo) Die Widget-Quellen liegen jetzt im Ordner src-widgets statt src-widgets-ts — so heißt er im ioBroker-Umfeld üblicherweise. Der Repository-Checker überspringt diesen Ordner, seine Hinweise zu react und den Schriftpaketen entfallen damit ganz, ohne Abhängigkeiten aufzunehmen, die zur Laufzeit niemand braucht. Am ausgelieferten Paket ändert sich nichts
 
@@ -438,9 +443,6 @@ WOLF und das WOLF-Logo sind Marken der WOLF GmbH. Dieses Projekt steht in keiner
 
 ### 0.3.0 (2026-09-19)
 * (ssbingo) Neue Widgets: Anlagenschema mit Flussanimation, Verläufe aus history, sql oder influxdb und Meldungen als Zustandsliste mit Störungs-LED — damit sind alle acht Widgets verfügbar.
-
-### 0.2.0 (2026-09-18)
-* (ssbingo) Erste Version: Widget-Set für VIS-2 (React 19) mit Gaszähler, Kesselstatus, Heizkreis, Warmwasser und Heizkurve. Bedienende Widgets zeigen einen Wert erst nach der Bestätigung (ack); die Heizkurve ist eine Näherung (keine Wolf-Formel). Der Gaszähler rechnet Tages- und Monatsverbrauch aus dem Verlauf.
 
 Ältere Änderungen: [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 
