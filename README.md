@@ -400,6 +400,11 @@ provide.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (ssbingo) Bundled statistics script in version 2.1.0: it also derives the flow rate from the meter changes (states Durchfluss, VerbrauchAktiv, ZaehlerLetzteAenderung) — the file was converted to UTF-8 and its timers now run through globalThis
+* (ssbingo) Gas meter: the folder automation knows the derived flow and leaves an already linked flow object alone
+* (ssbingo) The script files carry their version in the name; texts and tooltips point at the addOn/ folder, and a test keeps the READMEs from naming files that do not exist
+
 ### 0.6.0 (2026-09-23)
 * (ssbingo) Every widget except the gas meter can fill its objects from an adapter instance: pick a wolf-smartset (ISM7) or wolf (ISM8i) system in the first field of the *Objects* group and the matching objects are filled in — without a choice everything stays manual as before
 * (ssbingo) Gas meter: the energy price can be entered in ct/kWh the way most bills print it; the tile points out a price outside 0.01 to 1.00 €/kWh, which is what entering cents into the euro field looks like
