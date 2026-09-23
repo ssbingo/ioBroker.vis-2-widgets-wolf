@@ -3,6 +3,19 @@
     "name": "vis-2-widgets-wolf",
     "version": "0.5.2",
     "news": {
+      "NEXT": {
+        "en": "Widgets can fill their objects from a wolf-smartset (ISM7) or wolf (ISM8i) instance. Gas meter: the energy price can be entered in ct/kWh, with a hint when it looks implausible.",
+        "de": "Widgets können ihre Objekte aus einer wolf-smartset- (ISM7) oder wolf-Instanz (ISM8i) vorbelegen. Gaszähler: Der Arbeitspreis lässt sich in ct/kWh eintragen, mit Hinweis bei unplausiblen Werten.",
+        "ru": "Виджеты могут подставлять объекты из экземпляра wolf-smartset (ISM7) или wolf (ISM8i). Счётчик газа: цену за энергию можно ввести в ct/кВт·ч, с подсказкой при неправдоподобных значениях.",
+        "pt": "Os widgets podem preencher os seus objetos a partir de uma instância wolf-smartset (ISM7) ou wolf (ISM8i). Contador de gás: o preço da energia pode ser indicado em cent/kWh, com aviso se parecer implausível.",
+        "nl": "Widgets kunnen hun objecten invullen vanuit een wolf-smartset- (ISM7) of wolf-instantie (ISM8i). Gasmeter: de energieprijs kan in ct/kWh worden ingevoerd, met een melding bij onwaarschijnlijke waarden.",
+        "fr": "Les widgets peuvent renseigner leurs objets depuis une instance wolf-smartset (ISM7) ou wolf (ISM8i). Compteur de gaz : le prix de l'énergie peut être saisi en ct/kWh, avec un avertissement en cas de valeur improbable.",
+        "it": "I widget possono compilare i loro oggetti da un'istanza wolf-smartset (ISM7) o wolf (ISM8i). Contatore del gas: il prezzo dell'energia si può indicare in cent/kWh, con un avviso se non è plausibile.",
+        "es": "Los widgets pueden rellenar sus objetos desde una instancia de wolf-smartset (ISM7) o wolf (ISM8i). Contador de gas: el precio de la energía se puede indicar en cent/kWh, con un aviso si no es plausible.",
+        "pl": "Widżety mogą wypełniać swoje obiekty z instancji wolf-smartset (ISM7) lub wolf (ISM8i). Licznik gazu: cenę energii można podać w ct/kWh, z ostrzeżeniem przy nieprawdopodobnych wartościach.",
+        "uk": "Віджети можуть підставляти свої об’єкти з екземпляра wolf-smartset (ISM7) або wolf (ISM8i). Лічильник газу: ціну за енергію можна ввести в ct/кВт·год, з підказкою за неправдоподібних значень.",
+        "zh-cn": "小部件可从 wolf-smartset（ISM7）或 wolf（ISM8i）实例自动填入对象。燃气表：单价可按 ct/kWh 输入，数值不合理时会给出提示。"
+      },
       "0.5.2": {
         "en": "System diagram: a heating circuit now stands still while the 3-way diverter valve points to hot water — new fields for the valve and the value that means hot water.",
         "de": "Anlagenschema: Ein Heizkreis steht jetzt still, solange das 3-Wege-Umschaltventil auf Warmwasser steht — neue Felder für das Ventil und den Wert für Warmwasser.",

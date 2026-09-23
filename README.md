@@ -389,6 +389,10 @@ provide.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (ssbingo) Every widget except the gas meter can fill its objects from an adapter instance: pick a wolf-smartset (ISM7) or wolf (ISM8i) system in the first field of the *Objects* group and the matching objects are filled in — without a choice everything stays manual as before
+* (ssbingo) Gas meter: the energy price can be entered in ct/kWh the way most bills print it; the tile points out a price outside 0.01 to 1.00 €/kWh, which is what entering cents into the euro field looks like
+
 ### 0.5.2 (2026-09-23)
 * (ssbingo) System diagram: a heating circuit stands still while the 3-way diverter valve points to hot water — until now it followed the boiler and wrongly showed flow during tank charging in summer mode
 * (ssbingo) System diagram: new fields for the diverter valve and the value that means hot water; without them nothing changes, and an explicit *charging active* object still wins for the tank branch
