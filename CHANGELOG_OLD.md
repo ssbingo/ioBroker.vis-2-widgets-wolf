@@ -1,4 +1,10 @@
 # Older changes
+## 0.4.0 (2026-09-19)
+* (ssbingo) Preview image for every widget in the VIS-2 palette, icon for the widget group
+* (ssbingo) Narrow tiles: the system diagram switches to an upright layout below 480 px; small steppers and LED texts adapt down to about 260 px
+* (ssbingo) Keyboard: the trends chart can be operated with the arrow keys; visible focus on all controls
+* (ssbingo) Documentation: setup with wolf-smartset (ISM7) for every widget
+
 ## 0.3.0 (2026-09-19)
 * (ssbingo) Trends: up to four curves and a background area (e.g. modulation) from the history adapter (history, sql, influxdb), 6 h to 7 days, average/min-max/raw values, current value at the right edge, crosshair with values in the legend
 * (ssbingo) System diagram: heat generator with flame, distributor, hot water tank, up to four heating circuits and outside temperature; the flow animation follows the pump (or the burner), tank charging and each circuit's pump

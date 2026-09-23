@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "vis-2-widgets-wolf",
-    "version": "0.7.1",
+    "version": "0.8.0",
     "news": {
-      "NEXT": {
+      "0.8.0": {
         "en": "Gas meter: new field for VAT, so costs can be calculated from net prices — default 0 keeps existing setups unchanged.",
         "de": "Gaszähler: neues Feld für die Mehrwertsteuer, damit sich die Kosten aus Nettopreisen rechnen lassen — Vorgabe 0 lässt bestehende Einstellungen unverändert.",
         "ru": "Счётчик газа: новое поле для НДС, чтобы считать затраты по ценам без налога; значение по умолчанию 0 сохраняет прежние настройки.",
@@ -15,19 +15,6 @@
         "pl": "Licznik gazu: nowe pole VAT, aby liczyć koszty z cen netto — domyślne 0 nie zmienia istniejących ustawień.",
         "uk": "Лічильник газу: нове поле для ПДВ, щоб рахувати витрати з цін без податку — типове значення 0 залишає наявні налаштування незмінними.",
         "zh-cn": "燃气表：新增增值税字段，可按净价计算费用；默认值 0 不影响现有配置。"
-      },
-      "0.7.1": {
-        "en": "Gas meter: picking the script folder now also fills in the corrected meter reading and the derived flow, and the tile warns when a correction value would apply twice.",
-        "de": "Gaszähler: Die Ordnerwahl trägt jetzt auch den korrigierten Zählerstand und den berechneten Durchfluss ein; die Kachel warnt vor doppelter Korrektur.",
-        "ru": "Счётчик газа: выбор папки теперь подставляет и скорректированные показания, и вычисленный расход; плитка предупреждает о двойной коррекции.",
-        "pt": "Contador de gás: a escolha da pasta passa a preencher também a leitura corrigida e o caudal calculado; o widget avisa se a correção for aplicada duas vezes.",
-        "nl": "Gasmeter: de mapkeuze vult nu ook de gecorrigeerde meterstand en het berekende debiet in; de tegel waarschuwt voor dubbele correctie.",
-        "fr": "Compteur de gaz : le choix du dossier renseigne désormais aussi l'index corrigé et le débit calculé ; la vignette avertit d'une double correction.",
-        "it": "Contatore del gas: la scelta della cartella inserisce ora anche la lettura corretta e la portata calcolata; la piastrella avvisa di una doppia correzione.",
-        "es": "Contador de gas: la elección de la carpeta rellena ahora también la lectura corregida y el caudal calculado; la tarjeta avisa de una corrección doble.",
-        "pl": "Licznik gazu: wybór folderu wpisuje teraz także skorygowany stan licznika i wyliczony przepływ; kafelek ostrzega przed podwójną korektą.",
-        "uk": "Лічильник газу: вибір теки тепер підставляє й скориговані показання та обчислену витрату; плитка попереджає про подвійну корекцію.",
-        "zh-cn": "燃气表：选择脚本目录时也会填入已校准的表读数与计算得到的流量；磁贴会提示重复修正。"
       }
     },
     "titleLang": {

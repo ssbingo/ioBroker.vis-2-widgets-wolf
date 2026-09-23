@@ -62,6 +62,9 @@ WOLF i logo WOLF są znakami towarowymi WOLF GmbH. Ten projekt nie jest powiąza
     ### **WORK IN PROGRESS**
 -->
 
+### 0.8.0 (2026-09-23)
+* (ssbingo) Licznik gazu: nowe pole *VAT (%)* w wyliczaniu kosztów. Dotychczas kafelek sumował tylko cenę energii i opłatę stałą, więc wynik był brutto lub netto zależnie od wpisanych cen; dołączony skrypt liczy z cen netto i dolicza podatek, przez co różnica sięgała 19 procent. Domyślne 0 nie zmienia istniejących ustawień
+
 ### 0.7.1 (2026-09-23)
 * (ssbingo) Licznik gazu: wybór folderu wpisuje teraz także skorygowany stan licznika i wyliczony przepływ — dotychczas oba pola pozostawały nietknięte, jeśli był w nich czujnik, więc kafelek nadal pokazywał stan bez korekty
 * (ssbingo) Licznik gazu: kafelek ostrzega o korekcie, która wciąż jest ustawiona, choć stan pochodzi ze skryptu — inaczej korekta zadziała dwa razy
@@ -100,9 +103,6 @@ WOLF i logo WOLF są znakami towarowymi WOLF GmbH. Ten projekt nie jest powiąza
 
 ### 0.4.1 (2026-09-19)
 * (ssbingo) Przycisk Buy me a coffee na początku wszystkich plików README.
-
-### 0.4.0 (2026-09-19)
-* (ssbingo) Obraz podglądu dla każdego widżetu w palecie VIS-2; wąskie kafelki do ok. 260 px (schemat instalacji przechodzi w układ pionowy); przebiegi obsługiwane z klawiatury; dokumentacja z konfiguracją dla wolf-smartset (ISM7).
 
 Starsze zmiany: [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 

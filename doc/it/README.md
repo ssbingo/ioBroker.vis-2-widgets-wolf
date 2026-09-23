@@ -62,6 +62,9 @@ WOLF e il logo WOLF sono marchi di WOLF GmbH. Questo progetto non è affiliato a
     ### **WORK IN PROGRESS**
 -->
 
+### 0.8.0 (2026-09-23)
+* (ssbingo) Contatore del gas: nuovo campo *IVA (%)* nel calcolo dei costi. Finora la piastrella sommava solo prezzo dell'energia e quota fissa, quindi il risultato era lordo o netto a seconda di quanto inserito; lo script incluso lavora con prezzi netti e aggiunge l'imposta, con una differenza del 19 per cento. Il valore predefinito 0 lascia invariate le configurazioni esistenti
+
 ### 0.7.1 (2026-09-23)
 * (ssbingo) Contatore del gas: la scelta della cartella inserisce ora anche la lettura corretta e la portata calcolata — prima i due campi restavano invariati se contenevano già il sensore e la piastrella mostrava la lettura non corretta
 * (ssbingo) Contatore del gas: la piastrella segnala un valore di correzione ancora impostato mentre la lettura arriva dallo script, altrimenti la correzione viene applicata due volte
@@ -100,9 +103,6 @@ WOLF e il logo WOLF sono marchi di WOLF GmbH. Questo progetto non è affiliato a
 
 ### 0.4.1 (2026-09-19)
 * (ssbingo) Pulsante Buy me a coffee in cima a tutti i file README.
-
-### 0.4.0 (2026-09-19)
-* (ssbingo) Immagine di anteprima per ogni widget nella tavolozza di VIS-2; riquadri stretti fino a circa 260 px (lo schema dell'impianto passa in verticale); andamenti utilizzabili da tastiera; documentazione con la configurazione per wolf-smartset (ISM7).
 
 Modifiche precedenti: [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 

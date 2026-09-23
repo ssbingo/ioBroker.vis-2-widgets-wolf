@@ -62,6 +62,9 @@ WOLF en het WOLF-logo zijn merken van WOLF GmbH. Dit project is niet verbonden m
     ### **WORK IN PROGRESS**
 -->
 
+### 0.8.0 (2026-09-23)
+* (ssbingo) Gasmeter: nieuw veld *Btw (%)* in de kostenberekening. Tot nu telde de tegel alleen energie- en vastrechtprijs op, dus het resultaat was inclusief of exclusief afhankelijk van de invoer; het meegeleverde script rekent met nettoprijzen en telt de btw erbij, waardoor beide 19 procent uiteenliepen. Standaard 0 laat bestaande instellingen ongewijzigd
+
 ### 0.7.1 (2026-09-23)
 * (ssbingo) Gasmeter: de mapkeuze vult nu ook de gecorrigeerde meterstand en het berekende debiet in — voorheen bleven beide velden staan als de sensor er al in stond, waardoor de tegel de ongecorrigeerde stand bleef tonen
 * (ssbingo) Gasmeter: de tegel wijst op een correctiewaarde die nog is ingesteld terwijl de stand uit het script komt, anders wordt er dubbel gecorrigeerd
@@ -100,9 +103,6 @@ WOLF en het WOLF-logo zijn merken van WOLF GmbH. Dit project is niet verbonden m
 
 ### 0.4.1 (2026-09-19)
 * (ssbingo) Buy me a coffee-knop bovenaan alle README-bestanden.
-
-### 0.4.0 (2026-09-19)
-* (ssbingo) Voorbeeldafbeelding voor elke widget in het VIS-2-palet; smalle tegels tot ongeveer 260 px (het installatieschema wordt staand); verloop met het toetsenbord te bedienen; documentatie met de instelling voor wolf-smartset (ISM7).
 
 Oudere wijzigingen: [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 

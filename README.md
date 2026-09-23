@@ -437,7 +437,7 @@ provide.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.8.0 (2026-09-23)
 * (ssbingo) Gas meter: new field *VAT (%)* in the cost calculation. Until now the tile simply added energy and base price, so the result was gross or net depending on what you entered, while the bundled script works with net prices and adds the tax — the two differed by 19 percent. The default 0 keeps existing setups unchanged
 
 ### 0.7.1 (2026-09-23)
@@ -478,12 +478,6 @@ provide.
 
 ### 0.4.1 (2026-09-19)
 * (ssbingo) Buy me a coffee button at the top of all README files
-
-### 0.4.0 (2026-09-19)
-* (ssbingo) Preview image for every widget in the VIS-2 palette, icon for the widget group
-* (ssbingo) Narrow tiles: the system diagram switches to an upright layout below 480 px; small steppers and LED texts adapt down to about 260 px
-* (ssbingo) Keyboard: the trends chart can be operated with the arrow keys; visible focus on all controls
-* (ssbingo) Documentation: setup with wolf-smartset (ISM7) for every widget
 
 Older changes: [CHANGELOG_OLD.md](CHANGELOG_OLD.md)
 

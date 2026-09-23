@@ -62,6 +62,9 @@ WOLF e o logótipo WOLF são marcas da WOLF GmbH. Este projeto não tem qualquer
     ### **WORK IN PROGRESS**
 -->
 
+### 0.8.0 (2026-09-23)
+* (ssbingo) Contador de gás: novo campo *IVA (%)* no cálculo de custos. Até agora o widget somava apenas preço da energia e preço base, pelo que o resultado era bruto ou líquido conforme o que estava indicado; o script incluído trabalha com preços líquidos e acrescenta o imposto, dando uma diferença de 19 por cento. A predefinição 0 mantém as configurações existentes
+
 ### 0.7.1 (2026-09-23)
 * (ssbingo) Contador de gás: a escolha da pasta passa a preencher também a leitura corrigida e o caudal calculado — antes os dois campos ficavam como estavam se já tivessem o sensor, pelo que o widget continuava a mostrar a leitura não corrigida
 * (ssbingo) Contador de gás: o widget avisa quando ainda existe um valor de correção enquanto a leitura vem do script, caso contrário é corrigida duas vezes
@@ -100,9 +103,6 @@ WOLF e o logótipo WOLF são marcas da WOLF GmbH. Este projeto não tem qualquer
 
 ### 0.4.1 (2026-09-19)
 * (ssbingo) Botão Buy me a coffee no topo de todos os ficheiros README.
-
-### 0.4.0 (2026-09-19)
-* (ssbingo) Imagem de pré-visualização para cada widget na paleta do VIS-2; mosaicos estreitos até cerca de 260 px (o esquema da instalação passa a vertical); históricos operáveis pelo teclado; documentação com a configuração para wolf-smartset (ISM7).
 
 Alterações mais antigas: [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 

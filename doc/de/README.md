@@ -413,6 +413,9 @@ WOLF und das WOLF-Logo sind Marken der WOLF GmbH. Dieses Projekt steht in keiner
     ### **WORK IN PROGRESS**
 -->
 
+### 0.8.0 (2026-09-23)
+* (ssbingo) Gaszähler: neues Feld *Mehrwertsteuer (%)* in der Kostenrechnung. Bisher addierte die Kachel nur Arbeits- und Grundpreis, das Ergebnis war also brutto oder netto — je nachdem, was eingetragen war; das beiliegende Skript rechnet dagegen mit Nettopreisen und schlägt die Steuer auf, beide Wege unterschieden sich um 19 Prozent. Die Vorgabe 0 lässt bestehende Einstellungen unverändert
+
 ### 0.7.1 (2026-09-23)
 * (ssbingo) Gaszähler: Die Ordnerwahl trägt jetzt auch den korrigierten Zählerstand und den berechneten Durchfluss ein — bisher blieben beide Felder unangetastet, wenn dort schon der Sensor stand, sodass die Kachel weiter den unkorrigierten Stand zeigte
 * (ssbingo) Gaszähler: Die Kachel weist auf einen Korrekturwert hin, der noch gesetzt ist, während der Stand aus dem Skript kommt — sonst wird zweimal korrigiert
@@ -451,9 +454,6 @@ WOLF und das WOLF-Logo sind Marken der WOLF GmbH. Dieses Projekt steht in keiner
 
 ### 0.4.1 (2026-09-19)
 * (ssbingo) Buy-Me-a-Coffee-Button oben in allen README-Dateien.
-
-### 0.4.0 (2026-09-19)
-* (ssbingo) Vorschaubild für jedes Widget in der VIS-2-Palette; schmale Kacheln bis etwa 260 px (das Anlagenschema stellt sich hochkant); Verläufe mit der Tastatur bedienbar; Anleitung mit der Einrichtung für wolf-smartset (ISM7).
 
 Ältere Änderungen: [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 

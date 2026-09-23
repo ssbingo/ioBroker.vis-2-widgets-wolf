@@ -62,6 +62,9 @@ WOLF et le logo WOLF sont des marques de WOLF GmbH. Ce projet n'est ni affilié 
     ### **WORK IN PROGRESS**
 -->
 
+### 0.8.0 (2026-09-23)
+* (ssbingo) Compteur de gaz : nouveau champ *TVA (%)* dans le calcul des coûts. Jusqu'ici la vignette additionnait seulement le prix de l'énergie et l'abonnement, le résultat était donc TTC ou HT selon la saisie ; le script fourni travaille avec des prix HT et ajoute la taxe, d'où un écart de 19 pour cent. La valeur par défaut 0 ne change rien aux configurations existantes
+
 ### 0.7.1 (2026-09-23)
 * (ssbingo) Compteur de gaz : le choix du dossier renseigne désormais aussi l'index corrigé et le débit calculé — auparavant ces deux champs restaient inchangés s'ils contenaient déjà le capteur, et la vignette affichait l'index non corrigé
 * (ssbingo) Compteur de gaz : la vignette signale une valeur de correction encore présente alors que l'index vient du script, sinon la correction s'applique deux fois
@@ -100,9 +103,6 @@ WOLF et le logo WOLF sont des marques de WOLF GmbH. Ce projet n'est ni affilié 
 
 ### 0.4.1 (2026-09-19)
 * (ssbingo) Bouton Buy me a coffee en haut de tous les fichiers README.
-
-### 0.4.0 (2026-09-19)
-* (ssbingo) Image d'aperçu pour chaque widget dans la palette VIS-2 ; tuiles étroites jusqu'à environ 260 px (le schéma de l'installation passe à la verticale) ; historiques utilisables au clavier ; documentation avec la configuration pour wolf-smartset (ISM7).
 
 Modifications plus anciennes : [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 
