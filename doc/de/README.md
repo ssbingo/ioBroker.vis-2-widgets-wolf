@@ -243,13 +243,16 @@ weist die Kachel auf einen Arbeitspreis hin, der außerhalb von 0,01 bis 1,00 �
 
 #### Gaszähler: Werte aus dem Statistik-Skript
 
-Dem Adapter liegt das ioBroker-Skript `gasverbrauch_statistik.js` bei. Es berechnet aus dem
+Dem Adapter liegt das ioBroker-Skript `gasverbrauch_statistik_v2.1.0.js` bei. Es berechnet aus dem
 Zählerstand *Heute*, *Gestern*, *letzte 7 Tage*, *letzte 30 Tage*, *diesen* und *letzten Monat*
 und legt sie als Objekte ab — Einrichtung siehe [Beiliegendes Skript](#beiliegendes-skript-gasverbrauch-statistik).
 
 Im Widget genügt es dann, unter *Statistik-Skript* den Ordner zu wählen: Die vorhandenen States
-werden oben als Objekte eingetragen — der Zählerstand nur, wenn dort noch nichts steht, denn er
-zeigt meist auf den Sensor selbst.
+werden oben als Objekte eingetragen — Zählerstand und Durchfluss nur, wenn dort noch nichts steht,
+denn sie zeigen meist auf den Sensor selbst. Ab Fassung 2.1 rechnet das Skript auch den
+Durchfluss aus der Zähleränderung; er fällt nach einer Pause zuverlässig auf 0, anders als der
+träge Wert mancher Sensoren. Wer ihn nutzen will, trägt `<Ordner>.Durchfluss` von Hand als
+*Momentandurchfluss* ein oder leert das Feld vor der Ordnerwahl.
 
 Welche Werte die Kachel zeigt, entscheidet die Gruppe *Sichtbare Werte*: je ein Schalter für
 Heute, Gestern, 7 Tage, 30 Tage, Monat, letzten Monat und die Kosten. Heute, Monat und Kosten
@@ -278,7 +281,7 @@ HmIP-ESI im Gasmodus zum Beispiel:
 Ein HmIP-ESI zeigt in der CCU-WebUI *Heute*, *Gestern*, *vergangene 7 Tage* und *vergangene
 30 Tage*. Diese Werte sind keine Gerätedatenpunkte — die CCU rechnet sie intern aus gespeicherten
 Zählerständen, über `hm-rpc` kommen sie deshalb nicht in ioBroker an. Das beiliegende Skript
-`gasverbrauch_statistik.js` erzeugt sie aus dem Zählerstand selbst und ergänzt den laufenden und
+`gasverbrauch_statistik_v2.1.0.js` erzeugt sie aus dem Zählerstand selbst und ergänzt den laufenden und
 den vorigen Monat. Es eignet sich für jeden monoton steigenden Zählerstand, nicht nur für den
 HmIP-ESI.
 
@@ -292,14 +295,14 @@ Vorbefüllung nützlich.
 |---|---|
 | Repository | [`addOn/`](https://github.com/ssbingo/ioBroker.vis-2-widgets-wolf/tree/main/addOn) |
 | installierter Adapter | `node_modules/iobroker.vis-2-widgets-wolf/widgets/vis-2-widgets-wolf/addon/` |
-| im Browser | `http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik.js` |
+| im Browser | `http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik_v2.1.0.js` |
 
-Daneben liegen `gasverbrauch_statistik.md` und dieselbe Anleitung als PDF (auf Deutsch).
+Daneben liegen `gasverbrauch_statistik_v2.1.0.md` und dieselbe Anleitung als PDF (auf Deutsch).
 
 **Einrichten**
 
 1. Im Adapter `javascript` ein neues Skript vom Typ *Javascript/ECMAScript* anlegen.
-2. Inhalt von `gasverbrauch_statistik.js` einfügen.
+2. Inhalt von `gasverbrauch_statistik_v2.1.0.js` einfügen.
 3. Im Kopf mindestens `SRC` auf den Zählerstand setzen — z. B. `hm-rpc.0.<Seriennummer>.2.GAS_VOLUME`
    oder die Rega-Variable `svEnergyCounter…` (dafür in `hm-rega` das Synchronisieren nicht sichtbarer
    Variablen einschalten).
@@ -317,6 +320,12 @@ Daneben liegen `gasverbrauch_statistik.md` und dieselbe Anleitung als PDF (auf D
 | `NK` | `3` | Nachkommastellen der Verbrauchswerte |
 | `HISTORY_INSTANCE` | `'influxdb.0'` | Instanz für die Vorbefüllung, auch `history.0` oder `sql.0`; leer schaltet sie ab |
 | `BACKFILL_BEIM_START` | `true` | beim allerersten Start automatisch vorbefüllen |
+| `DURCHFLUSS_AKTIV` | `true` | Durchfluss aus der Zähleränderung berechnen (ab Fassung 2.1) |
+| `FENSTER_MIN` | `10` | Glättungsfenster in Minuten; größer heißt ruhiger, aber träger |
+| `NULL_NACH_MIN` | `10` | ohne Zähleränderung fällt der Durchfluss nach so vielen Minuten auf 0 |
+| `LUECKE_MIN` | `7` | ab dieser Pause zwischen zwei Änderungen gilt die Zeit dazwischen als Stillstand |
+| `ANLAUF_MIN` | `3` | angenommene Dauer der ersten Änderung nach einer Pause |
+| `MAX_DURCHFLUSS` | `10` | Plausibilitätsgrenze in m³/h (ein G4-Zähler schafft 6) |
 | `DEBUG` | `false` | zusätzliche Log-Ausgaben |
 
 **Erzeugte States** (unterhalb von `PFAD`)
@@ -330,7 +339,9 @@ Daneben liegen `gasverbrauch_statistik.md` und dieselbe Anleitung als PDF (auf D
 | `Letzte30Tage` | Summe der letzten 30 Tage | 30 Tage |
 | `DieserMonat` | Summe seit Monatsbeginn inkl. heute | Monat |
 | `LetzterMonat` | Summe des Vormonats | Letzter Monat |
-| `Basis`, `BasisDatum`, `Historie` | Zählerstand um Mitternacht, dessen Datum, Tageswerte als JSON | intern |
+| `Durchfluss` | berechneter Durchfluss in m³/h (ab Fassung 2.1) | Momentandurchfluss |
+| `VerbrauchAktiv` | true, solange Gas fließt | — |
+| `Basis`, `BasisDatum`, `Historie`, `ZaehlerLetzteAenderung` | Zählerstand um Mitternacht, dessen Datum, Tageswerte als JSON, Zeitpunkt der letzten Zähleränderung | intern |
 | `Backfill` | Schalter: Historie neu aus dem History-Adapter aufbauen | — |
 
 **Vorbefüllung**

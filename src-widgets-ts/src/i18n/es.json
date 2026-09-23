@@ -57,7 +57,7 @@
     "last_month": "Mes pasado",
     "group_stats": "Script de estadísticas",
     "stats_path": "Carpeta del script",
-    "stats_path_tooltip": "Carpeta que crea el script addOn/Gasverbrauch_statistik.js (por ejemplo 0_userdata.0.Gas). Sus estados se rellenan en los objetos de arriba.",
+    "stats_path_tooltip": "Carpeta que crea el script de estadísticas de la carpeta addOn/ (por ejemplo 0_userdata.0.Gas). Sus estados se rellenan en los objetos de arriba.",
     "stats_tooltip": "Lo proporciona, por ejemplo, el script de estadísticas; sin objeto el valor queda oculto",
     "consumption": "Consumo",
     "no_consumption": "Sin consumo",

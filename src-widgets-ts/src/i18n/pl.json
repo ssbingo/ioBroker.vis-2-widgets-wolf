@@ -57,7 +57,7 @@
     "last_month": "Poprzedni miesiąc",
     "group_stats": "Skrypt statystyk",
     "stats_path": "Folder skryptu",
-    "stats_path_tooltip": "Folder tworzony przez skrypt addOn/Gasverbrauch_statistik.js (np. 0_userdata.0.Gas). Jego stany są wpisywane do obiektów powyżej.",
+    "stats_path_tooltip": "Folder tworzony przez skrypt statystyk z folderu addOn/ (np. 0_userdata.0.Gas). Jego stany są wpisywane do obiektów powyżej.",
     "stats_tooltip": "Dostarcza je na przykład skrypt statystyk; bez obiektu wartość pozostaje ukryta",
     "consumption": "Zużycie",
     "no_consumption": "Brak zużycia",

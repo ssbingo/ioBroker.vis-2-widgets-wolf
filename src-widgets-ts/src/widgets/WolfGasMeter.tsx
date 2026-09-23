@@ -87,8 +87,8 @@ const MAX_ENTRIES = 500;
 
 /**
  * Ordner des Statistik-Skripts gewählt: die States, die es dort anlegt, in die Objektfelder
- * eintragen — aber nur die, die es wirklich gibt. Der Zählerstand bleibt unangetastet, wenn dort
- * schon etwas steht: meist zeigt er auf den Sensor selbst.
+ * eintragen — aber nur die, die es wirklich gibt. Zählerstand und Durchfluss bleiben unangetastet,
+ * wenn dort schon etwas steht: meist zeigen sie auf den Sensor selbst.
  *
  * @param _field das geänderte Feld
  * @param data Attribute des Widgets
@@ -102,7 +102,7 @@ const applyStatsPath: RxWidgetInfoFieldChangeHandler = async (_field, data, chan
     }
     const next: WidgetData = { ...data };
     for (const { attr, id } of ids) {
-        if (attr === 'oid_zaehlerstand' && next[attr]) {
+        if ((attr === 'oid_zaehlerstand' || attr === 'oid_durchfluss') && next[attr]) {
             continue;
         }
         const obj = await socket.getObject(id).catch(() => null);

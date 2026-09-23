@@ -57,7 +57,7 @@
     "last_month": "上月",
     "group_stats": "统计脚本",
     "stats_path": "脚本的文件夹",
-    "stats_path_tooltip": "脚本 addOn/Gasverbrauch_statistik.js 创建的文件夹（例如 0_userdata.0.Gas）。其状态会填入上面的对象。",
+    "stats_path_tooltip": "统计脚本（位于 addOn/ 目录）创建的文件夹（例如 0_userdata.0.Gas）。其状态会填入上面的对象。",
     "stats_tooltip": "例如由统计脚本提供；没有对象时该值不显示",
     "consumption": "用气中",
     "no_consumption": "无用气",

@@ -36,7 +36,7 @@ interface Meter {
     flow: number;
     today: number;
     month: number;
-    /** Werte des Statistik-Skripts (addOn/gasverbrauch_statistik.js), wenn verknüpft */
+    /** Werte des Statistik-Skripts (Ordner addOn/), wenn verknüpft */
     stats?: { yesterday: number; days7: number; days30: number; lastMonth: number };
     /** sichtbare Werte wie in der Gruppe „Sichtbare Werte"; ohne Angabe alle */
     werte?: string[];

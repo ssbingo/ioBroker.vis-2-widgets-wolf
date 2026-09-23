@@ -40,11 +40,11 @@ W każdym widżecie poza licznikiem gazu pierwszym polem grupy „Obiekty" jest 
 
 ### Skrypt statystyk zużycia gazu
 
-Do adaptera dołączony jest skrypt ioBroker `gasverbrauch_statistik.js` (folder `addOn/`). Ze stanu licznika wylicza dziś, wczoraj, ostatnie 7 i 30 dni oraz bieżący i poprzedni miesiąc i zapisuje je jako obiekty (domyślnie w `0_userdata.0.Gas`) — dokładnie te wartości, które interfejs webowy CCU pokazuje dla HmIP-ESI, a które przez `hm-rpc` nie trafiają do ioBrokera. W codziennej pracy adapter historii nie jest potrzebny.
+Do adaptera dołączony jest skrypt ioBroker `gasverbrauch_statistik_v2.1.0.js` (folder `addOn/`). Ze stanu licznika wylicza dziś, wczoraj, ostatnie 7 i 30 dni oraz bieżący i poprzedni miesiąc i zapisuje je jako obiekty (domyślnie w `0_userdata.0.Gas`) — dokładnie te wartości, które interfejs webowy CCU pokazuje dla HmIP-ESI, a które przez `hm-rpc` nie trafiają do ioBrokera. W codziennej pracy adapter historii nie jest potrzebny.
 
 Utwórz skrypt w adapterze `javascript`, ustaw `SRC` na stan licznika i uruchom go. Następnie w widżecie licznika gazu wybierz folder w grupie *Skrypt statystyk* — stany zostaną wpisane automatycznie. O tym, które wartości pokazuje kafelek, decyduje grupa *Widoczne wartości*.
 
-Po instalacji skrypt jest dostępny także w przeglądarce: `http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik.js`. Szczegóły w [dokumentacji angielskiej](../../README.md).
+Po instalacji skrypt jest dostępny także w przeglądarce: `http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik_v2.1.0.js`. Szczegóły w [dokumentacji angielskiej](../../README.md).
 
 ### Wymagania
 

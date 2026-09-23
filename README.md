@@ -255,13 +255,16 @@ cents into a euro field is off by a factor of 100, so the tile points out an ene
 
 #### Gas meter: values from the statistics script
 
-The adapter ships the ioBroker script `gasverbrauch_statistik.js`. From the meter reading it
+The adapter ships the ioBroker script `gasverbrauch_statistik_v2.1.0.js`. From the meter reading it
 derives *today*, *yesterday*, *last 7 days*, *last 30 days*, *this* and *last month* and stores
 them as objects — see [Bundled script](#bundled-script-gas-consumption-statistics) for the setup.
 
 In the widget it is then enough to pick the folder under *Statistics script*: the states that
-exist are filled into the objects above — the meter reading only if that field is still empty,
-because it usually points at the sensor itself.
+exist are filled into the objects above — meter reading and flow only if those fields are still
+empty, because they usually point at the sensor itself. From version 2.1 the script also derives
+the flow rate from the meter changes; it drops to 0 reliably after a pause, unlike the sluggish
+value of some sensors. To use it, enter `<folder>.Durchfluss` as *flow* by hand, or clear that
+field before picking the folder.
 
 Which values the tile shows is up to the group *Visible values*: one switch each for today,
 yesterday, 7 days, 30 days, month, last month and the costs. Today, month and costs are always
@@ -289,7 +292,7 @@ enter the difference as the meter reading correction. With an HmIP-ESI in gas mo
 
 An HmIP-ESI shows *today*, *yesterday*, *last 7 days* and *last 30 days* in the CCU web UI. Those
 values are not device data points — the CCU derives them internally from stored meter readings, so
-they never arrive in ioBroker through `hm-rpc`. The bundled script `gasverbrauch_statistik.js`
+they never arrive in ioBroker through `hm-rpc`. The bundled script `gasverbrauch_statistik_v2.1.0.js`
 derives them from the meter reading itself and adds the current and the previous month. It works
 with any monotonically rising meter reading, not just the HmIP-ESI.
 
@@ -302,14 +305,14 @@ ring buffer and survive a restart. A history adapter is only useful for the init
 |---|---|
 | Repository | [`addOn/`](https://github.com/ssbingo/ioBroker.vis-2-widgets-wolf/tree/main/addOn) |
 | Installed adapter | `node_modules/iobroker.vis-2-widgets-wolf/widgets/vis-2-widgets-wolf/addon/` |
-| In the browser | `http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik.js` |
+| In the browser | `http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik_v2.1.0.js` |
 
-Next to it are `gasverbrauch_statistik.md` and the same manual as PDF (in German).
+Next to it are `gasverbrauch_statistik_v2.1.0.md` and the same manual as PDF (in German).
 
 **Setting it up**
 
 1. In the `javascript` adapter create a new script of type *Javascript/ECMAScript*.
-2. Paste the content of `gasverbrauch_statistik.js`.
+2. Paste the content of `gasverbrauch_statistik_v2.1.0.js`.
 3. At the top set at least `SRC` to the meter reading — e.g. `hm-rpc.0.<serial>.2.GAS_VOLUME` or the
    Rega variable `svEnergyCounter…` (for that, enable syncing of invisible variables in `hm-rega`).
 4. Start the script and check the log: it creates the states itself.
@@ -326,6 +329,12 @@ Next to it are `gasverbrauch_statistik.md` and the same manual as PDF (in German
 | `NK` | `3` | decimals of the consumption values |
 | `HISTORY_INSTANCE` | `'influxdb.0'` | instance used for the backfill, also `history.0` or `sql.0`; empty disables it |
 | `BACKFILL_BEIM_START` | `true` | backfill automatically on the very first start |
+| `DURCHFLUSS_AKTIV` | `true` | derive the flow rate from the meter changes (from version 2.1) |
+| `FENSTER_MIN` | `10` | smoothing window in minutes; larger is calmer but slower to react |
+| `NULL_NACH_MIN` | `10` | without a meter change the flow drops to 0 after this many minutes |
+| `LUECKE_MIN` | `7` | a longer gap between two changes counts as standstill in between |
+| `ANLAUF_MIN` | `3` | assumed duration of the first change after a pause |
+| `MAX_DURCHFLUSS` | `10` | plausibility limit in m³/h (a G4 meter handles 6) |
 | `DEBUG` | `false` | additional log output |
 
 **States it creates** (below `PFAD`)
@@ -339,7 +348,9 @@ Next to it are `gasverbrauch_statistik.md` and the same manual as PDF (in German
 | `Letzte30Tage` | sum of the last 30 days | 30 days |
 | `DieserMonat` | sum since the start of the month, today included | month |
 | `LetzterMonat` | sum of the previous month | last month |
-| `Basis`, `BasisDatum`, `Historie` | meter reading at midnight, its date, daily values as JSON | internal |
+| `Durchfluss` | derived flow rate in m³/h (from version 2.1) | flow |
+| `VerbrauchAktiv` | true while gas is flowing | — |
+| `Basis`, `BasisDatum`, `Historie`, `ZaehlerLetzteAenderung` | meter reading at midnight, its date, daily values as JSON, time of the last meter change | internal |
 | `Backfill` | button: rebuild the history from the history adapter | — |
 
 **Backfill**

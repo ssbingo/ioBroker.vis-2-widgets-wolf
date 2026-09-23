@@ -57,7 +57,7 @@
     "last_month": "Mês passado",
     "group_stats": "Script de estatísticas",
     "stats_path": "Pasta do script",
-    "stats_path_tooltip": "Pasta criada pelo script addOn/Gasverbrauch_statistik.js (por exemplo 0_userdata.0.Gas). Os seus estados são preenchidos nos objetos acima.",
+    "stats_path_tooltip": "Pasta criada pelo script de estatísticas da pasta addOn/ (por exemplo 0_userdata.0.Gas). Os seus estados são preenchidos nos objetos acima.",
     "stats_tooltip": "Fornecido, por exemplo, pelo script de estatísticas; sem objeto o valor fica oculto",
     "consumption": "Consumo",
     "no_consumption": "Sem consumo",

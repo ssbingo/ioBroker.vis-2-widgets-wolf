@@ -57,7 +57,7 @@
     "last_month": "Vorige maand",
     "group_stats": "Statistiekscript",
     "stats_path": "Map van het script",
-    "stats_path_tooltip": "Map die het script addOn/Gasverbrauch_statistik.js aanmaakt (bijv. 0_userdata.0.Gas). De states worden hierboven als objecten ingevuld.",
+    "stats_path_tooltip": "Map die het statistiekscript uit de map addOn/ aanmaakt (bijv. 0_userdata.0.Gas). De states worden hierboven als objecten ingevuld.",
     "stats_tooltip": "Komt bijvoorbeeld van het statistiekscript; zonder object blijft de waarde verborgen",
     "consumption": "Verbruik",
     "no_consumption": "Geen verbruik",

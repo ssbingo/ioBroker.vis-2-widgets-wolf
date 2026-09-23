@@ -89,8 +89,9 @@ Englisch, die übrigen unter `doc/<sprache>/` in der jeweiligen Sprache.
   Typ `instance` filtert mit `adapters` als **Array**, obwohl `@iobroker/types-vis-2` dort `string`
   deklariert.
 - `widgets/` ist Build-Ausgabe — nie von Hand bearbeiten, `tasks.js` löscht den Ordner
-- `addOn/` enthält das beiliegende ioBroker-Skript `gasverbrauch_statistik.js` (Gaszähler-Statistik)
-  mit Anleitung als md und pdf. `tasks.js` kopiert den Ordner nach
+- `addOn/` enthält das beiliegende ioBroker-Skript zur Gaszähler-Statistik mit Anleitung als md
+  und pdf, je Fassung als `gasverbrauch_statistik_vX.Y.Z.*`. Die READMEs nennen immer die
+  neueste Fassung; `readme.test.ts` prüft das. `tasks.js` kopiert den Ordner nach
   `widgets/vis-2-widgets-wolf/addon/`, damit er über vis-2 abrufbar ist. Änderungen am Skript
   gehören auch in die Dokumentation aller elf READMEs.
 

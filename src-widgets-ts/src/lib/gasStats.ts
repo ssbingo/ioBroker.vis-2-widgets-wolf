@@ -1,8 +1,9 @@
 /*
- * Statistik-Skript des Gaszählers: addOn/Gasverbrauch_statistik.js legt unter einem frei
+ * Statistik-Skript des Gaszählers: Das Skript aus dem Ordner addOn/ legt unter einem frei
  * wählbaren Ordner (Vorgabe 0_userdata.0.Gas) je einen State für Zählerstand, Heute, Gestern,
- * 7 Tage, 30 Tage, laufenden Monat und Vormonat an. Das Widget verknüpft diese States wie jede
- * andere Quelle; das Feld „Ordner des Statistik-Skripts" trägt sie nur bequem ein.
+ * 7 Tage, 30 Tage, laufenden Monat und Vormonat an — ab Fassung 2.1 auch für den berechneten
+ * Durchfluss. Das Widget verknüpft diese States wie jede andere Quelle; das Feld
+ * „Ordner des Statistik-Skripts" trägt sie nur bequem ein.
  */
 
 /** Widget-Attribut und der State, den das Skript dafür anlegt */
@@ -16,6 +17,8 @@ export interface GasStatsField {
 /** Zuordnung in der Reihenfolge, in der die Felder im Editor stehen */
 export const GAS_STATS_FIELDS: GasStatsField[] = [
     { attr: 'oid_zaehlerstand', state: 'Zaehlerstand' },
+    // ab Skriptfassung 2.1: aus der Zähleränderung berechnet, fällt nach einer Pause auf 0
+    { attr: 'oid_durchfluss', state: 'Durchfluss' },
     { attr: 'oid_heute', state: 'Heute' },
     { attr: 'oid_gestern', state: 'Gestern' },
     { attr: 'oid_7tage', state: 'Letzte7Tage' },

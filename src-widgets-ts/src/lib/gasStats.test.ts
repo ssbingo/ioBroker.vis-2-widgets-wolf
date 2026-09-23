@@ -14,8 +14,14 @@ describe('gasStatsIds', () => {
         expect(ids.find(i => i.attr === 'oid_vormonat')?.id).toBe('0_userdata.0.Gas.LetzterMonat');
     });
 
+    it('kennt den berechneten Durchfluss ab Skriptfassung 2.1', () => {
+        expect(gasStatsIds('0_userdata.0.Gas').find(i => i.attr === 'oid_durchfluss')?.id).toBe(
+            '0_userdata.0.Gas.Durchfluss',
+        );
+    });
+
     it('verträgt Leerzeichen und einen Punkt am Ende', () => {
-        expect(gasStatsIds('  0_userdata.0.Gas.  ')[1].id).toBe('0_userdata.0.Gas.Heute');
+        expect(gasStatsIds('  0_userdata.0.Gas.  ')[2].id).toBe('0_userdata.0.Gas.Heute');
     });
 
     it('liefert ohne Ordner nichts', () => {
