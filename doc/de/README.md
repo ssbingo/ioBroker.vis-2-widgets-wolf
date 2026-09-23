@@ -321,6 +321,10 @@ WOLF und das WOLF-Logo sind Marken der WOLF GmbH. Dieses Projekt steht in keiner
     ### **WORK IN PROGRESS**
 -->
 
+### 0.5.2 (2026-09-23)
+* (ssbingo) Anlagenschema: Ein Heizkreis steht still, solange das 3-Wege-Umschaltventil auf Warmwasser steht — bisher folgte er dem Heizgerät und zeigte im Sommerbetrieb während der Speicherladung fälschlich Fluss
+* (ssbingo) Anlagenschema: neue Felder für das Umschaltventil und den Wert für Warmwasser; ohne sie bleibt alles wie bisher, und ein eigenes Objekt *Ladung aktiv* hat für den Speicherzweig weiter Vorrang
+
 ### 0.5.1 (2026-09-20)
 * (ssbingo) Statistik-Skript: Die Zeitgeber laufen über globalThis, damit der ioBroker-Repository-Checker sie nicht mehr meldet — das Verhalten bleibt gleich
 * (ssbingo) react und die Schriftpakete sind für den Repository-Checker als optionale Abhängigkeiten gekennzeichnet: Die Schriften werden beim Bauen eingebettet, React liefert vis-2 zur Laufzeit

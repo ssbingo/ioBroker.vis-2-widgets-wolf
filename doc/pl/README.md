@@ -60,6 +60,10 @@ WOLF i logo WOLF są znakami towarowymi WOLF GmbH. Ten projekt nie jest powiąza
     ### **WORK IN PROGRESS**
 -->
 
+### 0.5.2 (2026-09-23)
+* (ssbingo) Schemat instalacji: obieg grzewczy stoi, dopóki zawór 3-drogowy jest ustawiony na c.w.u. — dotychczas podążał za kotłem i w trybie letnim podczas ładowania zasobnika błędnie pokazywał przepływ
+* (ssbingo) Schemat instalacji: nowe pola dla zaworu i wartości c.w.u.; bez nich wszystko pozostaje bez zmian, a własny obiekt *ładowanie aktywne* nadal ma pierwszeństwo dla gałęzi zasobnika
+
 ### 0.5.1 (2026-09-20)
 * (ssbingo) Skrypt statystyk: timery działają przez globalThis, aby kontroler repozytoriów ioBroker ich nie zgłaszał — działanie pozostaje bez zmian
 * (ssbingo) react i pakiety czcionek są oznaczone dla kontrolera jako zależności opcjonalne: czcionki są osadzane podczas budowania, React dostarcza vis-2 w czasie działania

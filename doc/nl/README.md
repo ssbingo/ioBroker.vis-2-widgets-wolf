@@ -60,6 +60,10 @@ WOLF en het WOLF-logo zijn merken van WOLF GmbH. Dit project is niet verbonden m
     ### **WORK IN PROGRESS**
 -->
 
+### 0.5.2 (2026-09-23)
+* (ssbingo) Installatieschema: een verwarmingscircuit staat stil zolang de 3-weg omschakelklep op warm water staat — voorheen volgde het het toestel en toonde in de zomerstand tijdens het laden van de boiler ten onrechte stroming
+* (ssbingo) Installatieschema: nieuwe velden voor de omschakelklep en de waarde voor warm water; zonder deze blijft alles zoals het was en een eigen object *laden actief* heeft voor de boilertak nog steeds voorrang
+
 ### 0.5.1 (2026-09-20)
 * (ssbingo) Statistiekscript: de timers lopen via globalThis zodat de ioBroker-repositorychecker ze niet meer meldt — het gedrag blijft gelijk
 * (ssbingo) react en de lettertypepakketten zijn voor de checker als optionele afhankelijkheden gemarkeerd: de lettertypen worden bij het bouwen ingesloten, React komt tijdens runtime van vis-2

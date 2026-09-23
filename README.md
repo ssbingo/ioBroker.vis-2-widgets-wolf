@@ -346,7 +346,7 @@ provide.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.5.2 (2026-09-23)
 * (ssbingo) System diagram: a heating circuit stands still while the 3-way diverter valve points to hot water — until now it followed the boiler and wrongly showed flow during tank charging in summer mode
 * (ssbingo) System diagram: new fields for the diverter valve and the value that means hot water; without them nothing changes, and an explicit *charging active* object still wins for the tank branch
 

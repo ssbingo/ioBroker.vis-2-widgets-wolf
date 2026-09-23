@@ -60,6 +60,10 @@ WOLF e il logo WOLF sono marchi di WOLF GmbH. Questo progetto non è affiliato a
     ### **WORK IN PROGRESS**
 -->
 
+### 0.5.2 (2026-09-23)
+* (ssbingo) Schema dell'impianto: un circuito di riscaldamento resta fermo finché la valvola a 3 vie è sull'acqua calda — prima seguiva la caldaia e in modalità estiva mostrava erroneamente flusso durante la carica del bollitore
+* (ssbingo) Schema dell'impianto: nuovi campi per la valvola e per il valore acqua calda; senza di essi non cambia nulla e un oggetto *carica attiva* mantiene la priorità per il ramo del bollitore
+
 ### 0.5.1 (2026-09-20)
 * (ssbingo) Script di statistica: i timer passano per globalThis, così il verificatore dei repository ioBroker non li segnala più — il comportamento resta invariato
 * (ssbingo) react e i pacchetti dei caratteri sono contrassegnati come dipendenze opzionali per il verificatore: i caratteri vengono inclusi in fase di build, React è fornito da vis-2 a runtime

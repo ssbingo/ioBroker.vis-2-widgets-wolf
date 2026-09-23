@@ -60,6 +60,10 @@ WOLF et le logo WOLF sont des marques de WOLF GmbH. Ce projet n'est ni affilié 
     ### **WORK IN PROGRESS**
 -->
 
+### 0.5.2 (2026-09-23)
+* (ssbingo) Schéma de l'installation : un circuit de chauffage reste à l'arrêt tant que la vanne 3 voies est sur l'eau chaude — il suivait jusqu'ici la chaudière et affichait à tort un débit pendant la charge du ballon en mode été
+* (ssbingo) Schéma de l'installation : nouveaux champs pour la vanne et la valeur eau chaude ; sans eux rien ne change, et un objet *charge active* garde la priorité pour la branche du ballon
+
 ### 0.5.1 (2026-09-20)
 * (ssbingo) Script de statistiques : les minuteries passent par globalThis afin que le vérificateur de dépôts ioBroker ne les signale plus — le comportement est inchangé
 * (ssbingo) react et les paquets de polices sont marqués comme dépendances optionnelles pour le vérificateur : les polices sont intégrées à la compilation, React est fourni par vis-2 à l'exécution

@@ -60,6 +60,10 @@ WOLF e o logótipo WOLF são marcas da WOLF GmbH. Este projeto não tem qualquer
     ### **WORK IN PROGRESS**
 -->
 
+### 0.5.2 (2026-09-23)
+* (ssbingo) Esquema da instalação: um circuito de aquecimento fica parado enquanto a válvula de 3 vias estiver na água quente — antes seguia o aparelho e mostrava fluxo indevido durante a carga do depósito no modo de verão
+* (ssbingo) Esquema da instalação: novos campos para a válvula e para o valor de água quente; sem eles tudo fica como antes e um objeto próprio *carga ativa* continua a ter prioridade para o ramo do depósito
+
 ### 0.5.1 (2026-09-20)
 * (ssbingo) Script de estatísticas: os temporizadores passam por globalThis para que o verificador de repositórios do ioBroker deixe de os assinalar — o comportamento mantém-se
 * (ssbingo) react e os pacotes de fontes estão marcados como dependências opcionais para o verificador: as fontes são incorporadas na compilação, o React é fornecido pelo vis-2 em tempo de execução
