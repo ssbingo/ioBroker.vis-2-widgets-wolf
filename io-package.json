@@ -3,6 +3,19 @@
     "name": "vis-2-widgets-wolf",
     "version": "0.7.1",
     "news": {
+      "NEXT": {
+        "en": "Gas meter: new field for VAT, so costs can be calculated from net prices — default 0 keeps existing setups unchanged.",
+        "de": "Gaszähler: neues Feld für die Mehrwertsteuer, damit sich die Kosten aus Nettopreisen rechnen lassen — Vorgabe 0 lässt bestehende Einstellungen unverändert.",
+        "ru": "Счётчик газа: новое поле для НДС, чтобы считать затраты по ценам без налога; значение по умолчанию 0 сохраняет прежние настройки.",
+        "pt": "Contador de gás: novo campo para o IVA, para calcular custos a partir de preços líquidos — a predefinição 0 mantém as configurações existentes.",
+        "nl": "Gasmeter: nieuw veld voor de btw, zodat kosten uit nettoprijzen kunnen worden berekend — standaard 0 laat bestaande instellingen ongewijzigd.",
+        "fr": "Compteur de gaz : nouveau champ pour la TVA afin de calculer les coûts à partir de prix hors taxes — la valeur par défaut 0 ne change rien aux configurations existantes.",
+        "it": "Contatore del gas: nuovo campo per l'IVA, così i costi si possono calcolare da prezzi netti — il valore predefinito 0 lascia invariate le configurazioni esistenti.",
+        "es": "Contador de gas: nuevo campo para el IVA, para calcular costes a partir de precios netos; el valor predeterminado 0 deja intactas las configuraciones existentes.",
+        "pl": "Licznik gazu: nowe pole VAT, aby liczyć koszty z cen netto — domyślne 0 nie zmienia istniejących ustawień.",
+        "uk": "Лічильник газу: нове поле для ПДВ, щоб рахувати витрати з цін без податку — типове значення 0 залишає наявні налаштування незмінними.",
+        "zh-cn": "燃气表：新增增值税字段，可按净价计算费用；默认值 0 不影响现有配置。"
+      },
       "0.7.1": {
         "en": "Gas meter: picking the script folder now also fills in the corrected meter reading and the derived flow, and the tile warns when a correction value would apply twice.",
         "de": "Gaszähler: Die Ordnerwahl trägt jetzt auch den korrigierten Zählerstand und den berechneten Durchfluss ein; die Kachel warnt vor doppelter Korrektur.",

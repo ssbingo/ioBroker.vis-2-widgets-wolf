@@ -437,6 +437,9 @@ provide.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (ssbingo) Gas meter: new field *VAT (%)* in the cost calculation. Until now the tile simply added energy and base price, so the result was gross or net depending on what you entered, while the bundled script works with net prices and adds the tax — the two differed by 19 percent. The default 0 keeps existing setups unchanged
+
 ### 0.7.1 (2026-09-23)
 * (ssbingo) Gas meter: picking the script folder now also fills in the corrected meter reading and the derived flow — until now those two fields were left alone when they already held the sensor, so the tile kept showing the uncorrected reading
 * (ssbingo) Gas meter: the tile points out a meter reading correction that is still set while the reading comes from the script, because it would be corrected twice
