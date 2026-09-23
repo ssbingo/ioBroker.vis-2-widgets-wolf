@@ -260,11 +260,13 @@ derives *today*, *yesterday*, *last 7 days*, *last 30 days*, *this* and *last mo
 them as objects — see [Bundled script](#bundled-script-gas-consumption-statistics) for the setup.
 
 In the widget it is then enough to pick the folder under *Statistics script*: the states that
-exist are filled into the objects above — meter reading and flow only if those fields are still
-empty, because they usually point at the sensor itself. From version 2.1 the script also derives
-the flow rate from the meter changes; it drops to 0 reliably after a pause, unlike the sluggish
-value of some sensors. To use it, enter `<folder>.Durchfluss` as *flow* by hand, or clear that
-field before picking the folder.
+exist are filled into the objects above — including meter reading and flow, because with the script
+those are the better sources. `Zaehlerstand` is the **corrected** reading (`ZaehlerstandRoh` is the
+raw value from the CCU), and the flow drops to 0 reliably after a pause, unlike the sluggish value
+of some sensors. If you prefer the sensor, enter it again afterwards.
+
+Important: set the *meter reading correction* to 0 once the reading comes from the script,
+otherwise it is corrected twice. The tile points this out.
 
 From version 3.0 the script calculates the costs itself — with base price, VAT and instalment.
 Link `<folder>.Kosten.KostenMonat` as *cost of the month* and the tile shows that value instead of

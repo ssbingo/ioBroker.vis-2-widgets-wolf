@@ -248,11 +248,13 @@ Zählerstand *Heute*, *Gestern*, *letzte 7 Tage*, *letzte 30 Tage*, *diesen* und
 und legt sie als Objekte ab — Einrichtung siehe [Beiliegendes Skript](#beiliegendes-skript-gasverbrauch-statistik).
 
 Im Widget genügt es dann, unter *Statistik-Skript* den Ordner zu wählen: Die vorhandenen States
-werden oben als Objekte eingetragen — Zählerstand und Durchfluss nur, wenn dort noch nichts steht,
-denn sie zeigen meist auf den Sensor selbst. Ab Fassung 2.1 rechnet das Skript auch den
-Durchfluss aus der Zähleränderung; er fällt nach einer Pause zuverlässig auf 0, anders als der
-träge Wert mancher Sensoren. Wer ihn nutzen will, trägt `<Ordner>.Durchfluss` von Hand als
-*Momentandurchfluss* ein oder leert das Feld vor der Ordnerwahl.
+werden oben als Objekte eingetragen — auch Zählerstand und Durchfluss, denn beim Skript sind das
+die besseren Quellen. `Zaehlerstand` ist der **korrigierte** Stand (`ZaehlerstandRoh` der rohe Wert
+der CCU), und der Durchfluss fällt nach einer Pause zuverlässig auf 0, anders als der träge Wert
+mancher Sensoren. Wer lieber den Sensor nimmt, trägt ihn danach wieder ein.
+
+Wichtig: Den *Korrekturwert Zählerstand* auf 0 setzen, sobald der Stand aus dem Skript kommt —
+sonst wird zweimal korrigiert. Die Kachel weist darauf hin.
 
 Ab Fassung 3.0 rechnet das Skript die Kosten selbst — mit Grundpreis, Mehrwertsteuer und
 Abschlag. Ist `<Ordner>.Kosten.KostenMonat` als *Kosten Monat* verknüpft, zeigt die Kachel diesen

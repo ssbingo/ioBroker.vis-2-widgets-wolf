@@ -88,8 +88,10 @@ const MAX_ENTRIES = 500;
 
 /**
  * Ordner des Statistik-Skripts gewählt: die States, die es dort anlegt, in die Objektfelder
- * eintragen — aber nur die, die es wirklich gibt. Zählerstand und Durchfluss bleiben unangetastet,
- * wenn dort schon etwas steht: meist zeigen sie auf den Sensor selbst.
+ * eintragen — alle, die es wirklich gibt, auch Zählerstand und Durchfluss. Beide sind beim Skript
+ * die besseren Quellen: Es korrigiert den Zählerstand anhand der Ablesungen (ZaehlerstandRoh ist
+ * der unkorrigierte Wert) und rechnet den Durchfluss so, dass er nach einer Pause auf 0 fällt.
+ * Wer lieber den Sensor nimmt, trägt ihn danach wieder ein.
  *
  * @param _field das geänderte Feld
  * @param data Attribute des Widgets
@@ -103,9 +105,6 @@ const applyStatsPath: RxWidgetInfoFieldChangeHandler = async (_field, data, chan
     }
     const next: WidgetData = { ...data };
     for (const { attr, id } of ids) {
-        if ((attr === 'oid_zaehlerstand' || attr === 'oid_durchfluss') && next[attr]) {
-            continue;
-        }
         const obj = await socket.getObject(id).catch(() => null);
         if (obj) {
             next[attr] = id;
@@ -500,6 +499,13 @@ export default class WolfGasMeter extends WolfWidgetBase<WolfGasMeterRxData, Wol
         const status = this.objectNumber(rx.oid_sensor_status);
         if (rx.oid_sensor_status && status !== null && status !== 0) {
             warnings.push(this.tr('warn_status'));
+        }
+        // Das Statistik-Skript korrigiert den Zählerstand anhand der Ablesungen; ein zusätzlicher
+        // Korrekturwert im Widget käme obendrauf
+        const folder = (rx.stats_path ?? '').trim().replace(/\.+$/, '');
+        const ausSkript = !!folder && !!rx.oid_zaehlerstand && rx.oid_zaehlerstand.startsWith(`${folder}.`);
+        if (ausSkript && attrNumber(rx.offset, 0) !== 0) {
+            warnings.push(this.tr('warn_offset'));
         }
         // Cent statt Euro im Arbeitspreis verfälscht die Kosten um den Faktor 100 — kommen die
         // Kosten aus einem Objekt, rechnet das Widget gar nicht und der Hinweis entfällt
