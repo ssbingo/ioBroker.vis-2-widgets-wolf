@@ -429,6 +429,11 @@ provide.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (ssbingo) Gas meter: new object field *cost of the month* — when linked, the tile shows that value instead of calculating from the tariff, which suits the bundled script because its figure includes base price, VAT and instalment
+* (ssbingo) Bundled statistics script in version 3.0.0: it aligns entered meter readings (correction factor against lost pulses), calculates costs and sends daily and monthly reports via Telegram and e-mail, optionally with a PDF
+* (ssbingo) Picking the script folder now also fills in the cost object; the manual lists the new settings and states
+
 ### 0.6.2 (2026-09-23)
 * (ssbingo) The widget sources moved from src-widgets-ts to src-widgets, the usual name in the ioBroker ecosystem: the repository checker skips that folder, so its remarks about react and the font packages are gone without adding dependencies nobody needs at runtime. Nothing changes in the delivered package
 

@@ -3,6 +3,19 @@
     "name": "vis-2-widgets-wolf",
     "version": "0.6.2",
     "news": {
+      "NEXT": {
+        "en": "Gas meter: the cost of the month can come from the bundled statistics script, which now also aligns meter readings, calculates costs with VAT and sends reports.",
+        "de": "Gaszähler: Die Kosten des Monats können aus dem beiliegenden Statistik-Skript kommen — es gleicht jetzt auch Ablesungen ab, rechnet Kosten mit Mehrwertsteuer und verschickt Berichte.",
+        "ru": "Счётчик газа: затраты за месяц могут поступать из прилагаемого скрипта статистики — он теперь сверяет показания, считает затраты с НДС и отправляет отчёты.",
+        "pt": "Contador de gás: o custo do mês pode vir do script de estatísticas incluído — que agora também concilia leituras, calcula custos com IVA e envia relatórios.",
+        "nl": "Gasmeter: de kosten van de maand kunnen uit het meegeleverde statistiekscript komen — dat nu ook meterstanden afstemt, kosten met btw berekent en rapporten verstuurt.",
+        "fr": "Compteur de gaz : le coût du mois peut provenir du script de statistiques fourni, qui recale désormais les index, calcule les coûts avec TVA et envoie des rapports.",
+        "it": "Contatore del gas: il costo del mese può arrivare dallo script di statistica incluso, che ora allinea anche le letture, calcola i costi con IVA e invia report.",
+        "es": "Contador de gas: el coste del mes puede venir del script de estadísticas incluido, que ahora concilia lecturas, calcula costes con IVA y envía informes.",
+        "pl": "Licznik gazu: koszt miesiąca może pochodzić z dołączonego skryptu statystyk, który uzgadnia teraz odczyty, wylicza koszty z VAT i wysyła raporty.",
+        "uk": "Лічильник газу: витрати за місяць можуть надходити з доданого скрипта статистики, який тепер звіряє показання, рахує витрати з ПДВ і надсилає звіти.",
+        "zh-cn": "燃气表：本月费用可来自附带的统计脚本——该脚本现在还能校准抄表读数、计算含增值税的费用并发送报告。"
+      },
       "0.6.2": {
         "en": "The widget sources now live in the usual folder src-widgets; nothing changes in the delivered package.",
         "de": "Die Widget-Quellen liegen jetzt im üblichen Ordner src-widgets; am ausgelieferten Paket ändert sich nichts.",
