@@ -62,6 +62,11 @@ WOLF e o logótipo WOLF são marcas da WOLF GmbH. Este projeto não tem qualquer
     ### **WORK IN PROGRESS**
 -->
 
+### 0.6.1 (2026-09-23)
+* (ssbingo) Script de estatísticas incluído na versão 2.1.0: calcula também o caudal a partir das variações do contador (estados Durchfluss, VerbrauchAktiv, ZaehlerLetzteAenderung); o ficheiro foi convertido para UTF-8 e os temporizadores passam por globalThis
+* (ssbingo) Contador de gás: a automatização por pasta conhece o caudal calculado e não toca num objeto de caudal já ligado
+* (ssbingo) Os ficheiros do script têm a versão no nome; textos e dicas remetem para a pasta addOn/ e um teste impede que os README indiquem ficheiros inexistentes
+
 ### 0.6.0 (2026-09-23)
 * (ssbingo) Todos os widgets exceto o contador de gás podem preencher os objetos a partir de uma instância: no primeiro campo do grupo «Objetos» escolha uma instalação wolf-smartset (ISM7) ou wolf (ISM8i) e os objetos certos são preenchidos; sem escolha tudo continua manual
 * (ssbingo) Contador de gás: o preço da energia pode ser indicado em cent/kWh, tal como aparece na maioria das faturas; o widget avisa quando o preço fica fora de 0,01 a 1,00 €/kWh

@@ -62,6 +62,11 @@ WOLF 及 WOLF 标志是 WOLF GmbH 的商标。本项目与 WOLF GmbH 无任何�
     ### **WORK IN PROGRESS**
 -->
 
+### 0.6.1 (2026-09-23)
+* (ssbingo) 附带统计脚本升级到 2.1.0：还能根据表读数变化计算流量（状态 Durchfluss、VerbrauchAktiv、ZaehlerLetzteAenderung）；文件已转换为 UTF-8，定时器改为通过 globalThis 调用
+* (ssbingo) 燃气表：目录自动填充已识别计算得到的流量，并且不会覆盖已关联的流量对象
+* (ssbingo) 脚本文件名包含版本号；文字与提示改为指向 addOn/ 目录，并新增测试防止 README 引用不存在的文件
+
 ### 0.6.0 (2026-09-23)
 * (ssbingo) 除燃气表外，每个小部件都能从适配器实例自动填入对象：在“对象”分组的第一个字段选择 wolf-smartset（ISM7）或 wolf（ISM8i）设备即可；不选择时仍手动关联
 * (ssbingo) 燃气表：单价可按多数账单的写法以 ct/kWh 输入；若单价不在 0,01 至 1,00 €/kWh 之间，磁贴会给出提示

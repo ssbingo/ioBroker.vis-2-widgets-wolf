@@ -62,6 +62,11 @@ WOLF e il logo WOLF sono marchi di WOLF GmbH. Questo progetto non è affiliato a
     ### **WORK IN PROGRESS**
 -->
 
+### 0.6.1 (2026-09-23)
+* (ssbingo) Script di statistica incluso nella versione 2.1.0: calcola anche la portata dalle variazioni del contatore (stati Durchfluss, VerbrauchAktiv, ZaehlerLetzteAenderung); il file è stato convertito in UTF-8 e i timer passano per globalThis
+* (ssbingo) Contatore del gas: l'automatismo della cartella conosce la portata calcolata e lascia stare un oggetto di portata già collegato
+* (ssbingo) I file dello script portano la versione nel nome; testi e suggerimenti rimandano alla cartella addOn/ e un test impedisce che i README citino file inesistenti
+
 ### 0.6.0 (2026-09-23)
 * (ssbingo) Ogni widget tranne il contatore del gas può compilare i suoi oggetti da un'istanza: nel primo campo del gruppo «Oggetti» scegli un impianto wolf-smartset (ISM7) o wolf (ISM8i); senza scelta resta tutto manuale
 * (ssbingo) Contatore del gas: il prezzo dell'energia si può indicare in cent/kWh come nella maggior parte delle bollette; la piastrella segnala un prezzo fuori dall'intervallo 0,01–1,00 €/kWh

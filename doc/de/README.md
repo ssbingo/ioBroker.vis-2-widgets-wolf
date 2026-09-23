@@ -374,6 +374,11 @@ WOLF und das WOLF-Logo sind Marken der WOLF GmbH. Dieses Projekt steht in keiner
     ### **WORK IN PROGRESS**
 -->
 
+### 0.6.1 (2026-09-23)
+* (ssbingo) Beiliegendes Statistik-Skript in Fassung 2.1.0: Es rechnet auch den Durchfluss aus der Zähleränderung (States Durchfluss, VerbrauchAktiv, ZaehlerLetzteAenderung) — die Datei wurde nach UTF-8 gewandelt, ihre Zeitgeber laufen über globalThis
+* (ssbingo) Gaszähler: Die Ordner-Automatik kennt den berechneten Durchfluss und lässt ein bereits verknüpftes Durchfluss-Objekt in Ruhe
+* (ssbingo) Die Skriptdateien tragen die Fassung im Namen; Texte und Tooltips verweisen auf den Ordner addOn/, und ein Test verhindert, dass die READMEs Dateien nennen, die es nicht gibt
+
 ### 0.6.0 (2026-09-23)
 * (ssbingo) Jedes Widget außer dem Gaszähler kann seine Objekte aus einer Adapterinstanz vorbelegen: im ersten Feld der Gruppe *Objekte* eine Anlage von wolf-smartset (ISM7) oder wolf (ISM8i) wählen, dann werden die passenden Objekte eingetragen — ohne Auswahl bleibt alles wie bisher von Hand verknüpfbar
 * (ssbingo) Gaszähler: Der Arbeitspreis lässt sich in ct/kWh eintragen, so wie er auf den meisten Rechnungen steht; die Kachel weist auf einen Preis außerhalb von 0,01 bis 1,00 €/kWh hin — so sieht es aus, wenn Cent im Euro-Feld landen

@@ -62,6 +62,11 @@ WOLF en het WOLF-logo zijn merken van WOLF GmbH. Dit project is niet verbonden m
     ### **WORK IN PROGRESS**
 -->
 
+### 0.6.1 (2026-09-23)
+* (ssbingo) Meegeleverd statistiekscript in versie 2.1.0: het berekent ook het debiet uit de meterwijzigingen (states Durchfluss, VerbrauchAktiv, ZaehlerLetzteAenderung); het bestand is naar UTF-8 omgezet en de timers lopen via globalThis
+* (ssbingo) Gasmeter: de mapautomatisering kent het berekende debiet en laat een al gekoppeld debietobject met rust
+* (ssbingo) De scriptbestanden dragen de versie in de naam; teksten en tooltips verwijzen naar de map addOn/, en een test voorkomt dat de README's niet-bestaande bestanden noemen
+
 ### 0.6.0 (2026-09-23)
 * (ssbingo) Elk widget behalve de gasmeter kan zijn objecten invullen vanuit een adapterinstantie: kies in het eerste veld van de groep «Objecten» een installatie van wolf-smartset (ISM7) of wolf (ISM8i); zonder keuze blijft alles handmatig
 * (ssbingo) Gasmeter: de energieprijs kan in ct/kWh worden ingevoerd, zoals op de meeste rekeningen staat; de tegel wijst op een prijs buiten 0,01 tot 1,00 €/kWh

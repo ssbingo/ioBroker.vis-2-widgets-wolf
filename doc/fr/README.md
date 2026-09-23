@@ -62,6 +62,11 @@ WOLF et le logo WOLF sont des marques de WOLF GmbH. Ce projet n'est ni affilié 
     ### **WORK IN PROGRESS**
 -->
 
+### 0.6.1 (2026-09-23)
+* (ssbingo) Script de statistiques fourni en version 2.1.0 : il calcule aussi le débit à partir des variations du compteur (états Durchfluss, VerbrauchAktiv, ZaehlerLetzteAenderung) ; le fichier a été converti en UTF-8 et ses minuteries passent par globalThis
+* (ssbingo) Compteur de gaz : l'automatisme du dossier connaît le débit calculé et laisse tel quel un objet de débit déjà lié
+* (ssbingo) Les fichiers du script portent la version dans leur nom ; les textes et info-bulles renvoient au dossier addOn/, et un test empêche les README de citer des fichiers inexistants
+
 ### 0.6.0 (2026-09-23)
 * (ssbingo) Chaque widget sauf le compteur de gaz peut renseigner ses objets depuis une instance : dans le premier champ du groupe « Objets », choisissez une installation wolf-smartset (ISM7) ou wolf (ISM8i) ; sans choix, tout reste manuel
 * (ssbingo) Compteur de gaz : le prix de l'énergie peut être saisi en ct/kWh comme sur la plupart des factures ; la vignette signale un prix hors de 0,01 à 1,00 €/kWh
