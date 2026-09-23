@@ -400,6 +400,9 @@ provide.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (ssbingo) The widget sources moved from src-widgets-ts to src-widgets, the usual name in the ioBroker ecosystem: the repository checker skips that folder, so its remarks about react and the font packages are gone without adding dependencies nobody needs at runtime. Nothing changes in the delivered package
+
 ### 0.6.1 (2026-09-23)
 * (ssbingo) Bundled statistics script in version 2.1.0: it also derives the flow rate from the meter changes (states Durchfluss, VerbrauchAktiv, ZaehlerLetzteAenderung) — the file was converted to UTF-8 and its timers now run through globalThis
 * (ssbingo) Gas meter: the folder automation knows the derived flow and leaves an already linked flow object alone

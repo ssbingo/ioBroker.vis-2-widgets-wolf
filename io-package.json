@@ -3,6 +3,19 @@
     "name": "vis-2-widgets-wolf",
     "version": "0.6.1",
     "news": {
+      "NEXT": {
+        "en": "The widget sources now live in the usual folder src-widgets; nothing changes in the delivered package.",
+        "de": "Die Widget-Quellen liegen jetzt im üblichen Ordner src-widgets; am ausgelieferten Paket ändert sich nichts.",
+        "ru": "Исходники виджетов теперь лежат в обычной папке src-widgets; в поставляемом пакете ничего не меняется.",
+        "pt": "As fontes dos widgets estão agora na pasta habitual src-widgets; nada muda no pacote entregue.",
+        "nl": "De widgetbronnen staan nu in de gebruikelijke map src-widgets; aan het geleverde pakket verandert niets.",
+        "fr": "Les sources des widgets se trouvent désormais dans le dossier habituel src-widgets ; rien ne change dans le paquet livré.",
+        "it": "I sorgenti dei widget si trovano ora nella consueta cartella src-widgets; nel pacchetto consegnato non cambia nulla.",
+        "es": "Las fuentes de los widgets están ahora en la carpeta habitual src-widgets; en el paquete entregado no cambia nada.",
+        "pl": "Źródła widżetów znajdują się teraz w typowym folderze src-widgets; w dostarczanym pakiecie nic się nie zmienia.",
+        "uk": "Вихідні файли віджетів тепер у звичній теці src-widgets; у пакеті, що постачається, нічого не змінюється.",
+        "zh-cn": "小部件源码现位于常用目录 src-widgets；交付的安装包没有任何变化。"
+      },
       "0.6.1": {
         "en": "Bundled statistics script in version 2.1.0: it also derives the flow rate from the meter changes. Encoding, timers and all references fixed.",
         "de": "Beiliegendes Statistik-Skript in Fassung 2.1.0: Es rechnet auch den Durchfluss aus der Zähleränderung. Kodierung, Zeitgeber und alle Verweise berichtigt.",
