@@ -346,6 +346,10 @@ provide.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (ssbingo) System diagram: a heating circuit stands still while the 3-way diverter valve points to hot water — until now it followed the boiler and wrongly showed flow during tank charging in summer mode
+* (ssbingo) System diagram: new fields for the diverter valve and the value that means hot water; without them nothing changes, and an explicit *charging active* object still wins for the tank branch
+
 ### 0.5.1 (2026-09-20)
 * (ssbingo) Statistics script: the timers run through globalThis, so the ioBroker repository checker no longer reports them — the behaviour is unchanged
 * (ssbingo) react and the font packages are marked as optional dependencies for the repository checker: the fonts are bundled at build time, React is provided by vis-2 at runtime
