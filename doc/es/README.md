@@ -40,11 +40,11 @@ En todos los widgets salvo el contador de gas, el primer campo del grupo «Objet
 
 ### Script de estadísticas de consumo de gas
 
-El adaptador incluye el script de ioBroker `gasverbrauch_statistik_v2.1.0.js` (carpeta `addOn/`). A partir de la lectura del contador calcula hoy, ayer, los últimos 7 y 30 días y el mes actual y el anterior, y los guarda como objetos (por defecto en `0_userdata.0.Gas`): exactamente los valores que la interfaz web de la CCU muestra en un HmIP-ESI y que no llegan a ioBroker a través de `hm-rpc`. En el funcionamiento normal no hace falta ningún adaptador de histórico. Desde la versión 3.0 también concilia lecturas del contador, calcula costes (con cuota fija, IVA y anticipo) y envía informes diarios y mensuales por Telegram y correo electrónico.
+El adaptador incluye el script de ioBroker `gasverbrauch_statistik_v3.0.0.js` (carpeta `addOn/`). A partir de la lectura del contador calcula hoy, ayer, los últimos 7 y 30 días y el mes actual y el anterior, y los guarda como objetos (por defecto en `0_userdata.0.Gas`): exactamente los valores que la interfaz web de la CCU muestra en un HmIP-ESI y que no llegan a ioBroker a través de `hm-rpc`. En el funcionamiento normal no hace falta ningún adaptador de histórico. Desde la versión 3.0 también concilia lecturas del contador, calcula costes (con cuota fija, IVA y anticipo) y envía informes diarios y mensuales por Telegram y correo electrónico.
 
 Crea el script en el adaptador `javascript`, apunta `SRC` a la lectura del contador e inícialo. Después, en el widget del contador de gas, elige la carpeta en *Script de estadísticas*: los estados se rellenan automáticamente. Qué valores muestra la tarjeta lo decide el grupo *Valores visibles*.
 
-Tras la instalación el script también está disponible en el navegador: `http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik_v2.1.0.js`. Detalles en la [documentación en inglés](../../README.md).
+Tras la instalación el script también está disponible en el navegador: `http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik_v3.0.0.js`. Detalles en la [documentación en inglés](../../README.md).
 
 ### Requisitos
 

@@ -40,11 +40,11 @@ In elk widget behalve de gasmeter is het eerste veld van de groep «Objecten» d
 
 ### Script voor de gasverbruiksstatistiek
 
-Bij de adapter hoort het ioBroker-script `gasverbrauch_statistik_v2.1.0.js` (map `addOn/`). Uit de meterstand berekent het vandaag, gisteren, de laatste 7 en 30 dagen en de huidige en vorige maand en legt ze vast als objecten (standaard in `0_userdata.0.Gas`) — precies de waarden die de CCU-webinterface van een HmIP-ESI toont, maar die via `hm-rpc` niet in ioBroker aankomen. Voor het dagelijks gebruik is geen history-adapter nodig. Vanaf versie 3.0 stemt het ook afgelezen meterstanden af, berekent kosten (met vastrecht, btw en voorschot) en verstuurt dag- en maandrapporten via Telegram en e-mail.
+Bij de adapter hoort het ioBroker-script `gasverbrauch_statistik_v3.0.0.js` (map `addOn/`). Uit de meterstand berekent het vandaag, gisteren, de laatste 7 en 30 dagen en de huidige en vorige maand en legt ze vast als objecten (standaard in `0_userdata.0.Gas`) — precies de waarden die de CCU-webinterface van een HmIP-ESI toont, maar die via `hm-rpc` niet in ioBroker aankomen. Voor het dagelijks gebruik is geen history-adapter nodig. Vanaf versie 3.0 stemt het ook afgelezen meterstanden af, berekent kosten (met vastrecht, btw en voorschot) en verstuurt dag- en maandrapporten via Telegram en e-mail.
 
 Maak het script aan in de adapter `javascript`, zet `SRC` op de meterstand en start het. Kies daarna in het gasmeter-widget de map onder *Statistiekscript* — de states worden automatisch ingevuld. Welke waarden de tegel toont, bepaalt de groep *Zichtbare waarden*.
 
-Na de installatie staat het script ook in de browser klaar: `http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik_v2.1.0.js`. Details in de [Engelse documentatie](../../README.md).
+Na de installatie staat het script ook in de browser klaar: `http://<iobroker>:8082/vis-2/widgets/vis-2-widgets-wolf/addon/gasverbrauch_statistik_v3.0.0.js`. Details in de [Engelse documentatie](../../README.md).
 
 ### Vereisten
 

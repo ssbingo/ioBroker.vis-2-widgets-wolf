@@ -209,7 +209,7 @@ Zählerstand (monoton)  ──►  Heute = Zählerstand − Basis
 | Auslöser | Zweck |
 |---|---|
 | Änderung von `SRC` | laufende Aktualisierung von *Heute* |
-| `schedule('1 0 * * *')` | Tagesabschluss um 00:01 Uhr |
+| `schedule('0 0 * * *')` | Tagesabschluss um 00:00 Uhr |
 | `schedule('5 * * * *')` | stündliches Sicherheitsnetz |
 | `schedule('* * * * *')` | minütliche Prüfung: Durchfluss auf 0, wenn der Zähler steht |
 | `Ablesung` beschrieben | Abgleich auf den abgelesenen Zählerstand |
@@ -217,9 +217,11 @@ Zählerstand (monoton)  ──►  Heute = Zählerstand − Basis
 | `TAGESBERICHT_CRON` | Tagesübersicht per Telegram |
 | `MONATSBERICHT_CRON` | Monatsabrechnung per Telegram, E-Mail und PDF |
 
-Überlappende Läufe sind durch eine Sperre ausgeschlossen – wichtig, weil die
+Alle Läufe hängen an einer seriellen Warteschlange: Fällt etwas an, während ein
+anderer Vorgang läuft, wird es angehängt statt verworfen. Das ist wichtig, weil
+Tagesabschluss und Tagesbericht kurz hintereinander fällig sind und die
 Vorbefüllung länger dauern kann als das Intervall des Zählers. Der Durchfluss
-wird außerhalb dieser Sperre sofort bei jeder Zähleränderung aktualisiert.
+wird außerhalb der Warteschlange sofort bei jeder Zähleränderung aktualisiert.
 
 **Robustheit**
 
@@ -459,7 +461,7 @@ Saldo daher nicht.
 
 ### Tagesübersicht (Telegram)
 
-Läuft um 00:01 Uhr, direkt nach dem Tagesabschluss, und betrifft den soeben
+Läuft um 00:01 Uhr, eine Minute nach dem Tagesabschluss, und betrifft den soeben
 abgeschlossenen Vortag. Inhalt: Verbrauch in m³ und kWh, Kosten, Vergleich zum
 Vortag mit Trendpfeil, Zählerstand sowie der laufende Monat mit Durchschnitt und
 Hochrechnung.
@@ -555,6 +557,7 @@ Monat jede Datengrundlage, bricht der Monatsbericht mit einem Hinweis im Log ab.
 | Log: `Berechneter Faktor … unplausibel` | Ablesung oder Zeitpunkt passt nicht; alter Faktor bleibt aktiv |
 | Korrekturfaktor bleibt 1 | erst ab der zweiten Ablesung und `FAKTOR_MIN_VERBRAUCH` m³ Abstand wird er gebildet |
 | Abweichung wächst trotz Korrektur weiter | Faktor über eine längere Periode neu bilden lassen; bei stark schwankendem Verlust Sensorsitz und Zählertyp prüfen |
+| Nächtlicher Tagesbericht bleibt aus | `TAGESBERICHT_CRON` darf nicht auf derselben Minute liegen wie ein anderer Zeitplan des Skripts; ab Version 3.0.0 fängt die Warteschlange das zwar ab, sauberer bleibt ein eigener Zeitpunkt |
 | Keine Telegram-Nachricht | `TELEGRAM_INSTANZ` prüfen; bei gesetztem `TELEGRAM_USER` muss der Name exakt dem im Adapter registrierten entsprechen |
 | Log: `PDF übersprungen – npm-Modul "pdfkit" fehlt` | pdfkit in der javascript-Instanz unter *Zusätzliche NPM-Module* eintragen und Instanz neu starten |
 | Log: `PDF-Ordner … nicht anlegbar` | Schreibrechte für den ioBroker-Benutzer auf `PDF_PFAD` prüfen |

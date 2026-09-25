@@ -68,19 +68,24 @@ describe('Beiliegendes Statistik-Skript', () => {
 
     it('wird in den READMEs nur mit vorhandenen Dateinamen genannt', () => {
         for (const [datei, inhalt] of Object.entries(readmes)) {
-            const genannt = [...String(inhalt).matchAll(SCRIPT_PATTERN)].map(m => m[0]);
+            // im Changelog bleiben ältere Fassungen stehen, auch wenn ihre Datei längst weg ist
+            const text = String(inhalt).split('## Changelog')[0];
+            const genannt = [...text.matchAll(SCRIPT_PATTERN)].map(m => m[0]);
             for (const name of genannt) {
                 expect(dateien, `${datei} nennt ${name}`).toContain(name);
             }
         }
     });
 
-    it('wird in der Anleitung mit der neuesten Fassung genannt', () => {
+    it('wird in jeder Anleitung mit der neuesten Fassung genannt', () => {
         // im Changelog stehen ältere Fassungen weiter — geprüft wird nur der Text davor
-        for (const datei of ['../../README.md', '../../doc/de/README.md']) {
+        for (const datei of Object.keys(readmes)) {
             const text = String(readmes[datei]).split('## Changelog')[0];
+            if (!SCRIPT_PATTERN.test(text)) {
+                continue; // diese Sprache nennt keine Datei
+            }
+            SCRIPT_PATTERN.lastIndex = 0;
             const genannt = [...text.matchAll(SCRIPT_PATTERN)].map(m => m[0]);
-            expect(genannt.length, `${datei} nennt das Skript nicht`).toBeGreaterThan(0);
             for (const name of genannt) {
                 expect(name, `${datei} nennt eine ältere Fassung`).toBe(neueste);
             }

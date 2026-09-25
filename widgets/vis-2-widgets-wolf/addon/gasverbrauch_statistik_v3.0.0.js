@@ -141,9 +141,9 @@ const ABSCHLAG_EUR = 120.00;
 
 /** Kopfdaten für Abrechnung und PDF */
 const KUNDE = {
-    name:          'max Mustermann',
-    anschrift:     '',                  // z. B. 'Musterweg 1, 12345 Heimatstadt'
-    lieferant:     '',                  // z. B. 'Stadtwerke Heimatstadt'
+    name:          'Max Mustermann',
+    anschrift:     '',                  // z. B. 'Musterweg 1, 45481 Mülheim'
+    lieferant:     '',                  // z. B. 'Stadtwerke Mülheim'
     tarif:         '',                  // z. B. 'Erdgas Basis'
     vertragskonto: '',                  // Vertrags-/Kundennummer
     zaehlernummer: ''                   // Nummer des Gaszählers
@@ -175,7 +175,7 @@ const EMAIL_INSTANZ = 'email.0';
 
 /** Absender und Empfänger. '' beim Absender = Standard der Instanz */
 const EMAIL_VON = '';
-const EMAIL_AN  = 'max.mustermann@eigenemail.com';
+const EMAIL_AN  = 'max.mustermann@eigneneemail.com';
 
 /** true = PDF erzeugen (benötigt das npm-Modul pdfkit) */
 const PDF_AKTIV = true;
@@ -1672,19 +1672,20 @@ async function sendeMonatsbericht(key) {
 // --------------------------------- Trigger ----------------------------------
 
 let bereit = false;
-let laeuft = false;
+let kette  = Promise.resolve();   // serielle Warteschlange
 
-/** verhindert überlappende Läufe (Backfill und Berichte können dauern) */
-async function sicher(fn) {
-    if (!bereit || laeuft) return;
-    laeuft = true;
-    try {
-        await fn();
-    } catch (e) {
+/**
+ * Führt fn aus, ohne dass sich Läufe überlappen.
+ * Wichtig: Aufgaben werden ANGEHÄNGT, nicht verworfen – sonst verschluckt ein
+ * laufender Vorgang (z. B. der Tagesabschluss) einen gleichzeitig fälligen
+ * Bericht. Die Aufrufe sind idempotent, mehrfaches Rechnen schadet nicht.
+ */
+function sicher(fn) {
+    if (!bereit) return Promise.resolve();
+    kette = kette.then(() => fn()).catch(e => {
         log(`[Gas] Fehler: ${e.message}`, 'error');
-    } finally {
-        laeuft = false;
-    }
+    });
+    return kette;
 }
 
 // jede Zähleränderung
@@ -1706,8 +1707,9 @@ on({ id: SRC, change: 'ne' }, async obj => {
 schedule('* * * * *', () => durchflussNullPruefung().catch(e =>
     log(`[Gas] Fehler Durchfluss: ${e.message}`, 'error')));
 
-// Mitternacht: Tag abschließen (auch wenn der Zähler gerade stillsteht)
-schedule('1 0 * * *', () => sicher(berechne));
+// Mitternacht: Tag abschließen (auch wenn der Zähler gerade stillsteht).
+// Bewusst eine Minute vor dem Tagesbericht.
+schedule('0 0 * * *', () => sicher(berechne));
 
 // Sicherheitsnetz: stündlich neu rechnen
 schedule('5 * * * *', () => sicher(berechne));

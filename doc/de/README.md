@@ -392,8 +392,11 @@ nur, die Tageswerte ab jetzt aufzubauen.
 
 **Betrieb**
 
-Das Skript rechnet bei jeder Änderung des Zählerstands, um 0:01 Uhr und stündlich als
-Sicherheitsnetz. Ein verpasster Mitternachtslauf wird beim nächsten Lauf nachgeholt, Tage ohne
+Das Skript rechnet bei jeder Änderung des Zählerstands, um 0:00 Uhr und stündlich als
+Sicherheitsnetz; der Tagesbericht geht eine Minute später raus. Alle Läufe hängen an einer
+seriellen Warteschlange: Was anfällt, während ein anderer Vorgang läuft, wird angehängt statt
+verworfen — sonst verschluckt zum Beispiel ein laufender Tagesabschluss den gleichzeitig fälligen
+Bericht. Ein verpasster Mitternachtslauf wird beim nächsten Lauf nachgeholt, Tage ohne
 Daten werden mit 0 aufgefüllt. Sinkt der Zählerstand (Zählerwechsel oder Reset), setzt es die Basis
 neu und wertet den Tag mit 0.
 

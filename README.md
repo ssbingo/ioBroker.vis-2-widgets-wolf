@@ -399,7 +399,10 @@ simply start building up from now on.
 
 **Operation**
 
-The script recalculates on every change of the meter reading, at 00:01 and hourly as a safety net.
+The script recalculates on every change of the meter reading, at 00:00 and hourly as a safety net;
+the daily report goes out a minute later. All runs share a serial queue: whatever comes up while
+another task is running is appended instead of dropped — otherwise a running daily closing would
+swallow a report due at the same moment.
 A missed midnight run is caught up on the next run, days without data are filled with 0. If the
 meter reading drops (meter exchange or reset), it sets a new baseline and counts that day as 0.
 
