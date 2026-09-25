@@ -62,6 +62,10 @@ WOLF en het WOLF-logo zijn merken van WOLF GmbH. Dit project is niet verbonden m
     ### **WORK IN PROGRESS**
 -->
 
+### 0.8.1 (2026-09-25)
+* (ssbingo) Meegeleverd statistiekscript: het nachtelijke dagrapport verdween stilletjes als het op dezelfde minuut viel als de dagafsluiting — de vergrendeling tegen overlappende runs gooide de tweede aanroep weg in plaats van hem in de wachtrij te zetten. De afsluiting draait nu om 00:00, het rapport blijft op 00:01 en een seriële wachtrij voegt taken toe in plaats van ze te laten vallen; dat redt ook een meterwijziging tijdens het vooraf vullen
+* (ssbingo) In de map addOn/ staat alleen nog de actuele scriptversie; de korte handleidingen verwezen naar een versie die er niet meer is
+
 ### 0.8.0 (2026-09-23)
 * (ssbingo) Gasmeter: nieuw veld *Btw (%)* in de kostenberekening. Tot nu telde de tegel alleen energie- en vastrechtprijs op, dus het resultaat was inclusief of exclusief afhankelijk van de invoer; het meegeleverde script rekent met nettoprijzen en telt de btw erbij, waardoor beide 19 procent uiteenliepen. Standaard 0 laat bestaande instellingen ongewijzigd
 
@@ -100,9 +104,6 @@ WOLF en het WOLF-logo zijn merken van WOLF GmbH. Dit project is niet verbonden m
 * (ssbingo) Gasmeter: verbruikswaarden uit het meegeleverde statistiekscript — gisteren, laatste 7 en 30 dagen, vorige maand
 * (ssbingo) Gasmeter: elke waarde in de voettekst afzonderlijk te tonen of te verbergen
 * (ssbingo) Het statistiekscript `gasverbrauch_statistik.js` wordt meegeleverd en is in alle README's beschreven
-
-### 0.4.1 (2026-09-19)
-* (ssbingo) Buy me a coffee-knop bovenaan alle README-bestanden.
 
 Oudere wijzigingen: [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 

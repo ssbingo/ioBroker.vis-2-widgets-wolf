@@ -62,6 +62,10 @@ WOLF et le logo WOLF sont des marques de WOLF GmbH. Ce projet n'est ni affilié 
     ### **WORK IN PROGRESS**
 -->
 
+### 0.8.1 (2026-09-25)
+* (ssbingo) Script de statistiques fourni : le rapport quotidien nocturne était silencieusement abandonné s'il tombait à la même minute que la clôture du jour — le verrou contre les exécutions simultanées rejetait le second appel au lieu de le mettre en file. La clôture a lieu désormais à 00:00, le rapport reste à 00:01 et une file d'attente sérielle ajoute les tâches au lieu de les perdre, ce qui sauve aussi une variation d'index survenue pendant un préremplissage
+* (ssbingo) Le dossier addOn/ ne contient plus que la version actuelle du script ; les manuels courts renvoyaient à une version disparue
+
 ### 0.8.0 (2026-09-23)
 * (ssbingo) Compteur de gaz : nouveau champ *TVA (%)* dans le calcul des coûts. Jusqu'ici la vignette additionnait seulement le prix de l'énergie et l'abonnement, le résultat était donc TTC ou HT selon la saisie ; le script fourni travaille avec des prix HT et ajoute la taxe, d'où un écart de 19 pour cent. La valeur par défaut 0 ne change rien aux configurations existantes
 
@@ -100,9 +104,6 @@ WOLF et le logo WOLF sont des marques de WOLF GmbH. Ce projet n'est ni affilié 
 * (ssbingo) Compteur de gaz : valeurs de consommation issues du script de statistiques fourni — hier, 7 et 30 derniers jours, mois dernier
 * (ssbingo) Compteur de gaz : chaque valeur du pied de vignette peut être affichée ou masquée
 * (ssbingo) Le script de statistiques `gasverbrauch_statistik.js` est fourni avec l'adaptateur et documenté dans tous les README
-
-### 0.4.1 (2026-09-19)
-* (ssbingo) Bouton Buy me a coffee en haut de tous les fichiers README.
 
 Modifications plus anciennes : [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 

@@ -62,6 +62,10 @@ WOLF e o logótipo WOLF são marcas da WOLF GmbH. Este projeto não tem qualquer
     ### **WORK IN PROGRESS**
 -->
 
+### 0.8.1 (2026-09-25)
+* (ssbingo) Script de estatísticas incluído: o relatório diário noturno era descartado em silêncio quando calhava no mesmo minuto do fecho do dia — o bloqueio contra execuções sobrepostas descartava a segunda chamada em vez de a enfileirar. O fecho corre agora às 00:00, o relatório fica às 00:01 e uma fila em série acrescenta tarefas em vez de as descartar, o que também salva uma variação do contador durante o preenchimento inicial
+* (ssbingo) Na pasta addOn/ fica apenas a versão atual do script; os manuais curtos apontavam para uma versão que já não existe
+
 ### 0.8.0 (2026-09-23)
 * (ssbingo) Contador de gás: novo campo *IVA (%)* no cálculo de custos. Até agora o widget somava apenas preço da energia e preço base, pelo que o resultado era bruto ou líquido conforme o que estava indicado; o script incluído trabalha com preços líquidos e acrescenta o imposto, dando uma diferença de 19 por cento. A predefinição 0 mantém as configurações existentes
 
@@ -100,9 +104,6 @@ WOLF e o logótipo WOLF são marcas da WOLF GmbH. Este projeto não tem qualquer
 * (ssbingo) Contador de gás: valores de consumo do script de estatísticas incluído — ontem, últimos 7 e 30 dias, mês passado
 * (ssbingo) Contador de gás: cada valor do rodapé pode ser mostrado ou ocultado
 * (ssbingo) O script de estatísticas `gasverbrauch_statistik.js` acompanha o adaptador e está descrito em todos os README
-
-### 0.4.1 (2026-09-19)
-* (ssbingo) Botão Buy me a coffee no topo de todos os ficheiros README.
 
 Alterações mais antigas: [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 

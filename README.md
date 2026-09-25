@@ -440,7 +440,7 @@ provide.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.8.1 (2026-09-25)
 * (ssbingo) Bundled statistics script: the nightly daily report was silently dropped whenever it fell on the same minute as the daily closing — the lock against overlapping runs discarded the second call instead of queueing it. The closing now runs at 00:00, the report stays at 00:01, and a serial queue appends tasks instead of dropping them, which also saves a meter change arriving during a backfill
 * (ssbingo) Only the current script version stays in the addOn folder; the shorter manuals pointed at a version that is no longer there
 
@@ -482,9 +482,6 @@ provide.
 * (ssbingo) Gas meter: consumption values from the bundled statistics script — yesterday, last 7 and 30 days, previous month
 * (ssbingo) Gas meter: every value of the footer can be shown or hidden individually
 * (ssbingo) The statistics script `gasverbrauch_statistik.js` ships with the adapter and is documented in all READMEs
-
-### 0.4.1 (2026-09-19)
-* (ssbingo) Buy me a coffee button at the top of all README files
 
 Older changes: [CHANGELOG_OLD.md](CHANGELOG_OLD.md)
 

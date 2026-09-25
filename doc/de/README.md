@@ -416,6 +416,10 @@ WOLF und das WOLF-Logo sind Marken der WOLF GmbH. Dieses Projekt steht in keiner
     ### **WORK IN PROGRESS**
 -->
 
+### 0.8.1 (2026-09-25)
+* (ssbingo) Beiliegendes Statistik-Skript: Der nächtliche Tagesbericht fiel still aus, wenn er auf dieselbe Minute wie der Tagesabschluss fiel — die Sperre gegen überlappende Läufe verwarf den zweiten Aufruf, statt ihn anzuhängen. Der Abschluss läuft jetzt um 00:00 Uhr, der Bericht bleibt bei 00:01 Uhr, und eine serielle Warteschlange hängt Aufgaben an, statt sie zu verwerfen; das rettet auch eine Zähleränderung während eines Backfills
+* (ssbingo) Im Ordner addOn/ liegt nur noch die aktuelle Skriptfassung; die Kurzanleitungen zeigten noch auf eine Fassung, die es nicht mehr gibt
+
 ### 0.8.0 (2026-09-23)
 * (ssbingo) Gaszähler: neues Feld *Mehrwertsteuer (%)* in der Kostenrechnung. Bisher addierte die Kachel nur Arbeits- und Grundpreis, das Ergebnis war also brutto oder netto — je nachdem, was eingetragen war; das beiliegende Skript rechnet dagegen mit Nettopreisen und schlägt die Steuer auf, beide Wege unterschieden sich um 19 Prozent. Die Vorgabe 0 lässt bestehende Einstellungen unverändert
 
@@ -454,9 +458,6 @@ WOLF und das WOLF-Logo sind Marken der WOLF GmbH. Dieses Projekt steht in keiner
 * (ssbingo) Gaszähler: Verbrauchswerte aus dem beiliegenden Statistik-Skript — Gestern, letzte 7 und 30 Tage, Vormonat
 * (ssbingo) Gaszähler: jeder Wert der Fußzeile einzeln ein- und ausblendbar
 * (ssbingo) Das Statistik-Skript `gasverbrauch_statistik.js` liegt dem Adapter bei und ist in allen READMEs beschrieben
-
-### 0.4.1 (2026-09-19)
-* (ssbingo) Buy-Me-a-Coffee-Button oben in allen README-Dateien.
 
 Ältere Änderungen: [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 

@@ -62,6 +62,10 @@ WOLF i logo WOLF są znakami towarowymi WOLF GmbH. Ten projekt nie jest powiąza
     ### **WORK IN PROGRESS**
 -->
 
+### 0.8.1 (2026-09-25)
+* (ssbingo) Dołączony skrypt statystyk: nocny raport dzienny po cichu przepadał, gdy wypadał w tej samej minucie co zamknięcie dnia — blokada przed nakładaniem się uruchomień odrzucała drugie wywołanie zamiast je kolejkować. Zamknięcie działa teraz o 00:00, raport pozostaje o 00:01, a szeregowa kolejka dodaje zadania zamiast je odrzucać; ratuje to również zmianę stanu licznika podczas wstępnego wypełniania
+* (ssbingo) W folderze addOn/ pozostaje tylko bieżąca wersja skryptu; krótkie instrukcje wskazywały wersję, której już nie ma
+
 ### 0.8.0 (2026-09-23)
 * (ssbingo) Licznik gazu: nowe pole *VAT (%)* w wyliczaniu kosztów. Dotychczas kafelek sumował tylko cenę energii i opłatę stałą, więc wynik był brutto lub netto zależnie od wpisanych cen; dołączony skrypt liczy z cen netto i dolicza podatek, przez co różnica sięgała 19 procent. Domyślne 0 nie zmienia istniejących ustawień
 
@@ -100,9 +104,6 @@ WOLF i logo WOLF są znakami towarowymi WOLF GmbH. Ten projekt nie jest powiąza
 * (ssbingo) Licznik gazu: wartości zużycia z dołączonego skryptu statystyk — wczoraj, ostatnie 7 i 30 dni, poprzedni miesiąc
 * (ssbingo) Licznik gazu: każdą wartość w stopce można pokazać lub ukryć
 * (ssbingo) Skrypt statystyk `gasverbrauch_statistik.js` jest dołączony do adaptera i opisany we wszystkich plikach README
-
-### 0.4.1 (2026-09-19)
-* (ssbingo) Przycisk Buy me a coffee na początku wszystkich plików README.
 
 Starsze zmiany: [CHANGELOG_OLD.md](../../CHANGELOG_OLD.md)
 
