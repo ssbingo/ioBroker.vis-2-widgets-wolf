@@ -3,6 +3,19 @@
     "name": "vis-2-widgets-wolf",
     "version": "0.8.0",
     "news": {
+      "NEXT": {
+        "en": "Bundled statistics script: the nightly daily report was silently dropped when it fell on the same minute as the daily closing. Only the current version 3.0.0 remains in the addOn folder.",
+        "de": "Beiliegendes Statistik-Skript: Der nächtliche Tagesbericht fiel still aus, wenn er auf dieselbe Minute wie der Tagesabschluss fiel. Im Ordner addOn/ liegt nur noch die aktuelle Fassung 3.0.0.",
+        "ru": "Прилагаемый скрипт статистики: ночной дневной отчёт молча пропадал, если совпадал по минуте с закрытием дня. В папке addOn/ осталась только текущая версия 3.0.0.",
+        "pt": "Script de estatísticas incluído: o relatório diário noturno era descartado em silêncio quando calhava no mesmo minuto do fecho do dia. Na pasta addOn/ fica apenas a versão atual 3.0.0.",
+        "nl": "Meegeleverd statistiekscript: het nachtelijke dagrapport verdween stilletjes als het op dezelfde minuut viel als de dagafsluiting. In de map addOn/ staat nu alleen nog versie 3.0.0.",
+        "fr": "Script de statistiques fourni : le rapport quotidien nocturne était silencieusement abandonné s'il tombait à la même minute que la clôture du jour. Seule la version actuelle 3.0.0 reste dans le dossier addOn/.",
+        "it": "Script di statistica incluso: il report giornaliero notturno veniva scartato in silenzio se cadeva nello stesso minuto della chiusura del giorno. Nella cartella addOn/ resta solo la versione attuale 3.0.0.",
+        "es": "Script de estadísticas incluido: el informe diario nocturno se descartaba en silencio si coincidía en el minuto con el cierre del día. En la carpeta addOn/ queda solo la versión actual 3.0.0.",
+        "pl": "Dołączony skrypt statystyk: nocny raport dzienny po cichu przepadał, gdy wypadał w tej samej minucie co zamknięcie dnia. W folderze addOn/ pozostaje tylko bieżąca wersja 3.0.0.",
+        "uk": "Доданий скрипт статистики: нічний денний звіт тихо зникав, якщо випадав на ту саму хвилину, що й закриття дня. У теці addOn/ лишилася тільки поточна версія 3.0.0.",
+        "zh-cn": "附带统计脚本：当夜间日报与日结落在同一分钟时会被悄悄丢弃。addOn/ 目录中现在只保留当前的 3.0.0 版本。"
+      },
       "0.8.0": {
         "en": "Gas meter: new field for VAT, so costs can be calculated from net prices — default 0 keeps existing setups unchanged.",
         "de": "Gaszähler: neues Feld für die Mehrwertsteuer, damit sich die Kosten aus Nettopreisen rechnen lassen — Vorgabe 0 lässt bestehende Einstellungen unverändert.",

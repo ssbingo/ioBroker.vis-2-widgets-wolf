@@ -440,6 +440,10 @@ provide.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (ssbingo) Bundled statistics script: the nightly daily report was silently dropped whenever it fell on the same minute as the daily closing — the lock against overlapping runs discarded the second call instead of queueing it. The closing now runs at 00:00, the report stays at 00:01, and a serial queue appends tasks instead of dropping them, which also saves a meter change arriving during a backfill
+* (ssbingo) Only the current script version stays in the addOn folder; the shorter manuals pointed at a version that is no longer there
+
 ### 0.8.0 (2026-09-23)
 * (ssbingo) Gas meter: new field *VAT (%)* in the cost calculation. Until now the tile simply added energy and base price, so the result was gross or net depending on what you entered, while the bundled script works with net prices and adds the tax — the two differed by 19 percent. The default 0 keeps existing setups unchanged
 
