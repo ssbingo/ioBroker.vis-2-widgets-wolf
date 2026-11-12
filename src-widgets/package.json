@@ -14,7 +14,7 @@
         "@fontsource/barlow-semi-condensed": "^5.3.0",
         "@fontsource/jetbrains-mono": "^5.3.0",
         "@iobroker/types": "^7.2.5",
-        "@iobroker/types-vis-2": "^2.20.1",
+        "@iobroker/types-vis-2": "^2.20.6",
         "@module-federation/vite": "^1.23.2",
         "@types/react": "^19.3.0",
         "@types/react-dom": "^19.3.0",
